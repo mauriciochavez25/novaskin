@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -64,6 +64,51 @@ function SectionHeading({ eyebrow, title, copy, light = false }: any) {
   return <div className={`max-w-2xl ${light ? 'text-[#F2F2F0]' : 'text-[#2F4055]'}`}><p className="mb-4 text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">{eyebrow}</p><h2 className="font-serif text-4xl leading-[1.08] md:text-6xl">{title}</h2>{copy && <p className={`mt-5 text-base leading-7 ${light ? 'text-[#d4d9d9]' : 'text-[#68727b]'}`}>{copy}</p>}</div>;
 }
 
+function HoverVideo({ src, poster, title }: { src: string; poster?: string; title: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const playVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    void video.play().catch(() => {
+      // Browsers can still reject playback when the device has media restrictions.
+    });
+  };
+
+  const pauseVideo = () => {
+    videoRef.current?.pause();
+  };
+
+  return (
+    <div
+      className="group relative aspect-video overflow-hidden bg-[#2F4055]"
+      onMouseEnter={playVideo}
+      onMouseLeave={pauseVideo}
+      onFocus={playVideo}
+      onBlur={pauseVideo}
+      tabIndex={0}
+      aria-label={`${title}. Pasa el cursor para reproducir`}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+      />
+      <div className="pointer-events-none absolute inset-0 grid place-items-center bg-[#202c3a]/10 transition group-hover:bg-transparent">
+        <span className="rounded-full border border-white/70 bg-[#2F4055]/60 p-4 text-white transition group-hover:scale-90 group-hover:bg-[#BB9445] group-hover:opacity-0">
+          <Play size={20} fill="currentColor" />
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function PublicSite() {
   const { data, isLoading, isError } = useGetSite();
   const site: any = data?.settings ?? fallback;
@@ -113,7 +158,7 @@ function PublicSite() {
       <section id="espacio" className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[.8fr_1.2fr] md:items-end"><SectionHeading light eyebrow="El espacio NOVA" title="No es solo una cita, es un momento de reconexión contigo misma." copy="Luz cálida, manos expertas y el tiempo suficiente para que vuelvas a escucharte."/><div className="grid grid-cols-2 gap-3 md:grid-cols-[1fr_1.35fr]"><img src={localImages[2]} alt="Consulta en NOVA Skin" className="aspect-[.8] w-full object-cover"/><img src={localImages[1]} alt="Sala de tratamiento NOVA Skin" className="mt-12 aspect-[.8] w-full object-cover"/></div></div></section>
       <section className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><div className="flex flex-wrap items-end justify-between gap-6"><SectionHeading eyebrow="Un vistazo" title="El cuidado también vive en los detalles."/><p className="max-w-xs text-sm leading-6 text-[#68727b]">Un ambiente creado para sentirte tranquila desde el primer paso.</p></div><div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">{galleryItems.slice(0, 4).map((g, i) => <button type="button" key={g.id} data-testid={`button-gallery-${g.id}`} onClick={() => setLightbox(g)} className={`group relative overflow-hidden text-left ${i === 0 ? 'col-span-2 row-span-2' : ''}`}><img src={g.imageUrl || localImages[i % 3]} alt={g.title} className="h-full min-h-40 w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/65 to-transparent opacity-0 transition group-hover:opacity-100"/><span className="absolute bottom-4 left-4 text-sm text-white opacity-0 transition group-hover:opacity-100">{g.title}</span></button>)}</div></div></section>
       {promotions.length > 0 && <section className="bg-[#AF9275] px-5 py-16 md:px-10"><div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[.8fr_1.2fr] md:items-center"><SectionHeading eyebrow="Este mes en NOVA" title="Un buen momento para empezar." copy="Conoce nuestras experiencias y beneficios vigentes."/><div className="grid gap-4 md:grid-cols-2">{promotions.map(p => <div key={p.id} className="bg-[#F2F2EF] p-7"><p className="text-xs uppercase tracking-widest text-[#BB9445]">NOVA edit</p><h3 className="mt-3 font-serif text-2xl">{p.title}</h3><p className="mt-3 text-sm text-[#68727b]">{p.description}</p></div>)}</div></div></section>}
-      <section className="bg-[#e6e1d9] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><div className="flex items-end justify-between"><SectionHeading eyebrow="Desde adentro" title="La calma también se practica."/><div className="hidden gap-2 md:flex"><button data-testid="button-video-prev" className="rounded-full border border-[#AF9275] p-3"><ChevronLeft size={18}/></button><button data-testid="button-video-next" className="rounded-full border border-[#AF9275] p-3"><ChevronRight size={18}/></button></div></div><div className="mt-12 grid gap-5 md:grid-cols-3">{videoItems.map((v, i) => <article key={v.id} className="group"><div className="relative aspect-video overflow-hidden bg-[#2F4055]"><img src={v.posterUrl || localVideos[i % 3][1]} alt={v.title} className="h-full w-full object-cover opacity-80"/><div className="absolute inset-0 grid place-items-center"><span className="rounded-full border border-white/70 bg-[#2F4055]/60 p-4 text-white transition group-hover:bg-[#BB9445]"><Play size={20} fill="currentColor"/></span></div></div><h3 className="mt-4 font-serif text-2xl">{v.title}</h3><p className="mt-1 text-sm text-[#68727b]">{v.description}</p></article>)}</div></div></section>
+       <section className="bg-[#e6e1d9] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><div className="flex items-end justify-between"><SectionHeading eyebrow="Desde adentro" title="La calma también se practica."/><div className="hidden gap-2 md:flex"><button data-testid="button-video-prev" className="rounded-full border border-[#AF9275] p-3"><ChevronLeft size={18}/></button><button data-testid="button-video-next" className="rounded-full border border-[#AF9275] p-3"><ChevronRight size={18}/></button></div></div><div className="mt-12 grid gap-5 md:grid-cols-3">{videoItems.map((v, i) => <article key={v.id}><HoverVideo src={v.videoUrl} poster={v.posterUrl || localVideos[i % 3][1]} title={v.title}/><h3 className="mt-4 font-serif text-2xl">{v.title}</h3><p className="mt-1 text-sm text-[#68727b]">{v.description}</p></article>)}</div></div></section>
       {specialists.length > 0 && <section id="equipo" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="Tu equipo" title="Experiencia que sabe escuchar."/><div className="mt-12 grid gap-6 md:grid-cols-3">{specialists.map((s, i) => <div key={s.id}><div className="arch aspect-[.85] overflow-hidden bg-[#AF9275]"><img src={s.photoUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover"/></div><p className="mt-5 text-xs uppercase tracking-widest text-[#BB9445]">{s.specialty}</p><h3 className="mt-2 font-serif text-2xl">{s.name}</h3><p className="mt-2 text-sm leading-6 text-[#68727b]">{s.bio}</p></div>)}</div></div></section>}
       {testimonials.length > 0 && <section className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-28"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.3em] text-[#e0bb69]">Historias NOVA</p><div className="mx-auto mt-8 flex justify-center gap-1 text-[#BB9445]">{[1,2,3,4,5].map(x => <Star key={x} size={16} fill="currentColor"/>)}</div><blockquote className="mt-8 font-serif text-3xl leading-tight md:text-5xl">“{testimonials[0].comment}”</blockquote><p className="mt-7 text-sm uppercase tracking-widest text-[#c7ccca]">— {testimonials[0].name}</p></div></section>}
       <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><a data-testid="link-contact-email" href={`mailto:${site.email}`} className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email}</a><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span>{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span>{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
