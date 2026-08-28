@@ -84,7 +84,15 @@ function PublicSite() {
     { id: 3, name: 'Toxina botulínica', description: 'Resultados naturales, planeados contigo y aplicados por especialistas.', duration: '45 min', price: null, imageUrl: localImages[0] }
   ];
   const videoItems = videos.length ? videos : localVideos.map((v, i) => ({ id: i + 1, title: ['El ritual NOVA', 'La ciencia se siente', 'Detalles que importan'][i], description: 'Conoce un poco más de nuestro universo.', videoUrl: v[0], posterUrl: v[1] }));
-  const submitContact = (e: any) => { e.preventDefault(); const f = new FormData(e.currentTarget); contact.mutate({ data: { name: String(f.get('name')), phone: String(f.get('phone')), email: String(f.get('email')), message: String(f.get('message')) } }, { onSuccess: () => { setSent(true); e.currentTarget.reset(); } }); };
+  const submitContact = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    contact.mutate(
+      { data: { name: String(f.get('name')), phone: String(f.get('phone')), email: String(f.get('email')), message: String(f.get('message')) } },
+      { onSuccess: () => { setSent(true); form.reset(); } },
+    );
+  };
   return <div className="nova-grain overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
     <header className="absolute left-0 right-0 top-0 z-40 border-b border-white/20 text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
