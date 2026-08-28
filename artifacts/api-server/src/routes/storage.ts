@@ -34,6 +34,23 @@ router.post(
 
     try {
       const { name, size, contentType } = parsed.data;
+      const imageTypes = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/avif']);
+      const videoTypes = new Set(['video/mp4', 'video/webm', 'video/quicktime']);
+      const isImage = imageTypes.has(contentType);
+      const isVideo = videoTypes.has(contentType);
+      const maxSize = isVideo ? 100 * 1024 * 1024 : 10 * 1024 * 1024;
+      if ((!isImage && !isVideo) || size > maxSize) {
+        res.status(400).json({
+          error: isVideo
+            ? 'El video debe ser MP4, WEBM o MOV y pesar menos de 100 MB'
+            : 'La imagen debe ser JPG, PNG, WEBP o AVIF y pesar menos de 10 MB',
+        });
+        return;
+      }
+      if (!name.trim()) {
+        res.status(400).json({ error: 'El archivo necesita un nombre válido' });
+        return;
+      }
 
       const uploadURL = await objectStorageService.getObjectEntityUploadURL();
       const objectPath =

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useListServices, useCreateService, useUpdateService, useDeleteService, getListServicesQueryKey } from '@workspace/api-client-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader, AdminButton, Modal, AdminInput, AdminTextarea, AdminSwitch } from '../../components/admin/ui';
+import { MediaUpload } from '../../components/admin/media-upload';
 import { Edit2, Trash2, Plus } from 'lucide-react';
 
 export function Services() {
@@ -14,9 +15,10 @@ export function Services() {
   const [editing, setEditing] = useState<any>(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [activeToggle, setActiveToggle] = useState(true);
+  const [imageUrl, setImageUrl] = useState('');
 
-  const openNew = () => { setEditing(null); setActiveToggle(true); setModalOpen(true); };
-  const openEdit = (s: any) => { setEditing(s); setActiveToggle(s.active); setModalOpen(true); };
+  const openNew = () => { setEditing(null); setImageUrl(''); setActiveToggle(true); setModalOpen(true); };
+  const openEdit = (s: any) => { setEditing(s); setImageUrl(s.imageUrl); setActiveToggle(s.active); setModalOpen(true); };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,7 +100,8 @@ export function Services() {
             <AdminInput label="Precio ($ USD)" name="price" type="number" step="0.01" defaultValue={editing?.price || ''} />
             <AdminInput label="Duración (ej. 60 min)" name="duration" defaultValue={editing?.duration || ''} />
           </div>
-          <AdminInput label="URL de la imagen" name="imageUrl" defaultValue={editing?.imageUrl} required />
+          <MediaUpload kind="image" value={imageUrl} onUploaded={setImageUrl} />
+          <AdminInput label="URL de la imagen (o carga un archivo)" name="imageUrl" value={imageUrl} onChange={(e: any) => setImageUrl(e.target.value)} required />
           <div className="flex gap-4 items-end">
             <div className="flex-1">
               <AdminInput label="Orden (menor aparece primero)" name="sortOrder" type="number" defaultValue={editing?.sortOrder || 0} required />

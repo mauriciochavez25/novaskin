@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGetSiteSettings, useUpdateSiteSettings, getGetSiteSettingsQueryKey } from '@workspace/api-client-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader, AdminButton, AdminInput, AdminTextarea } from '../../components/admin/ui';
+import { MediaUpload } from '../../components/admin/media-upload';
 import { Check } from 'lucide-react';
 
 export function Settings() {
@@ -9,6 +10,7 @@ export function Settings() {
   const update = useUpdateSiteSettings();
   const qc = useQueryClient();
   const [saved, setSaved] = useState(false);
+  const [heroImage, setHeroImage] = useState('');
 
   if (isLoading) return <p className="text-[#68727b] font-medium">Cargando ajustes...</p>;
 
@@ -26,7 +28,7 @@ export function Settings() {
       instagram: String(f.get('instagram')),
       facebook: String(f.get('facebook')),
       tiktok: String(f.get('tiktok')),
-      heroImage: String(f.get('heroImage')),
+      heroImage: heroImage || String(f.get('heroImage')),
       heroEyebrow: String(f.get('heroEyebrow')),
       heroTitle: String(f.get('heroTitle')),
       heroDescription: String(f.get('heroDescription')),
@@ -74,7 +76,8 @@ export function Settings() {
         <section className="space-y-5 rounded-xl border border-[#AF9275]/20 bg-white p-7 shadow-sm lg:col-span-2">
           <h2 className="font-serif text-2xl text-[#2F4055] border-b border-[#AF9275]/20 pb-3">Portada Principal (Hero)</h2>
           <div className="grid gap-5 md:grid-cols-2">
-            <AdminInput label="URL de Imagen de Fondo" name="heroImage" defaultValue={settings?.heroImage} />
+            <MediaUpload kind="image" value={heroImage || settings?.heroImage} onUploaded={setHeroImage} label="Cargar imagen de portada desde tu dispositivo" />
+            <AdminInput label="URL de Imagen de Fondo (o carga un archivo)" name="heroImage" value={heroImage || settings?.heroImage || ''} onChange={(e: any) => setHeroImage(e.target.value)} />
             <AdminInput label="Texto Superior Pequeño" name="heroEyebrow" defaultValue={settings?.heroEyebrow} />
             <div className="md:col-span-2">
               <AdminInput label="Título Principal" name="heroTitle" defaultValue={settings?.heroTitle} />
