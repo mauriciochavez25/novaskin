@@ -1,0 +1,545 @@
+Quiero crear una aplicación web profesional para una Clínica de Belleza.
+
+La aplicación debe ser moderna, elegante, rápida y completamente responsiva, con especial atención a dispositivos móviles.
+
+## STACK TECNOLÓGICO OBLIGATORIO
+
+Frontend:
+- React
+- TypeScript
+- JavaScript cuando sea necesario
+- Vite
+- Tailwind CSS
+- Shadcn/UI
+- React Query para manejo de datos
+
+Backend:
+- Node.js
+- Express.js
+- TypeScript
+- API REST
+
+Base de datos:
+- PostgreSQL
+- Drizzle ORM
+
+Arquitectura:
+- Separar claramente frontend y backend.
+- Utilizar buenas prácticas.
+- Crear componentes reutilizables.
+- Mantener una estructura escalable.
+- Utilizar variables de entorno para información sensible.
+
+---
+
+# OBJETIVO DEL SITIO
+
+Crear una página web para una Clínica de Belleza que permita mostrar:
+
+- Servicios
+- Tratamientos
+- Antes y después
+- Galería de imágenes
+- Videos
+- Promociones
+- Información de la clínica
+- Especialistas
+- Testimonios
+- Ubicación
+- Formulario de contacto
+- Botón directo de WhatsApp
+- Redes sociales
+
+La página debe tener un diseño premium, elegante y moderno.
+
+---
+
+# RESPONSIVE DESIGN
+
+La aplicación debe ser Mobile First.
+
+Debe funcionar perfectamente en:
+
+- iPhone 13 Pro Max
+- iPhone 14
+- iPhone 15
+- Samsung Galaxy S24
+- Tablets
+- Laptops
+- Pantallas de escritorio grandes
+
+Requisitos:
+
+- Menú responsive tipo hamburguesa en móviles.
+- Botones grandes y fáciles de presionar.
+- Imágenes adaptables.
+- Videos responsivos.
+- Texto legible en pantallas pequeñas.
+- No debe existir scroll horizontal.
+- Optimizar tamaños de imágenes para carga rápida.
+- Utilizar breakpoints de Tailwind.
+- Probar específicamente resoluciones similares a iPhone 13 Pro Max y Samsung Galaxy S24.
+
+---
+
+# PÁGINA PÚBLICA
+
+Crear las siguientes secciones:
+
+## 1. HOME
+
+- Hero principal con imagen o video.
+- Título llamativo.
+- Descripción breve.
+- Botón "Agenda tu cita".
+- Botón de WhatsApp.
+- Imagen o video administrable desde el panel de administración.
+
+## 2. NOSOTROS
+
+- Información de la clínica.
+- Misión.
+- Visión.
+- Valores.
+- Historia.
+
+Todo el contenido debe poder editarse desde el panel administrativo.
+
+## 3. SERVICIOS
+
+Crear un catálogo de servicios.
+
+Cada servicio debe incluir:
+
+- Imagen
+- Nombre
+- Descripción
+- Precio opcional
+- Duración opcional
+- Estado activo/inactivo
+
+Ejemplos:
+
+- Botox
+- Ácido hialurónico
+- Faciales
+- Depilación láser
+- Tratamientos corporales
+- Limpiezas faciales
+
+Los servicios deben administrarse desde el panel.
+
+Debe ser posible:
+
+- Crear
+- Editar
+- Eliminar
+- Activar/desactivar
+
+---
+
+## 4. GALERÍA
+
+Crear una galería moderna de imágenes.
+
+El administrador debe poder:
+
+- Subir imágenes.
+- Editar título.
+- Agregar descripción.
+- Cambiar el orden.
+- Eliminar imágenes.
+- Activar/desactivar imágenes.
+
+Las imágenes deben mostrarse de forma atractiva.
+
+Al hacer clic debe abrirse un modal para ver la imagen en tamaño grande.
+
+---
+
+## 5. VIDEOS
+
+Crear una sección de videos.
+
+El administrador debe poder:
+
+- Subir videos o registrar URLs externas.
+- Agregar título.
+- Agregar descripción.
+- Seleccionar imagen de portada.
+- Cambiar orden.
+- Eliminar.
+- Activar/desactivar.
+
+Los videos deben ser completamente responsivos.
+
+---
+
+## 6. ANTES Y DESPUÉS
+
+Crear una sección especializada para mostrar resultados.
+
+Cada registro debe incluir:
+
+- Imagen antes.
+- Imagen después.
+- Nombre del tratamiento.
+- Descripción.
+
+La visualización debe ser atractiva y responsiva.
+
+---
+
+## 7. PROMOCIONES
+
+Crear una sección para promociones activas.
+
+Cada promoción debe incluir:
+
+- Imagen.
+- Título.
+- Descripción.
+- Fecha de inicio.
+- Fecha de finalización.
+- Botón de contacto.
+- Estado activo/inactivo.
+
+Las promociones vencidas no deben mostrarse automáticamente.
+
+---
+
+## 8. ESPECIALISTAS
+
+Crear una sección para mostrar al equipo.
+
+Cada especialista debe incluir:
+
+- Foto.
+- Nombre.
+- Especialidad.
+- Descripción.
+- Redes sociales opcionales.
+
+Administrable desde el panel.
+
+---
+
+## 9. TESTIMONIOS
+
+Crear una sección de testimonios.
+
+Cada testimonio debe incluir:
+
+- Nombre.
+- Foto opcional.
+- Comentario.
+- Calificación de 1 a 5 estrellas.
+- Estado activo/inactivo.
+
+---
+
+## 10. CONTACTO
+
+Incluir:
+
+- Teléfono.
+- WhatsApp.
+- Correo electrónico.
+- Dirección.
+- Google Maps.
+- Horarios.
+- Redes sociales.
+
+Crear formulario de contacto con:
+
+- Nombre
+- Teléfono
+- Correo
+- Mensaje
+
+Guardar los mensajes en PostgreSQL para poder verlos desde el panel administrativo.
+
+---
+
+# PANEL DE ADMINISTRACIÓN
+
+Crear una ruta protegida:
+
+/admin
+
+Debe contar con inicio de sesión seguro.
+
+## LOGIN
+
+Crear:
+
+/admin/login
+
+Campos:
+
+- Correo electrónico
+- Contraseña
+
+Utilizar:
+
+- Contraseñas encriptadas con bcrypt.
+- Sesiones seguras o JWT.
+- Rutas protegidas.
+
+---
+
+# DASHBOARD ADMINISTRATIVO
+
+Crear un dashboard moderno con:
+
+- Total de imágenes.
+- Total de videos.
+- Servicios activos.
+- Promociones activas.
+- Mensajes recibidos.
+
+Menú lateral responsive.
+
+En móviles el menú debe convertirse en menú desplegable.
+
+---
+
+# MÓDULOS DEL ADMINISTRADOR
+
+## ADMINISTRAR IMÁGENES
+
+Crear módulo para:
+
+- Subir imágenes.
+- Ver imágenes.
+- Editar.
+- Eliminar.
+- Reordenar.
+
+Mostrar una vista previa antes de guardar.
+
+---
+
+## ADMINISTRAR VIDEOS
+
+Permitir:
+
+- Subir video.
+- Agregar URL de YouTube/Vimeo.
+- Editar información.
+- Eliminar.
+- Activar/desactivar.
+
+---
+
+## ADMINISTRAR SERVICIOS
+
+CRUD completo:
+
+- Crear.
+- Leer.
+- Editar.
+- Eliminar.
+
+---
+
+## ADMINISTRAR PROMOCIONES
+
+CRUD completo.
+
+---
+
+## ADMINISTRAR ESPECIALISTAS
+
+CRUD completo.
+
+---
+
+## ADMINISTRAR TESTIMONIOS
+
+CRUD completo.
+
+---
+
+## ADMINISTRAR MENSAJES
+
+Mostrar mensajes recibidos desde el formulario.
+
+Permitir:
+
+- Ver.
+- Marcar como leído.
+- Eliminar.
+
+---
+
+## CONFIGURACIÓN DEL SITIO
+
+Crear una sección donde el administrador pueda modificar:
+
+- Nombre de la clínica.
+- Logo.
+- Teléfono.
+- WhatsApp.
+- Correo.
+- Dirección.
+- Horarios.
+- Facebook.
+- Instagram.
+- TikTok.
+
+Estos datos deben reflejarse automáticamente en la página pública.
+
+---
+
+# BASE DE DATOS POSTGRESQL
+
+Diseñar las tablas necesarias.
+
+Como mínimo:
+
+users
+services
+gallery_images
+videos
+before_after
+promotions
+specialists
+testimonials
+contact_messages
+site_settings
+
+Agregar:
+
+- id
+- created_at
+- updated_at
+
+Cuando sea necesario.
+
+Utilizar relaciones correctas y Drizzle ORM.
+
+---
+
+# API REST
+
+Crear endpoints organizados.
+
+Ejemplos:
+
+GET /api/services
+POST /api/services
+PUT /api/services/:id
+DELETE /api/services/:id
+
+Hacer lo mismo para:
+
+- Imágenes
+- Videos
+- Promociones
+- Especialistas
+- Testimonios
+- Mensajes
+- Configuración
+
+Las rutas administrativas deben requerir autenticación.
+
+---
+
+# MANEJO DE ARCHIVOS
+
+Crear un sistema adecuado para manejar:
+
+- Imágenes
+- Videos
+- Imágenes antes/después
+- Logos
+
+No guardar archivos grandes directamente en PostgreSQL.
+
+Guardar en la base de datos únicamente:
+
+- URL
+- Nombre
+- Tipo
+- Metadata necesaria
+
+Preparar la aplicación para poder utilizar almacenamiento externo en el futuro.
+
+---
+
+# DISEÑO
+
+El diseño debe transmitir:
+
+- Elegancia
+- Confianza
+- Profesionalismo
+- Belleza
+- Tecnología
+
+Utilizar:
+
+- Espacios amplios.
+- Tipografía moderna.
+- Tarjetas elegantes.
+- Animaciones suaves.
+- Buenas fotografías.
+- Diseño limpio.
+
+No utilizar un diseño genérico de dashboard.
+
+Crear una experiencia visual premium.
+
+---
+
+# SEO Y RENDIMIENTO
+
+Agregar:
+
+- Meta title.
+- Meta description.
+- Open Graph.
+- Favicon.
+- Imágenes optimizadas.
+- Lazy loading.
+- Buen rendimiento móvil.
+
+---
+
+# CALIDAD DEL CÓDIGO
+
+IMPORTANTE:
+
+1. Usar TypeScript correctamente.
+2. Evitar código duplicado.
+3. Crear componentes reutilizables.
+4. Separar lógica de presentación.
+5. Manejar errores de API.
+6. Mostrar estados de loading.
+7. Mostrar mensajes de éxito y error.
+8. Validar formularios.
+9. Crear interfaces y tipos correctamente.
+10. No usar datos falsos una vez que la API esté funcionando.
+11. Conectar completamente frontend, backend y PostgreSQL.
+
+---
+
+# PRIMER PASO
+
+Antes de construir todo, realiza lo siguiente:
+
+1. Crear la estructura del proyecto.
+2. Configurar PostgreSQL.
+3. Configurar Drizzle ORM.
+4. Crear el esquema inicial de la base de datos.
+5. Crear autenticación de administrador.
+6. Crear el layout público.
+7. Crear el layout administrativo.
+8. Conectar frontend y backend.
+9. Crear datos iniciales de ejemplo.
+10. Verificar que el proyecto pueda ejecutarse correctamente.
+
+Después continúa construyendo todos los módulos.
+
+Al finalizar, revisa que no existan errores de TypeScript ni errores de conexión a la base de datos.

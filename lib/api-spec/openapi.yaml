@@ -1,22 +1,22 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: API for NOVA Skin Med Spa public site and administration.
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
-    description: Health operations
+  - name: public
+  - name: auth
+  - name: admin
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +24,718 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /site:
+    get:
+      operationId: getSite
+      tags: [public]
+      summary: Get the complete public site content
+      responses:
+        "200":
+          description: Site content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+  /contact:
+    post:
+      operationId: createContactMessage
+      tags: [public]
+      summary: Submit a contact message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactMessageInput"
+      responses:
+        "201":
+          description: Message received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactMessage"
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Start an administrator session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Authenticated administrator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "401":
+          description: Invalid credentials
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: End administrator session
+      responses:
+        "204":
+          description: Logged out
+  /auth/me:
+    get:
+      operationId: getCurrentUser
+      tags: [auth]
+      summary: Get the current administrator
+      responses:
+        "200":
+          description: Current administrator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "401":
+          description: Not authenticated
+  /admin/summary:
+    get:
+      operationId: getAdminSummary
+      tags: [admin]
+      summary: Get dashboard totals
+      responses:
+        "200":
+          description: Dashboard totals
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSummary"
+  /admin/settings:
+    get:
+      operationId: getSiteSettings
+      tags: [admin]
+      summary: Get editable site settings
+      responses:
+        "200":
+          description: Settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteSettings"
+    put:
+      operationId: updateSiteSettings
+      tags: [admin]
+      summary: Update editable site settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SiteSettingsInput"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteSettings"
+  /admin/services:
+    get:
+      operationId: listServices
+      tags: [admin]
+      summary: List services
+      responses:
+        "200":
+          description: Services
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Service" }
+    post:
+      operationId: createService
+      tags: [admin]
+      summary: Create a service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ServiceInput" }
+      responses:
+        "201":
+          description: Created service
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Service" }
+  /admin/services/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updateService
+      tags: [admin]
+      summary: Update a service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ServiceInput" }
+      responses:
+        "200":
+          description: Updated service
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Service" }
+    delete:
+      operationId: deleteService
+      tags: [admin]
+      summary: Delete a service
+      responses:
+        "204": { description: Deleted }
+  /admin/gallery:
+    get:
+      operationId: listGalleryImages
+      tags: [admin]
+      summary: List gallery images
+      responses:
+        "200":
+          description: Gallery images
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/GalleryImage" }
+    post:
+      operationId: createGalleryImage
+      tags: [admin]
+      summary: Create gallery image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GalleryImageInput" }
+      responses:
+        "201":
+          description: Created gallery image
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GalleryImage" }
+  /admin/gallery/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updateGalleryImage
+      tags: [admin]
+      summary: Update gallery image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GalleryImageInput" }
+      responses:
+        "200":
+          description: Updated gallery image
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GalleryImage" }
+    delete:
+      operationId: deleteGalleryImage
+      tags: [admin]
+      summary: Delete gallery image
+      responses:
+        "204": { description: Deleted }
+  /admin/videos:
+    get:
+      operationId: listVideos
+      tags: [admin]
+      summary: List videos
+      responses:
+        "200":
+          description: Videos
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Video" }
+    post:
+      operationId: createVideo
+      tags: [admin]
+      summary: Create video
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/VideoInput" }
+      responses:
+        "201":
+          description: Created video
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Video" }
+  /admin/videos/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updateVideo
+      tags: [admin]
+      summary: Update video
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/VideoInput" }
+      responses:
+        "200":
+          description: Updated video
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Video" }
+    delete:
+      operationId: deleteVideo
+      tags: [admin]
+      summary: Delete video
+      responses:
+        "204": { description: Deleted }
+  /admin/promotions:
+    get:
+      operationId: listPromotions
+      tags: [admin]
+      summary: List promotions
+      responses:
+        "200":
+          description: Promotions
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Promotion" }
+    post:
+      operationId: createPromotion
+      tags: [admin]
+      summary: Create promotion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PromotionInput" }
+      responses:
+        "201":
+          description: Created promotion
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Promotion" }
+  /admin/promotions/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updatePromotion
+      tags: [admin]
+      summary: Update promotion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PromotionInput" }
+      responses:
+        "200":
+          description: Updated promotion
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Promotion" }
+    delete:
+      operationId: deletePromotion
+      tags: [admin]
+      summary: Delete promotion
+      responses:
+        "204": { description: Deleted }
+  /admin/specialists:
+    get:
+      operationId: listSpecialists
+      tags: [admin]
+      summary: List specialists
+      responses:
+        "200":
+          description: Specialists
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Specialist" }
+    post:
+      operationId: createSpecialist
+      tags: [admin]
+      summary: Create specialist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SpecialistInput" }
+      responses:
+        "201":
+          description: Created specialist
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Specialist" }
+  /admin/specialists/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updateSpecialist
+      tags: [admin]
+      summary: Update specialist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SpecialistInput" }
+      responses:
+        "200":
+          description: Updated specialist
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Specialist" }
+    delete:
+      operationId: deleteSpecialist
+      tags: [admin]
+      summary: Delete specialist
+      responses:
+        "204": { description: Deleted }
+  /admin/testimonials:
+    get:
+      operationId: listTestimonials
+      tags: [admin]
+      summary: List testimonials
+      responses:
+        "200":
+          description: Testimonials
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Testimonial" }
+    post:
+      operationId: createTestimonial
+      tags: [admin]
+      summary: Create testimonial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TestimonialInput" }
+      responses:
+        "201":
+          description: Created testimonial
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Testimonial" }
+  /admin/testimonials/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updateTestimonial
+      tags: [admin]
+      summary: Update testimonial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TestimonialInput" }
+      responses:
+        "200":
+          description: Updated testimonial
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Testimonial" }
+    delete:
+      operationId: deleteTestimonial
+      tags: [admin]
+      summary: Delete testimonial
+      responses:
+        "204": { description: Deleted }
+  /admin/messages:
+    get:
+      operationId: listContactMessages
+      tags: [admin]
+      summary: List contact messages
+      responses:
+        "200":
+          description: Contact messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ContactMessage" }
+  /admin/messages/{id}:
+    parameters:
+      - { $ref: "#/components/parameters/Id" }
+    patch:
+      operationId: updateContactMessage
+      tags: [admin]
+      summary: Mark a message as read or unread
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MessageUpdate" }
+      responses:
+        "200":
+          description: Updated message
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ContactMessage" }
+    delete:
+      operationId: deleteContactMessage
+      tags: [admin]
+      summary: Delete contact message
+      responses:
+        "204": { description: Deleted }
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema: { type: integer }
   schemas:
     HealthStatus:
       type: object
       properties:
-        status:
-          type: string
-      required:
-        - status
-
+        status: { type: string }
+      required: [status]
+    AuthUser:
+      type: object
+      properties:
+        id: { type: integer }
+        email: { type: string }
+        name: { type: string }
+      required: [id, email, name]
+    LoginInput:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 1 }
+      required: [email, password]
+    SiteSettings:
+      type: object
+      properties:
+        id: { type: integer }
+        clinicName: { type: string }
+        tagline: { type: string }
+        phone: { type: string }
+        whatsapp: { type: string }
+        email: { type: string }
+        address: { type: string }
+        hours: { type: string }
+        instagram: { type: string }
+        facebook: { type: string }
+        tiktok: { type: string }
+        heroImage: { type: string }
+        heroEyebrow: { type: string }
+        heroTitle: { type: string }
+        heroDescription: { type: string }
+        aboutText: { type: string }
+        updatedAt: { type: string, format: date-time }
+      required: [id, clinicName, tagline, phone, whatsapp, email, address, hours, instagram, facebook, tiktok, heroImage, heroEyebrow, heroTitle, heroDescription, aboutText, updatedAt]
+    SiteSettingsInput:
+      type: object
+      properties:
+        clinicName: { type: string, minLength: 1 }
+        tagline: { type: string }
+        phone: { type: string }
+        whatsapp: { type: string }
+        email: { type: string, format: email }
+        address: { type: string }
+        hours: { type: string }
+        instagram: { type: string }
+        facebook: { type: string }
+        tiktok: { type: string }
+        heroImage: { type: string }
+        heroEyebrow: { type: string }
+        heroTitle: { type: string }
+        heroDescription: { type: string }
+        aboutText: { type: string }
+      required: [clinicName, tagline, phone, whatsapp, email, address, hours, instagram, facebook, tiktok, heroImage, heroEyebrow, heroTitle, heroDescription, aboutText]
+    Service:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        description: { type: string }
+        price: { type: ["number", "null"] }
+        duration: { type: ["string", "null"] }
+        imageUrl: { type: string }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+        createdAt: { type: string, format: date-time }
+      required: [id, name, description, price, duration, imageUrl, active, sortOrder, createdAt]
+    ServiceInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 1 }
+        description: { type: string }
+        price: { type: ["number", "null"] }
+        duration: { type: ["string", "null"] }
+        imageUrl: { type: string }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+      required: [name, description, price, duration, imageUrl, active, sortOrder]
+    GalleryImage:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        imageUrl: { type: string }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+        createdAt: { type: string, format: date-time }
+      required: [id, title, description, imageUrl, active, sortOrder, createdAt]
+    GalleryImageInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        description: { type: string }
+        imageUrl: { type: string }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+      required: [title, description, imageUrl, active, sortOrder]
+    Video:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        videoUrl: { type: string }
+        posterUrl: { type: ["string", "null"] }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+        createdAt: { type: string, format: date-time }
+      required: [id, title, description, videoUrl, posterUrl, active, sortOrder, createdAt]
+    VideoInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        description: { type: string }
+        videoUrl: { type: string }
+        posterUrl: { type: ["string", "null"] }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+      required: [title, description, videoUrl, posterUrl, active, sortOrder]
+    Promotion:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        imageUrl: { type: string }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        active: { type: boolean }
+        createdAt: { type: string, format: date-time }
+      required: [id, title, description, imageUrl, startDate, endDate, active, createdAt]
+    PromotionInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        description: { type: string }
+        imageUrl: { type: string }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        active: { type: boolean }
+      required: [title, description, imageUrl, startDate, endDate, active]
+    Specialist:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        specialty: { type: string }
+        bio: { type: string }
+        photoUrl: { type: string }
+        instagram: { type: ["string", "null"] }
+        active: { type: boolean }
+        createdAt: { type: string, format: date-time }
+      required: [id, name, specialty, bio, photoUrl, instagram, active, createdAt]
+    SpecialistInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 1 }
+        specialty: { type: string }
+        bio: { type: string }
+        photoUrl: { type: string }
+        instagram: { type: ["string", "null"] }
+        active: { type: boolean }
+      required: [name, specialty, bio, photoUrl, instagram, active]
+    Testimonial:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        comment: { type: string }
+        rating: { type: integer, minimum: 1, maximum: 5 }
+        photoUrl: { type: ["string", "null"] }
+        active: { type: boolean }
+        createdAt: { type: string, format: date-time }
+      required: [id, name, comment, rating, photoUrl, active, createdAt]
+    TestimonialInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 1 }
+        comment: { type: string }
+        rating: { type: integer, minimum: 1, maximum: 5 }
+        photoUrl: { type: ["string", "null"] }
+        active: { type: boolean }
+      required: [name, comment, rating, photoUrl, active]
+    ContactMessage:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        phone: { type: string }
+        email: { type: string }
+        message: { type: string }
+        read: { type: boolean }
+        createdAt: { type: string, format: date-time }
+      required: [id, name, phone, email, message, read, createdAt]
+    ContactMessageInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 1 }
+        phone: { type: string, minLength: 1 }
+        email: { type: string, format: email }
+        message: { type: string, minLength: 1 }
+      required: [name, phone, email, message]
+    MessageUpdate:
+      type: object
+      properties:
+        read: { type: boolean }
+      required: [read]
+    AdminSummary:
+      type: object
+      properties:
+        images: { type: integer }
+        videos: { type: integer }
+        services: { type: integer }
+        promotions: { type: integer }
+        messages: { type: integer }
+        unreadMessages: { type: integer }
+      required: [images, videos, services, promotions, messages, unreadMessages]
+    SiteContent:
+      type: object
+      properties:
+        settings: { $ref: "#/components/schemas/SiteSettings" }
+        services:
+          type: array
+          items: { $ref: "#/components/schemas/Service" }
+        gallery:
+          type: array
+          items: { $ref: "#/components/schemas/GalleryImage" }
+        videos:
+          type: array
+          items: { $ref: "#/components/schemas/Video" }
+        promotions:
+          type: array
+          items: { $ref: "#/components/schemas/Promotion" }
+        specialists:
+          type: array
+          items: { $ref: "#/components/schemas/Specialist" }
+        testimonials:
+          type: array
+          items: { $ref: "#/components/schemas/Testimonial" }
+      required: [settings, services, gallery, videos, promotions, specialists, testimonials]
