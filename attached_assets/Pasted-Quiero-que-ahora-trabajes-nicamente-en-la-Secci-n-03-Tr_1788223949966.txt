@@ -1,0 +1,143 @@
+Quiero que ahora trabajes únicamente en la Sección 03 — Tratamientos del sitio web actual de NovaSkin. No modifiques la Sección 01 ni la Sección 02 que ya fueron trabajadas y no hagas cambios en ninguna sección posterior. Antes de comenzar, revisa cómo está construida actualmente la sección de tratamientos y reutiliza los componentes existentes siempre que sea posible. Conserva completamente el branding actual de NovaSkin: logo, colores, tipografías, estilo de botones, espacios y lenguaje visual.
+
+El objetivo de esta sección es presentar de manera clara y atractiva los 6 tratamientos principales de NovaSkin, permitiendo que el usuario pueda conocerlos rápidamente y después entrar a “Ver más” si quiere información detallada. No quiero colocar los seis tratamientos uno debajo del otro porque haría demasiado larga la página. Quiero convertir esta sección en un carrusel horizontal de tarjetas verticales, elegante, limpio y visual.
+
+En computadora deben verse exactamente 3 tratamientos al mismo tiempo. A la derecha deben existir más tratamientos y el usuario debe poder desplazarse horizontalmente para descubrirlos. Los otros tres tratamientos no deben aparecer debajo de los primeros tres. Deben formar parte del mismo carrusel horizontal. Permite navegar mediante flechas izquierda/derecha, mouse, trackpad y gesto de swipe en dispositivos táctiles.
+
+No quiero que el carrusel avance automáticamente. El usuario debe controlar cuándo cambia de tratamiento.
+
+Los seis tratamientos, en este orden, son: 01 Toxina Botulínica, 02 Bioestimuladores, 03 PDRN Salmón, 04 Skin Boosters, 05 NCTF Revitalizante y 06 Mesoterapia Capilar.
+
+En la parte superior de la sección coloca un identificador pequeño que diga “02 — TRATAMIENTOS” y después un título principal como “Cuidado personalizado, respaldado por la ciencia.” Debajo coloca un texto corto que invite al usuario a conocer las diferentes opciones de NovaSkin.
+
+Cada tarjeta debe tener una fotografía vertical grande en la parte superior. Quiero conservar el estilo visual que hemos definido: la fotografía debe tener la parte superior redondeada formando una especie de arco elegante, similar a una ventana vertical. Debajo de la fotografía debe aparecer el número del tratamiento, su nombre, una descripción breve y finalmente el enlace o botón “VER MÁS →”.
+
+Todavía no contamos con todas las fotografías definitivas de cada tratamiento, así que quiero que utilices imágenes provisionales relacionadas específicamente con cada procedimiento. No dejes espacios vacíos y no utilices la misma imagen para varios tratamientos.
+
+Para Toxina Botulínica, utiliza provisionalmente una fotografía profesional relacionada con la aplicación de toxina botulínica en el rostro. Debe verse como un procedimiento estético profesional y elegante.
+
+Para Bioestimuladores, utiliza una fotografía relacionada con un procedimiento de bioestimulación facial o aplicación profesional enfocada en el cuidado y firmeza de la piel.
+
+Para PDRN Salmón, utiliza una fotografía relacionada con un procedimiento facial de regeneración o bioestimulación de la piel.
+
+Para Skin Boosters, utiliza una fotografía relacionada con hidratación profunda o tratamiento facial mediante Skin Boosters.
+
+Para NCTF Revitalizante, utiliza una fotografía relacionada con mesoterapia facial o revitalización de la piel.
+
+Para Mesoterapia Capilar, utiliza una fotografía claramente relacionada con un procedimiento realizado sobre el cuero cabelludo o cuidado capilar profesional.
+
+Todas estas fotografías son placeholders temporales. Deben quedar implementadas de forma que posteriormente podamos sustituir cada archivo por una fotografía real de NovaSkin sin tener que modificar el diseño de la tarjeta. No utilices fotografías que tengan logotipos de otras clínicas, marcas visibles, textos incorporados o marcas de agua.
+
+La descripción breve de Toxina Botulínica debe explicar que es un tratamiento que ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión.
+
+La descripción de Bioestimuladores debe explicar brevemente que estimulan progresivamente la producción natural de colágeno y elastina para mejorar la firmeza, elasticidad y calidad de la piel.
+
+La descripción de PDRN Salmón debe explicar que es un tratamiento enfocado en la bioestimulación y regeneración cutánea para mejorar la calidad general de la piel.
+
+La descripción de Skin Boosters debe explicar que están enfocados principalmente en mejorar hidratación, luminosidad, elasticidad y calidad de la piel.
+
+La descripción de NCTF Revitalizante debe explicar que es un tratamiento de mesoterapia enfocado en revitalizar la piel y mejorar hidratación, luminosidad y textura.
+
+La descripción de Mesoterapia Capilar debe explicar que consiste en aplicar activos directamente en el cuero cabelludo para favorecer las condiciones del folículo y mejorar la calidad del cabello.
+
+Quiero que las seis tarjetas mantengan exactamente la misma altura y estructura para que el carrusel se vea ordenado.
+
+Cuando el usuario pase el cursor sobre cualquiera de las tarjetas, quiero una microanimación que indique claramente que puede interactuar con ella. La tarjeta debe elevarse aproximadamente entre 6 y 10 píxeles, la fotografía puede hacer un zoom muy pequeño de aproximadamente 1.02 a 1.04, y la sombra puede aumentar ligeramente. La transición debe durar aproximadamente entre 250 y 350 milisegundos y sentirse suave. Al retirar el cursor, todo debe regresar lentamente a su posición original. No utilices rebotes ni movimientos exagerados.
+
+El cursor debe cambiar a pointer cuando se encuentre sobre una zona clicable.
+
+Las flechas del carrusel deben ser discretas y utilizar el estilo gráfico y los colores del branding de NovaSkin. Cuando el usuario esté viendo los primeros tratamientos, la flecha izquierda debe aparecer deshabilitada o con menor intensidad. Al llegar al final, debe suceder lo mismo con la flecha derecha.
+
+En tablet deben verse aproximadamente 2 tratamientos al mismo tiempo y en celular debe mostrarse 1 tratamiento por vez. En móvil el usuario debe poder deslizar con el dedo hacia la izquierda y derecha. Mantén el arco de las fotografías y toda la información de las tarjetas.
+
+Ahora quiero configurar el funcionamiento de “VER MÁS →”.
+
+Al hacer clic en “VER MÁS” de cualquier tratamiento, quiero abrir una vista ampliada elegante del tratamiento. Puede implementarse como una página interna o como una vista/modal amplio si esto funciona mejor con la arquitectura actual, pero debe permitir leer cómodamente toda la información y funcionar correctamente en móvil.
+
+La vista ampliada debe mostrar primero el nombre del tratamiento, después una fotografía relacionada, después el título “¿En qué consiste?”, su explicación y posteriormente una sección de “Preguntas frecuentes” con exactamente 3 preguntas específicas de ese tratamiento.
+
+Las preguntas deben funcionar como acordeones. Inicialmente debe verse únicamente la pregunta y un símbolo +. Al hacer clic, la respuesta debe desplegarse suavemente y el símbolo puede cambiar de + a −. Al volver a hacer clic debe cerrarse.
+
+Para Toxina Botulínica, utiliza estas tres preguntas:
+
+¿Cuándo se empiezan a ver los resultados?
+Explica que los primeros efectos pueden comenzar a observarse aproximadamente a partir del tercer día y continúan evolucionando posteriormente.
+
+¿Cuánto dura el efecto?
+Indica que, de acuerdo con la información proporcionada por NovaSkin, suele tener una duración aproximada de 4 a 6 meses, aunque puede variar según cada persona.
+
+¿Me va a dejar la cara sin expresión?
+Explica que el objetivo de una aplicación adecuada es suavizar las líneas de expresión manteniendo una apariencia natural.
+
+Para Bioestimuladores, utiliza:
+
+¿Los resultados son inmediatos?
+Explica que los resultados son principalmente progresivos porque el tratamiento busca estimular procesos como la producción natural de colágeno.
+
+¿Cuánto duran los resultados?
+Explica que pueden mantenerse durante varios meses y que la duración depende del producto utilizado y de las características de cada paciente.
+
+¿Cuántas sesiones necesito?
+Explica que el número de sesiones depende del producto, las condiciones de la piel y los objetivos de cada persona, por lo que se determina durante una valoración.
+
+Para PDRN Salmón, utiliza:
+
+¿Es realmente de salmón?
+Explica que el PDRN se obtiene a partir de ADN de salmón altamente purificado y procesado para su utilización correspondiente.
+
+¿Cuándo se empiezan a notar los resultados?
+Explica que algunos cambios pueden apreciarse desde las primeras sesiones, mientras que otros relacionados con la calidad de la piel aparecen progresivamente.
+
+¿Qué cuidados debo tener después?
+Explica que deben seguirse las indicaciones del profesional y que pueden incluir mantener la piel limpia e hidratada, utilizar protección solar y evitar temporalmente productos irritantes.
+
+Para Skin Boosters, utiliza:
+
+¿Los Skin Boosters dan volumen al rostro?
+Explica que su objetivo principal es mejorar la hidratación y calidad de la piel y que no persiguen el mismo efecto de volumen que un relleno.
+
+¿Qué beneficios puedo notar?
+Explica que están enfocados en mejorar aspectos como hidratación, luminosidad, elasticidad y calidad general de la piel.
+
+¿Cuántas sesiones necesito?
+Explica que el protocolo depende del producto utilizado, las condiciones de la piel y los objetivos del paciente, por lo que debe establecerse de manera personalizada.
+
+Para NCTF Revitalizante, utiliza:
+
+¿Para qué sirve NCTF?
+Explica que está enfocado en revitalizar la piel y mejorar aspectos como hidratación, luminosidad, textura y calidad general.
+
+¿Es un relleno facial?
+Explica que NovaSkin lo maneja como un tratamiento de mesoterapia revitalizante con ácido hialurónico no reticulado y otros activos, enfocado principalmente en la calidad de la piel.
+
+¿Se puede combinar con otros tratamientos?
+Explica que en algunos casos sí, pero cualquier combinación debe definirse de manera personalizada durante una valoración profesional.
+
+Para Mesoterapia Capilar, utiliza:
+
+¿Para quién está indicada?
+Explica que puede utilizarse como apoyo en personas con cabello debilitado, pérdida de densidad o caída capilar, siempre después de una valoración.
+
+¿Todos reciben los mismos activos?
+Explica que no. El protocolo y los activos deben seleccionarse de acuerdo con las necesidades individuales de cada persona.
+
+¿Cuántas sesiones necesito?
+Explica que el número y frecuencia de las sesiones dependerán de las necesidades detectadas durante la valoración y del protocolo indicado.
+
+Después de las tres preguntas frecuentes de cada tratamiento, coloca un bloque de conversión que diga:
+
+“¿Quieres saber si este tratamiento es para ti?”
+
+Debajo coloca dos botones.
+
+El botón principal debe decir “AGENDAR VALORACIÓN →”. Al hacer clic, debe regresar mediante scroll suave a la Sección 10 — Contacto, posicionando al usuario directamente donde comienza el formulario que ya existe en el sitio. No debe crear un formulario nuevo y no debe abrir otra página.
+
+El segundo botón debe decir “WHATSAPP”. Al hacer clic debe abrir una conversación de WhatsApp con NovaSkin utilizando el número real 8711437775. Quiero que el mensaje aparezca previamente escrito y cambie según el tratamiento. Por ejemplo, si el usuario está viendo Toxina Botulínica, el mensaje puede decir: “Hola, me gustaría recibir más información sobre Toxina Botulínica y agendar una valoración.” Si está viendo PDRN, debe sustituir automáticamente el nombre por PDRN Salmón, y así sucesivamente con los seis tratamientos.
+
+Si la vista ampliada se implementa como modal o panel, agrega un botón claro para cerrar y regresar a los tratamientos. Si se implementa como página individual, agrega una opción “← VOLVER A TRATAMIENTOS” que regrese al carrusel manteniendo una experiencia fluida.
+
+No inventes precios, promociones, tiempos de recuperación, contraindicaciones, certificaciones, resultados garantizados ni otra información médica que no haya sido proporcionada. Si falta algún dato, simplemente no lo muestres.
+
+Mantén todas las imágenes provisionales relacionadas con cada tema, pero deja su implementación preparada para que posteriormente podamos reemplazarlas por las fotografías reales de NovaSkin sin rediseñar la sección.
+
+Finalmente, revisa que todo funcione correctamente en desktop, tablet y móvil: desplazamiento del carrusel, flechas, swipe, hover, botón Ver más, acordeones de preguntas, botón Agendar Valoración, enlace de WhatsApp y regreso a Tratamientos.
