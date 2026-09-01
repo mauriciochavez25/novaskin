@@ -546,7 +546,7 @@ function PublicSite() {
          <div className="relative mx-auto w-full max-w-7xl">
             <div className="max-w-[680px] text-[#F2F2F0] md:max-w-[740px]">
              <p className="hero-reveal hero-reveal-1 mb-5 text-[11px] font-bold uppercase tracking-[.3em] text-[#e0bb69] md:text-xs md:tracking-[.35em]">{heroContent.eyebrow}</p>
-              <h1 className="hero-reveal hero-reveal-2 max-w-[720px] font-serif text-[2.8rem] leading-[1.01] md:text-[4.25rem] lg:text-[4.85rem] xl:text-[5.25rem]">{heroContent.title}</h1>
+              <h1 className="hero-reveal hero-reveal-2 max-w-[670px] font-serif text-[2.35rem] leading-[1.05] md:text-[3.2rem] lg:text-[3.35rem] xl:text-[3.5rem]">{heroContent.title}</h1>
              <p className="hero-reveal hero-reveal-3 mt-7 max-w-xl text-base leading-7 text-[#e9ebe8] md:text-lg">{heroContent.description}</p>
              <div className="hero-reveal hero-reveal-4 mt-8 flex flex-wrap gap-3 md:mt-9">
                 <Button testId="button-book-hero" variant="gold" className="min-h-12 px-6 uppercase tracking-[.08em]" onClick={scrollToContact}>Agendar valoración <ArrowRight size={16}/></Button>
