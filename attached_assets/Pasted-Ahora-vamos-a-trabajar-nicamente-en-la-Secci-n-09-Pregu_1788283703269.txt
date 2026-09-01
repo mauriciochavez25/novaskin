@@ -1,0 +1,79 @@
+Ahora vamos a trabajar únicamente en la Sección 09 — Preguntas Frecuentes del sitio web actual de NovaSkin. No modifiques ninguna de las secciones anteriores que ya están terminadas y no hagas cambios todavía en la Sección 10 de Contacto ni en el Footer. Mantén completamente el branding actual de NovaSkin: colores, tipografías, tamaños, espaciados, estilo de botones, animaciones y lenguaje visual.
+
+Esta sección debe servir para resolver las dudas principales que puede tener una persona antes de decidirse a contactar o agendar. Recuerda que las preguntas específicas de cada tratamiento ya están dentro del botón “Ver más” de cada tratamiento, por lo tanto aquí no quiero repetir preguntas como cuánto dura un procedimiento específico, para qué sirve determinado tratamiento o cuáles son sus cuidados particulares. Esta sección debe contener dudas generales sobre la atención en NovaSkin.
+
+Quiero una composición limpia y elegante. En la parte superior izquierda coloca un texto pequeño que diga “PREGUNTAS FRECUENTES” y como título principal utiliza “Antes de tu visita, resolvamos tus dudas.” Debajo coloca una frase breve: “Encuentra respuestas a algunas de las preguntas más comunes sobre tu experiencia en NovaSkin.”
+
+Quiero que esta sección tenga un diseño más creativo que simplemente colocar una lista larga de preguntas. En desktop divide visualmente la sección en dos partes. En el lado izquierdo coloca el título, la introducción y una imagen relacionada con NovaSkin. Si todavía no contamos con una fotografía definitiva adecuada para esta parte, coloca temporalmente una imagen relacionada con medicina estética, cuidado de la piel o una consulta profesional, siempre respetando la estética premium y los colores del sitio. No utilices imágenes con logos de otras clínicas, marcas de agua o textos. Deja esta imagen preparada para sustituirla posteriormente sin cambiar el diseño.
+
+En el lado derecho coloca las preguntas mediante un sistema de acordeón. Quiero que inicialmente todas las respuestas estén cerradas. Cada pregunta debe aparecer en una fila limpia con un símbolo “+” al lado derecho. Cuando el usuario haga clic sobre una pregunta, debe desplegarse suavemente la respuesta y el símbolo debe cambiar de “+” a “−”. Cuando vuelva a hacer clic, debe cerrarse.
+
+Permite que solamente una pregunta permanezca abierta al mismo tiempo. Cuando el usuario abra otra pregunta, la anterior debe cerrarse automáticamente. La animación debe ser suave y elegante, sin movimientos bruscos.
+
+Coloca estas preguntas generales:
+
+01. ¿Necesito una valoración antes de realizarme un tratamiento?
+
+Respuesta: “La valoración permite conocer tus necesidades y objetivos para orientarte hacia el tratamiento más adecuado para ti. Dependiendo del procedimiento que te interese, el equipo de NovaSkin podrá indicarte si es necesario realizar una valoración previa.”
+
+02. ¿Cómo puedo saber qué tratamiento es adecuado para mí?
+
+Respuesta: “Cada piel y cada persona tienen necesidades diferentes. Puedes contactar a NovaSkin para recibir orientación y conocer las opciones disponibles de acuerdo con lo que deseas trabajar.”
+
+03. ¿Cómo puedo agendar una cita?
+
+Respuesta: “Puedes solicitar tu cita a través del formulario de esta página o comunicarte directamente con NovaSkin por WhatsApp. El equipo dará seguimiento a tu solicitud para confirmar disponibilidad.”
+
+No digas que llenar el formulario significa que la cita ya quedó confirmada. El formulario únicamente envía la solicitud y posteriormente NovaSkin debe ponerse en contacto con la persona.
+
+04. ¿Puedo preguntar por un tratamiento antes de agendar?
+
+Respuesta: “Sí. Puedes comunicarte por WhatsApp para resolver dudas generales antes de solicitar tu cita. Si tu pregunta requiere una valoración profesional, el equipo te indicará el siguiente paso.”
+
+05. ¿Los tratamientos son iguales para todas las personas?
+
+Respuesta: “No necesariamente. La elección del tratamiento puede variar de acuerdo con las necesidades, objetivos y valoración de cada persona.”
+
+06. ¿Dónde se encuentra NovaSkin?
+
+Respuesta: “NovaSkin se encuentra en Av. Juárez 4955, Plaza Laguna Oriente, Local 43.”
+
+Debajo de esta respuesta agrega discretamente un enlace o botón pequeño que diga “VER UBICACIÓN →”. Deja preparado este botón para abrir la ubicación de NovaSkin en Google Maps. Si todavía no existe dentro del proyecto el enlace exacto de Google Maps proporcionado por el cliente, no inventes coordenadas ni una ubicación diferente. Deja claramente preparado el campo para colocar posteriormente el enlace real.
+
+07. ¿Cuál es el horario de atención?
+
+Respuesta: “El horario de atención es de 10:00 a.m. a 2:00 p.m. y de 4:00 p.m. a 7:00 p.m.”
+
+No inventes los días de atención si todavía no contamos con esa información confirmada.
+
+08. ¿Cómo puedo comunicarme directamente con NovaSkin?
+
+Respuesta: “Puedes comunicarte directamente por WhatsApp al 871 143 7775.”
+
+Dentro de esta respuesta coloca un pequeño enlace que diga “ENVIAR WHATSAPP →”. Al presionarlo debe abrir una conversación con el número real 8711437775 y cargar el mensaje: “Hola, tengo una pregunta sobre los servicios de NovaSkin.”
+
+Después del acordeón quiero una pequeña llamada a la acción para las personas cuya duda no aparece en las preguntas frecuentes. Coloca el texto “¿No encontraste lo que buscabas?” y debajo “Escríbenos y con gusto podemos orientarte.”
+
+Agrega un botón que diga “PREGUNTAR POR WHATSAPP →”. Este botón debe abrir directamente WhatsApp con el número 8711437775 y el mensaje preescrito “Hola, tengo una duda y me gustaría recibir información sobre NovaSkin.”
+
+También coloca un botón secundario que diga “SOLICITAR CITA →”. Este botón debe hacer scroll suave hacia la Sección 10 — Contacto, exactamente donde comienza el formulario existente. No debe abrir otro formulario ni crear una página nueva.
+
+Quiero pequeñas microinteracciones en el acordeón. Cuando el usuario pase el cursor sobre una pregunta en computadora, puede cambiar ligeramente el color del texto o aparecer una línea dorada muy sutil. El símbolo “+” también puede rotar suavemente al abrirse. Mantén todo discreto.
+
+Cuando esta sección aparezca mediante scroll, primero debe aparecer la parte izquierda con el título y la imagen y posteriormente el acordeón con un fade-in suave. No hagas que cada pregunta tenga una animación exagerada.
+
+En tablet puedes conservar las dos columnas si existe suficiente espacio. Si comienza a verse comprimido, coloca primero el título y la imagen y después las preguntas.
+
+En celular quiero obligatoriamente una sola columna. Primero debe aparecer “PREGUNTAS FRECUENTES”, el título y el texto introductorio. Después la imagen y posteriormente todo el acordeón. Las filas de las preguntas deben tener suficiente altura para poder tocarlas cómodamente con el dedo.
+
+No hagas que únicamente el símbolo “+” sea clickeable. Toda la fila de cada pregunta debe funcionar como botón para abrir o cerrar la respuesta.
+
+Implementa correctamente accesibilidad en el acordeón: las preguntas deben poder activarse también mediante teclado, deben indicar mediante atributos correspondientes si están abiertas o cerradas y el foco debe ser visible sin romper el diseño de NovaSkin.
+
+No agregues precios, promociones, resultados garantizados, contraindicaciones, información médica específica ni afirmaciones que no hayan sido proporcionadas. Tampoco agregues nuevas preguntas relacionadas con procedimientos individuales, porque esas preguntas ya se encuentran dentro de cada tratamiento.
+
+La transición final de esta sección hacia Contacto debe sentirse natural. El usuario acaba de resolver sus principales dudas y la siguiente acción lógica debe ser contactar o solicitar una cita.
+
+Cuando termines, revisa que las ocho preguntas estén correctamente escritas, que el acordeón funcione, que solo exista una respuesta abierta a la vez, que WhatsApp utilice el número 8711437775, que el botón “Solicitar cita” lleve al formulario y que todo sea responsive.
+
+Realiza únicamente estos cambios en la Sección 09 — Preguntas Frecuentes. No modifiques ninguna otra sección. Cuando termines, detente y espera mis instrucciones antes de continuar con la Sección 10 — Contacto / Solicitud de cita.

@@ -1,1 +1,2 @@
 - [Revisión de placeholders visuales](placeholder-review.md) — inspeccionar imágenes temporales localmente y retirar marcas visibles antes de presentar una sección.
+- [Alcance de secciones aisladas](section-scope.md) — no mezclar funcionalidades pendientes de secciones vecinas en una implementación acotada.
