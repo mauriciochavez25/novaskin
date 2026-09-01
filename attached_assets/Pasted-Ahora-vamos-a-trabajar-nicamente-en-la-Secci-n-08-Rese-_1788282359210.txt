@@ -1,0 +1,51 @@
+Ahora vamos a trabajar únicamente en la Sección 08 — Reseñas / Experiencias de clientes del sitio web actual de NovaSkin. No modifiques ninguna de las secciones anteriores que ya están terminadas y no hagas cambios todavía en Preguntas Frecuentes, Contacto ni Footer. Conserva completamente el branding de NovaSkin, incluyendo colores, tipografías, espaciados, estilo de botones, animaciones y lenguaje visual. Esta sección debe sentirse elegante y generar confianza, pero también debe ser sencilla y fácil de utilizar.
+
+La función de esta sección es mostrar experiencias de clientes de NovaSkin y, al mismo tiempo, permitir que una persona que ya recibió atención pueda dejar su propia reseña. Quiero que ambas funciones estén dentro de la misma sección, pero claramente diferenciadas.
+
+En la parte superior coloca un texto pequeño que diga “EXPERIENCIAS NOVASKIN” y como título principal utiliza “Lo que dicen quienes ya vivieron la experiencia.” Debajo coloca una frase breve como “Cada experiencia es diferente. Conoce lo que nuestros clientes comparten sobre su visita a NovaSkin.”
+
+No inventes reseñas reales ni nombres de clientes. Mientras todavía no tengamos testimonios reales cargados, utiliza contenido claramente identificado como contenido de demostración o placeholder, de manera que después podamos reemplazarlo fácilmente. Bajo ninguna circunstancia presentes una reseña inventada como si perteneciera a una clienta real de NovaSkin.
+
+Quiero que las reseñas se presenten mediante un carrusel horizontal elegante. En computadora deben poder verse aproximadamente tres reseñas al mismo tiempo y el usuario debe poder desplazarse hacia la derecha para ver las siguientes. En tablet pueden mostrarse dos y en celular una reseña a la vez. El carrusel debe poder controlarse mediante flechas en computadora y mediante swipe en dispositivos móviles.
+
+No quiero que el carrusel avance automáticamente. El usuario debe decidir cuándo cambiar de reseña.
+
+Cada reseña debe mostrar primero una calificación visual mediante estrellas, después el comentario y finalmente el nombre de la persona. Cuando tengamos reseñas reales, si una persona solamente proporciona su nombre, utiliza únicamente su primer nombre y la inicial de su apellido cuando corresponda, por ejemplo “Mariana R.”. No agregues fotografías de clientes si no contamos con autorización y material real para hacerlo.
+
+El diseño de las reseñas debe sentirse editorial y premium. No quiero tarjetas genéricas con bordes gruesos y sombras fuertes. Utiliza fondos, líneas, espacios y tipografías pertenecientes al branding de NovaSkin. Las estrellas pueden utilizar el color de acento correspondiente al branding.
+
+Al pasar el cursor sobre una reseña en computadora puede existir una microinteracción muy discreta, como un desplazamiento vertical mínimo o un cambio ligero en el borde. No utilices zooms fuertes ni rebotes.
+
+Después del carrusel quiero agregar un bloque específico para dejar una reseña. Este bloque debe diferenciarse visualmente del carrusel mediante espacio, cambio sutil de fondo o composición, pero debe seguir formando parte de la misma Sección 08.
+
+El título de este bloque debe decir “¿Ya viviste la experiencia NovaSkin?” y debajo coloca “Nos encantará conocer tu experiencia.”
+
+Agrega un botón principal que diga “DEJAR UNA RESEÑA →”. Al presionar este botón no quiero que el usuario sea enviado directamente a otra página. Primero debe abrirse dentro del mismo sitio un formulario/modal para escribir su reseña.
+
+El formulario debe solicitar únicamente la información necesaria. Incluye un campo de Nombre, un selector de calificación de 1 a 5 estrellas y un campo amplio que diga “Cuéntanos sobre tu experiencia”. No solicites teléfono, información médica, tratamiento recibido ni datos personales innecesarios para publicar una reseña.
+
+Las estrellas del formulario deben ser interactivas. Cuando el usuario pase el cursor o toque una estrella, deben resaltarse progresivamente de izquierda a derecha. Si selecciona cuatro estrellas, deben quedar visualmente activas cuatro. La selección debe funcionar tanto con mouse como con dispositivos táctiles.
+
+El campo de comentario debe tener un límite razonable de caracteres para evitar textos excesivamente largos. Puedes establecer aproximadamente 500 caracteres y mostrar discretamente el contador de caracteres.
+
+Antes del botón de envío agrega una casilla obligatoria con un texto claro indicando que la persona autoriza que su reseña pueda ser mostrada públicamente en el sitio web de NovaSkin. La reseña no debe enviarse si esta autorización no está marcada.
+
+El botón del formulario debe decir “ENVIAR RESEÑA →”. No permitas el envío si falta el nombre, no se seleccionó una calificación, el comentario está vacío o no se aceptó la autorización. Muestra mensajes de validación claros y discretos debajo del campo correspondiente.
+
+Muy importante: una reseña enviada por un usuario no debe publicarse automáticamente en el carrusel público. Debe guardarse como pendiente de revisión o enviarse al sistema que actualmente utilice el proyecto para almacenar los formularios. La intención es que NovaSkin pueda revisar una reseña antes de mostrarla públicamente. No implementes publicación automática de contenido enviado por usuarios.
+
+Si el proyecto todavía no cuenta con un backend o una base de datos preparada para guardar reseñas, no inventes una integración externa ni agregues servicios de pago sin autorización. En ese caso, construye correctamente toda la interfaz y validación y deja preparada la función de envío para conectarla posteriormente, indicando claramente en el código dónde debe conectarse el almacenamiento. No simules que una reseña se guardó realmente si no existe esa funcionalidad.
+
+Después de un envío exitoso, únicamente si el sistema confirmó realmente que recibió la información, cierra o limpia el formulario y muestra un mensaje que diga “Gracias por compartir tu experiencia. Tu reseña será revisada antes de publicarse.” No agregues inmediatamente esa reseña al carrusel.
+
+El modal debe tener un botón claro “X” para cerrarlo y también debe poder cerrarse mediante la tecla Escape en computadora. Si el usuario hace clic fuera del modal puedes permitir que se cierre, siempre que esto no provoque pérdida accidental de información sin advertencia cuando ya haya comenzado a escribir.
+
+En dispositivos móviles, el formulario debe ocupar prácticamente todo el ancho disponible y ser cómodo de completar. Los campos y estrellas deben tener tamaños adecuados para interacción táctil.
+
+Quiero animaciones suaves cuando la sección aparezca mediante scroll. Primero debe aparecer el identificador “EXPERIENCIAS NOVASKIN”, después el título y descripción, posteriormente las reseñas y finalmente el bloque “¿Ya viviste la experiencia NovaSkin?”. Utiliza fade-in y pequeños desplazamientos verticales. No utilices animaciones exageradas.
+
+No utilices fotografías provisionales de personas para representar clientes. En esta sección prefiero trabajar únicamente con texto, estrellas y composición gráfica hasta que exista material real y autorizado.
+
+Al terminar, revisa el funcionamiento del carrusel, las flechas, el swipe, las estrellas, el botón “DEJAR UNA RESEÑA”, apertura y cierre del formulario, validaciones, consentimiento para publicación y comportamiento responsive.
+
+Realiza únicamente estos cambios en la Sección 08 — Reseñas / Experiencias NovaSkin. No modifiques ninguna otra sección. Cuando termines, detente y espera mis siguientes instrucciones antes de continuar con la Sección 09 — Preguntas Frecuentes.
