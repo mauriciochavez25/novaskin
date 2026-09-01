@@ -71,7 +71,7 @@ export function WhatToImproveSection({
       aria-labelledby="what-to-improve-title"
       className="relative overflow-hidden bg-[#F2F2EF] px-5 py-20 text-[#2F4055] sm:px-8 md:px-10 md:py-28 lg:px-16 lg:py-36"
     >
-      <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[minmax(0,.82fr)_minmax(0,1.18fr)] md:items-start md:gap-12 lg:grid-cols-[minmax(290px,.78fr)_minmax(0,1.22fr)] lg:gap-24">
+      <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[minmax(0,.82fr)_minmax(0,1.18fr)] md:grid-rows-[auto_1fr] md:items-start md:gap-12 lg:grid-cols-[minmax(290px,.78fr)_minmax(0,1.22fr)] lg:gap-24">
         <div className="md:sticky md:top-12">
           <p className="motion-safe:reveal mb-5 text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">
             Tu punto de partida
@@ -86,25 +86,9 @@ export function WhatToImproveSection({
             No necesitas saber qué tratamiento elegir. Empieza por contarnos qué buscas.
           </p>
 
-          <figure className="motion-safe:reveal delay-3 relative mt-10 overflow-hidden md:mt-16">
-            <div className="absolute -left-3 -top-3 z-0 h-24 w-24 border-l border-t border-[#BB9445]/70" />
-            <div className="relative z-10 aspect-[4/5] overflow-hidden bg-[#D9D1C4] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[5/6]">
-              <img
-                src={imageUrl}
-                alt="Valoración estética facial en NovaSkin"
-                className="h-full w-full object-cover transition duration-700 ease-out motion-safe:hover:scale-[1.025]"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#202b38]/75 via-[#202b38]/20 to-transparent px-5 pb-5 pt-16 text-[#F2F2EF]">
-                <figcaption className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.24em]">
-                  <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-[#D7B66A]" />
-                  Primero escuchamos
-                </figcaption>
-              </div>
-            </div>
-          </figure>
         </div>
 
-        <div className="delay-4">
+        <div className="delay-4 md:col-start-2 md:row-span-2 md:row-start-1">
           <div className="mb-7 flex items-end justify-between gap-6 border-b border-[#AF9275]/45 pb-5">
             <p className="max-w-xs text-xs font-semibold uppercase leading-5 tracking-[.2em] text-[#AF9275]">
               Elige el objetivo que más se parece a lo que buscas
@@ -165,13 +149,13 @@ export function WhatToImproveSection({
                             onClick={() => onViewRelated(objective.treatments)}
                             className="mt-5 inline-flex min-h-11 items-center gap-2 text-[11px] font-bold uppercase tracking-[.16em] text-[#2F4055] underline decoration-[#BB9445] decoration-1 underline-offset-4 transition-colors hover:text-[#BB9445] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BB9445] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E9E3D9]"
                           >
-                            VER TRATAMIENTOS RELACIONADOS <span aria-hidden="true">→</span>
+                            CONOCER TRATAMIENTOS <span aria-hidden="true">→</span>
                           </button>
                         </div>
 
                         <div className="border-l border-[#BB9445]/45 pl-5 sm:pl-6">
                           <p className="text-[10px] font-bold uppercase tracking-[.18em] text-[#AF9275]">
-                            Puede relacionarse con
+                            Opciones relacionadas:
                           </p>
                           <ul className="mt-3 space-y-2 text-sm leading-5 text-[#2F4055]">
                             {objective.treatments.map((treatment) => (
@@ -209,6 +193,23 @@ export function WhatToImproveSection({
             </a>
           </div>
         </div>
+
+        <figure className="motion-safe:reveal delay-3 relative mt-10 w-full max-w-sm overflow-hidden md:col-start-1 md:row-start-2 md:mt-14">
+          <div className="absolute -left-3 -top-3 z-0 h-24 w-24 border-l border-t border-[#BB9445]/70" />
+          <div className="relative z-10 aspect-[4/5] overflow-hidden bg-[#D9D1C4] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[5/6]">
+            <img
+              src={imageUrl}
+              alt="Consulta para identificar necesidades de la piel en NovaSkin"
+              className="h-full w-full object-cover transition duration-700 ease-out motion-safe:hover:scale-[1.025]"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#202b38]/75 via-[#202b38]/20 to-transparent px-5 pb-5 pt-16 text-[#F2F2EF]">
+              <figcaption className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.24em]">
+                <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-[#D7B66A]" />
+                Primero escuchamos
+              </figcaption>
+            </div>
+          </div>
+        </figure>
       </div>
     </section>
   );

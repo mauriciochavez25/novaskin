@@ -1,0 +1,25 @@
+Quiero pulir únicamente la sección “¿Qué quieres mejorar?” de NovaSkin. La estructura general actual me gusta y NO quiero que la rediseñes desde cero. Conserva la composición de dos columnas, el título grande a la izquierda, los cinco objetivos en formato acordeón a la derecha, los colores, tipografías y estilo visual actual.
+
+Mantén arriba del título el texto pequeño “TU PUNTO DE PARTIDA” y conserva el título “¿Qué quieres mejorar?”. Mantén también el texto: “No necesitas saber qué tratamiento elegir. Empieza por contarnos qué buscas.”
+
+Conserva los cinco objetivos actuales y su orden: 01 Hidratación y luminosidad, 02 Líneas de expresión, 03 Firmeza, 04 Textura y calidad de piel y 05 Cuidado capilar.
+
+Quiero que cada objetivo funcione realmente como acordeón. Al hacer clic en cualquier parte de la fila, no solamente en la flecha, debe abrirse suavemente el contenido. La flecha debe rotar para indicar que está abierto. Al volver a hacer clic debe cerrarse. Permite tener únicamente un objetivo abierto al mismo tiempo para mantener la sección limpia.
+
+Dentro de cada acordeón muestra una explicación breve del objetivo y posteriormente una línea que diga “Opciones relacionadas:” seguida de tratamientos de NovaSkin que tengan relación con ese objetivo. Esta información debe presentarse como orientación general y NO como un diagnóstico ni como una afirmación de que el usuario necesariamente necesita esos tratamientos. Incluye un pequeño enlace “CONOCER TRATAMIENTOS →” que haga scroll suave hacia la sección de Tratamientos.
+
+No inventes beneficios médicos, resultados garantizados ni recomendaciones clínicas específicas. Mantén un lenguaje informativo y deja claro, cuando sea necesario, que la opción adecuada se determina mediante valoración.
+
+Cambia la fotografía actual de la izquierda por una imagen temporal diferente. NO utilices nuevamente la fotografía de la limpieza facial que ya aparece en Tratamientos. Utiliza una imagen elegante relacionada con el concepto de identificar necesidades de la piel: preferentemente una mujer adulta observando o tocando suavemente la piel de su rostro frente a un espejo, con piel natural, iluminación cálida, estética premium y sin mostrar un procedimiento médico. Esta imagen es temporal y posteriormente será reemplazada.
+
+Mantén la fotografía en el lado izquierdo debajo del texto, pero procura que no sea excesivamente grande. Debe acompañar la sección sin competir con los acordeones.
+
+Mantén al final el botón “QUIERO UNA VALORACIÓN →”. Al hacer clic debe hacer scroll suave hasta el formulario de contacto existente al final de la página. No crees un formulario nuevo.
+
+Mantén “Escríbenos por WhatsApp”. Al hacer clic debe abrir WhatsApp al número 8711437775 con el mensaje preescrito: “Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.”
+
+Agrega interacciones muy sutiles. Al pasar el cursor por uno de los cinco objetivos, puede cambiar ligeramente el color de la flecha o del número dorado. No utilices fondos fuertes, sombras grandes ni animaciones exageradas.
+
+En móvil coloca primero “TU PUNTO DE PARTIDA”, el título, la descripción y posteriormente los cinco acordeones. La fotografía puede aparecer después de los acordeones o eliminarse en pantallas muy pequeñas si perjudica la navegación. Los dos CTA deben ser fáciles de tocar.
+
+No modifiques el header, Tratamientos, Filosofía, Hero ni ninguna otra sección.
