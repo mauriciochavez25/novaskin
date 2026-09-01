@@ -523,7 +523,16 @@ function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: 
                 </div>
                 <h3 className="mt-3 font-serif text-3xl leading-tight text-[#2F4055]">{treatment.name}</h3>
                 <p className="mt-4 text-sm leading-7 text-[#68727b]">{treatment.description}</p>
-                <button type="button" data-testid={`button-treatment-more-${treatment.number}`} onClick={() => onSelect(treatment)} className="mt-auto inline-flex cursor-pointer items-center gap-2 pt-8 text-xs font-bold uppercase tracking-[.18em] text-[#2F4055] transition hover:text-[#BB9445]">
+                <button
+                  type="button"
+                  data-testid={`button-treatment-more-${treatment.number}`}
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onSelect(treatment);
+                  }}
+                  className="mt-auto inline-flex cursor-pointer items-center gap-2 pt-8 text-xs font-bold uppercase tracking-[.18em] text-[#2F4055] transition hover:text-[#BB9445]"
+                >
                   Ver más <ArrowRight size={15} />
                 </button>
               </div>

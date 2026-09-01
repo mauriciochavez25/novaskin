@@ -1,0 +1,41 @@
+Quiero corregir únicamente la funcionalidad de los botones “VER MÁS →” de la sección de Tratamientos. El diseño visual actual de esta sección me gusta y NO quiero que lo cambies. No modifiques tamaños, fotografías, marcos arqueados, textos, posiciones, colores, carrusel, flechas, animaciones ni distribución. Trabaja solamente en recuperar el funcionamiento de “Ver más”.
+
+Actualmente, al hacer clic en “VER MÁS →” de los tratamientos ya no sucede nada. Antes cada tratamiento tenía una vista ampliada o detalle con información adicional. Revisa el código actual y detecta qué se rompió durante las últimas modificaciones del carrusel.
+
+Quiero que cada uno de los 7 tratamientos tenga su propio “VER MÁS →” completamente funcional:
+
+01 Limpieza Facial
+02 Toxina Botulínica
+03 Bioestimuladores
+04 PDRN Salmón
+05 Skin Boosters
+06 NCTF Revitalizante
+07 Mesoterapia Capilar
+
+Al hacer clic en “VER MÁS →”, debe abrirse una vista ampliada elegante del tratamiento correspondiente. No quiero que el usuario sea enviado a un sitio externo.
+
+La vista ampliada debe mostrar: nombre del tratamiento, imagen correspondiente, sección “¿En qué consiste?”, explicación del tratamiento, tres preguntas frecuentes específicas con respuestas en formato acordeón y una llamada a la acción al final.
+
+Para los tratamientos que ya tenían información antes de las últimas modificaciones, recupera y reutiliza exactamente la lógica y contenido que ya existían. No borres esa información ni la reemplaces por contenido genérico.
+
+Para Limpieza Facial, crea la misma estructura visual que utilizan los demás tratamientos, pero por ahora no inventes información clínica detallada que no haya sido proporcionada. Puedes mostrar una descripción breve y dejar la sección preparada para completar posteriormente.
+
+Las preguntas frecuentes deben funcionar como acordeones. Cada pregunta debe mostrar inicialmente un símbolo “+”. Al hacer clic, debe desplegarse la respuesta con una animación suave y el símbolo debe cambiar a “−”. Al volver a hacer clic debe cerrarse.
+
+Al final de cada vista ampliada coloca el texto “¿Quieres saber si este tratamiento es para ti?” seguido de dos botones.
+
+El botón principal “AGENDAR VALORACIÓN →” debe hacer scroll suave hasta el formulario de contacto existente al final de la página. No crees un formulario nuevo.
+
+El botón “WHATSAPP” debe abrir una conversación con NovaSkin utilizando el número 8711437775 y un mensaje preescrito que incluya automáticamente el nombre del tratamiento seleccionado. Por ejemplo: “Hola, me gustaría recibir más información sobre Bioestimuladores y agendar una valoración.”
+
+Si la vista ampliada funciona como modal o panel, debe incluir un botón claro para cerrar y volver al carrusel. Si actualmente el proyecto utiliza una página interna o drawer, conserva esa misma solución en lugar de crear otra arquitectura diferente.
+
+Muy importante: cada botón “VER MÁS” debe abrir el contenido del tratamiento correcto. Revisa que no todos apunten al mismo ID, estado o handler. Cada tarjeta debe pasar correctamente la información de su tratamiento seleccionado.
+
+Verifica también que al desplazar el carrusel y hacer clic en tratamientos que están inicialmente fuera de pantalla, el botón “VER MÁS” siga funcionando correctamente.
+
+No alteres el funcionamiento de las flechas del carrusel mientras corriges esto.
+
+Después de corregirlo, prueba manualmente los 7 botones uno por uno y confirma que cada uno abre el tratamiento correcto, que los acordeones funcionan, que el botón de cerrar funciona, que Agendar valoración lleva al formulario y que WhatsApp utiliza el nombre correcto del tratamiento.
+
+No modifiques ninguna otra sección de la página. No rediseñes la sección de Tratamientos. El objetivo de esta instrucción es exclusivamente restaurar y verificar la funcionalidad de “VER MÁS →”.
