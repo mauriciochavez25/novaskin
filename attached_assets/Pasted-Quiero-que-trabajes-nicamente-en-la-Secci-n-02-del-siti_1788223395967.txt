@@ -1,0 +1,66 @@
+Quiero que trabajes únicamente en la Sección 02 del sitio web actual de NovaSkin, correspondiente a la filosofía y presentación de la marca. No modifiques ninguna otra sección del sitio. En especial, no cambies absolutamente nada de la Sección 01 — Hero que ya fue trabajada. El video de fondo, navegación, textos, botones, animaciones y funcionamiento de la portada deben permanecer exactamente como están.
+
+Antes de comenzar, revisa cómo está construida actualmente la Sección 02 y reutiliza los componentes existentes cuando sea posible. No reconstruyas innecesariamente elementos generales del sitio y conserva completamente el branding que ya está implementado: logo, paleta de colores, tipografías, tamaños, estilos de botones y lenguaje visual de NovaSkin.
+
+La función de esta sección es que, después de que el usuario vea el video de las instalaciones en la portada, pueda entender rápidamente cuál es la filosofía de NovaSkin y qué tipo de atención busca ofrecer. Por eso quiero que visualmente exista un cambio de ritmo: venimos de una portada con video y movimiento, así que esta segunda sección debe sentirse más limpia, tranquila, elegante y editorial.
+
+No utilices ninguna fotografía ni ningún video en esta sección. Tampoco utilices imágenes provisionales. Quiero que la sección dependa de la composición tipográfica, espacios en blanco, líneas, números y pequeños elementos gráficos que pertenezcan al branding.
+
+En la parte superior izquierda coloca un identificador pequeño que diga “01 — NUESTRA FILOSOFÍA”. Debe funcionar únicamente como elemento visual para introducir la sección. No debe ser un botón, no debe ser clicable y no debe dirigir a ninguna parte. Utiliza un tamaño pequeño y algún color de acento perteneciente al branding de NovaSkin.
+
+Después coloca como título principal:
+
+“Tu piel merece un cuidado pensado para ti.”
+
+Este será el elemento con mayor importancia visual de la sección. Utiliza la tipografía oficial correspondiente a encabezados y dale suficiente tamaño y espacio para que tenga protagonismo, pero sin hacerlo exageradamente grande.
+
+Acompaña el título con un texto breve que explique la filosofía de NovaSkin. Quiero que comunique que cada persona tiene necesidades diferentes y que la atención busca partir de conocer esas necesidades para ofrecer un cuidado personalizado, profesional y cercano. Utiliza la información real que ya existe en el proyecto y no inventes certificaciones, años de experiencia, resultados garantizados ni afirmaciones médicas que no hayan sido proporcionadas.
+
+Debajo o a un costado de este contenido quiero mostrar tres principios de NovaSkin:
+
+01 — Atención personalizada
+Texto breve: “Cada piel y cada objetivo son diferentes. Por eso, el cuidado comienza por conocer tus necesidades.”
+
+02 — Cuidado profesional
+Texto breve: “Cada tratamiento parte de una valoración y de un protocolo pensado de acuerdo con las necesidades de cada persona.”
+
+03 — Resultados naturales
+Texto breve: “Buscamos cuidar y realzar la apariencia de la piel manteniendo una imagen natural y equilibrada.”
+
+Estos tres elementos no deben convertirse en tres tarjetas rectangulares tradicionales. No quiero cajas con sombras ni tres módulos genéricos. Quiero una presentación editorial. En computadora pueden distribuirse horizontalmente y separarse mediante líneas finas verticales u horizontales, números grandes o pequeños detalles gráficos utilizando exclusivamente los colores del branding.
+
+Los números 01, 02 y 03 son únicamente elementos visuales, por lo tanto no deben funcionar como botones ni enlaces.
+
+Quiero que la composición general sea asimétrica. En desktop, utiliza aproximadamente la mitad izquierda para el título principal y la otra mitad para el texto introductorio. Los tres principios pueden ocupar la zona inferior de la sección. Deja bastante espacio libre entre los elementos para mantener una sensación premium y evitar saturación.
+
+Esta sección no necesita un botón principal, porque inmediatamente después aparecerá la sección de Tratamientos. No quiero agregar botones solamente por llenar espacio. El objetivo aquí es presentar la filosofía y después permitir que el usuario continúe naturalmente hacia los tratamientos.
+
+Sin embargo, al final de la sección puedes colocar un pequeño elemento visual que invite a continuar bajando, por ejemplo una línea fina con el texto “DESCUBRE NUESTROS TRATAMIENTOS ↓”. Este elemento puede funcionar como enlace interno. Si el usuario hace clic, debe realizar un scroll suave hasta el inicio exacto de la Sección 03 — Tratamientos. No debe abrir otra página ni recargar el sitio.
+
+Quiero agregar animaciones sutiles cuando esta sección entre en pantalla. Primero debe aparecer el identificador “01 — NUESTRA FILOSOFÍA”, después el título principal, posteriormente el texto y finalmente los tres principios. Utiliza un fade-in combinado con un desplazamiento vertical pequeño. La duración debe sentirse tranquila y elegante.
+
+Cuando aparezcan los tres principios, pueden entrar progresivamente de izquierda a derecha: primero Atención personalizada, después Cuidado profesional y finalmente Resultados naturales. Si utilizas líneas divisorias, estas pueden dibujarse o expandirse suavemente al aparecer.
+
+No agregues animaciones constantes. Una vez que los elementos hayan aparecido, deben permanecer quietos. No quiero elementos flotando, pulsando o moviéndose mientras el usuario lee.
+
+Al pasar el cursor sobre los tres principios puede existir una microinteracción muy discreta, por ejemplo que el número o una línea cambie ligeramente hacia uno de los colores de acento del branding. No eleves estos elementos como tarjetas, porque quiero reservar ese tipo de interacción para la siguiente sección de Tratamientos.
+
+En tablet, reorganiza la composición manteniendo la jerarquía visual. Si no existe suficiente espacio para colocar los tres principios horizontalmente, permite una distribución de dos arriba y uno abajo o una composición vertical equilibrada.
+
+En celular, la estructura debe cambiar a una sola columna. Primero debe aparecer “01 — NUESTRA FILOSOFÍA”, después el título, luego el texto introductorio y posteriormente Atención personalizada, Cuidado profesional y Resultados naturales uno debajo del otro. Mantén líneas divisorias finas entre ellos y suficiente espacio vertical. Finalmente coloca “DESCUBRE NUESTROS TRATAMIENTOS ↓”.
+
+En móvil, al presionar “DESCUBRE NUESTROS TRATAMIENTOS ↓”, también debe realizar un scroll suave hasta la Sección 03.
+
+Cuida especialmente los márgenes laterales para que ningún texto quede pegado a los bordes de la pantalla. Los títulos no deben cortarse, las líneas no deben salirse del contenedor y los tamaños tipográficos deben adaptarse correctamente.
+
+No utilices imágenes, videos, iconos genéricos de bancos de recursos ni fotografías de stock en esta sección. Tampoco agregues íconos médicos como cruces, jeringas, corazones o símbolos que no pertenezcan al sistema visual de NovaSkin. La intención es conseguir personalidad mediante la tipografía y composición, no mediante elementos decorativos genéricos.
+
+No cambies el fondo, colores o tipografías por otros que consideres mejores. Utiliza exclusivamente el sistema visual que ya existe en el sitio y que corresponde al branding de NovaSkin.
+
+Al finalizar, revisa que la transición desde la Sección 01 hacia esta sección se sienta natural. El usuario debe pasar de un Hero inmersivo con video a una sección mucho más limpia y tranquila. Después, la parte final de esta sección debe conectar visualmente con la Sección 03 — Tratamientos.
+
+También verifica que el enlace “DESCUBRE NUESTROS TRATAMIENTOS ↓” lleve correctamente a la Sección 03 mediante scroll suave y que no interfiera con el menú ni con otros enlaces existentes.
+
+No modifiques todavía la Sección 03. Si necesitas crear o verificar un ID/ancla para que el enlace pueda desplazarse hasta Tratamientos, puedes hacerlo únicamente si no altera su diseño ni contenido.
+
+Cuando termines, revisa desktop, tablet y móvil. Después detente. No continúes automáticamente con ninguna otra sección y no realices cambios fuera de la Sección 02.

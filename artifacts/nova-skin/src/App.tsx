@@ -7,9 +7,9 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import {
   ArrowRight, BarChart3, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, CircleAlert,
-  CircleCheck, Clock3, Eye, FileText, Image as ImageIcon, Instagram, LayoutDashboard, LogOut,
+  Clock3, Eye, FileText, Image as ImageIcon, Instagram, LayoutDashboard, LogOut,
   Mail, Menu, MessageCircle, Pencil, Phone, Plus, Play, Save, Scissors, Send, Settings,
-  Sparkles, Star, Trash2, UserRound, Users, Video as VideoIcon, X
+  Star, Trash2, UserRound, Users, Video as VideoIcon, X
 } from 'lucide-react';
 import {
   getGetAdminSummaryQueryKey, getGetCurrentUserQueryKey, getGetSiteQueryKey, getGetSiteSettingsQueryKey,
@@ -111,6 +111,90 @@ function HoverVideo({ src, poster, title }: { src: string; poster?: string; titl
   );
 }
 
+function PhilosophySection({ copy }: { copy: string }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  const principles = [
+    {
+      number: '01',
+      title: 'Atención personalizada',
+      description: 'Cada piel y cada objetivo son diferentes. Por eso, el cuidado comienza por conocer tus necesidades.',
+    },
+    {
+      number: '02',
+      title: 'Cuidado profesional',
+      description: 'Cada tratamiento parte de una valoración y de un protocolo pensado de acuerdo con las necesidades de cada persona.',
+    },
+    {
+      number: '03',
+      title: 'Resultados naturales',
+      description: 'Buscamos cuidar y realzar la apariencia de la piel manteniendo una imagen natural y equilibrada.',
+    },
+  ];
+
+  return (
+    <section
+      ref={sectionRef}
+      id="filosofia"
+      className={`philosophy-section bg-[#F2F2EF] px-5 py-24 md:px-10 md:py-32 lg:py-36 ${isVisible ? 'philosophy-visible' : ''}`}
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="philosophy-reveal philosophy-delay-1">
+            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">01 — Nuestra filosofía</p>
+            <h2 className="mt-8 max-w-xl font-serif text-5xl leading-[1.02] text-[#2F4055] md:text-6xl lg:text-[4.5rem]">
+              Tu piel merece un cuidado pensado para ti.
+            </h2>
+          </div>
+          <div className="flex items-end lg:pb-2">
+            <p className="philosophy-reveal philosophy-delay-2 max-w-lg text-base leading-8 text-[#68727b] md:text-lg">
+              {copy}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-20 grid gap-0 border-t border-[#AF9275]/45 md:mt-28 md:grid-cols-2 lg:grid-cols-3">
+          {principles.map((principle, index) => (
+            <div
+              key={principle.number}
+              className={`philosophy-reveal philosophy-principle philosophy-delay-${index + 3} group border-b border-[#AF9275]/45 py-8 md:px-8 md:py-10 lg:border-b-0 lg:first:pl-0 lg:last:pr-0 ${index === 2 ? 'md:col-span-2 lg:col-span-1' : ''} ${index > 0 ? 'lg:border-l lg:border-[#AF9275]/45' : ''}`}
+            >
+              <p className="font-serif text-4xl text-[#BB9445]/65 transition-colors duration-300 group-hover:text-[#BB9445]">{principle.number}</p>
+              <h3 className="mt-6 max-w-xs font-serif text-2xl text-[#2F4055]">{principle.title}</h3>
+              <p className="mt-4 max-w-sm text-sm leading-7 text-[#68727b]">{principle.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <a
+          href="#servicios"
+          className="philosophy-reveal philosophy-delay-6 mt-16 inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[.24em] text-[#AF9275] transition-colors duration-300 hover:text-[#BB9445] md:mt-20"
+        >
+          <span className="h-px w-10 bg-[#BB9445]/70" />
+          Descubre nuestros tratamientos ↓
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function PublicSite() {
   const { data, isLoading, isError } = useGetSite();
   const site: any = data?.settings ?? fallback;
@@ -203,7 +287,7 @@ function PublicSite() {
            </div>
          </div>
       </section>
-      <section className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl items-start gap-12 md:grid-cols-[.65fr_1fr]"><div><p className="text-7xl font-serif text-[#BB9445]/50">01</p><p className="mt-8 max-w-xs text-xs font-bold uppercase leading-5 tracking-[.2em] text-[#AF9275]">Más que resultados,<br/>un nuevo ritual.</p></div><div><SectionHeading eyebrow="Nuestra filosofía" title="Tu piel merece el respaldo de la ciencia y el confort de un spa." copy={site.aboutText || fallback.aboutText}/><div className="mt-9 grid grid-cols-2 gap-7 border-t border-[#AF9275]/40 pt-7 text-sm"><div><Sparkles size={19} className="mb-3 text-[#BB9445]"/><b className="block">Ciencia cercana</b><span className="mt-1 block text-[#68727b]">Protocolos pensados para ti.</span></div><div><CircleCheck size={19} className="mb-3 text-[#BB9445]"/><b className="block">Bienestar real</b><span className="mt-1 block text-[#68727b]">Un espacio que baja el ruido.</span></div></div></div></div></section>
+       <PhilosophySection copy={site.aboutText || fallback.aboutText} />
       <section id="servicios" className="bg-[#e6e1d9] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="Tratamientos" title="Lo que tu piel necesita, lo encontramos juntas." copy="Cada protocolo comienza con una conversación y termina con un plan que puedes sostener."/><div className="mt-14 grid gap-5 md:grid-cols-3">{serviceItems.map((s, i) => <article key={s.id} data-testid={`card-service-${s.id}`} className={`group ${i === 1 ? 'md:mt-14' : ''}`}><div className="arch relative aspect-[.82] overflow-hidden bg-[#AF9275]"><img src={s.imageUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/70 to-transparent opacity-70"/><span className="absolute bottom-5 left-5 text-xs uppercase tracking-[.2em] text-[#F2F2EF]">0{i + 1}</span></div><div className="flex items-start justify-between gap-3 pt-5"><div><h3 className="font-serif text-2xl">{s.name}</h3><p className="mt-2 text-sm leading-6 text-[#68727b]">{s.description}</p></div><ArrowRight size={18} className="mt-1 shrink-0 text-[#BB9445] transition group-hover:translate-x-1"/></div><div className="mt-4 flex gap-4 text-xs font-semibold uppercase tracking-wider text-[#AF9275]"><span>{s.duration || 'Personalizado'}</span>{s.price && <span>${s.price}</span>}</div></article>)}</div></div></section>
       <section id="espacio" className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[.8fr_1.2fr] md:items-end"><SectionHeading light eyebrow="El espacio NOVA" title="No es solo una cita, es un momento de reconexión contigo misma." copy="Luz cálida, manos expertas y el tiempo suficiente para que vuelvas a escucharte."/><div className="grid grid-cols-2 gap-3 md:grid-cols-[1fr_1.35fr]"><img src={localImages[2]} alt="Consulta en NOVA Skin" className="aspect-[.8] w-full object-cover"/><img src={localImages[1]} alt="Sala de tratamiento NOVA Skin" className="mt-12 aspect-[.8] w-full object-cover"/></div></div></section>
       <section className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><div className="flex flex-wrap items-end justify-between gap-6"><SectionHeading eyebrow="Un vistazo" title="El cuidado también vive en los detalles."/><p className="max-w-xs text-sm leading-6 text-[#68727b]">Un ambiente creado para sentirte tranquila desde el primer paso.</p></div><div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">{galleryItems.slice(0, 4).map((g, i) => <button type="button" key={g.id} data-testid={`button-gallery-${g.id}`} onClick={() => setLightbox(g)} className={`group relative overflow-hidden text-left ${i === 0 ? 'col-span-2 row-span-2' : ''}`}><img src={g.imageUrl || localImages[i % 3]} alt={g.title} className="h-full min-h-40 w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/65 to-transparent opacity-0 transition group-hover:opacity-100"/><span className="absolute bottom-4 left-4 text-sm text-white opacity-0 transition group-hover:opacity-100">{g.title}</span></button>)}</div></div></section>

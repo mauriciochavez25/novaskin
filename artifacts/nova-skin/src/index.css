@@ -291,6 +291,21 @@ body { background: #f2f2ef; }
 @media (prefers-reduced-motion: reduce) {
   .hero-reveal { animation: none; }
 }
+.philosophy-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .85s cubic-bezier(.22,.8,.2,1), transform .85s cubic-bezier(.22,.8,.2,1);
+}
+.philosophy-visible .philosophy-reveal { opacity: 1; transform: translateY(0); }
+.philosophy-delay-1 { transition-delay: .08s; }
+.philosophy-delay-2 { transition-delay: .2s; }
+.philosophy-delay-3 { transition-delay: .34s; }
+.philosophy-delay-4 { transition-delay: .46s; }
+.philosophy-delay-5 { transition-delay: .58s; }
+.philosophy-delay-6 { transition-delay: .72s; }
+@media (prefers-reduced-motion: reduce) {
+  .philosophy-reveal { opacity: 1; transform: none; transition: none; }
+}
 .soft-card { box-shadow: 0 18px 50px rgba(47,64,85,.08); }
 .line-gold { border-color: rgba(187,148,69,.55); }
 .admin-input { border: 1px solid hsl(var(--input)); background: hsl(var(--card)); border-radius: .55rem; padding: .7rem .8rem; width: 100%; outline: none; }
