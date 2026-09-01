@@ -1,0 +1,1 @@
+- [Revisión de placeholders visuales](placeholder-review.md) — inspeccionar imágenes temporales localmente y retirar marcas visibles antes de presentar una sección.

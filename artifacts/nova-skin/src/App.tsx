@@ -195,6 +195,258 @@ function PhilosophySection({ copy }: { copy: string }) {
   );
 }
 
+type TreatmentFaq = { question: string; answer: string };
+type Treatment = {
+  number: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  detail: string;
+  faq: TreatmentFaq[];
+};
+
+const treatmentCatalog: Treatment[] = [
+  {
+    number: '01',
+    name: 'Toxina Botulínica',
+    imageUrl: `${media}treatment-01-toxina.jpg`,
+    description: 'Ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión.',
+    detail: 'Es un tratamiento que ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión. Una aplicación adecuada busca mantener una apariencia natural.',
+    faq: [
+      { question: '¿Cuándo se empiezan a ver los resultados?', answer: 'Los primeros efectos pueden comenzar a observarse aproximadamente a partir del tercer día y continúan evolucionando posteriormente.' },
+      { question: '¿Cuánto dura el efecto?', answer: 'De acuerdo con la información proporcionada por NovaSkin, suele tener una duración aproximada de 4 a 6 meses, aunque puede variar según cada persona.' },
+      { question: '¿Me va a dejar la cara sin expresión?', answer: 'El objetivo de una aplicación adecuada es suavizar las líneas de expresión manteniendo una apariencia natural.' },
+    ],
+  },
+  {
+    number: '02',
+    name: 'Bioestimuladores',
+    imageUrl: `${media}treatment-02-biostimuladores.jpg`,
+    description: 'Estimulan progresivamente la producción natural de colágeno y elastina para mejorar la firmeza y calidad de la piel.',
+    detail: 'Los bioestimuladores buscan estimular progresivamente la producción natural de colágeno y elastina para mejorar la firmeza, elasticidad y calidad de la piel.',
+    faq: [
+      { question: '¿Los resultados son inmediatos?', answer: 'Los resultados son principalmente progresivos porque el tratamiento busca estimular procesos como la producción natural de colágeno.' },
+      { question: '¿Cuánto duran los resultados?', answer: 'Pueden mantenerse durante varios meses y la duración depende del producto utilizado y de las características de cada paciente.' },
+      { question: '¿Cuántas sesiones necesito?', answer: 'El número de sesiones depende del producto, las condiciones de la piel y los objetivos de cada persona, por lo que se determina durante una valoración.' },
+    ],
+  },
+  {
+    number: '03',
+    name: 'PDRN Salmón',
+    imageUrl: `${media}treatment-03-pdrn.jpg`,
+    description: 'Tratamiento enfocado en la bioestimulación y regeneración cutánea para mejorar la calidad general de la piel.',
+    detail: 'Es un tratamiento enfocado en la bioestimulación y regeneración cutánea para mejorar la calidad general de la piel.',
+    faq: [
+      { question: '¿Es realmente de salmón?', answer: 'El PDRN se obtiene a partir de ADN de salmón altamente purificado y procesado para su utilización correspondiente.' },
+      { question: '¿Cuándo se empiezan a notar los resultados?', answer: 'Algunos cambios pueden apreciarse desde las primeras sesiones, mientras que otros relacionados con la calidad de la piel aparecen progresivamente.' },
+      { question: '¿Qué cuidados debo tener después?', answer: 'Deben seguirse las indicaciones del profesional y pueden incluir mantener la piel limpia e hidratada, utilizar protección solar y evitar temporalmente productos irritantes.' },
+    ],
+  },
+  {
+    number: '04',
+    name: 'Skin Boosters',
+    imageUrl: `${media}treatment-04-skin-boosters.jpg`,
+    description: 'Enfocados en mejorar la hidratación, luminosidad, elasticidad y calidad general de la piel.',
+    detail: 'Los Skin Boosters están enfocados principalmente en mejorar la hidratación, luminosidad, elasticidad y calidad de la piel.',
+    faq: [
+      { question: '¿Los Skin Boosters dan volumen al rostro?', answer: 'Su objetivo principal es mejorar la hidratación y calidad de la piel; no persiguen el mismo efecto de volumen que un relleno.' },
+      { question: '¿Qué beneficios puedo notar?', answer: 'Están enfocados en mejorar aspectos como hidratación, luminosidad, elasticidad y calidad general de la piel.' },
+      { question: '¿Cuántas sesiones necesito?', answer: 'El protocolo depende del producto utilizado, las condiciones de la piel y los objetivos del paciente, por lo que debe establecerse de manera personalizada.' },
+    ],
+  },
+  {
+    number: '05',
+    name: 'NCTF Revitalizante',
+    imageUrl: `${media}treatment-05-nctf.jpg`,
+    description: 'Mesoterapia enfocada en revitalizar la piel y mejorar hidratación, luminosidad y textura.',
+    detail: 'Es un tratamiento de mesoterapia enfocado en revitalizar la piel y mejorar aspectos como hidratación, luminosidad, textura y calidad general.',
+    faq: [
+      { question: '¿Para qué sirve NCTF?', answer: 'Está enfocado en revitalizar la piel y mejorar aspectos como hidratación, luminosidad, textura y calidad general.' },
+      { question: '¿Es un relleno facial?', answer: 'NovaSkin lo maneja como un tratamiento de mesoterapia revitalizante con ácido hialurónico no reticulado y otros activos, enfocado principalmente en la calidad de la piel.' },
+      { question: '¿Se puede combinar con otros tratamientos?', answer: 'En algunos casos sí, pero cualquier combinación debe definirse de manera personalizada durante una valoración profesional.' },
+    ],
+  },
+  {
+    number: '06',
+    name: 'Mesoterapia Capilar',
+    imageUrl: `${media}treatment-06-mesoterapia-capilar.jpg`,
+    description: 'Aplicación de activos directamente en el cuero cabelludo para favorecer las condiciones del folículo y la calidad del cabello.',
+    detail: 'Consiste en aplicar activos directamente en el cuero cabelludo para favorecer las condiciones del folículo y mejorar la calidad del cabello.',
+    faq: [
+      { question: '¿Para quién está indicada?', answer: 'Puede utilizarse como apoyo en personas con cabello debilitado, pérdida de densidad o caída capilar, siempre después de una valoración.' },
+      { question: '¿Todos reciben los mismos activos?', answer: 'No. El protocolo y los activos deben seleccionarse de acuerdo con las necesidades individuales de cada persona.' },
+      { question: '¿Cuántas sesiones necesito?', answer: 'El número y frecuencia de las sesiones dependerán de las necesidades detectadas durante la valoración y del protocolo indicado.' },
+    ],
+  },
+];
+
+function TreatmentDetailsModal({ treatment, onClose }: { treatment: Treatment; onClose: () => void }) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const whatsappUrl = `https://wa.me/8711437775?text=${encodeURIComponent(`Hola, me gustaría recibir más información sobre ${treatment.name} y agendar una valoración.`)}`;
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [onClose]);
+
+  return (
+    <div role="dialog" aria-modal="true" aria-labelledby="treatment-modal-title" className="fixed inset-0 z-[70] flex items-center justify-center bg-[#202c3a]/80 p-4 md:p-8" onClick={onClose}>
+      <div className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto bg-[#F2F2EF] text-[#2F4055] shadow-2xl" onClick={(event) => event.stopPropagation()}>
+        <button type="button" aria-label="Cerrar detalle del tratamiento" data-testid="button-close-treatment" onClick={onClose} className="absolute right-4 top-4 z-10 rounded-full border border-[#2F4055]/25 bg-[#F2F2EF]/90 p-3 text-[#2F4055] transition hover:bg-[#BB9445] md:right-6 md:top-6">
+          <X size={18} />
+        </button>
+        <div className="grid lg:grid-cols-[.82fr_1.18fr]">
+          <div className="bg-[#AF9275] p-5 md:p-8">
+            <p className="text-xs font-bold uppercase tracking-[.24em] text-[#F2F2EF]">{treatment.number}</p>
+            <h2 id="treatment-modal-title" className="mt-4 max-w-sm font-serif text-4xl leading-tight text-[#F2F2EF] md:text-5xl">{treatment.name}</h2>
+            <div className="arch mt-8 overflow-hidden bg-[#2F4055]">
+              <img src={treatment.imageUrl} alt={`Placeholder de ${treatment.name}`} className="aspect-[.78] h-full w-full object-cover" />
+            </div>
+          </div>
+          <div className="p-6 md:p-10">
+            <p className="text-[11px] font-bold uppercase tracking-[.25em] text-[#BB9445]">Información del tratamiento</p>
+            <h3 className="mt-6 font-serif text-3xl text-[#2F4055]">¿En qué consiste?</h3>
+            <p className="mt-4 text-base leading-8 text-[#68727b]">{treatment.detail}</p>
+            <div className="mt-10 border-t border-[#AF9275]/45">
+              <h3 className="py-6 font-serif text-3xl text-[#2F4055]">Preguntas frecuentes</h3>
+              <div>
+                {treatment.faq.map((faq, index) => {
+                  const isOpen = openFaq === index;
+                  return (
+                    <div key={faq.question} className="border-t border-[#AF9275]/45">
+                      <button type="button" aria-expanded={isOpen} data-testid={`button-faq-${treatment.number}-${index + 1}`} onClick={() => setOpenFaq(isOpen ? null : index)} className="flex w-full items-center justify-between gap-5 py-5 text-left text-sm font-semibold text-[#2F4055]">
+                        <span>{faq.question}</span>
+                        <span className="shrink-0 font-serif text-2xl font-normal text-[#BB9445]">{isOpen ? '−' : '+'}</span>
+                      </button>
+                      <div className={`overflow-hidden text-sm leading-7 text-[#68727b] transition-all duration-300 ${isOpen ? 'max-h-48 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <p>{faq.answer}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="mt-10 bg-[#2F4055] p-6 text-[#F2F2F0] md:p-8">
+              <p className="font-serif text-2xl">¿Quieres saber si este tratamiento es para ti?</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button
+                  testId="button-treatment-book"
+                  variant="gold"
+                  className="uppercase tracking-[.08em]"
+                  onClick={() => {
+                    onClose();
+                    window.setTimeout(() => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' }), 0);
+                  }}
+                >
+                  Agendar valoración <ArrowRight size={16} />
+                </Button>
+                <a data-testid="link-treatment-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/35 px-5 py-3 text-sm font-semibold uppercase tracking-[.08em] text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+                  <MessageCircle size={16} /> WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: (treatment: Treatment) => void }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const treatments = useMemo(
+    () => treatmentCatalog.map((treatment) => {
+      const managedTreatment = services.find((service) => service.name === treatment.name);
+      return {
+        ...treatment,
+        imageUrl: managedTreatment?.imageUrl || treatment.imageUrl,
+        description: managedTreatment?.description || treatment.description,
+      };
+    }),
+    [services],
+  );
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const updateArrows = () => {
+      setCanScrollLeft(track.scrollLeft > 4);
+      setCanScrollRight(track.scrollLeft + track.clientWidth < track.scrollWidth - 4);
+    };
+    updateArrows();
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    return () => {
+      track.removeEventListener('scroll', updateArrows);
+      window.removeEventListener('resize', updateArrows);
+    };
+  }, [treatments.length]);
+
+  const scrollCarousel = (direction: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: direction * track.clientWidth * 0.92, behavior: 'smooth' });
+  };
+
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+    if (track.scrollWidth <= track.clientWidth) return;
+    event.preventDefault();
+    track.scrollLeft += event.deltaY;
+  };
+
+  return (
+    <section id="servicios" className="treatments-section bg-[#e6e1d9] px-5 py-20 md:px-10 md:py-28">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">03 — TRATAMIENTOS</p>
+            <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[1.02] text-[#2F4055] md:text-6xl">Cuidado personalizado, respaldado por la ciencia.</h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#68727b]">Conoce las opciones de NovaSkin y encuentra el punto de partida para cuidar tu piel de forma personalizada.</p>
+          </div>
+          <div className="flex gap-2">
+            <button type="button" aria-label="Tratamientos anteriores" data-testid="button-treatment-prev" disabled={!canScrollLeft} onClick={() => scrollCarousel(-1)} className="rounded-full border border-[#AF9275] p-3 text-[#2F4055] transition hover:bg-[#F2F2EF] disabled:cursor-not-allowed disabled:opacity-35">
+              <ChevronLeft size={18} />
+            </button>
+            <button type="button" aria-label="Siguientes tratamientos" data-testid="button-treatment-next" disabled={!canScrollRight} onClick={() => scrollCarousel(1)} className="rounded-full border border-[#AF9275] p-3 text-[#2F4055] transition hover:bg-[#F2F2EF] disabled:cursor-not-allowed disabled:opacity-35">
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+        <div ref={trackRef} onWheel={handleWheel} className="treatment-track mt-14 flex gap-5 overflow-x-auto pb-5">
+          {treatments.map((treatment) => (
+            <article key={treatment.number} className="treatment-card group shrink-0 snap-start">
+              <div className="arch relative h-[350px] overflow-hidden bg-[#AF9275] md:h-[390px]">
+                <img src={treatment.imageUrl} alt={`Placeholder de ${treatment.name}`} className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
+                <span className="absolute bottom-5 left-5 text-xs font-bold uppercase tracking-[.2em] text-[#F2F2EF]">{treatment.number}</span>
+              </div>
+              <div className="flex flex-1 flex-col px-1 pb-2 pt-6">
+                <p className="text-xs font-bold uppercase tracking-[.18em] text-[#BB9445]">{treatment.number}</p>
+                <h3 className="mt-3 font-serif text-3xl leading-tight text-[#2F4055]">{treatment.name}</h3>
+                <p className="mt-4 text-sm leading-7 text-[#68727b]">{treatment.description}</p>
+                <button type="button" data-testid={`button-treatment-more-${treatment.number}`} onClick={() => onSelect(treatment)} className="mt-auto inline-flex cursor-pointer items-center gap-2 pt-8 text-xs font-bold uppercase tracking-[.18em] text-[#2F4055] transition hover:text-[#BB9445]">
+                  Ver más <ArrowRight size={15} />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PublicSite() {
   const { data, isLoading, isError } = useGetSite();
   const site: any = data?.settings ?? fallback;
@@ -218,6 +470,7 @@ function PublicSite() {
   const [menu, setMenu] = useState(false);
   const [lightbox, setLightbox] = useState<any>(null);
   const [sent, setSent] = useState(false);
+  const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const contact = useCreateContactMessage();
   useEffect(() => {
@@ -232,11 +485,6 @@ function PublicSite() {
     return () => video.removeEventListener('canplay', playVideo);
   }, []);
   const galleryItems = gallery.length ? gallery : [{ id: 1, title: 'Un espacio para volver a ti', description: 'Nuestra recepción', imageUrl: localImages[0] }, { id: 2, title: 'Rituales que reparan', description: 'Sala de tratamientos', imageUrl: localImages[1] }, { id: 3, title: 'Primero escuchamos', description: 'Consulta personalizada', imageUrl: localImages[2] }];
-  const serviceItems = services.length ? services : [
-    { id: 1, name: 'Limpieza profunda', description: 'Una piel luminosa, equilibrada y lista para respirar.', duration: '60 min', price: 120, imageUrl: localImages[1] },
-    { id: 2, name: 'Hydrafacial', description: 'Tecnología de hidratación y renovación sin tiempo de recuperación.', duration: '50 min', price: 185, imageUrl: localImages[2] },
-    { id: 3, name: 'Toxina botulínica', description: 'Resultados naturales, planeados contigo y aplicados por especialistas.', duration: '45 min', price: null, imageUrl: localImages[0] }
-  ];
   const videoItems = videos.length ? videos : localVideos.map((v, i) => ({ id: i + 1, title: ['El ritual NOVA', 'La ciencia se siente', 'Detalles que importan'][i], description: 'Conoce un poco más de nuestro universo.', videoUrl: v[0], posterUrl: v[1] }));
   const submitContact = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -288,7 +536,7 @@ function PublicSite() {
          </div>
       </section>
        <PhilosophySection copy={site.aboutText || fallback.aboutText} />
-      <section id="servicios" className="bg-[#e6e1d9] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="Tratamientos" title="Lo que tu piel necesita, lo encontramos juntas." copy="Cada protocolo comienza con una conversación y termina con un plan que puedes sostener."/><div className="mt-14 grid gap-5 md:grid-cols-3">{serviceItems.map((s, i) => <article key={s.id} data-testid={`card-service-${s.id}`} className={`group ${i === 1 ? 'md:mt-14' : ''}`}><div className="arch relative aspect-[.82] overflow-hidden bg-[#AF9275]"><img src={s.imageUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/70 to-transparent opacity-70"/><span className="absolute bottom-5 left-5 text-xs uppercase tracking-[.2em] text-[#F2F2EF]">0{i + 1}</span></div><div className="flex items-start justify-between gap-3 pt-5"><div><h3 className="font-serif text-2xl">{s.name}</h3><p className="mt-2 text-sm leading-6 text-[#68727b]">{s.description}</p></div><ArrowRight size={18} className="mt-1 shrink-0 text-[#BB9445] transition group-hover:translate-x-1"/></div><div className="mt-4 flex gap-4 text-xs font-semibold uppercase tracking-wider text-[#AF9275]"><span>{s.duration || 'Personalizado'}</span>{s.price && <span>${s.price}</span>}</div></article>)}</div></div></section>
+       <TreatmentsSection services={services} onSelect={setSelectedTreatment} />
       <section id="espacio" className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[.8fr_1.2fr] md:items-end"><SectionHeading light eyebrow="El espacio NOVA" title="No es solo una cita, es un momento de reconexión contigo misma." copy="Luz cálida, manos expertas y el tiempo suficiente para que vuelvas a escucharte."/><div className="grid grid-cols-2 gap-3 md:grid-cols-[1fr_1.35fr]"><img src={localImages[2]} alt="Consulta en NOVA Skin" className="aspect-[.8] w-full object-cover"/><img src={localImages[1]} alt="Sala de tratamiento NOVA Skin" className="mt-12 aspect-[.8] w-full object-cover"/></div></div></section>
       <section className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><div className="flex flex-wrap items-end justify-between gap-6"><SectionHeading eyebrow="Un vistazo" title="El cuidado también vive en los detalles."/><p className="max-w-xs text-sm leading-6 text-[#68727b]">Un ambiente creado para sentirte tranquila desde el primer paso.</p></div><div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">{galleryItems.slice(0, 4).map((g, i) => <button type="button" key={g.id} data-testid={`button-gallery-${g.id}`} onClick={() => setLightbox(g)} className={`group relative overflow-hidden text-left ${i === 0 ? 'col-span-2 row-span-2' : ''}`}><img src={g.imageUrl || localImages[i % 3]} alt={g.title} className="h-full min-h-40 w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/65 to-transparent opacity-0 transition group-hover:opacity-100"/><span className="absolute bottom-4 left-4 text-sm text-white opacity-0 transition group-hover:opacity-100">{g.title}</span></button>)}</div></div></section>
       {promotions.length > 0 && <section className="bg-[#AF9275] px-5 py-16 md:px-10"><div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[.8fr_1.2fr] md:items-center"><SectionHeading eyebrow="Este mes en NOVA" title="Un buen momento para empezar." copy="Conoce nuestras experiencias y beneficios vigentes."/><div className="grid gap-4 md:grid-cols-2">{promotions.map(p => <div key={p.id} className="bg-[#F2F2EF] p-7"><p className="text-xs uppercase tracking-widest text-[#BB9445]">NOVA edit</p><h3 className="mt-3 font-serif text-2xl">{p.title}</h3><p className="mt-3 text-sm text-[#68727b]">{p.description}</p></div>)}</div></div></section>}
@@ -298,7 +546,8 @@ function PublicSite() {
       <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
     </main>
     <footer className="bg-[#202c3a] px-5 py-12 text-[#F2F2F0] md:px-10"><div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:items-end md:justify-between"><div><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></div><p className="mt-5 max-w-xs text-sm leading-6 text-[#bdc5c8]">{site.tagline}</p></div><div className="text-sm text-[#bdc5c8] md:text-right"><p>{site.address}</p><p className="mt-2">{site.hours}</p><div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div></div></div><div className="mx-auto mt-10 max-w-7xl border-t border-white/15 pt-5 text-xs text-[#82909a]">© {new Date().getFullYear()} NOVA Skin Med Spa · Estética avanzada, bienestar real.</div></footer>
-    {lightbox && <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60] grid place-items-center bg-[#202c3a]/90 p-5" onClick={() => setLightbox(null)}><button data-testid="button-close-lightbox" onClick={() => setLightbox(null)} className="absolute right-5 top-5 rounded-full border border-white/30 p-3 text-white"><X size={18}/></button><div onClick={e => e.stopPropagation()} className="max-h-[90vh] max-w-5xl"><img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[78vh] w-auto object-contain"/><h3 className="mt-4 font-serif text-2xl text-white">{lightbox.title}</h3><p className="mt-1 text-sm text-[#d5d7d5]">{lightbox.description}</p></div></div>}
+     {selectedTreatment && <TreatmentDetailsModal treatment={selectedTreatment} onClose={() => setSelectedTreatment(null)} />}
+     {lightbox && <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60] grid place-items-center bg-[#202c3a]/90 p-5" onClick={() => setLightbox(null)}><button data-testid="button-close-lightbox" onClick={() => setLightbox(null)} className="absolute right-5 top-5 rounded-full border border-white/30 p-3 text-white"><X size={18}/></button><div onClick={e => e.stopPropagation()} className="max-h-[90vh] max-w-5xl"><img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[78vh] w-auto object-contain"/><h3 className="mt-4 font-serif text-2xl text-white">{lightbox.title}</h3><p className="mt-1 text-sm text-[#d5d7d5]">{lightbox.description}</p></div></div>}
     {isLoading && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#2F4055] px-4 py-2 text-xs text-white">Cargando NOVA…</div>}{isError && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#A83525] px-4 py-2 text-xs text-white">Mostrando información esencial</div>}
   </div>;
 }

@@ -306,6 +306,25 @@ body { background: #f2f2ef; }
 @media (prefers-reduced-motion: reduce) {
   .philosophy-reveal { opacity: 1; transform: none; transition: none; }
 }
+.treatment-track {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(175,146,117,.75) transparent;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+}
+.treatment-track::-webkit-scrollbar { height: 7px; }
+.treatment-track::-webkit-scrollbar-track { background: transparent; }
+.treatment-track::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(175,146,117,.75); }
+.treatment-card {
+  flex-basis: 100%;
+  min-height: 680px;
+}
+@media (min-width: 768px) {
+  .treatment-card { flex-basis: calc((100% - 1.25rem) / 2); }
+}
+@media (min-width: 1024px) {
+  .treatment-card { flex-basis: calc((100% - 2.5rem) / 3); }
+}
 .soft-card { box-shadow: 0 18px 50px rgba(47,64,85,.08); }
 .line-gold { border-color: rgba(187,148,69,.55); }
 .admin-input { border: 1px solid hsl(var(--input)); background: hsl(var(--card)); border-radius: .55rem; padding: .7rem .8rem; width: 100%; outline: none; }
