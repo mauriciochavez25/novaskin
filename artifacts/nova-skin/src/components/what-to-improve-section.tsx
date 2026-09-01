@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, ChevronDown, MessageCircle, Sparkles } from 'lucide-react';
+import { ChevronDown, MessageCircle, Sparkles } from 'lucide-react';
 
 type Objective = {
   title: string;
@@ -25,24 +25,24 @@ const objectives: Objective[] = [
   },
   {
     title: 'Líneas de expresión',
-    copy: 'Suaviza la apariencia de las líneas sin perder la naturalidad de tu expresión.',
+    copy: 'Suaviza visualmente la apariencia de líneas dinámicas y otros signos de expresión.',
     orientation:
       'Observaremos las zonas que te preocupan y el movimiento facial para orientar opciones de forma personalizada.',
-    treatments: ['Toxina Botulínica', 'PDRN Salmón'],
+    treatments: ['Toxina Botulínica'],
   },
   {
     title: 'Firmeza',
     copy: 'Cuando buscas que la piel se sienta más elástica, tonificada y acompañada en el tiempo.',
     orientation:
       'La recomendación depende del estado de la piel, la elasticidad y el tipo de estímulo que mejor acompañe tus objetivos.',
-    treatments: ['Bioestimuladores', 'PDRN Salmón', 'Skin Boosters'],
+    treatments: ['Bioestimuladores'],
   },
   {
     title: 'Textura y calidad de piel',
     copy: 'Para una piel que se vea y se sienta más uniforme, lisa y vital.',
     orientation:
       'Revisaremos textura, sensibilidad y calidad general para definir una orientación que respete el momento de tu piel.',
-    treatments: ['PDRN Salmón', 'NCTF Revitalizante', 'Skin Boosters'],
+    treatments: ['PDRN Salmón', 'Skin Boosters', 'NCTF Revitalizante'],
   },
   {
     title: 'Cuidado capilar',
@@ -67,30 +67,31 @@ export function WhatToImproveSection({
 
   return (
     <section
+      id="mejorar"
       aria-labelledby="what-to-improve-title"
       className="relative overflow-hidden bg-[#F2F2EF] px-5 py-20 text-[#2F4055] sm:px-8 md:px-10 md:py-28 lg:px-16 lg:py-36"
     >
       <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[minmax(0,.82fr)_minmax(0,1.18fr)] md:items-start md:gap-12 lg:grid-cols-[minmax(290px,.78fr)_minmax(0,1.22fr)] lg:gap-24">
-        <div className="motion-safe:reveal md:sticky md:top-12">
-          <p className="mb-5 text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">
+        <div className="md:sticky md:top-12">
+          <p className="motion-safe:reveal mb-5 text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">
             Tu punto de partida
           </p>
           <h2
             id="what-to-improve-title"
-            className="max-w-xl font-serif text-[clamp(2.7rem,6vw,5.5rem)] leading-[.96] tracking-[-.035em] text-[#2F4055]"
+            className="motion-safe:reveal delay-1 max-w-xl font-serif text-[clamp(2.7rem,6vw,5.5rem)] leading-[.96] tracking-[-.035em] text-[#2F4055]"
           >
             ¿Qué quieres mejorar?
           </h2>
-          <p className="mt-6 max-w-md text-base leading-7 text-[#68727b] md:mt-8 md:text-lg">
+          <p className="motion-safe:reveal delay-2 mt-6 max-w-md text-base leading-7 text-[#68727b] md:mt-8 md:text-lg">
             No necesitas saber qué tratamiento elegir. Empieza por contarnos qué buscas.
           </p>
 
-          <figure className="relative mt-10 overflow-hidden md:mt-16">
+          <figure className="motion-safe:reveal delay-3 relative mt-10 overflow-hidden md:mt-16">
             <div className="absolute -left-3 -top-3 z-0 h-24 w-24 border-l border-t border-[#BB9445]/70" />
             <div className="relative z-10 aspect-[4/5] overflow-hidden bg-[#D9D1C4] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[5/6]">
               <img
                 src={imageUrl}
-                alt="Espacio de cuidado y valoración en NovaSkin"
+                alt="Valoración estética facial en NovaSkin"
                 className="h-full w-full object-cover transition duration-700 ease-out motion-safe:hover:scale-[1.025]"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#202b38]/75 via-[#202b38]/20 to-transparent px-5 pb-5 pt-16 text-[#F2F2EF]">
@@ -103,7 +104,7 @@ export function WhatToImproveSection({
           </figure>
         </div>
 
-        <div className="motion-safe:reveal delay-2">
+        <div className="delay-4">
           <div className="mb-7 flex items-end justify-between gap-6 border-b border-[#AF9275]/45 pb-5">
             <p className="max-w-xs text-xs font-semibold uppercase leading-5 tracking-[.2em] text-[#AF9275]">
               Elige el objetivo que más se parece a lo que buscas
@@ -118,7 +119,8 @@ export function WhatToImproveSection({
               return (
                 <article
                   key={objective.title}
-                  className={`border-b border-[#AF9275]/45 transition-colors duration-300 ${
+                  style={{ animationDelay: `${0.55 + index * 0.1}s` }}
+                  className={`motion-safe:reveal border-b border-[#AF9275]/45 transition-colors duration-300 ${
                     isOpen ? 'bg-[#E9E3D9]/55' : 'bg-transparent'
                   }`}
                 >
@@ -163,8 +165,7 @@ export function WhatToImproveSection({
                             onClick={() => onViewRelated(objective.treatments)}
                             className="mt-5 inline-flex min-h-11 items-center gap-2 text-[11px] font-bold uppercase tracking-[.16em] text-[#2F4055] underline decoration-[#BB9445] decoration-1 underline-offset-4 transition-colors hover:text-[#BB9445] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BB9445] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E9E3D9]"
                           >
-                            Ver tratamientos relacionados
-                            <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
+                            VER TRATAMIENTOS RELACIONADOS <span aria-hidden="true">→</span>
                           </button>
                         </div>
 
@@ -193,10 +194,9 @@ export function WhatToImproveSection({
             <button
               type="button"
               onClick={onBook}
-              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#2F4055] px-6 py-3 text-sm font-semibold text-[#F2F2EF] transition duration-300 hover:-translate-y-0.5 hover:bg-[#3D526B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BB9445] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F2F2EF]"
+              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#2F4055] px-6 py-3 text-sm font-semibold uppercase tracking-[.08em] text-[#F2F2EF] transition duration-300 hover:-translate-y-0.5 hover:bg-[#3D526B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BB9445] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F2F2EF]"
             >
-              Quiero una valoración
-              <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              Quiero una valoración <span aria-hidden="true">→</span>
             </button>
             <a
               href={whatsappHref}

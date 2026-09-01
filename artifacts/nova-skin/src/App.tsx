@@ -36,6 +36,7 @@ import { Services } from '@/pages/admin/services';
 import { Gallery, Videos, Promotions, Specialists, Testimonials } from '@/pages/admin/content-pages';
 import { Messages } from '@/pages/admin/messages';
 import { Settings as AdminSettings } from '@/pages/admin/settings';
+import WhatToImproveSection from '@/components/what-to-improve-section';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 20_000, retry: 1 } } });
 
@@ -495,6 +496,9 @@ function PublicSite() {
       { onSuccess: () => { setSent(true); form.reset(); } },
     );
   };
+  const scrollToContact = () => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToTreatments = (_treatments: string[]) => document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' });
+  const improvementWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.')}`;
   return <div className="nova-grain overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
     <header className="absolute left-0 right-0 top-0 z-40 border-b border-white/20 text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
@@ -537,6 +541,7 @@ function PublicSite() {
       </section>
        <PhilosophySection copy={site.aboutText || fallback.aboutText} />
        <TreatmentsSection services={services} onSelect={setSelectedTreatment} />
+       <WhatToImproveSection imageUrl={`${media}what-to-improve-skin.jpg`} onViewRelated={scrollToTreatments} onBook={scrollToContact} whatsappHref={improvementWhatsAppHref} />
       <section id="espacio" className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[.8fr_1.2fr] md:items-end"><SectionHeading light eyebrow="El espacio NOVA" title="No es solo una cita, es un momento de reconexión contigo misma." copy="Luz cálida, manos expertas y el tiempo suficiente para que vuelvas a escucharte."/><div className="grid grid-cols-2 gap-3 md:grid-cols-[1fr_1.35fr]"><img src={localImages[2]} alt="Consulta en NOVA Skin" className="aspect-[.8] w-full object-cover"/><img src={localImages[1]} alt="Sala de tratamiento NOVA Skin" className="mt-12 aspect-[.8] w-full object-cover"/></div></div></section>
       <section className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><div className="flex flex-wrap items-end justify-between gap-6"><SectionHeading eyebrow="Un vistazo" title="El cuidado también vive en los detalles."/><p className="max-w-xs text-sm leading-6 text-[#68727b]">Un ambiente creado para sentirte tranquila desde el primer paso.</p></div><div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">{galleryItems.slice(0, 4).map((g, i) => <button type="button" key={g.id} data-testid={`button-gallery-${g.id}`} onClick={() => setLightbox(g)} className={`group relative overflow-hidden text-left ${i === 0 ? 'col-span-2 row-span-2' : ''}`}><img src={g.imageUrl || localImages[i % 3]} alt={g.title} className="h-full min-h-40 w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/65 to-transparent opacity-0 transition group-hover:opacity-100"/><span className="absolute bottom-4 left-4 text-sm text-white opacity-0 transition group-hover:opacity-100">{g.title}</span></button>)}</div></div></section>
       {promotions.length > 0 && <section className="bg-[#AF9275] px-5 py-16 md:px-10"><div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[.8fr_1.2fr] md:items-center"><SectionHeading eyebrow="Este mes en NOVA" title="Un buen momento para empezar." copy="Conoce nuestras experiencias y beneficios vigentes."/><div className="grid gap-4 md:grid-cols-2">{promotions.map(p => <div key={p.id} className="bg-[#F2F2EF] p-7"><p className="text-xs uppercase tracking-widest text-[#BB9445]">NOVA edit</p><h3 className="mt-3 font-serif text-2xl">{p.title}</h3><p className="mt-3 text-sm text-[#68727b]">{p.description}</p></div>)}</div></div></section>}

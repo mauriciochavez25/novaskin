@@ -281,7 +281,7 @@ body { background: #f2f2ef; }
 }
 .arch { border-radius: 999px 999px 1.25rem 1.25rem; }
 .reveal { animation: rise .7s cubic-bezier(.22,.8,.2,1) both; }
-.delay-1 { animation-delay: .1s; } .delay-2 { animation-delay: .2s; } .delay-3 { animation-delay: .3s; }
+.delay-1 { animation-delay: .1s; } .delay-2 { animation-delay: .2s; } .delay-3 { animation-delay: .3s; } .delay-4 { animation-delay: .45s; }
 .hero-reveal { animation: rise .8s cubic-bezier(.22,.8,.2,1) both; }
 .hero-reveal-1 { animation-delay: .08s; }
 .hero-reveal-2 { animation-delay: .2s; }
