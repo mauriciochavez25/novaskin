@@ -163,8 +163,8 @@ function PhilosophySection({ copy }: { copy: string }) {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="philosophy-reveal philosophy-delay-1">
-            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">01 — NUESTRA FILOSOFÍA</p>
-            <h2 className="mt-8 max-w-xl font-serif text-5xl leading-[1.02] text-[#2F4055] md:text-6xl lg:text-[4.5rem]">
+            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">NUESTRA FILOSOFÍA</p>
+            <h2 className="mt-6 max-w-xl font-serif text-[2.6rem] leading-[1.04] text-[#2F4055] md:text-[3.25rem] lg:text-[4rem]">
               Tu piel merece un cuidado pensado para ti.
             </h2>
           </div>
@@ -175,7 +175,7 @@ function PhilosophySection({ copy }: { copy: string }) {
           </div>
         </div>
 
-        <div className="mt-20 grid gap-0 border-t border-[#AF9275]/45 md:mt-28 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-0 border-t border-[#AF9275]/45 md:mt-20 md:grid-cols-2 lg:grid-cols-3">
           {principles.map((principle, index) => (
             <div
               key={principle.number}
@@ -555,7 +555,7 @@ function PublicSite() {
            </div>
          </div>
       </section>
-       <PhilosophySection copy={site.aboutText || fallback.aboutText} />
+       <PhilosophySection copy="NOVA SKIN MED SPA fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural." />
        <TreatmentsSection services={services} onSelect={setSelectedTreatment} />
        <WhatToImproveSection imageUrl={`${media}what-to-improve-skin.jpg`} onViewRelated={scrollToTreatments} onBook={scrollToContact} whatsappHref={improvementWhatsAppHref} />
        <SalonSpacesSection onBook={scrollToContact} whatsappHref={salonWhatsAppHref} />

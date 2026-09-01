@@ -293,8 +293,8 @@ body { background: #f2f2ef; }
 }
 .philosophy-reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .85s cubic-bezier(.22,.8,.2,1), transform .85s cubic-bezier(.22,.8,.2,1);
+  transform: translateY(6px);
+  transition: opacity .75s cubic-bezier(.22,.8,.2,1), transform .75s cubic-bezier(.22,.8,.2,1);
 }
 .philosophy-visible .philosophy-reveal { opacity: 1; transform: translateY(0); }
 .philosophy-delay-1 { transition-delay: .08s; }
