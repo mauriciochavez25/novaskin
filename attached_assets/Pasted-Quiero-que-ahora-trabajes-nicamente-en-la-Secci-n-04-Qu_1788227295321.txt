@@ -1,0 +1,49 @@
+Quiero que ahora trabajes únicamente en la Sección 04 — “¿Qué quieres mejorar?” del sitio web actual de NovaSkin. No modifiques la Sección 01, 02 ni 03 que ya fueron trabajadas y no hagas cambios en las secciones posteriores. Antes de empezar, revisa cómo está construido el sitio actual y reutiliza los componentes, estilos y animaciones existentes siempre que sea posible. Conserva completamente el branding actual de NovaSkin: logo, tipografías, paleta de colores, espaciados, estilo visual y tono premium, elegante, clínico y cercano.
+
+La función de esta sección es cambiar el punto de vista. En la Sección 03 ya mostramos los tratamientos que ofrece NovaSkin. Ahora quiero que esta Sección 04 se enfoque en lo que el cliente quiere mejorar, sin obligarlo a saber desde el principio qué tratamiento necesita. La idea principal es que el usuario pueda identificarse con una necesidad y entender que NovaSkin puede orientarlo mediante una valoración personalizada.
+
+Quiero que el título principal de la sección sea “¿Qué quieres mejorar?” y debajo coloca el texto “No necesitas saber qué tratamiento elegir. Empieza por contarnos qué buscas.” Mantén el tono elegante, claro y cercano.
+
+Quiero que esta sección muestre cinco objetivos principales: Hidratación y luminosidad, Líneas de expresión, Firmeza, Textura y calidad de piel, y Cuidado capilar.
+
+No quiero que estos cinco objetivos aparezcan como cinco tarjetas rectangulares iguales. Quiero una composición mucho más editorial y creativa. Utiliza una imagen principal grande, vertical o ligeramente alargada, relacionada con rostro y piel saludable, colocada en el centro o ligeramente desplazada hacia un lado. Esta imagen por ahora puede ser provisional, pero debe ser de alta calidad, elegante, limpia y relacionada con estética facial. No debe mostrar logos de otras clínicas, marcas visibles, textos, marcas de agua ni elementos que rompan el branding.
+
+La imagen debe funcionar como el centro visual de la sección y los cinco objetivos deben distribuirse alrededor de ella mediante textos, números, líneas finas o pequeños marcadores. La composición debe sentirse sofisticada, limpia y creativa, no saturada. Quiero bastante espacio negativo para que cada objetivo tenga su propia presencia.
+
+Cada uno de los cinco objetivos debe ser interactivo. Al pasar el cursor sobre Hidratación y luminosidad, debe resaltarse de manera sutil mediante un cambio de color dentro de la paleta de NovaSkin, una línea que se active o un pequeño desplazamiento. Haz lo mismo para los otros cuatro objetivos. No utilices cajas grandes, sombras fuertes ni animaciones agresivas.
+
+Quiero que cada objetivo tenga un texto corto de apoyo. Para Hidratación y luminosidad, utiliza una frase breve relacionada con mejorar la apariencia de una piel deshidratada, opaca o con falta de luminosidad. Para Líneas de expresión, explica que este objetivo está relacionado con suavizar visualmente líneas dinámicas y signos de expresión. Para Firmeza, utiliza una frase relacionada con mejorar la apariencia de la flacidez y la calidad estructural de la piel. Para Textura y calidad de piel, utiliza una frase relacionada con suavidad, uniformidad, hidratación y calidad cutánea. Para Cuidado capilar, utiliza una frase relacionada con cabello debilitado, pérdida de densidad o caída capilar. Mantén todos estos textos breves y no inventes resultados garantizados.
+
+Quiero que estos cinco objetivos estén visualmente conectados con el contenido real de tratamientos que NovaSkin ya maneja. No quiero que al dar clic se abra una página nueva automáticamente. En su lugar, cuando el usuario haga clic sobre uno de los objetivos, quiero que se muestre una pequeña recomendación orientativa debajo o al costado, indicando cuáles tratamientos del catálogo pueden estar relacionados con esa necesidad, sin afirmar que sean adecuados para todas las personas.
+
+Por ejemplo, al hacer clic en Hidratación y luminosidad, puedes mostrar una nota breve como: “Tratamientos relacionados: Skin Boosters, PDRN Salmón y NCTF Revitalizante.” Al hacer clic en Líneas de expresión, mostrar: “Tratamientos relacionados: Toxina Botulínica y opciones complementarias según valoración.” Al hacer clic en Firmeza, mostrar: “Tratamientos relacionados: Bioestimuladores.” Al hacer clic en Textura y calidad de piel, mostrar: “Tratamientos relacionados: PDRN Salmón, Skin Boosters y NCTF Revitalizante.” Al hacer clic en Cuidado capilar, mostrar: “Tratamiento relacionado: Mesoterapia Capilar.”
+
+Estas recomendaciones deben presentarse claramente como orientación general y no como diagnóstico. Agrega una frase pequeña que diga “La recomendación final depende de una valoración profesional.”
+
+Quiero que cuando aparezca la recomendación de un objetivo exista un botón pequeño que diga “VER TRATAMIENTOS RELACIONADOS →”. Al hacer clic, debe realizar un scroll suave hacia la Sección 03 — Tratamientos y, si es técnicamente sencillo dentro de la estructura actual, posicionar el carrusel cerca del tratamiento relacionado. Si esto requiere rehacer demasiado el carrusel o puede romperlo, simplemente realiza el scroll hasta la Sección 03 sin modificar su funcionamiento.
+
+Además, al final de esta Sección 04 quiero un botón principal con el texto “QUIERO UNA VALORACIÓN →”. Este botón debe realizar un scroll suave hasta la Sección 10 — Contacto, directamente al formulario existente. No debe abrir un formulario nuevo, no debe crear una página nueva y no debe modificar el formulario actual.
+
+También agrega un botón o enlace secundario de WhatsApp. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775. El mensaje preescrito puede decir: “Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.”
+
+Quiero animaciones suaves al entrar a la sección. Primero debe aparecer el título, luego el texto introductorio, después la imagen principal y finalmente los cinco objetivos de forma progresiva. Puedes hacer que los objetivos aparezcan uno por uno alrededor de la imagen. No utilices rebotes, zooms fuertes ni movimientos rápidos.
+
+Cuando el usuario pase el cursor sobre la imagen principal, puede existir un zoom mínimo de aproximadamente 1.02, únicamente para darle vida. Al retirar el cursor debe regresar suavemente a su tamaño original. No quiero que la imagen se levante como las tarjetas de Tratamientos porque esta sección debe tener una personalidad diferente.
+
+En desktop, quiero una composición amplia, editorial y asimétrica. La imagen principal puede ocupar alrededor de un tercio o poco más de la sección, mientras que los cinco objetivos se distribuyen alrededor. Evita que todos queden alineados como una lista común. Quiero que visualmente parezca una composición diseñada especialmente para NovaSkin.
+
+En tablet, adapta la distribución manteniendo la imagen como protagonista y colocando los objetivos alrededor o en dos columnas si es necesario. No permitas que los textos se encimen con la imagen.
+
+En móvil, cambia completamente la composición para que sea cómoda de leer. Primero debe aparecer el título y el texto introductorio, después la imagen principal y debajo los cinco objetivos en formato vertical. Cada objetivo debe conservar su interacción y, al tocarlo, debe desplegar la recomendación relacionada. No uses hover como única forma de interacción en móvil; debe funcionar correctamente mediante tap.
+
+Mantén suficiente separación entre cada elemento y asegúrate de que todas las zonas clicables sean fáciles de tocar en celular.
+
+No utilices imágenes adicionales innecesarias. Esta sección debe tener una sola imagen principal provisional relacionada con rostro/piel. No agregues cinco fotografías diferentes ni iconos médicos genéricos. La creatividad debe venir de la composición, tipografía, líneas, numeración e interacción.
+
+No inventes tratamientos adicionales. Utiliza únicamente los tratamientos reales de NovaSkin: Toxina Botulínica, Bioestimuladores, PDRN Salmón, Skin Boosters, NCTF Revitalizante y Mesoterapia Capilar.
+
+No inventes precios, promociones, resultados garantizados, tiempos de recuperación ni recomendaciones médicas específicas.
+
+Al terminar, revisa que funcionen correctamente: la interacción de los cinco objetivos, la aparición de las recomendaciones, el botón “VER TRATAMIENTOS RELACIONADOS”, el botón “QUIERO UNA VALORACIÓN”, el botón de WhatsApp, las animaciones y la adaptación responsive.
+
+No modifiques ninguna otra sección del sitio. Cuando termines completamente la Sección 04, detente y espera mis siguientes instrucciones antes de continuar con la Sección 05.
