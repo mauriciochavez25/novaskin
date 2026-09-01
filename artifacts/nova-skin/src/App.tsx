@@ -213,6 +213,14 @@ type Treatment = {
 const treatmentCatalog: Treatment[] = [
   {
     number: '01',
+    name: 'Limpieza Facial',
+    imageUrl: `${media}what-to-improve-skin.jpg`,
+    description: 'Cuidado facial enfocado en limpiar, renovar y mejorar la apariencia general de la piel.',
+    detail: 'La información detallada de este tratamiento estará disponible próximamente. El equipo de NovaSkin podrá orientarte durante una valoración.',
+    faq: [],
+  },
+  {
+    number: '02',
     name: 'Toxina Botulínica',
     imageUrl: `${media}treatment-01-toxina.jpg`,
     description: 'Ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión.',
@@ -224,7 +232,7 @@ const treatmentCatalog: Treatment[] = [
     ],
   },
   {
-    number: '02',
+    number: '03',
     name: 'Bioestimuladores',
     imageUrl: `${media}treatment-02-biostimuladores.jpg`,
     description: 'Estimulan progresivamente la producción natural de colágeno y elastina para mejorar la firmeza y calidad de la piel.',
@@ -236,7 +244,7 @@ const treatmentCatalog: Treatment[] = [
     ],
   },
   {
-    number: '03',
+    number: '04',
     name: 'PDRN Salmón',
     imageUrl: `${media}treatment-03-pdrn.jpg`,
     description: 'Tratamiento enfocado en la bioestimulación y regeneración cutánea para mejorar la calidad general de la piel.',
@@ -248,7 +256,7 @@ const treatmentCatalog: Treatment[] = [
     ],
   },
   {
-    number: '04',
+    number: '05',
     name: 'Skin Boosters',
     imageUrl: `${media}treatment-04-skin-boosters.jpg`,
     description: 'Enfocados en mejorar la hidratación, luminosidad, elasticidad y calidad general de la piel.',
@@ -260,7 +268,7 @@ const treatmentCatalog: Treatment[] = [
     ],
   },
   {
-    number: '05',
+    number: '06',
     name: 'NCTF Revitalizante',
     imageUrl: `${media}treatment-05-nctf.jpg`,
     description: 'Mesoterapia enfocada en revitalizar la piel y mejorar hidratación, luminosidad y textura.',
@@ -272,7 +280,7 @@ const treatmentCatalog: Treatment[] = [
     ],
   },
   {
-    number: '06',
+    number: '07',
     name: 'Mesoterapia Capilar',
     imageUrl: `${media}treatment-06-mesoterapia-capilar.jpg`,
     description: 'Aplicación de activos directamente en el cuero cabelludo para favorecer las condiciones del folículo y la calidad del cabello.',
@@ -320,7 +328,7 @@ function TreatmentDetailsModal({ treatment, onClose }: { treatment: Treatment; o
             <p className="text-[11px] font-bold uppercase tracking-[.25em] text-[#BB9445]">Información del tratamiento</p>
             <h3 className="mt-6 font-serif text-3xl text-[#2F4055]">¿En qué consiste?</h3>
             <p className="mt-4 text-base leading-8 text-[#68727b]">{treatment.detail}</p>
-            <div className="mt-10 border-t border-[#AF9275]/45">
+            {treatment.faq.length > 0 && <div className="mt-10 border-t border-[#AF9275]/45">
               <h3 className="py-6 font-serif text-3xl text-[#2F4055]">Preguntas frecuentes</h3>
               <div>
                 {treatment.faq.map((faq, index) => {
@@ -338,7 +346,7 @@ function TreatmentDetailsModal({ treatment, onClose }: { treatment: Treatment; o
                   );
                 })}
               </div>
-            </div>
+            </div>}
             <div className="mt-10 bg-[#2F4055] p-6 text-[#F2F2F0] md:p-8">
               <p className="font-serif text-2xl">¿Quieres saber si este tratamiento es para ti?</p>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -367,8 +375,11 @@ function TreatmentDetailsModal({ treatment, onClose }: { treatment: Treatment; o
 
 function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: (treatment: Treatment) => void }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const dragStateRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
+  const wasDraggedRef = useRef(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
   const treatments = useMemo(
     () => treatmentCatalog.map((treatment) => {
       const managedTreatment = services.find((service) => service.name === treatment.name);
@@ -400,7 +411,16 @@ function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: 
   const scrollCarousel = (direction: number) => {
     const track = trackRef.current;
     if (!track) return;
-    track.scrollBy({ left: direction * track.clientWidth * 0.92, behavior: 'smooth' });
+    const firstCard = track.querySelector<HTMLElement>('.treatment-card');
+    if (!firstCard) return;
+    const styles = window.getComputedStyle(track);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+    const step = firstCard.getBoundingClientRect().width + gap;
+    if (!step) return;
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const currentIndex = Math.round(track.scrollLeft / step);
+    const nextPosition = Math.max(0, Math.min(maxScrollLeft, (currentIndex + direction) * step));
+    track.scrollTo({ left: nextPosition, behavior: 'smooth' });
   };
 
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
@@ -409,6 +429,52 @@ function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: 
     if (track.scrollWidth <= track.clientWidth) return;
     event.preventDefault();
     track.scrollLeft += event.deltaY;
+  };
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    const track = trackRef.current;
+    if (!track) return;
+    dragStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startScrollLeft: track.scrollLeft,
+      moved: false,
+    };
+    wasDraggedRef.current = false;
+    setIsDragging(true);
+    track.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    const dragState = dragStateRef.current;
+    if (!track || !dragState || dragState.pointerId !== event.pointerId) return;
+    const distance = event.clientX - dragState.startX;
+    if (Math.abs(distance) > 4) {
+      dragState.moved = true;
+      event.preventDefault();
+      track.scrollLeft = dragState.startScrollLeft - distance;
+    }
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    const dragState = dragStateRef.current;
+    if (!track || !dragState || dragState.pointerId !== event.pointerId) return;
+    wasDraggedRef.current = dragState.moved;
+    dragStateRef.current = null;
+    setIsDragging(false);
+    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+  };
+
+  const handleTrackClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!wasDraggedRef.current) return;
+    event.preventDefault();
+    event.stopPropagation();
+    window.setTimeout(() => {
+      wasDraggedRef.current = false;
+    }, 0);
   };
 
   return (
@@ -429,15 +495,32 @@ function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: 
             </button>
           </div>
         </div>
-        <div ref={trackRef} onWheel={handleWheel} className="treatment-track mt-14 flex gap-5 overflow-x-auto pb-5">
+        <div
+          ref={trackRef}
+          onWheel={handleWheel}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onClick={handleTrackClick}
+          className={`treatment-track mt-14 flex gap-5 overflow-x-auto pb-5 ${isDragging ? 'is-dragging' : ''}`}
+        >
           {treatments.map((treatment) => (
-            <article key={treatment.number} className="treatment-card group shrink-0 snap-start">
-              <div className="arch relative h-[350px] overflow-hidden bg-[#AF9275] md:h-[390px]">
-                <img src={treatment.imageUrl} alt={`Placeholder de ${treatment.name}`} className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
-                <span className="absolute bottom-5 left-5 text-xs font-bold uppercase tracking-[.2em] text-[#F2F2EF]">{treatment.number}</span>
+            <article key={treatment.number} className="treatment-card group flex shrink-0 snap-start flex-col">
+              <div className="treatment-photo arch relative h-[350px] overflow-hidden bg-[#AF9275] transition-transform duration-300 group-hover:-translate-y-1 md:h-[390px]">
+                <img
+                  src={treatment.imageUrl}
+                  alt={`Imagen temporal de ${treatment.name}`}
+                  draggable={false}
+                  style={{ objectPosition: treatment.number === '01' ? 'center 45%' : 'center' }}
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
               </div>
               <div className="flex flex-1 flex-col px-1 pb-2 pt-6">
                 <p className="text-xs font-bold uppercase tracking-[.18em] text-[#BB9445]">{treatment.number}</p>
+                <div className="mt-3 min-h-4 text-[10px] font-bold uppercase tracking-[.16em] text-[#BB9445]">
+                  {treatment.number === '01' && 'Ideal para comenzar'}
+                </div>
                 <h3 className="mt-3 font-serif text-3xl leading-tight text-[#2F4055]">{treatment.name}</h3>
                 <p className="mt-4 text-sm leading-7 text-[#68727b]">{treatment.description}</p>
                 <button type="button" data-testid={`button-treatment-more-${treatment.number}`} onClick={() => onSelect(treatment)} className="mt-auto inline-flex cursor-pointer items-center gap-2 pt-8 text-xs font-bold uppercase tracking-[.18em] text-[#2F4055] transition hover:text-[#BB9445]">

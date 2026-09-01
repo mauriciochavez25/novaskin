@@ -1,0 +1,33 @@
+Quiero pulir únicamente la sección de Tratamientos de NovaSkin. La estructura y dirección visual actual me gustan, por lo que NO quiero que rediseñes la sección desde cero. Conserva el fondo claro, la tipografía, los colores de la identidad actual, el encabezado editorial, las fotografías con marco arqueado y el concepto de carrusel horizontal.
+
+Primero, actualiza la sección para pasar de 6 a 7 tratamientos. Agrega como primer tratamiento “Limpieza Facial” y renumera automáticamente todos los tratamientos de la siguiente manera: 01 Limpieza Facial, 02 Toxina Botulínica, 03 Bioestimuladores, 04 PDRN Salmón, 05 Skin Boosters, 06 NCTF Revitalizante y 07 Mesoterapia Capilar.
+
+Para Limpieza Facial utiliza temporalmente una fotografía relacionada con una limpieza facial profesional. Más adelante reemplazaré esta imagen por material definitivo de NovaSkin. No cambies las imágenes que ya hemos colocado para los demás tratamientos.
+
+En la tarjeta de Limpieza Facial coloca encima del nombre una pequeña etiqueta dorada que diga “IDEAL PARA COMENZAR”. Debe ser discreta y elegante, no parecer una promoción o descuento.
+
+Como descripción breve de Limpieza Facial utiliza: “Cuidado facial enfocado en limpiar, renovar y mejorar la apariencia general de la piel.”
+
+Mantén el botón “VER MÁS →”. Al presionarlo debe funcionar exactamente igual que el “Ver más” de los demás tratamientos y abrir el detalle correspondiente a Limpieza Facial. Por ahora crea la estructura del detalle sin inventar información clínica específica que todavía no haya sido proporcionada.
+
+Conserva el encabezado actual “Cuidado personalizado, respaldado por la ciencia.” y el texto introductorio actual. No aumentes el tamaño del título.
+
+Ahora corrige el comportamiento y las proporciones del carrusel. En desktop quiero ver tres tratamientos completos simultáneamente y solamente una pequeña parte, aproximadamente entre 15 % y 20 %, de la siguiente tarjeta. Ese pequeño fragmento debe funcionar como indicación visual de que existen más tratamientos hacia la derecha. No quiero tarjetas cortadas de manera exagerada.
+
+Todas las tarjetas deben tener exactamente la misma anchura y mantener alineados verticalmente: fotografía, número, nombre, descripción y “VER MÁS →”. Si una descripción tiene menos texto, la posición del botón debe seguir coincidiendo con la de las demás tarjetas.
+
+Mantén el marco arqueado actual de las fotografías. Todas deben tener exactamente las mismas dimensiones y utilizar object-fit: cover para evitar deformaciones. Ajusta individualmente object-position cuando sea necesario para mantener visible la parte importante de cada fotografía.
+
+Al pasar el cursor sobre una tarjeta, agrega una interacción elegante: la fotografía debe elevarse ligeramente y aumentar de escala de manera muy sutil, aproximadamente 1.02–1.03. El cambio debe durar unos 300–400 ms y sentirse suave. Puede aparecer también una variación muy discreta en el color de “VER MÁS →”. No agregues sombras exageradas.
+
+Las flechas circulares que actualmente aparecen en la parte superior derecha deben controlar realmente el carrusel. La flecha derecha debe avanzar al siguiente tratamiento y la izquierda regresar. El desplazamiento debe ser suave y respetar el ancho de cada tarjeta para evitar que el carrusel termine en posiciones intermedias.
+
+Permite también desplazar el carrusel arrastrándolo horizontalmente con el mouse y mediante swipe en dispositivos táctiles.
+
+Elimina visualmente la barra horizontal gruesa que actualmente aparece en la parte inferior del carrusel. No quiero que parezca un scrollbar del navegador. El usuario debe entender que puede desplazarse mediante las flechas, el fragmento visible de la siguiente tarjeta y el gesto de arrastre.
+
+Cuando se llegue al último tratamiento, desactiva visualmente la flecha derecha. Cuando se esté al principio, la flecha izquierda debe aparecer ligeramente atenuada, como actualmente.
+
+En tablet muestra aproximadamente dos tarjetas completas y parte de la siguiente. En móvil muestra una tarjeta completa y una pequeña parte de la siguiente. Mantén swipe horizontal en móvil.
+
+No agregues botones adicionales, precios ni información nueva. No modifiques el header, la Filosofía, la portada ni ninguna sección posterior.

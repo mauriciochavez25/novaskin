@@ -307,23 +307,25 @@ body { background: #f2f2ef; }
   .philosophy-reveal { opacity: 1; transform: none; transition: none; }
 }
 .treatment-track {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(175,146,117,.75) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   overscroll-behavior-inline: contain;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  touch-action: pan-y;
+  cursor: grab;
 }
-.treatment-track::-webkit-scrollbar { height: 7px; }
-.treatment-track::-webkit-scrollbar-track { background: transparent; }
-.treatment-track::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(175,146,117,.75); }
+.treatment-track.is-dragging { cursor: grabbing; }
+.treatment-track::-webkit-scrollbar { display: none; height: 0; width: 0; }
 .treatment-card {
-  flex-basis: 100%;
+  flex-basis: calc((100% - 1.25rem) / 1.18);
   min-height: 680px;
 }
 @media (min-width: 768px) {
-  .treatment-card { flex-basis: calc((100% - 1.25rem) / 2); }
+  .treatment-card { flex-basis: calc((100% - 2.5rem) / 2.2); }
 }
 @media (min-width: 1024px) {
-  .treatment-card { flex-basis: calc((100% - 2.5rem) / 3); }
+  .treatment-card { flex-basis: calc((100% - 3.75rem) / 3.2); }
 }
 .salon-space-copy,
 .salon-space-item {
