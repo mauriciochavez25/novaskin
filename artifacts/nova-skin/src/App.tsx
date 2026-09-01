@@ -158,7 +158,7 @@ function PhilosophySection({ copy }: { copy: string }) {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="philosophy-reveal philosophy-delay-1">
-            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">01 — Nuestra filosofía</p>
+            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">01 — NUESTRA FILOSOFÍA</p>
             <h2 className="mt-8 max-w-xl font-serif text-5xl leading-[1.02] text-[#2F4055] md:text-6xl lg:text-[4.5rem]">
               Tu piel merece un cuidado pensado para ti.
             </h2>
@@ -188,7 +188,7 @@ function PhilosophySection({ copy }: { copy: string }) {
           className="philosophy-reveal philosophy-delay-6 mt-16 inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[.24em] text-[#AF9275] transition-colors duration-300 hover:text-[#BB9445] md:mt-20"
         >
           <span className="h-px w-10 bg-[#BB9445]/70" />
-          Descubre nuestros tratamientos ↓
+          DESCUBRE NUESTROS TRATAMIENTOS ↓
         </a>
       </div>
     </section>
