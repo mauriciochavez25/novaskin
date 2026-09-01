@@ -1,0 +1,41 @@
+Ahora vamos a trabajar únicamente en la Sección 07 — Equipo NovaSkin del sitio web actual. No modifiques ninguna de las secciones anteriores que ya están trabajadas y no hagas cambios todavía en Reseñas, Preguntas Frecuentes, Contacto ni Footer. Antes de comenzar, revisa cómo está construida actualmente la sección de equipo y reutiliza los componentes existentes siempre que sea posible. Conserva por completo el branding actual de NovaSkin: logo, tipografías, paleta de colores, espaciados, estilo editorial, animaciones y lenguaje visual.
+
+La función de esta sección es presentar de forma profesional y cercana a las dos especialistas reales que forman parte del equipo de NovaSkin. Quiero que el usuario entienda claramente quién lo puede atender y cuál es la preparación de cada una, sin saturar la sección con demasiada información.
+
+En la parte superior coloca un texto pequeño que diga “NUESTRO EQUIPO” y como título principal utiliza “Profesionales dedicadas al cuidado de tu piel.” Debajo puedes colocar una frase breve como “Conoce a las especialistas que forman parte de la experiencia NovaSkin.” No agregues un párrafo largo.
+
+Quiero mostrar exactamente dos perfiles profesionales, uno para cada integrante del equipo. El primer perfil corresponde a Dra. Indira Isis Ceniceros Mejía y debajo debe aparecer “Maestría en Medicina Estética”. El segundo perfil corresponde a María Muñiz Montemayor y debajo debe aparecer “Lic. en Cosmetología”. Utiliza exactamente estos nombres y títulos. No inventes certificaciones, años de experiencia, especialidades adicionales, cédulas, cargos o información profesional que no haya sido proporcionada.
+
+Cada perfil debe tener una fotografía grande. Si todavía no tenemos las fotografías definitivas de cada una, utiliza temporalmente una imagen provisional relacionada con el perfil profesional correspondiente. Para la Dra. Indira utiliza una fotografía profesional de una doctora o especialista en medicina estética dentro de una clínica premium. Para María utiliza una fotografía profesional de una cosmetóloga o especialista en cuidado de la piel. Estas imágenes son únicamente placeholders y deben quedar preparadas para sustituirse fácilmente cuando tengamos las fotografías reales.
+
+No utilices imágenes que tengan logos de otras clínicas, marcas visibles, textos, marcas de agua ni uniformes con identidades ajenas a NovaSkin. Mantén una estética neutra, sofisticada y coherente con el sitio.
+
+No quiero dos tarjetas genéricas pequeñas. La sección debe sentirse editorial. En desktop, utiliza dos módulos grandes con la misma importancia visual. Pueden estar colocados uno al lado del otro, con fotografías verticales grandes y el nombre y preparación debajo. También puedes crear una ligera asimetría entre ambas fotografías siempre que las dos especialistas tengan el mismo nivel de importancia.
+
+Las fotografías pueden utilizar el mismo lenguaje de arcos o formas suaves que ya existen en el sitio, pero no repitas exactamente el diseño de las tarjetas de Tratamientos. La sección de Equipo debe sentirse relacionada con el sitio, pero con una personalidad propia.
+
+Cuando el usuario pase el cursor sobre una fotografía en desktop, agrega una microinteracción discreta. La imagen puede hacer un zoom muy ligero de aproximadamente 1.02 y puede existir un pequeño cambio en la posición o intensidad del borde. No eleves demasiado los módulos y no utilices animaciones agresivas.
+
+Quiero que los perfiles aparezcan suavemente al hacer scroll. Primero puede aparecer el título de la sección, después el perfil de la Dra. Indira y finalmente el de María con un pequeño retraso. Utiliza fade-in y desplazamientos verticales mínimos. Una vez que los perfiles aparezcan, deben permanecer quietos.
+
+No quiero que los nombres o fotografías sean enlaces a páginas nuevas por ahora. Esta sección es informativa. No agregues botones de “Ver más” si no existe información adicional real que mostrar.
+
+Sin embargo, al final de la sección sí quiero una llamada a la acción breve que conecte con el proceso de agendamiento. Coloca un texto como “¿Lista para comenzar?” y debajo un botón principal que diga “AGENDAR VALORACIÓN →”. Este botón debe hacer scroll suave hasta la Sección 10 — Contacto, directamente al formulario que ya existe. No debe abrir otro formulario y no debe crear una nueva página.
+
+Junto al botón principal agrega una opción secundaria de WhatsApp. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775 y debe cargar un mensaje preescrito que diga: “Hola, me gustaría agendar una valoración en NovaSkin.”
+
+Mantén el botón de Agendar valoración con mayor importancia visual que WhatsApp y utiliza únicamente los colores y estilos del branding actual.
+
+En tablet, conserva dos perfiles uno al lado del otro si hay suficiente espacio. Si la composición se vuelve demasiado estrecha, reorganízalos verticalmente.
+
+En móvil, muestra primero el título de la sección, después el perfil de la Dra. Indira y posteriormente el de María. Cada fotografía debe ocupar un ancho cómodo dentro de los márgenes del sitio y el nombre y preparación deben ser fáciles de leer. No dependas de hover para comunicar nada importante, porque en móvil no existe cursor.
+
+Cuida especialmente la tipografía de los nombres. Deben tener jerarquía visual, pero no deben competir con el título principal de la sección. La preparación profesional debe aparecer inmediatamente debajo de cada nombre con un estilo más pequeño y limpio.
+
+No agregues íconos médicos genéricos como cruces, estetoscopios o jeringas si no pertenecen al sistema visual de NovaSkin. La sección debe sentirse premium mediante fotografía, tipografía, espacios y composición.
+
+No inventes testimonios sobre las especialistas ni frases como “10 años de experiencia”, “especialista certificada”, “experta internacional” o similares si no han sido proporcionadas.
+
+Cuando termines, revisa que los nombres estén escritos correctamente, que las fotografías mantengan buena proporción, que el botón de Agendar valoración lleve al formulario existente, que WhatsApp abra correctamente el número 8711437775, y que la sección funcione correctamente en desktop, tablet y móvil.
+
+Trabaja únicamente sobre la Sección 07 — Equipo NovaSkin. No modifiques ninguna otra parte del sitio. Cuando termines, detente y espera mis siguientes instrucciones antes de continuar con la Sección 08 — Referencias / Reseñas.
