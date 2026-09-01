@@ -325,6 +325,31 @@ body { background: #f2f2ef; }
 @media (min-width: 1024px) {
   .treatment-card { flex-basis: calc((100% - 2.5rem) / 3); }
 }
+.salon-space-copy,
+.salon-space-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .8s cubic-bezier(.22,.8,.2,1), transform .8s cubic-bezier(.22,.8,.2,1);
+}
+.salon-spaces-visible .salon-space-copy,
+.salon-spaces-visible .salon-space-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+.salon-space-copy-1 { transition-delay: .04s; }
+.salon-space-copy-2 { transition-delay: .14s; }
+.salon-space-copy-3 { transition-delay: .24s; }
+.salon-space-item-1 { transition-delay: .38s; }
+.salon-space-item-2 { transition-delay: .52s; }
+.salon-space-copy-6 { transition-delay: .66s; }
+@media (prefers-reduced-motion: reduce) {
+  .salon-space-copy,
+  .salon-space-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 .soft-card { box-shadow: 0 18px 50px rgba(47,64,85,.08); }
 .line-gold { border-color: rgba(187,148,69,.55); }
 .admin-input { border: 1px solid hsl(var(--input)); background: hsl(var(--card)); border-radius: .55rem; padding: .7rem .8rem; width: 100%; outline: none; }

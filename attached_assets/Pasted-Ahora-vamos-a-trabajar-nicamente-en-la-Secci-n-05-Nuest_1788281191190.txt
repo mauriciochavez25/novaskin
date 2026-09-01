@@ -1,0 +1,55 @@
+Ahora vamos a trabajar únicamente en la Sección 05 — Nuestros espacios del sitio web actual de NovaSkin. No modifiques las secciones 01, 02, 03 ni 04 que ya fueron trabajadas y no hagas cambios en ninguna sección posterior. Antes de comenzar, revisa cómo está construido el sitio actual y reutiliza los componentes, estilos y animaciones existentes siempre que sea posible. Mantén completamente el branding de NovaSkin, incluyendo logo, tipografías, paleta de colores, espaciados, estilo de botones y lenguaje visual. Esta sección debe sentirse elegante, creativa, premium y tranquila, pero sin romper la identidad de la marca.
+
+La función de esta sección es mostrar únicamente los dos salones reales que NovaSkin utiliza para atender a sus pacientes. No quiero hacer otro recorrido general por las instalaciones, porque ese recorrido ya aparece en el video de fondo de la portada. Aquí quiero que el usuario conozca específicamente los dos espacios donde puede recibir atención.
+
+Quiero que el título pequeño de la sección sea “NUESTROS ESPACIOS”. El título principal debe decir “Dos espacios pensados para cuidar de ti.” Debajo coloca un texto breve que diga: “Cada detalle está preparado para ofrecerte una experiencia cómoda, privada y enfocada en tu cuidado.”
+
+Después del texto quiero mostrar exactamente dos módulos grandes, uno para cada salón. En computadora deben aparecer uno al lado del otro, con la misma importancia visual y dimensiones similares. No quiero una galería con muchas imágenes ni muchos módulos. Solamente estos dos espacios.
+
+Para el primer módulo utiliza exclusivamente el video real que te proporcionaré correspondiente al primer salón. Es el video donde se muestra un espacio blanco y minimalista, con escritorio de superficie tipo mármol, sillas oscuras y posteriormente una silla/camilla blanca de atención. Utiliza ese video dentro del módulo sin convertirlo en fotografía. Quiero que este archivo quede identificado dentro del proyecto como salon-01.mp4.
+
+Para el segundo módulo utiliza exclusivamente el otro video real que te proporcionaré correspondiente al segundo salón. Es el salón donde se observa una camilla para tratamiento, mueble de madera, equipo facial y el espejo circular iluminado. Utiliza este video directamente dentro del módulo y déjalo identificado como salon-02.mp4.
+
+Los dos videos deben reproducirse automáticamente cuando la sección esté visible, estar completamente silenciados, reproducirse en loop y no mostrar controles. Deben cubrir correctamente todo el espacio disponible dentro de cada módulo mediante una lógica equivalente a object-fit: cover, sin deformarse ni dejar espacios vacíos. Ambos deben mantener la misma proporción visual aunque sus recorridos internos sean diferentes.
+
+No quiero que estos videos parezcan reproductores incrustados. Deben sentirse como parte del diseño de la sección. Evita botones de play, barras de progreso, íconos de volumen o cualquier interfaz propia de un reproductor.
+
+Encima de cada video puede existir una capa oscura o degradado muy sutil solamente en la parte inferior, con el objetivo de permitir colocar información sin perder legibilidad. No oscurezcas todo el video.
+
+En el primer módulo coloca el texto “SALÓN 01” y debajo “Espacio de atención”. En el segundo módulo coloca “SALÓN 02” y debajo “Espacio de tratamientos”. Estos nombres deben quedar estructurados para que después puedan cambiarse fácilmente si NovaSkin decide darles un nombre específico.
+
+No agregues descripciones médicas o información inventada sobre qué procedimientos se realizan en cada salón. Si no tenemos esa información confirmada, mantén únicamente las etiquetas indicadas.
+
+Quiero que ambos módulos tengan bordes y proporciones elegantes. No utilices bordes demasiado redondeados si eso rompe el branding actual. Puedes utilizar una curvatura sutil o seguir el lenguaje visual que ya está implementado en el sitio.
+
+Al pasar el cursor sobre cualquiera de los dos módulos en computadora, quiero una microinteracción discreta. El módulo puede elevarse aproximadamente entre 4 y 8 píxeles y el video puede hacer un zoom mínimo, aproximadamente entre 1.02 y 1.04. La transición debe ser suave, de aproximadamente 300 milisegundos. También puede intensificarse muy ligeramente la sombra o el borde. No utilices rebotes ni animaciones fuertes.
+
+Al retirar el cursor, el módulo debe regresar suavemente a su posición original.
+
+No quiero que al hacer clic sobre el video se pause ni que se abra otro reproductor. Estos módulos son principalmente visuales. El usuario debe poder observar el espacio sin tener que interactuar con controles.
+
+Si consideras útil añadir una acción secundaria, puedes colocar debajo de ambos módulos un botón único con el texto “QUIERO AGENDAR UNA VALORACIÓN →”. Este botón debe realizar un scroll suave hasta la Sección 10 — Contacto, exactamente donde comienza el formulario existente. No debe abrir otro formulario, no debe crear una nueva página y no debe modificar la lógica actual del formulario.
+
+También puede colocarse un enlace secundario discreto de WhatsApp junto al botón principal. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775 y un mensaje preescrito que diga: “Hola, me gustaría agendar una valoración en NovaSkin.”
+
+No agregues fotografías provisionales en esta sección. Los dos videos proporcionados son el material real y definitivo que debe utilizarse para representar los salones.
+
+Quiero que la sección tenga bastante espacio alrededor de los módulos. No los pegues a los bordes de la pantalla y no satures el área con texto. Después de las secciones anteriores, esta parte debe sentirse principalmente visual.
+
+En desktop, coloca los dos módulos horizontalmente. El ancho debe permitir apreciar correctamente ambos videos y el espacio entre ellos debe ser suficiente para diferenciarlos.
+
+En tablet, si existe suficiente espacio, pueden seguir apareciendo uno al lado del otro con tamaños ajustados. Si esto compromete la visualización de los videos, coloca un módulo debajo del otro.
+
+En móvil, los dos módulos deben aparecer obligatoriamente uno debajo del otro, ocupando prácticamente todo el ancho disponible dentro de los márgenes del sitio. Mantén suficiente separación entre ellos. Los videos deben seguir reproduciéndose automáticamente, sin sonido y en loop.
+
+En dispositivos móviles no dependas del hover para comunicar interacción, ya que no existe cursor. Mantén la información de “Salón 01” y “Salón 02” siempre visible.
+
+Optimiza la carga de los videos para evitar que esta sección haga lenta la página. No dupliques los archivos ni cargues versiones innecesarias. Utiliza una implementación adecuada para video web y, si es posible dentro de la arquitectura actual, evita reproducirlos cuando la sección esté completamente fuera del viewport para reducir el consumo de recursos, reanudándolos cuando vuelvan a ser visibles.
+
+Quiero animaciones de entrada muy suaves cuando esta sección aparezca al hacer scroll. Primero puede aparecer el título y texto introductorio, después el módulo del Salón 01 y finalmente el módulo del Salón 02 con un pequeño retraso entre ellos. Utiliza fade-in y un desplazamiento vertical mínimo. No agregues movimientos permanentes.
+
+Asegúrate de que esta sección se sienta diferente al Hero. En la portada el video muestra la experiencia general de NovaSkin a pantalla completa. En esta sección los videos deben presentarse como dos ventanas específicas hacia los espacios de atención, por eso no conviertas nuevamente toda la sección en un video de fondo.
+
+Cuando termines, revisa que ambos archivos correspondan al salón correcto, que los videos se reproduzcan correctamente, que no aparezcan controles, que funcionen en desktop, tablet y móvil, que el hover sea sutil y que el botón de valoración lleve correctamente al formulario de contacto.
+
+Realiza únicamente estos cambios en la Sección 05 — Nuestros espacios. No modifiques ninguna otra sección. Cuando termines, detente y espera mis siguientes instrucciones antes de continuar con la Sección 06 — Así se vive NovaSkin.
