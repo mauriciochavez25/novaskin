@@ -1,0 +1,51 @@
+Ahora vamos a trabajar únicamente en la Sección 06 — “Así se vive NovaSkin” del sitio web actual. No modifiques absolutamente nada de las Secciones 01, 02, 03, 04 y 05 que ya fueron trabajadas, y tampoco hagas cambios en las secciones posteriores. Antes de comenzar, revisa cómo está construido actualmente el sitio, reutiliza componentes y estilos existentes cuando sea posible y conserva completamente el branding de NovaSkin: logo, paleta de colores, tipografías, tamaños, estilo editorial, espacios, animaciones y lenguaje visual. Esta sección debe sentirse creativa y diferente a las anteriores, pero siempre elegante, limpia, premium y coherente con la identidad de la marca.
+
+La función de esta sección es explicar de manera visual y sencilla cómo vive una persona su experiencia en NovaSkin desde que llega hasta después de su tratamiento. No quiero volver a explicar los tratamientos ni volver a enseñar los salones, porque eso ya se hizo en las secciones anteriores. Aquí quiero contar una historia paso a paso para que el usuario comprenda qué sucede cuando decide atenderse en NovaSkin.
+
+En la parte superior coloca un texto pequeño que diga “TU EXPERIENCIA” y como título principal utiliza “Así se vive NovaSkin.” Debajo puedes colocar una frase introductoria muy breve como “Un cuidado pensado para acompañarte en cada etapa.” No agregues un párrafo largo porque quiero que la parte visual sea la protagonista.
+
+La sección debe dividir la experiencia en exactamente cuatro etapas: 01 Valoración, 02 Tu protocolo, 03 Tratamiento y 04 Seguimiento. Estas cuatro etapas deben estar conectadas entre sí mediante una línea visual continua. No quiero cuatro tarjetas independientes y separadas. Quiero que se perciba claramente como un recorrido: 01 → 02 → 03 → 04.
+
+Para la primera etapa coloca “01 — VALORACIÓN” y como texto utiliza “Conocemos tus necesidades, objetivos y lo que te gustaría mejorar.” Esta etapa representa el momento inicial en el que NovaSkin escucha a la persona antes de recomendar un tratamiento. Acompáñala con una imagen relacionada con una valoración estética: una especialista conversando con una paciente, observando su piel o explicándole opciones. Si todavía no existe una fotografía real de NovaSkin que represente bien este momento, utiliza temporalmente una imagen provisional premium y relacionada con el tema. No uses imágenes con logos de otras clínicas, marcas de agua o texto integrado. Esta imagen debe quedar preparada para sustituirse posteriormente sin rediseñar la sección.
+
+Para la segunda etapa coloca “02 — TU PROTOCOLO” y el texto “Definimos un plan de cuidado de acuerdo con tus necesidades y objetivos.” Esta etapa debe representar la preparación o selección del tratamiento. Utiliza una imagen relacionada con una especialista preparando productos, revisando equipo, explicando un procedimiento o preparando el espacio para atender a la paciente. Si no existe material real adecuado, utiliza temporalmente una imagen relacionada y coherente con la estética de NovaSkin.
+
+Para la tercera etapa coloca “03 — TRATAMIENTO” y el texto “Recibes atención profesional durante todo el procedimiento.” Aquí quiero utilizar preferentemente material real de NovaSkin. Ya contamos con fotografías y videos donde se ve a una especialista realizando un tratamiento facial a una paciente. Utiliza uno de esos materiales reales si está disponible dentro del proyecto. Si el material elegido es video, debe reproducirse automáticamente, sin sonido, en loop y sin controles visibles. Debe verse integrado dentro del diseño y no como un reproductor independiente. Si utilizas una fotografía, debe mostrar claramente el procedimiento y conservar la misma estética visual que el resto de la sección.
+
+Para la cuarta etapa coloca “04 — SEGUIMIENTO” y como texto “Recibes indicaciones y cuidados posteriores para acompañar tus resultados.” Esta etapa representa el momento posterior al tratamiento. Utiliza una imagen relacionada con una especialista conversando con la paciente, explicando recomendaciones posteriores, entregando indicaciones o mostrando una interacción tranquila después del procedimiento. Si todavía no contamos con una imagen real que represente esto, utiliza una fotografía provisional relacionada y deja preparada su sustitución posterior.
+
+Quiero que la composición sea editorial y tenga movimiento visual. En computadora, no pongas las cuatro etapas dentro de cuatro cajas idénticas. Puedes alternar la posición de la imagen y el texto para crear ritmo. Por ejemplo, la etapa 01 puede tener la imagen arriba y el texto debajo, la etapa 02 puede invertir ligeramente la composición, y así sucesivamente, pero siempre manteniendo clara la lectura de izquierda a derecha. La línea que conecta las cuatro etapas debe funcionar como el elemento principal que une todo el recorrido.
+
+Quiero que esa línea tenga una animación relacionada con el scroll. Cuando el usuario llegue a esta sección, la línea debe comenzar en la etapa 01 y avanzar progresivamente conforme baja por la sección. Cuando la línea alcanza una etapa, el número correspondiente puede cambiar sutilmente al dorado o a uno de los colores de acento del branding y el contenido de esa etapa puede aparecer mediante un fade suave. La animación debe dar la sensación de que el usuario está recorriendo la experiencia de NovaSkin.
+
+No quiero que las cuatro etapas aparezcan todas de golpe. Haz que se activen progresivamente: primero 01 Valoración, después 02 Tu protocolo, luego 03 Tratamiento y finalmente 04 Seguimiento. Utiliza movimientos pequeños y elegantes, nunca rebotes, zooms fuertes ni efectos llamativos.
+
+Las imágenes o videos también pueden tener una microinteracción muy discreta al pasar el cursor. En desktop, cuando el usuario pase el cursor sobre una imagen o video, puede realizarse un zoom mínimo de aproximadamente 1.02 o un ligero cambio de escala. No eleves todo el módulo como en el carrusel de tratamientos; quiero que esta sección tenga un comportamiento diferente.
+
+Los números 01, 02, 03 y 04 no son botones. Son únicamente indicadores del recorrido. No deben abrir páginas ni enlaces.
+
+Al final del recorrido, después de la etapa 04, agrega una llamada a la acción breve. Coloca un texto como “¿Lista para comenzar tu experiencia NovaSkin?” y debajo un botón principal que diga “AGENDAR VALORACIÓN →”. Este botón debe realizar un scroll suave hasta la Sección 10 — Contacto, exactamente donde comienza el formulario existente. No debe abrir otro formulario, crear una página nueva ni modificar el formulario actual.
+
+Junto al botón principal puedes colocar una opción secundaria de “WHATSAPP”. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775. El mensaje preescrito debe decir: “Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.”
+
+Mantén el botón de Agendar valoración con mayor importancia visual que WhatsApp. Ambos deben utilizar únicamente los colores, bordes y estilos que ya corresponden al branding de NovaSkin.
+
+En desktop, quiero que esta sección tenga suficiente ancho y espacio para que el recorrido se entienda visualmente. No comprimas las cuatro etapas. Si es necesario darle mayor altura a la sección para que la animación con scroll tenga sentido, puedes hacerlo, pero evita crear una sección excesivamente larga.
+
+En tablet, puedes conservar el concepto de recorrido horizontal si el espacio lo permite. Si comienza a verse apretado, reorganiza las etapas en una composición de dos por dos, pero conserva la línea visual y el orden 01 → 02 → 03 → 04.
+
+En celular, no intentes mantener cuatro etapas horizontales. Cambia la estructura a un timeline vertical. La línea debe ir de arriba hacia abajo en uno de los lados y las etapas deben aparecer en orden: Valoración, Tu protocolo, Tratamiento y Seguimiento. Cada etapa debe mostrar su número, título, texto e imagen o video. Conforme el usuario hace scroll, la línea vertical debe ir activándose progresivamente.
+
+Si utilizas video en la etapa de Tratamiento en móvil, debe mantenerse muted, autoplay, loop y playsinline. Optimiza su reproducción para no perjudicar innecesariamente el rendimiento.
+
+No agregues información médica adicional, precios, tiempos, resultados garantizados ni recomendaciones que no hayan sido proporcionadas. Esta sección habla de la experiencia y el proceso de atención, no de los detalles técnicos de cada tratamiento.
+
+No repitas fotografías innecesariamente. Si alguna imagen ya se utiliza de forma protagonista en Tratamientos, intenta elegir otra toma para esta sección. Si no existe suficiente material real, utiliza una imagen provisional relacionada en lugar de repetir exactamente la misma fotografía varias veces.
+
+Todas las imágenes provisionales que utilices deben quedar claramente estructuradas como placeholders para que posteriormente podamos sustituirlas por material real sin modificar tamaños, estructura, animaciones ni distribución.
+
+También cuida la transición entre la Sección 05 y esta Sección 06. En la Sección 05 acabamos de enseñar físicamente los dos salones de NovaSkin; ahora el usuario debe pasar de conocer dónde será atendido a entender cómo será atendido. La transición debe sentirse natural.
+
+Al terminar, revisa que el timeline funcione correctamente, que la línea se active conforme se hace scroll, que las cuatro etapas aparezcan en el orden correcto, que el video o imágenes no se deformen, que el botón de Agendar valoración lleve al formulario existente, que WhatsApp abra correctamente el número 8711437775 y que todo funcione correctamente en desktop, tablet y móvil.
+
+Trabaja únicamente sobre la Sección 06 — Así se vive NovaSkin. No modifiques ninguna otra sección. Cuando termines, detente y espera mis siguientes instrucciones antes de continuar con la Sección 07 — Equipo NovaSkin.
