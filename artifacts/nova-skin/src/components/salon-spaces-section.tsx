@@ -3,11 +3,10 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 
 type SalonSpace = {
   label: string;
-  description: string;
-  videoUrl: string;
+  imageUrl: string;
 };
 
-type SalonVideoProps = SalonSpace & {
+type SalonImageProps = SalonSpace & {
   index: number;
 };
 
@@ -16,56 +15,18 @@ export type SalonSpacesSectionProps = {
   whatsappHref: string;
 };
 
-function SalonVideo({ label, description, videoUrl, index }: SalonVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    const playWhenVisible = () => {
-      video.muted = true;
-      void video.play().catch(() => undefined);
-    };
-    const pauseWhenHidden = () => video.pause();
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          playWhenVisible();
-        } else {
-          pauseWhenHidden();
-        }
-      },
-      { rootMargin: '120px 0px', threshold: 0.15 },
-    );
-
-    observer.observe(video);
-    return () => {
-      observer.disconnect();
-      video.pause();
-    };
-  }, []);
-
+function SalonImage({ label, imageUrl, index }: SalonImageProps) {
   return (
-    <article className={`salon-space-item salon-space-item-${index} group relative overflow-hidden rounded-[1.25rem] border border-[#AF9275]/40 bg-[#2F4055] shadow-[0_18px_45px_rgba(47,64,85,.10)] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_24px_52px_rgba(47,64,85,.16)]`}>
+    <article className={`salon-space-item salon-space-item-${index} group relative overflow-hidden rounded-[1.25rem] border border-[#AF9275]/40 bg-[#2F4055]`}>
       <div className="relative aspect-video overflow-hidden">
-        <video
-          ref={videoRef}
-          aria-label={`${label}, ${description}`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="h-full w-full object-cover transition duration-300 ease-out group-hover:scale-[1.03]"
-        >
-          <source src={videoUrl} type="video/mp4" />
-        </video>
+        <img
+          src={imageUrl}
+          alt={label}
+          className="h-full w-full object-cover transition duration-[550ms] ease-out group-hover:scale-[1.03]"
+        />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#202c3a]/80 via-[#202c3a]/25 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 text-[#F2F2EF] md:p-7">
           <p className="text-[11px] font-bold uppercase tracking-[.25em] text-[#D7B66A]">{label}</p>
-          <p className="mt-2 font-serif text-2xl md:text-3xl">{description}</p>
         </div>
       </div>
     </article>
@@ -75,13 +36,11 @@ function SalonVideo({ label, description, videoUrl, index }: SalonVideoProps) {
 const salonSpaces: SalonSpace[] = [
   {
     label: 'SALÓN 01',
-    description: 'Espacio de atención',
-    videoUrl: '/media/salon-01.mp4',
+    imageUrl: '/media/salon-01.jpg',
   },
   {
     label: 'SALÓN 02',
-    description: 'Espacio de tratamientos',
-    videoUrl: '/media/salon-02.mp4',
+    imageUrl: '/media/salon-02.jpg',
   },
 ];
 
@@ -126,9 +85,9 @@ export default function SalonSpacesSection({ onBook, whatsappHref }: SalonSpaces
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 md:gap-7">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-7">
           {salonSpaces.map((space, index) => (
-            <SalonVideo key={space.label} {...space} index={index + 1} />
+            <SalonImage key={space.label} {...space} index={index + 1} />
           ))}
         </div>
 

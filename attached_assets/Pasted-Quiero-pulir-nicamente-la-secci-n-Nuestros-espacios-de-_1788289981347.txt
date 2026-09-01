@@ -1,0 +1,27 @@
+Quiero pulir únicamente la sección “Nuestros espacios” de NovaSkin. El diseño actual me gusta y NO quiero que lo rediseñes. Conserva el fondo azul oscuro actual, el encabezado, las dos fotografías reales de los salones, los colores, las tipografías y los botones inferiores.
+
+Mantén el texto pequeño “NUESTROS ESPACIOS”, el título “Dos espacios pensados para cuidar de ti.” y la descripción “Cada detalle está preparado para ofrecerte una experiencia cómoda, privada y enfocada en tu cuidado.”
+
+Reduce ligeramente el espacio vertical que existe entre la descripción y las dos fotografías. Quiero conservar aire y elegancia, pero hacer que el encabezado y los dos módulos se perciban como una misma composición.
+
+Conserva exactamente las dos fotografías actuales y no las reemplaces por imágenes generadas ni de stock. Estas son fotografías reales de los espacios de NovaSkin.
+
+Las dos fotografías deben mantener exactamente las mismas dimensiones, proporción y bordes redondeados. Utiliza object-fit: cover y ajusta individualmente object-position únicamente si hace falta para que la parte más importante de cada salón permanezca visible.
+
+Mantén el degradado oscuro actual en la parte inferior de cada fotografía para garantizar la legibilidad del texto.
+
+En la primera tarjeta conserva “SALÓN 01” y en la segunda “SALÓN 02”. Por ahora elimina los nombres “Espacio de atención” y “Espacio de tratamientos” si esas funciones no han sido confirmadas como los nombres o usos oficiales de cada salón. En su lugar, deja únicamente “Salón 01” y “Salón 02” con una presentación elegante. No inventes características o funciones para cada espacio.
+
+Agrega una interacción muy sutil al pasar el cursor por cualquiera de los dos módulos. La fotografía debe hacer un pequeño zoom interno, aproximadamente scale(1.03), durante unos 500–600 ms. El contenedor debe mantener overflow: hidden para que la fotografía nunca salga de sus bordes redondeados. La tarjeta completa NO debe moverse ni saltar.
+
+También puedes hacer que el texto o la línea dorada tenga una variación mínima de opacidad al hacer hover, pero evita sombras fuertes, brillos o animaciones exageradas.
+
+Mantén debajo el botón “QUIERO AGENDAR UNA VALORACIÓN →”. Al hacer clic debe hacer scroll suave hasta el formulario existente al final de la página.
+
+Mantén también el acceso “WhatsApp”. Debe abrir una conversación con NovaSkin al número 8711437775 con el mensaje preescrito: “Hola, me gustaría recibir información y agendar una valoración en NovaSkin.”
+
+En tablet conserva las dos fotografías siempre que exista suficiente espacio. En móvil coloca primero Salón 01 y después Salón 02, ocupando prácticamente todo el ancho disponible. Los botones deben colocarse debajo y ser fáciles de tocar.
+
+No agregues carruseles, galerías, fotografías adicionales, videos, estadísticas, características de los salones ni botones “Ver más”. El objetivo de esta sección es únicamente mostrar de manera breve y visual los dos espacios reales donde NovaSkin atiende a sus clientes.
+
+No modifiques ninguna otra sección de la página.
