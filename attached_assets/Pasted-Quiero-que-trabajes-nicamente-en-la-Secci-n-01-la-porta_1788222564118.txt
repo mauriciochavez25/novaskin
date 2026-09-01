@@ -1,0 +1,21 @@
+Quiero que trabajes únicamente en la Sección 01, la portada o Hero, del sitio web actual de NovaSkin. No quiero que modifiques ninguna otra sección por el momento. Trabaja sobre la página que ya está creada, conserva todo lo que funciona correctamente y respeta completamente el branding actual de NovaSkin, incluyendo logo, colores, tipografías y estilo visual. La intención es mejorar la portada sin reconstruir el sitio desde cero.
+
+El cambio principal es reemplazar la imagen que actualmente aparece en la portada por el video real de bienvenida de NovaSkin que te voy a proporcionar. Este video debe utilizarse como fondo completo de toda la primera sección. No quiero que aparezca dentro de un recuadro, tarjeta, marco o reproductor. El video debe ocupar todo el ancho y toda la altura visible del Hero y quedar detrás del menú, los textos y los botones. La intención es que cuando una persona entre al sitio vea inmediatamente las instalaciones de NovaSkin en movimiento.
+
+Configura el video para que se reproduzca automáticamente, sin sonido, en loop y sin controles visibles. Debe cubrir completamente el fondo sin deformarse y adaptarse correctamente a computadora, tablet y celular. Si en dispositivos móviles es necesario modificar la posición o el recorte del video para mostrar mejor las instalaciones, hazlo de manera independiente sin afectar la versión de escritorio.
+
+Sobre el video coloca una capa oscura muy sutil únicamente para mejorar la legibilidad del contenido. No quiero que oscurezcas demasiado el video porque las instalaciones deben seguir siendo protagonistas. La portada debe sentirse inmersiva, elegante y premium.
+
+Conserva en la parte superior el logo y el menú de navegación que ya existen. Sobre el video coloca como texto pequeño “ESTÉTICA AVANZADA, BIENESTAR REAL”. El título principal será “Tu piel merece el respaldo de la ciencia y el confort de un spa.” Debajo coloca “Tratamientos clínico-estéticos personalizados en un entorno cálido, sofisticado y seguro.” Después agrega un botón principal que diga “AGENDAR VALORACIÓN →” y un botón secundario que diga “WHATSAPP”.
+
+No quiero que todo el contenido quede simplemente centrado en medio de la pantalla. En computadora quiero una composición más editorial y creativa, colocando principalmente los textos hacia la zona izquierda de la portada y dejando suficiente espacio libre para que se puedan apreciar las instalaciones del video. El título debe tener protagonismo, pero sin cubrir demasiado el fondo. Mantén una buena separación entre el texto pequeño, el título, la descripción y los botones.
+
+Quiero que el contenido tenga animaciones muy suaves al cargar la página. Primero debe aparecer el texto pequeño, después el título, luego la descripción y finalmente los botones. Utiliza efectos de aparición suaves y pequeños desplazamientos verticales. No uses rebotes, zooms exagerados, movimientos rápidos ni animaciones llamativas. Todo debe sentirse elegante y acorde con una clínica estética premium.
+
+Los botones también pueden tener una microanimación cuando el usuario pase el cursor sobre ellos, pero debe ser discreta. El botón de Agendar valoración debe tener mayor importancia visual que el botón de WhatsApp, siempre utilizando los colores y estilos del branding existente.
+
+En celular adapta correctamente la composición. El video debe continuar siendo el fondo completo de la portada, los textos deben conservar buena legibilidad y los botones deben ser cómodos de presionar. No quiero que simplemente reduzcas la versión de computadora; realiza los ajustes necesarios para que la portada se vea diseñada correctamente también en móvil.
+
+Antes de realizar los cambios revisa cómo está construida actualmente esta sección y reutiliza los componentes existentes siempre que sea posible. No cambies el branding, no inventes nuevos colores ni tipografías y no agregues fotografías provisionales en esta sección, ya que el video que te proporcionaré será el fondo definitivo del Hero.
+
+Realiza únicamente estos cambios en la Sección 01. No modifiques Tratamientos, Filosofía, Equipo, Reseñas, Preguntas Frecuentes, Contacto, Footer ni ninguna otra sección. Cuando termines la portada, detente para que pueda revisarla antes de continuar con la siguiente sección.

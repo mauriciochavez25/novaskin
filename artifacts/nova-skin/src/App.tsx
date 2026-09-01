@@ -44,12 +44,14 @@ const fallback = {
   clinicName: 'NOVA SKIN', tagline: 'Estética avanzada, bienestar real', phone: '871 143 7775',
   whatsapp: '8711437775', email: 'Correo próximamente', address: 'Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43',
   hours: '10:00 a.m. – 2:00 p.m.\n4:00 p.m. – 7:00 p.m.', instagram: '@novaskinmedspa', facebook: 'NOVA Skin Med Spa', tiktok: '@novaskinmedspa',
-  heroImage: `${media}clinic-lobby.png`, heroEyebrow: 'Tu piel, en buenas manos', heroTitle: 'Cuidamos tu piel, realzamos tu esencia',
-  heroDescription: 'Tratamientos estéticos avanzados acompañados de una atención cercana, serena y profundamente humana.',
+  heroImage: `${media}clinic-lobby.png`, heroEyebrow: 'ESTÉTICA AVANZADA, BIENESTAR REAL', heroTitle: 'Tu piel merece el respaldo de la ciencia y el confort de un spa.',
+  heroDescription: 'Tratamientos clínico-estéticos personalizados en un entorno cálido, sofisticado y seguro.',
   aboutText: 'Creemos que el cuidado personal no debe sentirse como una obligación, sino como un momento de reconexión. Combinamos ciencia, tecnología y bienestar para que cada visita se sienta tan bien como se ve.'
 };
 
 const localImages = [`${media}clinic-lobby.png`, `${media}treatment-room.png`, `${media}consultation.png`];
+const heroVideo = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.mp4`;
+const heroPoster = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.jpg`;
 const localVideos = [
   [`${media}team-intro-2026-08-31.mp4`, `${media}team-intro-2026-08-31.jpg`],
   [`${media}team-treatment-2026-08-31.mp4`, `${media}team-treatment-2026-08-31.jpg`],
@@ -118,6 +120,17 @@ function PublicSite() {
   const promotions: any[] = data?.promotions ?? [];
   const specialists: any[] = data?.specialists ?? [];
   const testimonials: any[] = data?.testimonials ?? [];
+  const heroContent = {
+    eyebrow: site.heroEyebrow && site.heroEyebrow !== 'Cuidamos tu piel, realzamos tu esencia' && site.heroEyebrow !== fallback.heroEyebrow
+      ? site.heroEyebrow
+      : fallback.heroEyebrow,
+    title: site.heroTitle && site.heroTitle !== 'La belleza que se siente bien.'
+      ? site.heroTitle
+      : fallback.heroTitle,
+    description: site.heroDescription && site.heroDescription !== 'Tratamientos clínico-estéticos avanzados en un espacio diseñado para volver a ti.'
+      ? site.heroDescription
+      : fallback.heroDescription,
+  };
   const [menu, setMenu] = useState(false);
   const [lightbox, setLightbox] = useState<any>(null);
   const [sent, setSent] = useState(false);
@@ -149,9 +162,33 @@ function PublicSite() {
       {menu && <nav className="flex flex-col gap-5 bg-[#2F4055] px-6 py-6 text-sm uppercase tracking-widest md:hidden"><a href="#servicios" onClick={() => setMenu(false)}>Tratamientos</a><a href="#espacio" onClick={() => setMenu(false)}>El espacio</a><a href="#equipo" onClick={() => setMenu(false)}>Especialistas</a><a href="#contacto" onClick={() => setMenu(false)}>Contacto</a></nav>}
     </header>
     <main>
-      <section id="inicio" className="relative flex min-h-[750px] items-end bg-[#2F4055] px-5 pb-16 pt-32 md:min-h-[840px] md:px-10 md:pb-24">
-        <img src={site.heroImage || fallback.heroImage} alt="Interior cálido de NOVA Skin" className="absolute inset-0 h-full w-full object-cover opacity-65" /><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a] via-[#2f4055]/25 to-[#2f4055]/10"/>
-        <div className="relative mx-auto grid w-full max-w-7xl items-end gap-12 md:grid-cols-[1.15fr_.85fr]"><div className="reveal max-w-3xl text-[#F2F2F0]"><p className="mb-5 text-xs font-bold uppercase tracking-[.35em] text-[#e0bb69]">{site.heroEyebrow || fallback.heroEyebrow}</p><h1 className="font-serif text-6xl leading-[.95] md:text-8xl">{site.heroTitle || fallback.heroTitle}</h1><p className="mt-7 max-w-xl text-lg leading-7 text-[#e0e1de]">{site.heroDescription || fallback.heroDescription}</p><div className="mt-9 flex flex-wrap gap-3"><Button testId="button-book-hero" variant="gold" onClick={() => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' })}>Reserva tu momento <ArrowRight size={16}/></Button><a data-testid="link-whatsapp-hero" href={`https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-sm text-white transition hover:bg-white/10"><MessageCircle size={16}/> WhatsApp</a></div></div><div className="reveal delay-2 hidden justify-self-end text-right text-[#F2F2F0] md:block"><p className="font-serif text-3xl italic">Estética avanzada,<br/>bienestar real.</p><span className="mt-5 block text-xs uppercase tracking-[.25em] text-[#d1d1ca]">Miami · Florida</span></div></div>
+       <section id="inicio" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#2F4055] px-5 pb-14 pt-32 md:px-10 md:pb-24">
+         <video
+           aria-hidden="true"
+           autoPlay
+           muted
+           loop
+           playsInline
+           preload="auto"
+           poster={heroPoster}
+           className="absolute inset-0 h-full w-full object-cover object-[56%_center] md:object-center"
+         >
+           <source src={heroVideo} type="video/mp4" />
+         </video>
+         <div className="absolute inset-0 bg-[#202c3a]/20" />
+         <div className="absolute inset-0 bg-gradient-to-r from-[#202c3a]/65 via-[#202c3a]/20 to-transparent" />
+         <div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/50 via-transparent to-[#202c3a]/10" />
+         <div className="relative mx-auto w-full max-w-7xl">
+           <div className="max-w-[760px] text-[#F2F2F0] md:max-w-[820px]">
+             <p className="hero-reveal hero-reveal-1 mb-5 text-[11px] font-bold uppercase tracking-[.3em] text-[#e0bb69] md:text-xs md:tracking-[.35em]">{heroContent.eyebrow}</p>
+             <h1 className="hero-reveal hero-reveal-2 max-w-[760px] font-serif text-[3.25rem] leading-[.98] md:text-[6.25rem] lg:text-[7.25rem]">{heroContent.title}</h1>
+             <p className="hero-reveal hero-reveal-3 mt-7 max-w-xl text-base leading-7 text-[#e9ebe8] md:text-lg">{heroContent.description}</p>
+             <div className="hero-reveal hero-reveal-4 mt-8 flex flex-wrap gap-3 md:mt-9">
+               <Button testId="button-book-hero" variant="gold" className="min-h-12 px-6 uppercase tracking-[.08em]" onClick={() => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' })}>Agendar valoración <ArrowRight size={16}/></Button>
+               <a data-testid="link-whatsapp-hero" href={`https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/45 bg-[#202c3a]/15 px-6 py-3 text-sm font-semibold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white/12"><MessageCircle size={16}/> WhatsApp</a>
+             </div>
+           </div>
+         </div>
       </section>
       <section className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl items-start gap-12 md:grid-cols-[.65fr_1fr]"><div><p className="text-7xl font-serif text-[#BB9445]/50">01</p><p className="mt-8 max-w-xs text-xs font-bold uppercase leading-5 tracking-[.2em] text-[#AF9275]">Más que resultados,<br/>un nuevo ritual.</p></div><div><SectionHeading eyebrow="Nuestra filosofía" title="Tu piel merece el respaldo de la ciencia y el confort de un spa." copy={site.aboutText || fallback.aboutText}/><div className="mt-9 grid grid-cols-2 gap-7 border-t border-[#AF9275]/40 pt-7 text-sm"><div><Sparkles size={19} className="mb-3 text-[#BB9445]"/><b className="block">Ciencia cercana</b><span className="mt-1 block text-[#68727b]">Protocolos pensados para ti.</span></div><div><CircleCheck size={19} className="mb-3 text-[#BB9445]"/><b className="block">Bienestar real</b><span className="mt-1 block text-[#68727b]">Un espacio que baja el ruido.</span></div></div></div></div></section>
       <section id="servicios" className="bg-[#e6e1d9] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="Tratamientos" title="Lo que tu piel necesita, lo encontramos juntas." copy="Cada protocolo comienza con una conversación y termina con un plan que puedes sostener."/><div className="mt-14 grid gap-5 md:grid-cols-3">{serviceItems.map((s, i) => <article key={s.id} data-testid={`card-service-${s.id}`} className={`group ${i === 1 ? 'md:mt-14' : ''}`}><div className="arch relative aspect-[.82] overflow-hidden bg-[#AF9275]"><img src={s.imageUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/70 to-transparent opacity-70"/><span className="absolute bottom-5 left-5 text-xs uppercase tracking-[.2em] text-[#F2F2EF]">0{i + 1}</span></div><div className="flex items-start justify-between gap-3 pt-5"><div><h3 className="font-serif text-2xl">{s.name}</h3><p className="mt-2 text-sm leading-6 text-[#68727b]">{s.description}</p></div><ArrowRight size={18} className="mt-1 shrink-0 text-[#BB9445] transition group-hover:translate-x-1"/></div><div className="mt-4 flex gap-4 text-xs font-semibold uppercase tracking-wider text-[#AF9275]"><span>{s.duration || 'Personalizado'}</span>{s.price && <span>${s.price}</span>}</div></article>)}</div></div></section>
