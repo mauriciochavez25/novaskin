@@ -54,7 +54,7 @@ export function Settings() {
           <AdminInput label="Lema (Tagline)" name="tagline" defaultValue={settings?.tagline} />
           <AdminInput label="Teléfono (Llamadas)" name="phone" defaultValue={settings?.phone} />
           <AdminInput label="WhatsApp (Para el botón)" name="whatsapp" defaultValue={settings?.whatsapp} />
-          <AdminInput label="Email de Contacto" name="email" type="email" defaultValue={settings?.email} />
+            <AdminInput label="Email de Contacto" name="email" type="text" defaultValue={settings?.email} />
           <AdminInput label="Dirección Física" name="address" defaultValue={settings?.address} />
           <AdminInput label="Horarios de Atención" name="hours" defaultValue={settings?.hours} />
         </section>

@@ -179,7 +179,7 @@ export const GetStorageObjectResponse = zod.unknown()
 
 
 export const LoginBody = zod.object({
-  "email": zod.email(),
+  "email": zod.string(),
   "password": zod.string().min(1)
 })
 
@@ -254,7 +254,7 @@ export const UpdateSiteSettingsBody = zod.object({
   "tagline": zod.string(),
   "phone": zod.string(),
   "whatsapp": zod.string(),
-  "email": zod.email(),
+  "email": zod.string(),
   "address": zod.string(),
   "hours": zod.string(),
   "instagram": zod.string(),
