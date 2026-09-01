@@ -1,0 +1,95 @@
+==================================================
+SECCIÓN 07 — EQUIPO NOVASKIN
+==================================================
+
+Mantener el diseño aprobado para esta sección.
+
+Título pequeño:
+"NUESTRO EQUIPO"
+
+Título principal:
+"Profesionales dedicadas al cuidado de tu piel."
+
+Mostrar dos perfiles profesionales.
+
+PERFIL 01
+
+Nombre:
+Dra. Indira Isis Ceniceros Mejía
+
+Preparación:
+Maestría en Medicina Estética
+
+Utilizar una fotografía provisional profesional relacionada con medicina estética mientras se proporciona la fotografía real de la doctora.
+
+IMPORTANTE:
+La fotografía es únicamente un placeholder. Debe poder sustituirse posteriormente sin modificar el diseño de la sección.
+
+
+PERFIL 02
+
+Nombre:
+María Muñiz Montemayor
+
+Preparación:
+Lic. en Cosmetología
+
+Utilizar una fotografía provisional profesional relacionada con cosmetología mientras se proporciona la fotografía real.
+
+IMPORTANTE:
+La fotografía es únicamente un placeholder. Debe poder sustituirse posteriormente sin modificar el diseño.
+
+
+DISEÑO:
+- Mostrar ambos perfiles con la misma importancia visual.
+- Mantener el estilo premium y editorial de NovaSkin.
+- Fotografías grandes y elegantes.
+- No utilizar tarjetas genéricas.
+- Mantener suficiente espacio en blanco.
+- Agregar animaciones muy sutiles al hacer scroll.
+- No inventar experiencia, certificaciones, especialidades ni información adicional que no haya sido proporcionada.
+
+
+==================================================
+SECCIÓN 10 — CONTACTO
+==================================================
+
+Mantener el formulario que YA ESTÁ DESARROLLADO Y FUNCIONANDO.
+
+NO crear un formulario nuevo y NO modificar su funcionamiento.
+
+Mantener los campos actuales:
+- Nombre
+- Teléfono
+- Email
+- ¿Qué te gustaría consultar?
+
+Mantener el botón de envío existente.
+
+Actualizar los datos de contacto mostrados en esta sección con la siguiente información REAL:
+
+TELÉFONO / WHATSAPP:
+871 143 7775
+
+HORARIO:
+10:00 a.m. – 2:00 p.m.
+4:00 p.m. – 7:00 p.m.
+
+DIRECCIÓN:
+Av. Juárez 4955
+Plaza Laguna Oriente
+Local 43
+
+CORREO:
+Todavía pendiente de proporcionar.
+
+No inventar un correo electrónico.
+
+Si actualmente el diseño obliga a mostrar un correo, utilizar temporalmente el texto:
+"Correo próximamente"
+
+WHATSAPP:
+Los botones de WhatsApp del sitio deben utilizar el número:
+8711437775
+
+Mantener el diseño de contacto aprobado y la identidad visual existente.

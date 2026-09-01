@@ -94,11 +94,11 @@ async function ensureSeeded() {
       await db.insert(siteSettings).values({
         clinicName: "NOVA SKIN MED SPA",
         tagline: "Estética avanzada, bienestar real",
-        phone: "+52 55 0000 0000",
-        whatsapp: "525500000000",
-        email: "hola@novaskin.mx",
-        address: "Ciudad de México, México",
-        hours: "Lunes a sábado · 9:00 — 19:00",
+         phone: "871 143 7775",
+         whatsapp: "8711437775",
+         email: "Correo próximamente",
+         address: "Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43",
+         hours: "10:00 a.m. – 2:00 p.m.\n4:00 p.m. – 7:00 p.m.",
         instagram: "https://instagram.com/novaskin",
         facebook: "https://facebook.com/novaskin",
         tiktok: "https://tiktok.com/@novaskin",
@@ -129,16 +129,16 @@ async function ensureSeeded() {
     const [video] = await db.select({ id: videos.id }).from(videos).limit(1);
     if (!video) {
       await db.insert(videos).values([
-        { title: "Bienvenida a NOVA", description: "Conoce nuestro espacio.", videoUrl: media("WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.mp4"), posterUrl: media("WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.jpg"), active: true, sortOrder: 1 },
-        { title: "Ritual de cuidado", description: "La calma también es parte del tratamiento.", videoUrl: media("WhatsApp_Video_2026-08-28_at_11.57.24_AM_1787940010694.mp4"), posterUrl: media("WhatsApp_Video_2026-08-28_at_11.57.24_AM_1787940010694.jpg"), active: true, sortOrder: 2 },
+         { title: "Conoce a nuestro equipo", description: "El cuidado de tu piel comienza con profesionales dedicadas.", videoUrl: media("team-intro-2026-08-31.mp4"), posterUrl: media("team-intro-2026-08-31.jpg"), active: true, sortOrder: 1 },
+         { title: "Una experiencia cercana", description: "Un vistazo al cuidado que vivimos en NOVA.", videoUrl: media("team-treatment-2026-08-31.mp4"), posterUrl: media("team-treatment-2026-08-31.jpg"), active: true, sortOrder: 2 },
         { title: "Precisión y bienestar", description: "Tecnología clínica con trato humano.", videoUrl: media("WhatsApp_Video_2026-08-28_at_11.57.28_AM_1787940017376.mp4"), posterUrl: media("WhatsApp_Video_2026-08-28_at_11.57.28_AM_1787940017376.jpg"), active: true, sortOrder: 3 },
       ]);
     }
     const [specialist] = await db.select({ id: specialists.id }).from(specialists).limit(1);
     if (!specialist) {
       await db.insert(specialists).values([
-        { name: "Dra. Sandra Guzmán", specialty: "Medicina estética", bio: "Acompañamiento cercano, criterio clínico y una mirada integral de la belleza.", photoUrl: media("consultation.png"), instagram: "https://instagram.com/novaskin", active: true },
-        { name: "Equipo NOVA", specialty: "Especialistas en bienestar", bio: "Un equipo preparado para cuidar cada parte de tu experiencia.", photoUrl: media("treatment-room.png"), instagram: null, active: true },
+         { name: "Dra. Indira Isis Ceniceros Mejía", specialty: "Maestría en Medicina Estética", bio: "", photoUrl: media("consultation.png"), instagram: null, active: true },
+         { name: "María Muñiz Montemayor", specialty: "Lic. en Cosmetología", bio: "", photoUrl: media("treatment-room.png"), instagram: null, active: true },
       ]);
     }
     const [testimonial] = await db.select({ id: testimonials.id }).from(testimonials).limit(1);
