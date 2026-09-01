@@ -90,7 +90,7 @@ export default function TeamSection({
               key={profile.name}
               className={`transition duration-700 ease-out ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
-              } ${index === 1 ? 'md:mt-14' : ''}`}
+              }`}
               style={{ transitionDelay: `${index * 140 + 180}ms` }}
             >
               <div className="group relative overflow-hidden rounded-t-[8rem] rounded-b-[1.25rem] bg-[#AF9275] shadow-[0_18px_45px_rgba(47,64,85,.10)] md:rounded-t-[11rem]">
