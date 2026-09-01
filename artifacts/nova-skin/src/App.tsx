@@ -477,6 +477,7 @@ function PublicSite() {
   const [lightbox, setLightbox] = useState<any>(null);
   const [sent, setSent] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const contact = useCreateContactMessage();
   useEffect(() => {
@@ -489,6 +490,12 @@ function PublicSite() {
     playVideo();
     video.addEventListener('canplay', playVideo);
     return () => video.removeEventListener('canplay', playVideo);
+  }, []);
+  useEffect(() => {
+    const handleScroll = () => setHasScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   const galleryItems = gallery.length ? gallery : [{ id: 1, title: 'Un espacio para volver a ti', description: 'Nuestra recepción', imageUrl: localImages[0] }, { id: 2, title: 'Rituales que reparan', description: 'Sala de tratamientos', imageUrl: localImages[1] }, { id: 3, title: 'Primero escuchamos', description: 'Consulta personalizada', imageUrl: localImages[2] }];
   const videoItems = videos.length ? videos : localVideos.map((v, i) => ({ id: i + 1, title: ['El ritual NOVA', 'La ciencia se siente', 'Detalles que importan'][i], description: 'Conoce un poco más de nuestro universo.', videoUrl: v[0], posterUrl: v[1] }));
@@ -506,20 +513,21 @@ function PublicSite() {
   const improvementWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.')}`;
   const salonWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración en NovaSkin.')}`;
   const experienceWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.')}`;
+  const heroWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre los tratamientos de NovaSkin.')}`;
   const faqQuestionWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una pregunta sobre los servicios de NovaSkin.')}`;
   const faqAskWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una duda y me gustaría recibir información sobre NovaSkin.')}`;
   return <div className="nova-grain overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
-    <header className="absolute left-0 right-0 top-0 z-40 border-b border-white/20 text-white">
+    <header className={`fixed left-0 right-0 top-0 z-40 border-b text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${hasScrolled ? 'border-[#AF9275]/35 bg-[#202C3B]/90 shadow-[0_10px_30px_rgba(32,44,59,.16)] backdrop-blur-md' : 'border-white/20 bg-transparent'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
         <a href="#inicio" data-testid="link-home" className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></a>
         <nav className="hidden items-center gap-8 text-xs uppercase tracking-[.2em] md:flex"><a data-testid="link-services" href="#servicios">Tratamientos</a><a data-testid="link-space" href="#espacio">El espacio</a><a data-testid="link-team" href="#equipo">Especialistas</a><a data-testid="link-contact" href="#contacto">Contacto</a></nav>
-        <Button testId="button-book-header" variant="gold" onClick={() => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' })}>Agendar consulta <ArrowRight size={15}/></Button>
+        <Button testId="button-book-header" variant="gold" onClick={scrollToContact}>Agendar valoración <ArrowRight size={15}/></Button>
         <button data-testid="button-mobile-menu" onClick={() => setMenu(!menu)} className="ml-2 md:hidden"><Menu size={23}/></button>
       </div>
       {menu && <nav className="flex flex-col gap-5 bg-[#2F4055] px-6 py-6 text-sm uppercase tracking-widest md:hidden"><a href="#servicios" onClick={() => setMenu(false)}>Tratamientos</a><a href="#espacio" onClick={() => setMenu(false)}>El espacio</a><a href="#equipo" onClick={() => setMenu(false)}>Especialistas</a><a href="#contacto" onClick={() => setMenu(false)}>Contacto</a></nav>}
     </header>
     <main>
-       <section id="inicio" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#2F4055] px-5 pb-14 pt-32 md:px-10 md:pb-24">
+        <section id="inicio" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#2F4055] px-5 pb-14 pt-32 md:px-10 md:pb-24">
          <video
            ref={heroVideoRef}
            aria-hidden="true"
@@ -529,21 +537,20 @@ function PublicSite() {
            playsInline
            preload="auto"
            poster={heroPoster}
-           className="absolute inset-0 h-full w-full object-cover object-[56%_center] md:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-center"
          >
            <source src={heroVideo} type="video/mp4" />
          </video>
-         <div className="absolute inset-0 bg-[#202c3a]/20" />
-         <div className="absolute inset-0 bg-gradient-to-r from-[#202c3a]/65 via-[#202c3a]/20 to-transparent" />
-         <div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/50 via-transparent to-[#202c3a]/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#202c3a]/70 via-[#202c3a]/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#202c3a]/35 via-transparent to-[#202c3a]/[0.06]" />
          <div className="relative mx-auto w-full max-w-7xl">
-           <div className="max-w-[760px] text-[#F2F2F0] md:max-w-[820px]">
+            <div className="max-w-[680px] text-[#F2F2F0] md:max-w-[740px]">
              <p className="hero-reveal hero-reveal-1 mb-5 text-[11px] font-bold uppercase tracking-[.3em] text-[#e0bb69] md:text-xs md:tracking-[.35em]">{heroContent.eyebrow}</p>
-             <h1 className="hero-reveal hero-reveal-2 max-w-[820px] font-serif text-[3.25rem] leading-[.98] md:text-[5rem] lg:text-[5.75rem] xl:text-[6.25rem]">{heroContent.title}</h1>
+              <h1 className="hero-reveal hero-reveal-2 max-w-[720px] font-serif text-[2.8rem] leading-[1.01] md:text-[4.25rem] lg:text-[4.85rem] xl:text-[5.25rem]">{heroContent.title}</h1>
              <p className="hero-reveal hero-reveal-3 mt-7 max-w-xl text-base leading-7 text-[#e9ebe8] md:text-lg">{heroContent.description}</p>
              <div className="hero-reveal hero-reveal-4 mt-8 flex flex-wrap gap-3 md:mt-9">
-               <Button testId="button-book-hero" variant="gold" className="min-h-12 px-6 uppercase tracking-[.08em]" onClick={() => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' })}>Agendar valoración <ArrowRight size={16}/></Button>
-               <a data-testid="link-whatsapp-hero" href={`https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/45 bg-[#202c3a]/15 px-6 py-3 text-sm font-semibold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white/12"><MessageCircle size={16}/> WhatsApp</a>
+                <Button testId="button-book-hero" variant="gold" className="min-h-12 px-6 uppercase tracking-[.08em]" onClick={scrollToContact}>Agendar valoración <ArrowRight size={16}/></Button>
+                <a data-testid="link-whatsapp-hero" href={heroWhatsAppHref} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/45 bg-[#202c3a]/15 px-6 py-3 text-sm font-semibold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white/12"><MessageCircle size={16}/> WhatsApp</a>
              </div>
            </div>
          </div>

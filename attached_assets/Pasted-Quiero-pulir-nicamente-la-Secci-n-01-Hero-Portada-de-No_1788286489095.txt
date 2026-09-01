@@ -1,0 +1,21 @@
+Quiero pulir únicamente la Sección 01 — Hero/Portada de NovaSkin. La estructura actual me gusta y NO quiero que la rediseñes desde cero. Conserva el video actual como fondo, el menú superior, la posición general de los textos, la identidad visual, tipografías y colores actuales. Realiza solamente los siguientes ajustes.
+
+Primero, reduce aproximadamente entre un 15 % y un 20 % el tamaño actual del título “Tu piel merece el respaldo de la ciencia y el confort de un spa.”. Sigue siendo el elemento principal de la portada, pero actualmente ocupa demasiado espacio y evita apreciar correctamente el video de fondo. Mantén una buena jerarquía visual y evita que el título se extienda demasiado hacia el centro y lado derecho de la pantalla.
+
+Conserva arriba del título el texto “ESTÉTICA AVANZADA, BIENESTAR REAL” y debajo conserva “Tratamientos clínico-estéticos personalizados en un entorno cálido, sofisticado y seguro.”.
+
+El video actual debe continuar ocupando todo el Hero, reproducirse automáticamente, en loop, sin sonido y sin mostrar controles. No cambies el video. Ajusta únicamente la capa oscura que tiene encima. Actualmente toda la imagen se percibe demasiado gris y oscura. Quiero un degradado: el lado izquierdo debe mantenerse suficientemente oscuro para que los textos blancos tengan excelente legibilidad, pero conforme avance hacia el centro y especialmente hacia el lado derecho, el overlay debe perder intensidad para que se aprecien mucho mejor los colores cálidos, las luces, el espejo, el mobiliario y las instalaciones reales de NovaSkin. No elimines por completo el overlay porque el texto debe seguir siendo perfectamente legible.
+
+Mantén los dos botones inferiores. El botón principal debe decir “AGENDAR VALORACIÓN →” y debe realizar scroll suave hasta el formulario de contacto/solicitud de cita que ya existe al final de la página. No crees un formulario nuevo. El botón “WHATSAPP” debe abrir una conversación con NovaSkin al número 8711437775. Utiliza como mensaje preescrito: “Hola, me gustaría recibir información sobre los tratamientos de NovaSkin.”
+
+En el menú superior cambia el botón actual “Agendar consulta” por “Agendar valoración →” para mantener el mismo lenguaje en toda la portada. Este botón también debe llevar mediante scroll suave al formulario existente.
+
+Conserva los enlaces del menú superior, pero verifica que cada uno lleve mediante scroll suave a su sección correspondiente de la misma página. No abras páginas nuevas.
+
+Haz que el header sea sticky. Cuando el usuario esté al inicio de la página debe conservar el aspecto actual sobre el video. Cuando empiece a hacer scroll, debe permanecer visible y adquirir de manera suave un fondo elegante ligeramente sólido o con blur, utilizando los colores actuales de NovaSkin, para garantizar que el menú siga siendo legible sobre cualquier sección. No quiero un efecto exagerado.
+
+Agrega una entrada muy discreta al cargar la portada: primero puede aparecer el pequeño texto superior, después el título, la descripción y finalmente los botones mediante un fade-in con un ligero movimiento vertical. Debe sentirse premium y fluido, no como una animación llamativa. El video no necesita animación adicional.
+
+En computadora conserva aproximadamente el acomodo actual. En tablet ajusta proporcionalmente el tamaño del título. En celular coloca el contenido en una sola composición vertical, reduce correctamente el título para que no ocupe toda la pantalla y asegúrate de que los dos botones sean fáciles de tocar. El video debe continuar cubriendo todo el Hero mediante object-fit: cover. Ajusta su posición en móvil si es necesario para que se vea una parte atractiva de las instalaciones y no un recorte vacío.
+
+No agregues nuevas imágenes, nuevos textos, tarjetas, estadísticas ni elementos decorativos. No modifiques ninguna sección posterior. El objetivo es pulir la portada actual, darle mayor protagonismo al video real de NovaSkin y mejorar la jerarquía visual sin perder el diseño que ya tenemos.
