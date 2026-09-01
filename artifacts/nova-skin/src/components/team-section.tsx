@@ -9,6 +9,7 @@ type SpecialistRecord = {
 type TeamSectionProps = {
   specialists: SpecialistRecord[];
   fallbackImages: string[];
+  imageOverrides?: string[];
   onBook: () => void;
   whatsappHref: string;
 };
@@ -27,6 +28,7 @@ const profiles = [
 export default function TeamSection({
   specialists,
   fallbackImages,
+  imageOverrides,
   onBook,
   whatsappHref,
 }: TeamSectionProps) {
@@ -58,7 +60,7 @@ export default function TeamSection({
     const storedProfile = specialists.find((specialist) => specialist.name === profile.name);
     return {
       ...profile,
-      photoUrl: storedProfile?.photoUrl || fallbackImages[index],
+      photoUrl: imageOverrides?.[index] || storedProfile?.photoUrl || fallbackImages[index],
     };
   });
 
