@@ -134,7 +134,19 @@ function PublicSite() {
   const [menu, setMenu] = useState(false);
   const [lightbox, setLightbox] = useState<any>(null);
   const [sent, setSent] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const contact = useCreateContactMessage();
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    video.muted = true;
+    const playVideo = () => {
+      void video.play().catch(() => undefined);
+    };
+    playVideo();
+    video.addEventListener('canplay', playVideo);
+    return () => video.removeEventListener('canplay', playVideo);
+  }, []);
   const galleryItems = gallery.length ? gallery : [{ id: 1, title: 'Un espacio para volver a ti', description: 'Nuestra recepción', imageUrl: localImages[0] }, { id: 2, title: 'Rituales que reparan', description: 'Sala de tratamientos', imageUrl: localImages[1] }, { id: 3, title: 'Primero escuchamos', description: 'Consulta personalizada', imageUrl: localImages[2] }];
   const serviceItems = services.length ? services : [
     { id: 1, name: 'Limpieza profunda', description: 'Una piel luminosa, equilibrada y lista para respirar.', duration: '60 min', price: 120, imageUrl: localImages[1] },
@@ -164,6 +176,7 @@ function PublicSite() {
     <main>
        <section id="inicio" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#2F4055] px-5 pb-14 pt-32 md:px-10 md:pb-24">
          <video
+           ref={heroVideoRef}
            aria-hidden="true"
            autoPlay
            muted
