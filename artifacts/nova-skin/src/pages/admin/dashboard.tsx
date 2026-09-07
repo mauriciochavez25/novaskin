@@ -19,7 +19,7 @@ export function Dashboard() {
 
   return (
     <div>
-      <PageHeader title="Bienvenida" description="Resumen de la actividad en NOVA Skin." />
+      <PageHeader title="Bienvenida" description="Resumen de la actividad en NovaSkin." />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((c, i) => (
           <Link key={i} href={c.link} className={`block rounded-xl bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg border ${c.alert ? 'border-[#A83525]/30 shadow-[#A83525]/10' : 'border-[#AF9275]/20 shadow-sm'}`}>

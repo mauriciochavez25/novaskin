@@ -57,7 +57,7 @@ const questions: FaqQuestion[] = [
   {
     number: '07',
     question: '¿Cuál es el horario de atención?',
-    answer: 'El horario de atención es de 10:00 a.m. a 2:00 p.m. y de 4:00 p.m. a 7:00 p.m.',
+    answer: 'El horario de atención es 10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.',
   },
   {
     number: '08',

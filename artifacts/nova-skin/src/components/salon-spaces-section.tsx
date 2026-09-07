@@ -97,11 +97,11 @@ function SalonVideo({ label, videoUrl, index }: SalonVideoProps) {
 
 const salonSpaces: SalonSpace[] = [
   {
-    label: 'SALÓN 01',
+    label: 'CABINA 01',
     videoUrl: '/media/salon-01.mp4',
   },
   {
-    label: 'SALÓN 02',
+    label: 'CABINA 02',
     videoUrl: '/media/salon-02.mp4',
   },
 ];
