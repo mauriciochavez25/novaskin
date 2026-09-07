@@ -3,10 +3,10 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 
 type SalonSpace = {
   label: string;
-  imageUrl: string;
+  videoUrl: string;
 };
 
-type SalonImageProps = SalonSpace & {
+type SalonVideoProps = SalonSpace & {
   index: number;
 };
 
@@ -15,15 +15,56 @@ export type SalonSpacesSectionProps = {
   whatsappHref: string;
 };
 
-function SalonImage({ label, imageUrl, index }: SalonImageProps) {
+function SalonVideo({ label, videoUrl, index }: SalonVideoProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+
+    const playVideo = () => {
+      video.muted = true;
+      void video.play().catch(() => undefined);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          playVideo();
+        } else {
+          video.pause();
+        }
+      },
+      { rootMargin: '120px 0px', threshold: 0.15 },
+    );
+
+    observer.observe(video);
+    playVideo();
+
+    return () => {
+      observer.disconnect();
+      video.pause();
+    };
+  }, []);
+
   return (
     <article className={`salon-space-item salon-space-item-${index} group relative overflow-hidden rounded-[1.25rem] border border-[#AF9275]/40 bg-[#2F4055]`}>
       <div className="relative aspect-video overflow-hidden">
-        <img
-          src={imageUrl}
-          alt={label}
+        <video
+          ref={videoRef}
+          aria-label={label}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={`/media/salon-${index === 1 ? '01' : '02'}.jpg`}
           className="h-full w-full object-cover transition duration-[550ms] ease-out group-hover:scale-[1.03]"
-        />
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#202c3a]/80 via-[#202c3a]/25 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 text-[#F2F2EF] md:p-7">
           <p className="text-[11px] font-bold uppercase tracking-[.25em] text-[#D7B66A]">{label}</p>
@@ -36,11 +77,11 @@ function SalonImage({ label, imageUrl, index }: SalonImageProps) {
 const salonSpaces: SalonSpace[] = [
   {
     label: 'SALÓN 01',
-    imageUrl: '/media/salon-01.jpg',
+    videoUrl: '/media/salon-01.mp4',
   },
   {
     label: 'SALÓN 02',
-    imageUrl: '/media/salon-02.jpg',
+    videoUrl: '/media/salon-02.mp4',
   },
 ];
 
@@ -87,7 +128,7 @@ export default function SalonSpacesSection({ onBook, whatsappHref }: SalonSpaces
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-7">
           {salonSpaces.map((space, index) => (
-            <SalonImage key={space.label} {...space} index={index + 1} />
+            <SalonVideo key={space.label} {...space} index={index + 1} />
           ))}
         </div>
 
