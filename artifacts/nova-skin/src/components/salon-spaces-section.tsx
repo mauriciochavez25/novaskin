@@ -24,9 +24,11 @@ function SalonVideo({ label, videoUrl, index }: SalonVideoProps) {
 
     let isInViewport = false;
 
+    video.defaultMuted = true;
     video.muted = true;
 
     const playVideo = () => {
+      video.defaultMuted = true;
       video.muted = true;
       if (video.readyState < HTMLMediaElement.HAVE_METADATA) return;
       void video.play().catch(() => undefined);
@@ -51,6 +53,7 @@ function SalonVideo({ label, videoUrl, index }: SalonVideoProps) {
     observer.observe(video);
     video.addEventListener('loadeddata', playWhenReady);
     video.addEventListener('canplay', playWhenReady);
+    playVideo();
 
     return () => {
       observer.disconnect();
