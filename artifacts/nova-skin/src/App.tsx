@@ -86,30 +86,75 @@ function HoverVideo({ src, poster, title }: { src: string; poster?: string; titl
   const playVideo = () => {
     const video = videoRef.current;
     if (!video) return;
+    video.defaultMuted = true;
     video.muted = true;
     void video.play().catch(() => {
       // Browsers can still reject playback when the device has media restrictions.
     });
   };
 
-  const pauseVideo = () => {
-    videoRef.current?.pause();
-  };
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let isInViewport = false;
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const playWhenVisible = () => {
+      if (!isInViewport) return;
+      video.defaultMuted = true;
+      video.muted = true;
+      if (video.readyState < HTMLMediaElement.HAVE_METADATA) return;
+      void video.play().catch(() => undefined);
+    };
+
+    const playWhenReady = () => playWhenVisible();
+    const observer = typeof IntersectionObserver === 'undefined'
+      ? null
+      : new IntersectionObserver(
+          ([entry]) => {
+            isInViewport = entry.isIntersecting;
+            if (isInViewport) {
+              playWhenVisible();
+            } else {
+              video.pause();
+            }
+          },
+          { threshold: 0.2 },
+        );
+
+    video.addEventListener('loadeddata', playWhenReady);
+    video.addEventListener('canplay', playWhenReady);
+
+    if (observer) {
+      observer.observe(video);
+    } else {
+      isInViewport = true;
+      playWhenVisible();
+    }
+
+    return () => {
+      observer?.disconnect();
+      video.removeEventListener('loadeddata', playWhenReady);
+      video.removeEventListener('canplay', playWhenReady);
+      video.pause();
+    };
+  }, []);
 
   return (
     <div
       className="group relative aspect-video overflow-hidden bg-[#2F4055]"
       onMouseEnter={playVideo}
-      onMouseLeave={pauseVideo}
       onFocus={playVideo}
-      onBlur={pauseVideo}
       tabIndex={0}
-      aria-label={`${title}. Pasa el cursor para reproducir`}
+      aria-label={`${title}. Se reproduce automáticamente al entrar en pantalla`}
     >
       <video
         ref={videoRef}
         src={src}
         poster={poster}
+        autoPlay
         muted
         loop
         playsInline
@@ -584,13 +629,47 @@ function PublicSite() {
   useEffect(() => {
     const video = heroVideoRef.current;
     if (!video) return;
+
+    let isInViewport = false;
+    video.defaultMuted = true;
     video.muted = true;
+
     const playVideo = () => {
+      if (!isInViewport || video.readyState < HTMLMediaElement.HAVE_METADATA) return;
+      video.defaultMuted = true;
+      video.muted = true;
       void video.play().catch(() => undefined);
     };
-    playVideo();
-    video.addEventListener('canplay', playVideo);
-    return () => video.removeEventListener('canplay', playVideo);
+    const playWhenReady = () => playVideo();
+    const observer = typeof IntersectionObserver === 'undefined'
+      ? null
+      : new IntersectionObserver(
+          ([entry]) => {
+            isInViewport = entry.isIntersecting;
+            if (isInViewport) {
+              playVideo();
+            } else {
+              video.pause();
+            }
+          },
+          { threshold: 0.2 },
+        );
+
+    video.addEventListener('loadeddata', playWhenReady);
+    video.addEventListener('canplay', playWhenReady);
+    if (observer) {
+      observer.observe(video);
+    } else {
+      isInViewport = true;
+      playVideo();
+    }
+
+    return () => {
+      observer?.disconnect();
+      video.removeEventListener('loadeddata', playWhenReady);
+      video.removeEventListener('canplay', playWhenReady);
+      video.pause();
+    };
   }, []);
   useEffect(() => {
     const handleScroll = () => setHasScrolled(window.scrollY > 24);

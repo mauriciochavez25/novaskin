@@ -81,7 +81,15 @@ export function MediaUpload({
         {preview && kind === "image" ? (
           <img src={preview} alt={fileName || "Vista previa"} className="absolute inset-0 h-full w-full object-cover opacity-35 transition group-hover:opacity-25" />
         ) : preview && kind === "video" ? (
-          <video src={preview} className="absolute inset-0 h-full w-full object-cover opacity-25" muted />
+          <video
+            src={preview}
+            className="absolute inset-0 h-full w-full object-cover opacity-25"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
         ) : null}
         <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#2F4055] text-white shadow-sm">
           {isUploading ? <LoaderCircle className="animate-spin" size={20} /> : kind === "image" ? <ImagePlus size={20} /> : <UploadCloud size={20} />}

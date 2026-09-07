@@ -61,23 +61,46 @@ export default function FacialCleansingSection({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || typeof IntersectionObserver === 'undefined') return;
+    if (!video) return;
 
+    let isInViewport = false;
+    video.defaultMuted = true;
     video.muted = true;
-    const mediaObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          void video.play().catch(() => undefined);
-        } else {
-          video.pause();
-        }
-      },
-      { rootMargin: '120px 0px', threshold: 0.2 },
-    );
 
-    mediaObserver.observe(video);
+    const playVideo = () => {
+      if (!isInViewport || video.readyState < HTMLMediaElement.HAVE_METADATA) return;
+      video.defaultMuted = true;
+      video.muted = true;
+      void video.play().catch(() => undefined);
+    };
+    const playWhenReady = () => playVideo();
+    const mediaObserver = typeof IntersectionObserver === 'undefined'
+      ? null
+      : new IntersectionObserver(
+          ([entry]) => {
+            isInViewport = entry.isIntersecting;
+            if (isInViewport) {
+              playVideo();
+            } else {
+              video.pause();
+            }
+          },
+          { rootMargin: '120px 0px', threshold: 0.2 },
+        );
+
+    video.addEventListener('loadeddata', playWhenReady);
+    video.addEventListener('canplay', playWhenReady);
+    if (mediaObserver) {
+      mediaObserver.observe(video);
+    } else {
+      isInViewport = true;
+      playVideo();
+    }
+
     return () => {
-      mediaObserver.disconnect();
+      mediaObserver?.disconnect();
+      video.removeEventListener('loadeddata', playWhenReady);
+      video.removeEventListener('canplay', playWhenReady);
       video.pause();
     };
   }, []);

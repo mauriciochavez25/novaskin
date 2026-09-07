@@ -28,6 +28,7 @@ function SalonVideo({ label, videoUrl, index }: SalonVideoProps) {
     video.muted = true;
 
     const playVideo = () => {
+      if (!isInViewport) return;
       video.defaultMuted = true;
       video.muted = true;
       if (video.readyState < HTMLMediaElement.HAVE_METADATA) return;
@@ -38,25 +39,31 @@ function SalonVideo({ label, videoUrl, index }: SalonVideoProps) {
       if (isInViewport) playVideo();
     };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isInViewport = entry.isIntersecting;
-        if (isInViewport) {
-          playVideo();
-        } else {
-          video.pause();
-        }
-      },
-      { rootMargin: '120px 0px', threshold: 0.15 },
-    );
-
-    observer.observe(video);
     video.addEventListener('loadeddata', playWhenReady);
     video.addEventListener('canplay', playWhenReady);
-    playVideo();
+    const observer = typeof IntersectionObserver === 'undefined'
+      ? null
+      : new IntersectionObserver(
+          ([entry]) => {
+            isInViewport = entry.isIntersecting;
+            if (isInViewport) {
+              playVideo();
+            } else {
+              video.pause();
+            }
+          },
+          { rootMargin: '120px 0px', threshold: 0.2 },
+        );
+
+    if (observer) {
+      observer.observe(video);
+    } else {
+      isInViewport = true;
+      playVideo();
+    }
 
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
       video.removeEventListener('loadeddata', playWhenReady);
       video.removeEventListener('canplay', playWhenReady);
       video.pause();
