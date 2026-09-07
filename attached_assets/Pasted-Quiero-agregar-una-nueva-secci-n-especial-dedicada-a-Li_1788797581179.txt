@@ -1,0 +1,110 @@
+Quiero agregar una nueva sección especial dedicada a Limpieza Facial en el sitio web actual de NovaSkin. Esta sección debe colocarse después de “Nuestra Filosofía” y antes de la sección de “Tratamientos”. No modifiques el diseño ni el funcionamiento de ninguna de las secciones existentes. Únicamente agrega esta nueva sección en esa posición y asegúrate de que visualmente se integre perfectamente con el resto del sitio y con el branding actual de NovaSkin.
+
+La función de esta sección es comunicarle a una persona que todavía no sabe qué tratamiento necesita que la limpieza facial puede ser una buena forma de comenzar su experiencia en NovaSkin. Internamente este servicio funciona como un punto importante de entrada para los clientes, pero no quiero comunicarlo de manera comercial o agresiva. Para el usuario debe sentirse como una recomendación natural, accesible y profesional para comenzar a cuidar su piel.
+
+Quiero que la composición sea similar al concepto visual que ya definimos: en computadora divide la sección en dos grandes áreas. En el lado izquierdo debe aparecer todo el contenido textual y los botones. En el lado derecho debe aparecer el video real de Limpieza Facial que te proporcionaré.
+
+Utiliza específicamente el archivo de video que estoy proporcionando para esta sección. Es el video real de una limpieza facial realizada en NovaSkin. No utilices fotografías de stock, imágenes generadas ni otro video como sustituto.
+
+El video debe mostrarse dentro de un módulo visual grande, elegante y vertical o ligeramente rectangular, ubicado en el lado derecho. No debe utilizarse como fondo completo de la sección. Quiero que parezca una ventana hacia el tratamiento real.
+
+Configura el video con autoplay, muted, loop y playsinline. No muestres controles visibles, barra de reproducción, botón de play, volumen ni interfaz de reproductor. El video debe comenzar automáticamente cuando la sección entre en pantalla y debe sentirse integrado al diseño.
+
+Utiliza object-fit: cover para que el video llene completamente su contenedor sin deformarse. Ajusta object-position si es necesario para que el rostro de la paciente y el procedimiento sean los protagonistas. Evita que los recortes dejen únicamente manos, paredes o zonas sin interés.
+
+El video original puede ser más largo de lo necesario. Si la implementación actual permite definir un fragmento o reproducción controlada, prioriza aproximadamente 10 a 15 segundos de las mejores tomas, especialmente donde se vea claramente el rostro y el tratamiento facial. Si no es conveniente técnicamente cortar el archivo desde código, utiliza el video completo en loop sin alterar su calidad y posteriormente reemplazaremos el archivo por una versión editada más corta si hace falta.
+
+No ralentices el video, no agregues filtros exagerados, no pongas música y no agregues textos dentro del propio video.
+
+Sobre la esquina inferior o superior del módulo del video coloca un pequeño distintivo dorado que diga “IDEAL PARA COMENZAR”. Debe verse elegante y discreto, como un sello editorial premium. No debe parecer una promoción, descuento o anuncio de oferta.
+
+En el lado izquierdo coloca un texto pequeño superior en color dorado que diga:
+
+¿NO SABES POR DÓNDE EMPEZAR?
+
+Debe ir en mayúsculas, con tamaño pequeño y espaciado entre caracteres, siguiendo el mismo estilo de identificadores que ya utilizamos en otras secciones.
+
+El título principal debe ser:
+
+“Empieza por conocer y cuidar tu piel.”
+
+Utiliza la tipografía principal de títulos que ya existe en el sitio. El título debe tener presencia, pero no ser tan grande como el Hero. Debe ocupar aproximadamente la mitad izquierda de la composición y mantener suficiente espacio en blanco alrededor.
+
+Debajo coloca este texto:
+
+“La limpieza facial puede ser un excelente primer paso para comenzar a cuidar tu piel y vivir la experiencia NovaSkin.”
+
+No agregues afirmaciones médicas, resultados garantizados ni beneficios que no hayan sido proporcionados por NovaSkin.
+
+Debajo del texto coloca dos botones.
+
+El botón principal debe decir:
+
+“CONOCER LIMPIEZA FACIAL →”
+
+Este botón debe abrir el mismo tipo de vista ampliada que utilizan actualmente los botones “VER MÁS” de los tratamientos. No crees un sistema diferente únicamente para este servicio. Reutiliza el componente, modal, drawer o vista interna que ya existe en la sección de Tratamientos.
+
+Cuando el usuario presione “CONOCER LIMPIEZA FACIAL →”, debe abrirse el detalle correspondiente a Limpieza Facial, que también existe como tratamiento 01 dentro del carrusel.
+
+No dupliques dos contenidos diferentes para Limpieza Facial. La sección especial y la tarjeta de Tratamientos deben apuntar al mismo detalle del tratamiento, para que posteriormente cualquier modificación se realice en un solo lugar.
+
+Si actualmente el detalle de Limpieza Facial todavía tiene información incompleta, conserva la estructura y el contenido que ya exista. No inventes nueva información clínica únicamente para llenar espacios.
+
+El segundo botón debe decir:
+
+“AGENDAR VALORACIÓN →”
+
+Al hacer clic debe realizar un scroll suave hasta el formulario de contacto que ya existe al final del sitio. No debe abrir otro formulario, no debe llevar a otra página y no debe crear una nueva lógica de reservación.
+
+Debajo o cerca de estos botones puedes agregar un enlace secundario discreto de WhatsApp, si visualmente funciona con la composición. Al hacer clic debe abrir WhatsApp con el número real de NovaSkin 8711437775 y cargar el siguiente mensaje:
+
+“Hola, me gustaría recibir información sobre la limpieza facial de NovaSkin.”
+
+No quiero que esta sección se convierta en una lista extensa de beneficios. Mantén el diseño limpio. Sin embargo, en la parte inferior de la sección puedes incluir una franja muy discreta con tres pequeños conceptos para reforzar por qué puede ser un buen punto de inicio.
+
+Utiliza únicamente estos tres:
+
+Cuidado de tu piel
+Una experiencia enfocada en limpiar y cuidar la apariencia de la piel.
+
+Conoce tus necesidades
+Un primer acercamiento para comenzar a identificar lo que tu piel necesita.
+
+Continúa tu cuidado
+Después puedes conocer otras opciones de NovaSkin de acuerdo con tus objetivos.
+
+No los conviertas en tres tarjetas grandes. Preséntalos como pequeños bloques editoriales separados mediante líneas finas, números o detalles dorados. Si esta franja empieza a hacer que la sección se vea saturada, elimínala. La prioridad es mantener una composición elegante y sencilla.
+
+Quiero que esta nueva sección tenga un fondo claro cálido, similar a las secciones de Filosofía y Tratamientos, pero utiliza una variación muy sutil del tono para que se perciba el cambio de sección sin romper la continuidad del sitio.
+
+No utilices el fondo azul oscuro aquí porque quiero reservar ese contraste para otras secciones como “Nuestros espacios”.
+
+Agrega animaciones de entrada muy suaves. Cuando el usuario llegue a esta sección mediante scroll, primero debe aparecer el texto pequeño “¿NO SABES POR DÓNDE EMPEZAR?”, después el título, posteriormente la descripción y los botones, y finalmente el módulo del video. Utiliza fade-in y desplazamientos verticales pequeños. No uses rebotes, zooms exagerados ni animaciones constantes.
+
+El video puede hacer un zoom mínimo de aproximadamente scale(1.02) cuando el usuario pase el cursor sobre su contenedor en computadora. La transición debe ser lenta y suave, aproximadamente entre 500 y 700 ms. El contenedor debe tener overflow: hidden para que nunca se salga del marco.
+
+No pauses el video al hacer clic sobre él. No quiero que el video sea un reproductor interactivo; debe funcionar como elemento visual de la sección.
+
+En tablet conserva el diseño de dos columnas siempre que exista suficiente espacio. Si el video o los textos comienzan a verse demasiado pequeños, reorganiza la sección colocando primero el contenido y después el video.
+
+En móvil utiliza una sola columna. El orden debe ser: texto pequeño, título, descripción, botón “CONOCER LIMPIEZA FACIAL”, botón “AGENDAR VALORACIÓN”, WhatsApp si se utiliza y finalmente el video. El video debe ocupar prácticamente todo el ancho disponible dentro de los márgenes del sitio.
+
+En dispositivos móviles asegúrate de que el video mantenga playsinline para evitar que abra el reproductor a pantalla completa automáticamente.
+
+Optimiza la carga del video para no perjudicar el rendimiento del sitio. Si es posible dentro de la arquitectura actual, utiliza carga diferida o inicia la reproducción únicamente cuando la sección esté cerca o dentro del viewport. Cuando el usuario se aleje completamente de esta sección, puedes pausar el video para reducir consumo de recursos y reanudarlo cuando vuelva a ser visible.
+
+No modifiques la sección de Filosofía que está arriba. No modifiques el carrusel de Tratamientos que estará debajo. Únicamente inserta esta nueva sección entre ambas.
+
+Muy importante: como ahora existe una nueva sección antes de Tratamientos, no quiero depender de números como “03 — Tratamientos”, porque la numeración puede quedar incorrecta. Si la sección de Tratamientos todavía tiene una numeración fija de sección, elimina únicamente ese número y conserva la palabra “TRATAMIENTOS” como identificador. No renumeres toda la página.
+
+También verifica que los enlaces del menú que actualmente llevan a “Tratamientos” sigan desplazándose correctamente hasta la sección real de Tratamientos y no se detengan en esta nueva sección de Limpieza Facial.
+
+El resultado final debe sentirse como una pausa especial entre Filosofía y Tratamientos y debe comunicar claramente:
+
+“No sé qué necesito → puedo comenzar por una limpieza facial → puedo conocer el servicio o agendar una valoración → después puedo explorar el resto de tratamientos.”
+
+No agregues promociones, precios, porcentajes de descuento, ofertas, testimonios ni afirmaciones médicas adicionales.
+
+Cuando termines, revisa en desktop, tablet y móvil que el video se reproduzca correctamente, que el texto no se sobreponga, que ambos botones funcionen, que el botón de Limpieza Facial abra el detalle correcto, que Agendar valoración lleve al formulario y que WhatsApp utilice el número y mensaje indicados.
+
+Realiza únicamente esta nueva sección y detente cuando esté terminada. No hagas cambios adicionales en el resto del sitio.
