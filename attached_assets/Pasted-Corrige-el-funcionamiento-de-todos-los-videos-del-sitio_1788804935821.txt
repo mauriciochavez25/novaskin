@@ -1,0 +1,101 @@
+Corrige el funcionamiento de todos los videos del sitio web de NovaSkin. Actualmente algunos videos no se reproducen automáticamente.
+
+Quiero que cada video se comporte de la siguiente manera:
+
+1. Reproducción automática al llegar a la sección
+
+Cuando el usuario haga scroll y el video entre en pantalla, debe comenzar a reproducirse automáticamente.
+
+No quiero que el usuario tenga que presionar play.
+
+2. Siempre sin sonido
+
+Todos los videos deben reproducirse completamente silenciados (muted).
+
+No mostrar controles de volumen ni activar audio en ningún momento.
+
+3. Reproducción en loop
+
+Cuando el video termine debe volver a comenzar automáticamente.
+
+Utiliza:
+
+autoplay
+muted
+loop
+playsInline
+
+Si los videos están implementados en React, asegúrate también de establecer explícitamente:
+
+video.muted = true
+video.defaultMuted = true
+
+antes de ejecutar .play().
+
+4. Reproducir únicamente cuando sean visibles
+
+Utiliza IntersectionObserver para detectar cuándo cada video entra en el viewport.
+
+Cuando aproximadamente 20% del video sea visible, intenta reproducirlo automáticamente con:
+
+video.play()
+
+Cuando el video salga completamente de la pantalla, puedes pausarlo para ahorrar recursos.
+
+Cuando vuelva a entrar en pantalla, debe continuar reproduciéndose automáticamente.
+
+5. Manejar restricciones de autoplay de los navegadores
+
+Los navegadores normalmente permiten autoplay cuando el video está silenciado. Asegúrate de que el atributo muted exista desde el render inicial del elemento <video>, no únicamente después mediante JavaScript.
+
+También maneja correctamente la promesa de:
+
+video.play()
+
+para evitar errores en consola si el navegador bloquea temporalmente la reproducción.
+
+6. No mostrar controles
+
+Elimina controls.
+
+No quiero:
+botón de play, barra de reproducción, volumen, pantalla completa ni ninguna interfaz del reproductor.
+
+El video debe sentirse como parte del diseño de la página.
+
+7. Mantener el diseño actual
+
+NO cambies tamaños, posiciones, bordes, textos, imágenes, colores, animaciones ni estructura de ninguna sección.
+
+Únicamente corrige la reproducción de los videos.
+
+Mantén object-fit: cover y el encuadre actual de cada video.
+
+8. Compatibilidad móvil
+
+Es especialmente importante que funcione en iPhone/Safari y Android/Chrome.
+
+Todos los videos deben tener playsInline para evitar que se abran automáticamente a pantalla completa en móvil.
+
+9. Video de Limpieza Facial
+
+Revisa específicamente el video de la nueva sección de Limpieza Facial. En cuanto el usuario llegue a esa sección, debe comenzar automáticamente, sin sonido y en loop.
+
+Si el usuario baja a otra sección, puede pausarse. Si vuelve a Limpieza Facial, debe reproducirse nuevamente.
+
+10. Revisa los demás videos
+
+Aplica exactamente el mismo comportamiento a cualquier otro video existente en NovaSkin.
+
+Antes de terminar, prueba que:
+
+Desktop: autoplay funciona.
+Chrome: autoplay funciona.
+Safari: autoplay funciona.
+Móvil: autoplay funciona sin abrir pantalla completa.
+Todos comienzan silenciados.
+Todos hacen loop.
+Ninguno muestra controles.
+Al volver mediante scroll a una sección, el video vuelve a reproducirse.
+
+No reemplaces los archivos de video ni los conviertas en imágenes. No modifiques ninguna otra parte de la página. Solamente corrige la lógica de reproducción automática de los videos.
