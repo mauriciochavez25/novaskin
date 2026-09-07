@@ -39,6 +39,7 @@ import { Settings as AdminSettings } from '@/pages/admin/settings';
 import WhatToImproveSection from '@/components/what-to-improve-section';
 import SalonSpacesSection from '@/components/salon-spaces-section';
 import ExperienceTimelineSection from '@/components/experience-timeline-section';
+import FacialCleansingSection from '@/components/facial-cleansing-section';
 import TeamSection from '@/components/team-section';
 import FaqSection from '@/components/faq-section';
 
@@ -63,6 +64,8 @@ const experienceImages = [
 ];
 const heroVideo = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.mp4`;
 const heroPoster = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.jpg`;
+const facialCleansingVideo = `${media}facial-cleansing.mp4`;
+const facialCleansingPoster = `${media}facial-cleansing-poster.jpg`;
 const localVideos = [
   [`${media}team-intro-2026-08-31.mp4`, `${media}team-intro-2026-08-31.jpg`],
   [`${media}team-treatment-2026-08-31.mp4`, `${media}team-treatment-2026-08-31.jpg`],
@@ -379,25 +382,24 @@ function TreatmentDetailsModal({ treatment, onClose }: { treatment: Treatment; o
   );
 }
 
-function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: (treatment: Treatment) => void }) {
+function getTreatments(services: any[]): Treatment[] {
+  return treatmentCatalog.map((treatment) => {
+    const managedTreatment = services.find((service) => service.name === treatment.name);
+    return {
+      ...treatment,
+      imageUrl: managedTreatment?.imageUrl || treatment.imageUrl,
+      description: managedTreatment?.description || treatment.description,
+    };
+  });
+}
+
+function TreatmentsSection({ treatments, onSelect }: { treatments: Treatment[]; onSelect: (treatment: Treatment) => void }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragStateRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
   const wasDraggedRef = useRef(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
-  const treatments = useMemo(
-    () => treatmentCatalog.map((treatment) => {
-      const managedTreatment = services.find((service) => service.name === treatment.name);
-      return {
-        ...treatment,
-        imageUrl: managedTreatment?.imageUrl || treatment.imageUrl,
-        description: managedTreatment?.description || treatment.description,
-      };
-    }),
-    [services],
-  );
-
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -488,7 +490,7 @@ function TreatmentsSection({ services, onSelect }: { services: any[]; onSelect: 
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">03 — TRATAMIENTOS</p>
+            <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">TRATAMIENTOS</p>
             <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[1.02] text-[#2F4055] md:text-6xl">Cuidado personalizado, respaldado por la ciencia.</h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-[#68727b]">Conoce las opciones de NovaSkin y encuentra el punto de partida para cuidar tu piel de forma personalizada.</p>
           </div>
@@ -578,6 +580,7 @@ function PublicSite() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const contact = useCreateContactMessage();
+  const treatments = useMemo(() => getTreatments(services), [services]);
   useEffect(() => {
     const video = heroVideoRef.current;
     if (!video) return;
@@ -612,6 +615,7 @@ function PublicSite() {
   const salonWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración en NovaSkin.')}`;
   const salonSpacesWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información y agendar una valoración en NovaSkin.')}`;
   const experienceWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.')}`;
+  const facialCleansingWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre la limpieza facial de NovaSkin.')}`;
   const heroWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre los tratamientos de NovaSkin.')}`;
   const faqQuestionWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una pregunta sobre los servicios de NovaSkin.')}`;
   const faqAskWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una duda y me gustaría recibir información sobre NovaSkin.')}`;
@@ -655,7 +659,14 @@ function PublicSite() {
          </div>
       </section>
        <PhilosophySection copy="NOVA SKIN MED SPA fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural." />
-       <TreatmentsSection services={services} onSelect={setSelectedTreatment} />
+        <FacialCleansingSection
+          onLearnMore={() => setSelectedTreatment(treatments[0])}
+          onBook={scrollToContact}
+          whatsappHref={facialCleansingWhatsAppHref}
+          videoUrl={facialCleansingVideo}
+          posterUrl={facialCleansingPoster}
+        />
+        <TreatmentsSection treatments={treatments} onSelect={setSelectedTreatment} />
        <WhatToImproveSection onViewRelated={scrollToTreatments} onBook={scrollToContact} whatsappHref={improvementWhatsAppHref} />
        <SalonSpacesSection onBook={scrollToContact} whatsappHref={salonSpacesWhatsAppHref} />
        <ExperienceTimelineSection imageUrls={experienceImages} onBook={scrollToContact} whatsappHref={experienceWhatsAppHref} />
