@@ -650,7 +650,7 @@ function PublicSite() {
       </section>
        <PhilosophySection copy="NOVA SKIN MED SPA fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural." />
        <TreatmentsSection services={services} onSelect={setSelectedTreatment} />
-       <WhatToImproveSection imageUrl={`${media}consultation.png`} onViewRelated={scrollToTreatments} onBook={scrollToContact} whatsappHref={improvementWhatsAppHref} />
+       <WhatToImproveSection onViewRelated={scrollToTreatments} onBook={scrollToContact} whatsappHref={improvementWhatsAppHref} />
        <SalonSpacesSection onBook={scrollToContact} whatsappHref={salonSpacesWhatsAppHref} />
        <ExperienceTimelineSection imageUrls={[localImages[2], localImages[1], localImages[0]]} treatmentVideoUrl={localVideos[1][0]} onBook={scrollToContact} whatsappHref={experienceWhatsAppHref} />
        <TeamSection specialists={specialistsFromApi} fallbackImages={[localImages[2], localImages[1]]} imageOverrides={[`${media}team-indira.png`, `${media}team-maria.png`]} onBook={scrollToContact} whatsappHref={salonWhatsAppHref} />

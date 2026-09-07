@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, MessageCircle, Sparkles } from 'lucide-react';
+import { ChevronDown, MessageCircle } from 'lucide-react';
 
 type Objective = {
   title: string;
@@ -9,7 +9,6 @@ type Objective = {
 };
 
 export type WhatToImproveSectionProps = {
-  imageUrl: string;
   onViewRelated: (treatments: string[]) => void;
   onBook: () => void;
   whatsappHref: string;
@@ -54,7 +53,6 @@ const objectives: Objective[] = [
 ];
 
 export function WhatToImproveSection({
-  imageUrl,
   onViewRelated,
   onBook,
   whatsappHref,
@@ -194,22 +192,6 @@ export function WhatToImproveSection({
           </div>
         </div>
 
-        <figure className="motion-safe:reveal delay-3 relative mt-10 w-full max-w-sm overflow-hidden md:col-start-1 md:row-start-2 md:mt-14">
-          <div className="absolute -left-3 -top-3 z-0 h-24 w-24 border-l border-t border-[#BB9445]/70" />
-          <div className="relative z-10 aspect-[4/5] overflow-hidden bg-[#D9D1C4] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[5/6]">
-            <img
-              src={imageUrl}
-              alt="Consulta para identificar necesidades de la piel en NovaSkin"
-              className="h-full w-full object-cover transition duration-700 ease-out motion-safe:hover:scale-[1.025]"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#202b38]/75 via-[#202b38]/20 to-transparent px-5 pb-5 pt-16 text-[#F2F2EF]">
-              <figcaption className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.24em]">
-                <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-[#D7B66A]" />
-                Primero escuchamos
-              </figcaption>
-            </div>
-          </div>
-        </figure>
       </div>
     </section>
   );
