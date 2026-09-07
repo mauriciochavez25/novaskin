@@ -55,6 +55,12 @@ const fallback = {
 };
 
 const localImages = [`${media}clinic-lobby.png`, `${media}treatment-room.png`, `${media}consultation.png`];
+const experienceImages = [
+  localImages[2],
+  `${media}experience-02-protocol.png`,
+  `${media}experience-03-treatment.png`,
+  `${media}experience-04-follow-up.png`,
+];
 const heroVideo = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.mp4`;
 const heroPoster = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.jpg`;
 const localVideos = [
@@ -652,7 +658,7 @@ function PublicSite() {
        <TreatmentsSection services={services} onSelect={setSelectedTreatment} />
        <WhatToImproveSection onViewRelated={scrollToTreatments} onBook={scrollToContact} whatsappHref={improvementWhatsAppHref} />
        <SalonSpacesSection onBook={scrollToContact} whatsappHref={salonSpacesWhatsAppHref} />
-       <ExperienceTimelineSection imageUrls={[localImages[2], localImages[1], localImages[0]]} treatmentVideoUrl={localVideos[1][0]} onBook={scrollToContact} whatsappHref={experienceWhatsAppHref} />
+       <ExperienceTimelineSection imageUrls={experienceImages} onBook={scrollToContact} whatsappHref={experienceWhatsAppHref} />
        <TeamSection specialists={specialistsFromApi} fallbackImages={[localImages[2], localImages[1]]} imageOverrides={[`${media}team-indira.png`, `${media}team-maria.png`]} onBook={scrollToContact} whatsappHref={salonWhatsAppHref} />
       {specialists.length > 0 && <section id="equipo" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="NUESTRO EQUIPO" title="Profesionales dedicadas al cuidado de tu piel."/><div className="mt-12 grid gap-10 md:grid-cols-2">{specialists.slice(0, 2).map((s, i) => <div key={s.id}><div className="arch aspect-[.92] overflow-hidden bg-[#AF9275]"><img src={s.photoUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"/></div><p className="mt-5 text-xs uppercase tracking-widest text-[#BB9445]">{s.specialty}</p><h3 className="mt-2 font-serif text-2xl md:text-3xl">{s.name}</h3>{s.bio && <p className="mt-2 text-sm leading-6 text-[#68727b]">{s.bio}</p>}</div>)}</div></div></section>}
       {testimonials.length > 0 && <section className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-28"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.3em] text-[#e0bb69]">Historias NOVA</p><div className="mx-auto mt-8 flex justify-center gap-1 text-[#BB9445]">{[1,2,3,4,5].map(x => <Star key={x} size={16} fill="currentColor"/>)}</div><blockquote className="mt-8 font-serif text-3xl leading-tight md:text-5xl">“{testimonials[0].comment}”</blockquote><p className="mt-7 text-sm uppercase tracking-widest text-[#c7ccca]">— {testimonials[0].name}</p></div></section>}

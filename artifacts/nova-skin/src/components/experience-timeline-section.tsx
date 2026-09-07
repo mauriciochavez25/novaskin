@@ -2,7 +2,6 @@ import { type CSSProperties, useEffect, useRef, useState } from 'react';
 
 type ExperienceTimelineSectionProps = {
   imageUrls: string[];
-  treatmentVideoUrl: string;
   onBook: () => void;
   whatsappHref: string;
 };
@@ -12,25 +11,25 @@ const stages = [
     number: '01',
     title: 'VALORACIÓN',
     description: 'Conocemos tus necesidades, objetivos y lo que te gustaría mejorar.',
-    media: 'image',
+    objectPosition: '50% 50%',
   },
   {
     number: '02',
     title: 'TU PROTOCOLO',
     description: 'Definimos un plan de cuidado de acuerdo con tus necesidades y objetivos.',
-    media: 'image',
+    objectPosition: '50% 43%',
   },
   {
     number: '03',
     title: 'TRATAMIENTO',
     description: 'Recibes atención profesional durante todo el procedimiento.',
-    media: 'video',
+    objectPosition: '53% 48%',
   },
   {
     number: '04',
     title: 'SEGUIMIENTO',
     description: 'Recibes indicaciones y cuidados posteriores para acompañar tus resultados.',
-    media: 'image',
+    objectPosition: '56% 45%',
   },
 ] as const;
 
@@ -40,12 +39,10 @@ function clamp(value: number, minimum: number, maximum: number) {
 
 export default function ExperienceTimelineSection({
   imageUrls,
-  treatmentVideoUrl,
   onBook,
   whatsappHref,
 }: ExperienceTimelineSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const stageRefs = useRef<Array<HTMLElement | null>>([]);
   const [activeStage, setActiveStage] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -126,29 +123,6 @@ export default function ExperienceTimelineSection({
     return () => stageObserver.disconnect();
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || typeof IntersectionObserver === 'undefined') return;
-
-    video.muted = true;
-    const mediaObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          void video.play().catch(() => undefined);
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.25 },
-    );
-
-    mediaObserver.observe(video);
-    return () => {
-      mediaObserver.disconnect();
-      video.pause();
-    };
-  }, []);
-
   const progressStyle = {
     '--timeline-progress': progress,
   } as CSSProperties;
@@ -192,7 +166,7 @@ export default function ExperienceTimelineSection({
 
           <div className="relative grid gap-y-20 md:gap-y-24 lg:flex lg:items-start lg:gap-x-7 lg:gap-y-0">
             {stages.map((stage, index) => {
-              const imageUrl = imageUrls[index < 2 ? index : index - 1];
+              const imageUrl = imageUrls[index];
               const isActive = activeStage === index;
 
               return (
@@ -215,27 +189,14 @@ export default function ExperienceTimelineSection({
                   />
 
                   <div className="group relative aspect-[0.87] overflow-hidden bg-[#ded5c5]">
-                    {stage.media === 'video' ? (
-                      <video
-                        ref={videoRef}
-                        src={treatmentVideoUrl}
-                        muted
-                        autoPlay
-                        loop
-                        playsInline
-                        preload="metadata"
-                        aria-label={`${stage.number} — ${stage.title}`}
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-                      />
-                    ) : (
-                      <img
-                        src={imageUrl}
-                        alt={`${stage.number} — ${stage.title}`}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-                      />
-                    )}
+                    <img
+                      src={imageUrl}
+                      alt={`${stage.number} — ${stage.title}`}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ objectPosition: stage.objectPosition }}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                    />
                   </div>
 
                   <div className="mt-6 max-w-[255px]">
