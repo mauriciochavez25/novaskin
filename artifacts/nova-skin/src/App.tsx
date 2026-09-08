@@ -40,6 +40,7 @@ import WhatToImproveSection from '@/components/what-to-improve-section';
 import SalonSpacesSection from '@/components/salon-spaces-section';
 import ExperienceTimelineSection from '@/components/experience-timeline-section';
 import FacialCleansingSection from '@/components/facial-cleansing-section';
+import FacialCleansingDetailsModal from '@/components/facial-cleansing-details-modal';
 import TeamSection from '@/components/team-section';
 import FaqSection from '@/components/faq-section';
 
@@ -622,6 +623,7 @@ function PublicSite() {
   const [lightbox, setLightbox] = useState<any>(null);
   const [sent, setSent] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
+  const [isFacialDetailsOpen, setIsFacialDetailsOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const contact = useCreateContactMessage();
@@ -739,7 +741,7 @@ function PublicSite() {
       </section>
        <PhilosophySection copy="NovaSkin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural." />
         <FacialCleansingSection
-          onLearnMore={() => setSelectedTreatment(treatments[0])}
+          onLearnMore={() => setIsFacialDetailsOpen(true)}
           onBook={scrollToContact}
           whatsappHref={facialCleansingWhatsAppHref}
           videoUrl={facialCleansingVideo}
@@ -757,6 +759,12 @@ function PublicSite() {
     </main>
     <footer className="bg-[#202c3a] px-5 py-12 text-[#F2F2F0] md:px-10"><div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:items-end md:justify-between"><div><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></div><p className="mt-5 max-w-xs text-sm leading-6 text-[#bdc5c8]">{site.tagline}</p></div><div className="text-sm text-[#bdc5c8] md:text-right"><p>{site.address}</p><p className="mt-2">{site.hours}</p><div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div></div></div><div className="mx-auto mt-10 max-w-7xl border-t border-white/15 pt-5 text-xs text-[#82909a]">© {new Date().getFullYear()} NovaSkin · Estética avanzada, bienestar real.</div></footer>
      {selectedTreatment && <TreatmentDetailsModal treatment={selectedTreatment} onClose={() => setSelectedTreatment(null)} />}
+     {isFacialDetailsOpen && (
+       <FacialCleansingDetailsModal
+         posterUrl={facialCleansingPoster}
+         onClose={() => setIsFacialDetailsOpen(false)}
+       />
+     )}
      {lightbox && <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60] grid place-items-center bg-[#202c3a]/90 p-5" onClick={() => setLightbox(null)}><button data-testid="button-close-lightbox" onClick={() => setLightbox(null)} className="absolute right-5 top-5 rounded-full border border-white/30 p-3 text-white"><X size={18}/></button><div onClick={e => e.stopPropagation()} className="max-h-[90vh] max-w-5xl"><img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[78vh] w-auto object-contain"/><h3 className="mt-4 font-serif text-2xl text-white">{lightbox.title}</h3><p className="mt-1 text-sm text-[#d5d7d5]">{lightbox.description}</p></div></div>}
     {isLoading && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#2F4055] px-4 py-2 text-xs text-white">Cargando NovaSkin…</div>}{isError && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#A83525] px-4 py-2 text-xs text-white">Mostrando información esencial</div>}
   </div>;

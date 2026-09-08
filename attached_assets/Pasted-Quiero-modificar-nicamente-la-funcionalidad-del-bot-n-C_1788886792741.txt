@@ -1,0 +1,188 @@
+Quiero modificar únicamente la funcionalidad del botón “CONOCER LIMPIEZA FACIAL →” de la sección especial de Limpieza Facial. No cambies el diseño actual de esa sección, no cambies el video, no cambies textos, botones, colores, tamaños, espaciados ni ninguna otra sección del sitio.
+
+Actualmente, al presionar “CONOCER LIMPIEZA FACIAL →” quiero que se abra una vista ampliada elegante, siguiendo el mismo lenguaje visual y funcionamiento que ya utilizan los botones “VER MÁS →” de la sección de Tratamientos.
+
+La diferencia es que, dentro de esta vista ampliada de Limpieza Facial, no quiero mostrar un solo tratamiento. Quiero explicar primero qué es un facial y después mostrar los dos tipos de faciales que ofrece NovaSkin mediante un sistema de acordeón.
+
+En la parte superior de la vista ampliada coloca como título:
+
+Limpieza Facial
+
+Debajo coloca el subtítulo:
+
+“Dos experiencias de cuidado diseñadas de acuerdo con las necesidades de tu piel.”
+
+Después agrega una introducción con el título:
+
+¿En qué consiste un facial?
+
+Y utiliza exactamente este texto:
+
+“Un tratamiento facial es un procedimiento estético enfocado en limpiar, renovar, hidratar y mejorar la apariencia de la piel, adaptándose siempre a su tipo y necesidades. Antes de comenzar, se realiza una valoración para determinar qué productos, técnicas y aparatología son adecuados para cada piel.”
+
+Después de esta explicación quiero mostrar dos acordeones grandes, uno para cada facial.
+
+Deben funcionar visualmente parecido a las preguntas frecuentes del sitio: inicialmente solamente debe verse el nombre del tratamiento, un pequeño subtítulo y un símbolo “+” a la derecha. Toda la fila debe ser clickeable.
+
+Cuando el usuario haga clic sobre un facial, debe desplegarse suavemente toda su información y el símbolo debe cambiar de “+” a “−”. Al volver a hacer clic debe cerrarse. Si abre el otro tratamiento, puede cerrarse automáticamente el anterior para mantener la vista limpia.
+
+El primer acordeón debe ser:
+
+NOVA ESSENTIAL
+Limpieza Facial Esencial
+
+Al abrirlo, coloca esta introducción:
+
+“Un tratamiento diseñado para realizar una higiene facial profunda, eliminar impurezas y aportar a la piel una apariencia más limpia, luminosa y saludable.”
+
+Después coloca el título:
+
+EL PROTOCOLO INCLUYE
+
+Y presenta los siguientes 7 pasos claramente numerados. No los conviertas en siete tarjetas grandes. Utiliza una lista editorial limpia, números, líneas o divisores sutiles.
+
+01. Higiene Facial Inicial
+“Limpieza profunda del rostro para eliminar impurezas, residuos y exceso de grasa.”
+
+02. Microdermoabrasión
+“Exfoliación mecánica que ayuda a remover células córneas y favorecer una textura más uniforme.”
+
+03. Vapor Ozono
+“Preparación de la piel para facilitar el proceso de extracción y favorecer una limpieza más profunda.”
+
+04. Extracción de Impurezas
+“Extracción manual y/o mediante tecnología ultrasónica, según las necesidades y sensibilidad de la piel.”
+
+05. Hidrafacial
+“Limpieza, exfoliación e hidratación para dejar la piel visiblemente más fresca y luminosa.”
+
+06. Mascarilla Facial
+“Aplicación de una mascarilla seleccionada de acuerdo con las necesidades específicas de la piel.”
+
+07. Skin Care Personalizado
+“Finalización del tratamiento con una selección personalizada de tónico, sérum y/o crema, de acuerdo con el diagnóstico y tipo de piel.”
+
+Después coloca un bloque final con el título:
+
+RESULTADO
+
+Y utiliza:
+
+“Una piel más limpia, suave, hidratada, luminosa y revitalizada, con un protocolo adaptado a sus necesidades.”
+
+No agregues “NOVA SKIN Tu piel, nuestra especialidad” como si fuera parte de la explicación técnica. Si quieres conservar esa frase, úsala solamente como un pequeño cierre visual o frase de marca y escribe NovaSkin, no NOVA SKIN.
+
+El segundo acordeón debe ser:
+
+NOVA ÉCLAT
+Tratamiento Facial Revitalizante
+
+Al abrirlo, utiliza esta introducción:
+
+“Un protocolo facial diseñado para purificar, revitalizar y devolver luminosidad a la piel, combinando técnicas de higiene profunda, aparatología y activos nutritivos seleccionados de acuerdo con las necesidades de cada piel.”
+
+Después coloca:
+
+EL PROTOCOLO INCLUYE
+
+Y presenta los siguientes 10 pasos:
+
+01. Higiene Facial Suave
+“Limpieza delicada del rostro para eliminar impurezas, residuos y exceso de grasa, respetando el equilibrio natural de la piel.”
+
+02. Microdermoabrasión
+“Exfoliación mecánica superficial que ayuda a eliminar células córneas y favorecer una textura más suave y uniforme.”
+
+03. Vapor Ozono
+“Preparación de la piel mediante vapor para facilitar el proceso de extracción y favorecer una higiene más profunda.”
+
+04. Extracción de Impurezas
+“Extracción manual y/o ultrasónica, seleccionando la técnica más adecuada de acuerdo con las condiciones y necesidades de la piel.”
+
+05. Hidrafacial
+“Protocolo de limpieza, exfoliación e hidratación que ayuda a mejorar la apariencia de la piel, aportando frescura y luminosidad.”
+
+06. Mascarilla Personalizada
+“Aplicación de una mascarilla seleccionada específicamente según el diagnóstico y las necesidades de la piel.”
+
+07. Alta Frecuencia Capilar
+“Aplicación de alta frecuencia en cuero cabelludo como complemento del protocolo de cuidado.”
+
+08. Terapia de Luz LED
+“Aplicación de fototerapia LED seleccionada de acuerdo con el objetivo cosmético del tratamiento.”
+
+09. Ampolleta Nutritiva
+“Aplicación de un concentrado nutritivo para complementar el tratamiento y aportar activos específicos a la piel.”
+
+10. Skin Care Personalizado
+“Finalización del protocolo con la aplicación de tónico, sérum y/o crema, seleccionados según el tipo y las necesidades de la piel.”
+
+Después coloca el título:
+
+EXPERIENCIA NOVA ÉCLAT
+
+Y utiliza:
+
+“Una experiencia de cuidado integral que deja la piel con una apariencia más limpia, suave, hidratada, luminosa y revitalizada.”
+
+Si deseas conservar la frase final de marca, utiliza únicamente como elemento secundario:
+
+“NovaSkin — Belleza, cuidado y tecnología para tu piel.”
+
+No conviertas esta frase en un título principal.
+
+Quiero que los dos tratamientos sean visualmente fáciles de comparar. Cuando ambos acordeones estén cerrados, el usuario debe poder ver inmediatamente:
+
+NOVA ESSENTIAL — Limpieza Facial Esencial
+NOVA ÉCLAT — Tratamiento Facial Revitalizante
+
+No pongas todo el contenido visible al mismo tiempo porque la vista sería demasiado larga.
+
+Al final de la vista ampliada agrega un bloque que diga:
+
+“¿No sabes cuál elegir?”
+
+Debajo:
+
+“Antes de comenzar realizamos una valoración para identificar las necesidades de tu piel y orientarte hacia el protocolo adecuado.”
+
+Después coloca dos botones.
+
+El botón principal debe decir:
+
+“AGENDAR VALORACIÓN →”
+
+Al hacer clic debe cerrar la vista ampliada si es necesario y realizar scroll suave hasta el formulario de contacto existente al final de la página. No crees otro formulario.
+
+El botón secundario debe decir:
+
+“PREGUNTAR POR WHATSAPP”
+
+Debe abrir WhatsApp con el número 8711437775 y el mensaje preescrito:
+
+“Hola, me gustaría recibir información sobre los faciales Nova Essential y Nova Éclat y saber cuál puede ser adecuado para mí.”
+
+La vista ampliada debe incluir un botón claro “X” o “← VOLVER” para regresar a la sección especial de Limpieza Facial.
+
+Mantén completamente el branding actual de NovaSkin. Usa las mismas tipografías, colores, líneas, espaciados y animaciones que ya existen en los detalles de los demás tratamientos.
+
+No agregues fotografías diferentes dentro de cada paso. Si quieres utilizar una imagen o video visual en la parte superior del detalle, reutiliza el material real de Limpieza Facial que ya existe en esa sección. No agregues imágenes de stock ni generadas.
+
+En desktop la vista debe ser cómoda de leer y no ocupar innecesariamente todo el ancho. En móvil los acordeones deben ocupar todo el ancho disponible y cada fila debe ser fácil de tocar.
+
+Muy importante: no modifiques los botones “VER MÁS” de los demás tratamientos ni su funcionamiento. Esta actualización aplica solamente al botón “CONOCER LIMPIEZA FACIAL →”.
+
+No inventes precios, duración, frecuencia recomendada, contraindicaciones ni resultados adicionales. Utiliza únicamente la información proporcionada para Nova Essential y Nova Éclat.
+
+Antes de terminar, prueba que:
+
+“CONOCER LIMPIEZA FACIAL →” abra correctamente esta nueva vista.
+Nova Essential abra y cierre.
+Nova Éclat abra y cierre.
+Solo se muestre el contenido del tratamiento seleccionado.
+“Agendar valoración” lleve al formulario.
+WhatsApp abra el número correcto.
+El botón de cerrar/regresar funcione.
+Todo se adapte correctamente a móvil.
+
+No hagas ningún otro cambio en el sitio.
