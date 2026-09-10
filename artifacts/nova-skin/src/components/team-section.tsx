@@ -16,12 +16,12 @@ type TeamSectionProps = {
 
 const profiles = [
   {
-    name: 'Dra. Indira Isis Ceniceros Mejía',
-    title: 'Maestría en Medicina Estética',
-  },
-  {
     name: 'María Muñiz Montemayor',
     title: 'Lic. en Cosmetología',
+  },
+  {
+    name: 'Dra. Indira Isis Ceniceros Mejía',
+    title: 'Maestría en Medicina Estética',
   },
 ];
 
