@@ -48,9 +48,9 @@ const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 20
 
 const media = '/media/';
 const fallback = {
-  clinicName: 'NovaSkin', tagline: 'Estética avanzada, bienestar real', phone: '871 143 7775',
+  clinicName: 'Nova Skin', tagline: 'Estética avanzada, bienestar real', phone: '871 143 7775',
   whatsapp: '8711437775', email: 'Correo próximamente', address: 'Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43',
-  hours: '10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.', instagram: '@novaskinmedspa', facebook: 'NovaSkin', tiktok: '@novaskinmedspa',
+  hours: '10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.', instagram: '@novaskinmedspa', facebook: 'Nova Skin', tiktok: '@novaskinmedspa',
   heroImage: `${media}clinic-lobby.png`, heroEyebrow: 'ESTÉTICA AVANZADA, BIENESTAR REAL', heroTitle: 'Tu piel merece el respaldo de la ciencia y el confort de un spa.',
   heroDescription: 'Tratamientos clínico-estéticos personalizados en un entorno cálido, sofisticado y seguro.',
   aboutText: 'Creemos que el cuidado personal no debe sentirse como una obligación, sino como un momento de reconexión. Combinamos ciencia, tecnología y bienestar para que cada visita se sienta tan bien como se ve.'
@@ -271,7 +271,7 @@ const treatmentCatalog: Treatment[] = [
     name: 'Limpieza Facial',
     imageUrl: `${media}what-to-improve-skin.jpg`,
     description: 'Cuidado facial enfocado en limpiar, renovar y mejorar la apariencia general de la piel.',
-    detail: 'La información detallada de este tratamiento estará disponible próximamente. El equipo de NovaSkin podrá orientarte durante una valoración.',
+    detail: 'La información detallada de este tratamiento estará disponible próximamente. El equipo de Nova Skin podrá orientarte durante una valoración.',
     faq: [],
   },
   {
@@ -282,7 +282,7 @@ const treatmentCatalog: Treatment[] = [
     detail: 'Es un tratamiento que ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión. Una aplicación adecuada busca mantener una apariencia natural.',
     faq: [
       { question: '¿Cuándo se empiezan a ver los resultados?', answer: 'Los primeros efectos pueden comenzar a observarse aproximadamente a partir del tercer día y continúan evolucionando posteriormente.' },
-      { question: '¿Cuánto dura el efecto?', answer: 'De acuerdo con la información proporcionada por NovaSkin, suele tener una duración aproximada de 4 a 6 meses, aunque puede variar según cada persona.' },
+      { question: '¿Cuánto dura el efecto?', answer: 'De acuerdo con la información proporcionada por Nova Skin, suele tener una duración aproximada de 4 a 6 meses, aunque puede variar según cada persona.' },
       { question: '¿Me va a dejar la cara sin expresión?', answer: 'El objetivo de una aplicación adecuada es suavizar las líneas de expresión manteniendo una apariencia natural.' },
     ],
   },
@@ -330,7 +330,7 @@ const treatmentCatalog: Treatment[] = [
     detail: 'Es un tratamiento de mesoterapia enfocado en revitalizar la piel y mejorar aspectos como hidratación, luminosidad, textura y calidad general.',
     faq: [
       { question: '¿Para qué sirve NCTF?', answer: 'Está enfocado en revitalizar la piel y mejorar aspectos como hidratación, luminosidad, textura y calidad general.' },
-      { question: '¿Es un relleno facial?', answer: 'NovaSkin lo maneja como un tratamiento de mesoterapia revitalizante con ácido hialurónico no reticulado y otros activos, enfocado principalmente en la calidad de la piel.' },
+      { question: '¿Es un relleno facial?', answer: 'Nova Skin lo maneja como un tratamiento de mesoterapia revitalizante con ácido hialurónico no reticulado y otros activos, enfocado principalmente en la calidad de la piel.' },
       { question: '¿Se puede combinar con otros tratamientos?', answer: 'En algunos casos sí, pero cualquier combinación debe definirse de manera personalizada durante una valoración profesional.' },
     ],
   },
@@ -538,7 +538,7 @@ function TreatmentsSection({ treatments, onSelect }: { treatments: Treatment[]; 
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">TRATAMIENTOS</p>
             <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[1.02] text-[#2F4055] md:text-6xl">Cuidado personalizado, respaldado por la ciencia.</h2>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[#68727b]">Conoce las opciones de NovaSkin y encuentra el punto de partida para cuidar tu piel de forma personalizada.</p>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#68727b]">Conoce las opciones de Nova Skin y encuentra el punto de partida para cuidar tu piel de forma personalizada.</p>
           </div>
           <div className="flex gap-2">
             <button type="button" aria-label="Tratamientos anteriores" data-testid="button-treatment-prev" disabled={!canScrollLeft} onClick={() => scrollCarousel(-1)} className="rounded-full border border-[#AF9275] p-3 text-[#2F4055] transition hover:bg-[#F2F2EF] disabled:cursor-not-allowed disabled:opacity-35">
@@ -680,7 +680,7 @@ function PublicSite() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   const galleryItems = gallery.length ? gallery : [{ id: 1, title: 'Un espacio para volver a ti', description: 'Nuestra recepción', imageUrl: localImages[0] }, { id: 2, title: 'Rituales que reparan', description: 'Sala de tratamientos', imageUrl: localImages[1] }, { id: 3, title: 'Primero escuchamos', description: 'Consulta personalizada', imageUrl: localImages[2] }];
-  const videoItems = videos.length ? videos : localVideos.map((v, i) => ({ id: i + 1, title: ['El ritual NovaSkin', 'La ciencia se siente', 'Detalles que importan'][i], description: 'Conoce un poco más de nuestro universo.', videoUrl: v[0], posterUrl: v[1] }));
+  const videoItems = videos.length ? videos : localVideos.map((v, i) => ({ id: i + 1, title: ['El ritual Nova Skin', 'La ciencia se siente', 'Detalles que importan'][i], description: 'Conoce un poco más de nuestro universo.', videoUrl: v[0], posterUrl: v[1] }));
   const submitContact = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -693,13 +693,13 @@ function PublicSite() {
   const scrollToContact = () => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToTreatments = (_treatments: string[]) => document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' });
   const improvementWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.')}`;
-  const salonWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración en NovaSkin.')}`;
-  const salonSpacesWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información y agendar una valoración en NovaSkin.')}`;
+  const salonWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración en Nova Skin.')}`;
+  const salonSpacesWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información y agendar una valoración en Nova Skin.')}`;
   const experienceWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.')}`;
-  const facialCleansingWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre la limpieza facial de NovaSkin.')}`;
-  const heroWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre los tratamientos de NovaSkin.')}`;
-  const faqQuestionWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una pregunta sobre los servicios de NovaSkin.')}`;
-  const faqAskWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una duda y me gustaría recibir información sobre NovaSkin.')}`;
+  const facialCleansingWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre la limpieza facial de Nova Skin.')}`;
+  const heroWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre los tratamientos de Nova Skin.')}`;
+  const faqQuestionWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una pregunta sobre los servicios de Nova Skin.')}`;
+  const faqAskWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una duda y me gustaría recibir información sobre Nova Skin.')}`;
   return <div className="nova-grain overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
     <header className={`fixed left-0 right-0 top-0 z-40 border-b text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${hasScrolled ? 'border-[#AF9275]/35 bg-[#202C3B]/90 shadow-[0_10px_30px_rgba(32,44,59,.16)] backdrop-blur-md' : 'border-white/20 bg-transparent'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
@@ -739,7 +739,7 @@ function PublicSite() {
            </div>
          </div>
       </section>
-       <PhilosophySection copy="NovaSkin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural." />
+       <PhilosophySection copy="Nova Skin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural." />
         <FacialCleansingSection
           onLearnMore={() => setIsFacialDetailsOpen(true)}
           onBook={scrollToContact}
@@ -753,7 +753,7 @@ function PublicSite() {
        <ExperienceTimelineSection imageUrls={experienceImages} onBook={scrollToContact} whatsappHref={experienceWhatsAppHref} />
        <TeamSection specialists={specialistsFromApi} fallbackImages={[localImages[2], localImages[1]]} imageOverrides={[`${media}specialist-maria.png`, `${media}specialist-indira.png`]} onBook={scrollToContact} whatsappHref={salonWhatsAppHref} />
       {specialists.length > 0 && <section id="equipo" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="NUESTRO EQUIPO" title="Profesionales dedicadas al cuidado de tu piel."/><div className="mt-12 grid gap-10 md:grid-cols-2">{specialists.slice(0, 2).map((s, i) => <div key={s.id}><div className="arch aspect-[.92] overflow-hidden bg-[#AF9275]"><img src={s.photoUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"/></div><p className="mt-5 text-xs uppercase tracking-widest text-[#BB9445]">{s.specialty}</p><h3 className="mt-2 font-serif text-2xl md:text-3xl">{s.name}</h3>{s.bio && <p className="mt-2 text-sm leading-6 text-[#68727b]">{s.bio}</p>}</div>)}</div></div></section>}
-      {testimonials.length > 0 && <section className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-28"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.3em] text-[#e0bb69]">Historias NovaSkin</p><div className="mx-auto mt-8 flex justify-center gap-1 text-[#BB9445]">{[1,2,3,4,5].map(x => <Star key={x} size={16} fill="currentColor"/>)}</div><blockquote className="mt-8 font-serif text-3xl leading-tight md:text-5xl">“{testimonials[0].comment}”</blockquote><p className="mt-7 text-sm uppercase tracking-widest text-[#c7ccca]">— {testimonials[0].name}</p></div></section>}
+      {testimonials.length > 0 && <section className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-28"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.3em] text-[#e0bb69]">Historias Nova Skin</p><div className="mx-auto mt-8 flex justify-center gap-1 text-[#BB9445]">{[1,2,3,4,5].map(x => <Star key={x} size={16} fill="currentColor"/>)}</div><blockquote className="mt-8 font-serif text-3xl leading-tight md:text-5xl">“{testimonials[0].comment}”</blockquote><p className="mt-7 text-sm uppercase tracking-widest text-[#c7ccca]">— {testimonials[0].name}</p></div></section>}
        <FaqSection imageUrl={localImages[2]} onBook={scrollToContact} whatsappHref={faqAskWhatsAppHref} questionWhatsappHref={faqQuestionWhatsAppHref} />
        <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
     </main>

@@ -231,7 +231,7 @@ export function Specialists() {
 
   return (
     <>
-      <GenericList title="Especialistas" description="Miembros del equipo NovaSkin." items={items} isLoading={isLoading} columns={['Especialista', 'Especialidad', 'Estado', 'Acciones']} onNew={() => { setEditing(null); setPhotoUrl(""); setActive(true); setOpen(true); }} renderRow={(item: any) => (
+      <GenericList title="Especialistas" description="Miembros del equipo Nova Skin." items={items} isLoading={isLoading} columns={['Especialista', 'Especialidad', 'Estado', 'Acciones']} onNew={() => { setEditing(null); setPhotoUrl(""); setActive(true); setOpen(true); }} renderRow={(item: any) => (
         <tr key={item.id} className="hover:bg-[#F2F2EF]/50 transition-colors">
           <td className="p-4 flex gap-4 items-center">
             <img src={item.photoUrl} className="h-12 w-12 object-cover rounded-full border border-[#BB9445]/30 bg-[#F2F2EF]" />

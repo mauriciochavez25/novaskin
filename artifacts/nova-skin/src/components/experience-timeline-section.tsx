@@ -146,7 +146,7 @@ export default function ExperienceTimelineSection({
             id="experience-timeline-title"
             className="font-serif text-[clamp(2.7rem,7vw,5.9rem)] leading-[0.94] tracking-[-0.035em] text-[#2f4055]"
           >
-            Así se vive NovaSkin.
+            Así se vive Nova Skin.
           </h2>
           <p className="mt-7 max-w-[540px] text-base leading-7 text-[#68727b] sm:text-lg">
             Un cuidado pensado para acompañarte en cada etapa.
@@ -222,7 +222,7 @@ export default function ExperienceTimelineSection({
           style={{ transitionDelay: '520ms' }}
         >
           <h3 className="max-w-[570px] font-serif text-3xl leading-[1.05] tracking-[-0.025em] sm:text-4xl lg:text-5xl">
-            ¿Lista para comenzar tu experiencia NovaSkin?
+            ¿Lista para comenzar tu experiencia Nova Skin?
           </h3>
           <div className="mt-8 flex shrink-0 flex-col items-start gap-5 sm:mt-0 sm:items-end">
             <button

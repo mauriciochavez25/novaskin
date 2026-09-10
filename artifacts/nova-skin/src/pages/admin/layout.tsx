@@ -54,7 +54,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
         <div className="hidden h-24 items-center justify-center border-b border-white/10 md:flex">
           <Link href="/admin" className="flex items-center gap-4 hover:opacity-80 transition-opacity">
             <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span>
-            <span className="text-xs font-bold tracking-[.2em] uppercase">NovaSkin ADMIN</span>
+            <span className="text-xs font-bold tracking-[.2em] uppercase">Nova Skin ADMIN</span>
           </Link>
         </div>
         <nav className="flex-1 space-y-1 p-4 overflow-y-auto mt-16 md:mt-0">

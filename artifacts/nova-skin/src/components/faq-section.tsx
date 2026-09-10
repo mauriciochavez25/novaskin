@@ -22,19 +22,19 @@ const questions: FaqQuestion[] = [
     number: '01',
     question: '¿Necesito una valoración antes de realizarme un tratamiento?',
     answer:
-      'La valoración permite conocer tus necesidades y objetivos para orientarte hacia el tratamiento más adecuado para ti. Dependiendo del procedimiento que te interese, el equipo de NovaSkin podrá indicarte si es necesario realizar una valoración previa.',
+      'La valoración permite conocer tus necesidades y objetivos para orientarte hacia el tratamiento más adecuado para ti. Dependiendo del procedimiento que te interese, el equipo de Nova Skin podrá indicarte si es necesario realizar una valoración previa.',
   },
   {
     number: '02',
     question: '¿Cómo puedo saber qué tratamiento es adecuado para mí?',
     answer:
-      'Cada piel y cada persona tienen necesidades diferentes. Puedes contactar a NovaSkin para recibir orientación y conocer las opciones disponibles de acuerdo con lo que deseas trabajar.',
+      'Cada piel y cada persona tienen necesidades diferentes. Puedes contactar a Nova Skin para recibir orientación y conocer las opciones disponibles de acuerdo con lo que deseas trabajar.',
   },
   {
     number: '03',
     question: '¿Cómo puedo agendar una cita?',
     answer:
-      'Puedes solicitar tu cita a través del formulario de esta página o comunicarte directamente con NovaSkin por WhatsApp. El equipo dará seguimiento a tu solicitud para confirmar disponibilidad.',
+      'Puedes solicitar tu cita a través del formulario de esta página o comunicarte directamente con Nova Skin por WhatsApp. El equipo dará seguimiento a tu solicitud para confirmar disponibilidad.',
   },
   {
     number: '04',
@@ -50,8 +50,8 @@ const questions: FaqQuestion[] = [
   },
   {
     number: '06',
-    question: '¿Dónde se encuentra NovaSkin?',
-    answer: 'NovaSkin se encuentra en Av. Juárez 4955, Plaza Laguna Oriente, Local 43.',
+    question: '¿Dónde se encuentra Nova Skin?',
+    answer: 'Nova Skin se encuentra en Av. Juárez 4955, Plaza Laguna Oriente, Local 43.',
     location: true,
   },
   {
@@ -61,7 +61,7 @@ const questions: FaqQuestion[] = [
   },
   {
     number: '08',
-    question: '¿Cómo puedo comunicarme directamente con NovaSkin?',
+    question: '¿Cómo puedo comunicarme directamente con Nova Skin?',
     answer: 'Puedes comunicarte directamente por WhatsApp al 871 143 7775.',
     whatsapp: true,
   },
@@ -118,12 +118,12 @@ export default function FaqSection({
               Antes de tu visita, resolvamos tus dudas.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-7 text-[#68727b] md:text-lg">
-              Encuentra respuestas a algunas de las preguntas más comunes sobre tu experiencia en NovaSkin.
+              Encuentra respuestas a algunas de las preguntas más comunes sobre tu experiencia en Nova Skin.
             </p>
             <div className="mt-10 overflow-hidden rounded-[1.25rem] bg-[#AF9275] shadow-[0_18px_45px_rgba(47,64,85,.08)]">
               <img
                 src={imageUrl}
-                alt="Consulta profesional en NovaSkin"
+              alt="Consulta profesional en Nova Skin"
                 loading="lazy"
                 decoding="async"
                 className="aspect-[.92] w-full object-cover transition duration-700 hover:scale-[1.02]"

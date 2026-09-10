@@ -82,7 +82,7 @@ export default function TeamSection({
             Profesionales dedicadas al cuidado de tu piel.
           </h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-[#68727b] md:text-lg">
-            Conoce a las especialistas que forman parte de la experiencia NovaSkin.
+            Conoce a las especialistas que forman parte de la experiencia Nova Skin.
           </p>
         </div>
 

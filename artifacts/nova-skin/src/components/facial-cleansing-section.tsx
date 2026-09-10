@@ -23,7 +23,7 @@ const editorialNotes = [
   {
     number: '03',
     title: 'Continúa tu cuidado',
-    description: 'Después puedes conocer otras opciones de NovaSkin de acuerdo con tus objetivos.',
+    description: 'Después puedes conocer otras opciones de Nova Skin de acuerdo con tus objetivos.',
   },
 ];
 
@@ -136,7 +136,7 @@ export default function FacialCleansingSection({
               className={`${reveal(160)} mt-7 max-w-[500px] text-base leading-7 text-[#68727b] sm:text-lg`}
               style={{ transitionDelay: '160ms' }}
             >
-              La limpieza facial puede ser un excelente primer paso para comenzar a cuidar tu piel y vivir la experiencia NovaSkin.
+              La limpieza facial puede ser un excelente primer paso para comenzar a cuidar tu piel y vivir la experiencia Nova Skin.
             </p>
 
             <div
@@ -188,7 +188,7 @@ export default function FacialCleansingSection({
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="Limpieza facial realizada en NovaSkin"
+                aria-label="Limpieza facial realizada en Nova Skin"
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 style={{ objectPosition: '50% 58%' }}
               />

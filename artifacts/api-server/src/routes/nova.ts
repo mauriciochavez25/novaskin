@@ -92,7 +92,7 @@ async function ensureSeeded() {
     const [existingSettings] = await db.select({ id: siteSettings.id }).from(siteSettings).limit(1);
     if (!existingSettings) {
       await db.insert(siteSettings).values({
-        clinicName: "NovaSkin",
+        clinicName: "Nova Skin",
         tagline: "Estética avanzada, bienestar real",
          phone: "871 143 7775",
          whatsapp: "8711437775",
@@ -107,7 +107,7 @@ async function ensureSeeded() {
         heroTitle: "La belleza que se siente bien.",
         heroDescription: "Tratamientos clínico-estéticos avanzados en un espacio diseñado para volver a ti.",
         aboutText:
-          "NovaSkin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural.",
+          "Nova Skin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural.",
       });
     }
     const [service] = await db.select({ id: services.id }).from(services).limit(1);
@@ -121,7 +121,7 @@ async function ensureSeeded() {
     const [gallery] = await db.select({ id: galleryImages.id }).from(galleryImages).limit(1);
     if (!gallery) {
       await db.insert(galleryImages).values([
-        { title: "El espacio NovaSkin", description: "Un refugio pensado para bajar las revoluciones.", imageUrl: media("clinic-lobby.png"), active: true, sortOrder: 1 },
+        { title: "El espacio Nova Skin", description: "Un refugio pensado para bajar las revoluciones.", imageUrl: media("clinic-lobby.png"), active: true, sortOrder: 1 },
         { title: "Cuidado que se siente", description: "Cada detalle acompaña tu experiencia.", imageUrl: media("treatment-room.png"), active: true, sortOrder: 2 },
         { title: "Diagnóstico personalizado", description: "Escuchamos tu piel antes de recomendar.", imageUrl: media("consultation.png"), active: true, sortOrder: 3 },
       ]);
@@ -130,7 +130,7 @@ async function ensureSeeded() {
     if (!video) {
       await db.insert(videos).values([
          { title: "Conoce a nuestro equipo", description: "El cuidado de tu piel comienza con profesionales dedicadas.", videoUrl: media("team-intro-2026-08-31.mp4"), posterUrl: media("team-intro-2026-08-31.jpg"), active: true, sortOrder: 1 },
-         { title: "Una experiencia cercana", description: "Un vistazo al cuidado que vivimos en NovaSkin.", videoUrl: media("team-treatment-2026-08-31.mp4"), posterUrl: media("team-treatment-2026-08-31.jpg"), active: true, sortOrder: 2 },
+         { title: "Una experiencia cercana", description: "Un vistazo al cuidado que vivimos en Nova Skin.", videoUrl: media("team-treatment-2026-08-31.mp4"), posterUrl: media("team-treatment-2026-08-31.jpg"), active: true, sortOrder: 2 },
         { title: "Precisión y bienestar", description: "Tecnología clínica con trato humano.", videoUrl: media("WhatsApp_Video_2026-08-28_at_11.57.28_AM_1787940017376.mp4"), posterUrl: media("WhatsApp_Video_2026-08-28_at_11.57.28_AM_1787940017376.jpg"), active: true, sortOrder: 3 },
       ]);
     }
@@ -145,7 +145,7 @@ async function ensureSeeded() {
     if (!testimonial) {
       await db.insert(testimonials).values([
         { name: "Mariana R.", comment: "Desde la primera valoración sentí que por fin estaban escuchando mi piel. El resultado fue natural y la experiencia, preciosa.", rating: 5, photoUrl: null, active: true },
-        { name: "Alejandra G.", comment: "NovaSkin se siente diferente: profesional, cálida y muy cuidadosa con cada detalle.", rating: 5, photoUrl: null, active: true },
+        { name: "Alejandra G.", comment: "Nova Skin se siente diferente: profesional, cálida y muy cuidadosa con cada detalle.", rating: 5, photoUrl: null, active: true },
       ]);
     }
     const [promotion] = await db.select({ id: promotions.id }).from(promotions).limit(1);
@@ -157,7 +157,7 @@ async function ensureSeeded() {
     const [admin] = await db.select({ id: adminUsers.id }).from(adminUsers).limit(1);
     if (!admin) {
       const password = process.env.NOVA_ADMIN_PASSWORD ?? "nova2026";
-      await db.insert(adminUsers).values({ email: process.env.NOVA_ADMIN_EMAIL ?? "admin@novaskin.mx", name: "Administrador NovaSkin", passwordHash: await bcrypt.hash(password, 10) });
+      await db.insert(adminUsers).values({ email: process.env.NOVA_ADMIN_EMAIL ?? "admin@novaskin.mx", name: "Administrador Nova Skin", passwordHash: await bcrypt.hash(password, 10) });
     }
   })();
   return seedPromise;

@@ -207,7 +207,7 @@ export default function FacialCleansingDetailsModal({
             <div className="arch mt-8 overflow-hidden bg-[#2F4055]">
               <img
                 src={posterUrl}
-                alt="Limpieza facial realizada en NovaSkin"
+                alt="Limpieza facial realizada en Nova Skin"
                 className="aspect-[.8] h-full w-full object-cover object-[50%_58%]"
               />
             </div>
@@ -320,7 +320,7 @@ export default function FacialCleansingDetailsModal({
             </div>
 
             <p className="mt-7 text-center font-serif text-sm italic text-[#68727b]">
-              NovaSkin — Belleza, cuidado y tecnología para tu piel.
+              Nova Skin — Belleza, cuidado y tecnología para tu piel.
             </p>
           </div>
         </div>
