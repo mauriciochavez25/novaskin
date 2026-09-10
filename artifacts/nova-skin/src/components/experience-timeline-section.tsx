@@ -11,13 +11,13 @@ const stages = [
     number: '01',
     title: 'VALORACIÓN',
     description: 'Conocemos tus necesidades, objetivos y lo que te gustaría mejorar.',
-    objectPosition: '50% 50%',
+    objectPosition: '56% 58%',
   },
   {
     number: '02',
     title: 'TU PROTOCOLO',
     description: 'Definimos un plan de cuidado de acuerdo con tus necesidades y objetivos.',
-    objectPosition: '50% 43%',
+    objectPosition: '50% 48%',
   },
   {
     number: '03',
@@ -29,7 +29,7 @@ const stages = [
     number: '04',
     title: 'SEGUIMIENTO',
     description: 'Recibes indicaciones y cuidados posteriores para acompañar tus resultados.',
-    objectPosition: '56% 45%',
+    objectPosition: '50% 56%',
   },
 ] as const;
 

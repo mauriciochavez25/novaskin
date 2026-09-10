@@ -58,10 +58,10 @@ const fallback = {
 
 const localImages = [`${media}clinic-lobby.png`, `${media}treatment-room.png`, `${media}consultation.png`];
 const experienceImages = [
-  localImages[2],
-  `${media}experience-02-protocol.png`,
+  `${media}experience-01-assessment.png`,
+  `${media}experience-02-protocol-new.png`,
   `${media}experience-03-treatment.png`,
-  `${media}experience-04-follow-up.png`,
+  `${media}experience-04-follow-up-new.png`,
 ];
 const heroVideo = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.mp4`;
 const heroPoster = `${media}WhatsApp_Video_2026-08-28_at_11.57.22_AM_1787940023775.jpg`;
