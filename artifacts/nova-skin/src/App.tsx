@@ -56,6 +56,32 @@ const fallback = {
   aboutText: 'Creemos que el cuidado personal no debe sentirse como una obligación, sino como un momento de reconexión. Combinamos ciencia, tecnología y bienestar para que cada visita se sienta tan bien como se ve.'
 };
 
+const visibleBrandTextFields = new Set([
+  'clinicName',
+  'heroEyebrow',
+  'heroTitle',
+  'heroDescription',
+  'aboutText',
+  'name',
+  'title',
+  'description',
+  'comment',
+  'bio',
+  'question',
+  'answer',
+]);
+
+function normalizeVisibleBrandText<T>(record: T): T {
+  return Object.fromEntries(
+    Object.entries(record as object).map(([key, value]) => [
+      key,
+      visibleBrandTextFields.has(key) && typeof value === 'string'
+        ? value.replaceAll('NovaSkin', 'Nova Skin')
+        : value,
+    ]),
+  ) as T;
+}
+
 const localImages = [`${media}clinic-lobby.png`, `${media}treatment-room.png`, `${media}consultation.png`];
 const experienceImages = [
   `${media}experience-01-assessment.png`,
@@ -600,14 +626,14 @@ function TreatmentsSection({ treatments, onSelect }: { treatments: Treatment[]; 
 
 function PublicSite() {
   const { data, isLoading, isError } = useGetSite();
-  const site: any = data?.settings ?? fallback;
-  const services: any[] = data?.services ?? [];
-  const gallery: any[] = data?.gallery ?? [];
-  const videos: any[] = data?.videos ?? [];
-  const promotions: any[] = data?.promotions ?? [];
-  const specialistsFromApi: any[] = data?.specialists ?? [];
+  const site: any = data?.settings ? normalizeVisibleBrandText(data.settings) : fallback;
+  const services: any[] = (data?.services ?? []).map(normalizeVisibleBrandText);
+  const gallery: any[] = (data?.gallery ?? []).map(normalizeVisibleBrandText);
+  const videos: any[] = (data?.videos ?? []).map(normalizeVisibleBrandText);
+  const promotions: any[] = (data?.promotions ?? []).map(normalizeVisibleBrandText);
+  const specialistsFromApi: any[] = (data?.specialists ?? []).map(normalizeVisibleBrandText);
   const specialists: any[] = [];
-  const testimonials: any[] = data?.testimonials ?? [];
+  const testimonials: any[] = (data?.testimonials ?? []).map(normalizeVisibleBrandText);
   const heroContent = {
     eyebrow: site.heroEyebrow && site.heroEyebrow !== 'Cuidamos tu piel, realzamos tu esencia' && site.heroEyebrow !== fallback.heroEyebrow
       ? site.heroEyebrow
@@ -757,7 +783,7 @@ function PublicSite() {
        <FaqSection imageUrl={localImages[2]} onBook={scrollToContact} whatsappHref={faqAskWhatsAppHref} questionWhatsappHref={faqQuestionWhatsAppHref} />
        <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
     </main>
-    <footer className="bg-[#202c3a] px-5 py-12 text-[#F2F2F0] md:px-10"><div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:items-end md:justify-between"><div><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></div><p className="mt-5 max-w-xs text-sm leading-6 text-[#bdc5c8]">{site.tagline}</p></div><div className="text-sm text-[#bdc5c8] md:text-right"><p>{site.address}</p><p className="mt-2">{site.hours}</p><div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div></div></div><div className="mx-auto mt-10 max-w-7xl border-t border-white/15 pt-5 text-xs text-[#82909a]">© {new Date().getFullYear()} NovaSkin · Estética avanzada, bienestar real.</div></footer>
+    <footer className="bg-[#202c3a] px-5 py-12 text-[#F2F2F0] md:px-10"><div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:items-end md:justify-between"><div><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></div><p className="mt-5 max-w-xs text-sm leading-6 text-[#bdc5c8]">{site.tagline}</p></div><div className="text-sm text-[#bdc5c8] md:text-right"><p>{site.address}</p><p className="mt-2">{site.hours}</p><div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div></div></div><div className="mx-auto mt-10 max-w-7xl border-t border-white/15 pt-5 text-xs text-[#82909a]">© {new Date().getFullYear()} Nova Skin · Estética avanzada, bienestar real.</div></footer>
      {selectedTreatment && <TreatmentDetailsModal treatment={selectedTreatment} onClose={() => setSelectedTreatment(null)} />}
      {isFacialDetailsOpen && (
        <FacialCleansingDetailsModal
@@ -766,7 +792,7 @@ function PublicSite() {
        />
      )}
      {lightbox && <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60] grid place-items-center bg-[#202c3a]/90 p-5" onClick={() => setLightbox(null)}><button data-testid="button-close-lightbox" onClick={() => setLightbox(null)} className="absolute right-5 top-5 rounded-full border border-white/30 p-3 text-white"><X size={18}/></button><div onClick={e => e.stopPropagation()} className="max-h-[90vh] max-w-5xl"><img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[78vh] w-auto object-contain"/><h3 className="mt-4 font-serif text-2xl text-white">{lightbox.title}</h3><p className="mt-1 text-sm text-[#d5d7d5]">{lightbox.description}</p></div></div>}
-    {isLoading && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#2F4055] px-4 py-2 text-xs text-white">Cargando NovaSkin…</div>}{isError && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#A83525] px-4 py-2 text-xs text-white">Mostrando información esencial</div>}
+    {isLoading && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#2F4055] px-4 py-2 text-xs text-white">Cargando Nova Skin…</div>}{isError && <div className="fixed bottom-5 left-5 z-50 rounded-full bg-[#A83525] px-4 py-2 text-xs text-white">Mostrando información esencial</div>}
   </div>;
 }
 
