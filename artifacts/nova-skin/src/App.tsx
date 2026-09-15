@@ -9,19 +9,19 @@ import {
   ArrowRight, BarChart3, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, CircleAlert,
   Clock3, Eye, FileText, Image as ImageIcon, Instagram, LayoutDashboard, LogOut,
   Mail, Menu, MessageCircle, Pencil, Phone, Plus, Play, Save, Scissors, Send, Settings,
-  Star, Trash2, UserRound, Users, Video as VideoIcon, X
+  Trash2, UserRound, Users, Video as VideoIcon, X
 } from 'lucide-react';
 import {
   getGetAdminSummaryQueryKey, getGetCurrentUserQueryKey, getGetSiteQueryKey, getGetSiteSettingsQueryKey,
   getListContactMessagesQueryKey, getListGalleryImagesQueryKey, getListPromotionsQueryKey,
-  getListServicesQueryKey, getListSpecialistsQueryKey, getListTestimonialsQueryKey,
+  getListServicesQueryKey, getListSpecialistsQueryKey,
   getListVideosQueryKey, useCreateContactMessage, useCreateGalleryImage, useCreatePromotion, useCreateService,
-  useCreateSpecialist, useCreateTestimonial, useCreateVideo, useDeleteContactMessage, useDeleteGalleryImage,
-  useDeletePromotion, useDeleteService, useDeleteSpecialist, useDeleteTestimonial, useDeleteVideo, useGetAdminSummary,
+  useCreateSpecialist, useCreateVideo, useDeleteContactMessage, useDeleteGalleryImage,
+  useDeletePromotion, useDeleteService, useDeleteSpecialist, useDeleteVideo, useGetAdminSummary,
   useGetCurrentUser, useGetSite, useGetSiteSettings, useListContactMessages, useListGalleryImages,
-  useListPromotions, useListServices, useListSpecialists, useListTestimonials, useListVideos, useLogin, useLogout,
+  useListPromotions, useListServices, useListSpecialists, useListVideos, useLogin, useLogout,
   useUpdateContactMessage, useUpdateGalleryImage, useUpdatePromotion, useUpdateService, useUpdateSiteSettings,
-  useUpdateSpecialist, useUpdateTestimonial, useUpdateVideo
+  useUpdateSpecialist, useUpdateVideo
 } from '@workspace/api-client-react';
 import {
   Route,
@@ -43,6 +43,7 @@ import FacialCleansingSection from '@/components/facial-cleansing-section';
 import FacialCleansingDetailsModal from '@/components/facial-cleansing-details-modal';
 import TeamSection from '@/components/team-section';
 import FaqSection from '@/components/faq-section';
+import ReviewsSection from '@/components/reviews-section';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 20_000, retry: 1 } } });
 
@@ -779,7 +780,7 @@ function PublicSite() {
        <ExperienceTimelineSection imageUrls={experienceImages} onBook={scrollToContact} whatsappHref={experienceWhatsAppHref} />
        <TeamSection specialists={specialistsFromApi} fallbackImages={[localImages[2], localImages[1]]} imageOverrides={[`${media}specialist-maria.png`, `${media}specialist-indira.png`]} onBook={scrollToContact} whatsappHref={salonWhatsAppHref} />
       {specialists.length > 0 && <section id="equipo" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="NUESTRO EQUIPO" title="Profesionales dedicadas al cuidado de tu piel."/><div className="mt-12 grid gap-10 md:grid-cols-2">{specialists.slice(0, 2).map((s, i) => <div key={s.id}><div className="arch aspect-[.92] overflow-hidden bg-[#AF9275]"><img src={s.photoUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"/></div><p className="mt-5 text-xs uppercase tracking-widest text-[#BB9445]">{s.specialty}</p><h3 className="mt-2 font-serif text-2xl md:text-3xl">{s.name}</h3>{s.bio && <p className="mt-2 text-sm leading-6 text-[#68727b]">{s.bio}</p>}</div>)}</div></div></section>}
-      {testimonials.length > 0 && <section className="bg-[#2F4055] px-5 py-20 text-[#F2F2F0] md:px-10 md:py-28"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.3em] text-[#e0bb69]">Historias Nova Skin</p><div className="mx-auto mt-8 flex justify-center gap-1 text-[#BB9445]">{[1,2,3,4,5].map(x => <Star key={x} size={16} fill="currentColor"/>)}</div><blockquote className="mt-8 font-serif text-3xl leading-tight md:text-5xl">“{testimonials[0].comment}”</blockquote><p className="mt-7 text-sm uppercase tracking-widest text-[#c7ccca]">— {testimonials[0].name}</p></div></section>}
+       <ReviewsSection reviews={testimonials} />
        <FaqSection imageUrl={localImages[2]} onBook={scrollToContact} whatsappHref={faqAskWhatsAppHref} questionWhatsappHref={faqQuestionWhatsAppHref} />
        <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
     </main>

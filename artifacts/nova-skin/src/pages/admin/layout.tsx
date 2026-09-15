@@ -27,7 +27,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
     { name: 'Videos', path: '/admin/videos', icon: Video },
     { name: 'Promociones', path: '/admin/promotions', icon: Tag },
     { name: 'Especialistas', path: '/admin/specialists', icon: Users },
-    { name: 'Testimonios', path: '/admin/testimonials', icon: MessageCircle },
+    { name: 'Reseñas', path: '/admin/testimonials', icon: MessageCircle },
     { name: 'Mensajes', path: '/admin/messages', icon: MessageSquare },
     { name: 'Ajustes', path: '/admin/settings', icon: Settings },
   ];

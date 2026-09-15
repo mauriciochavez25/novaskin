@@ -6,12 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface ContactMessageInput {
+export interface GoogleReviewLookupInput {
   /** @minLength 1 */
-  name: string;
-  /** @minLength 1 */
-  phone: string;
-  email: string;
-  /** @minLength 1 */
-  message: string;
+  query: string;
 }

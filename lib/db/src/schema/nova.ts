@@ -103,7 +103,21 @@ export const testimonials = pgTable("testimonials", {
   comment: text("comment").notNull(),
   rating: integer("rating").notNull(),
   photoUrl: text("photo_url"),
+  source: text("source").notNull().default("manual"),
+  externalId: text("external_id"),
+  reviewDate: timestamp("review_date", { withTimezone: true }),
   active: boolean("active").default(true).notNull(),
+  ...timestamps,
+});
+
+export const googleReviewSettings = pgTable("google_review_settings", {
+  id: serial("id").primaryKey(),
+  placeId: text("place_id"),
+  placeName: text("place_name"),
+  formattedAddress: text("formatted_address"),
+  googleMapsUrl: text("google_maps_url"),
+  minRating: integer("min_rating").default(4).notNull(),
+  lastSyncedAt: timestamp("last_synced_at", { withTimezone: true }),
   ...timestamps,
 });
 

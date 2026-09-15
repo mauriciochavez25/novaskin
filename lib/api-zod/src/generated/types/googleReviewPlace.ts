@@ -6,8 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface LoginInput {
-  email: string;
-  /** @minLength 1 */
-  password: string;
+export interface GoogleReviewPlace {
+  placeId: string;
+  placeName: string;
+  formattedAddress: string;
+  googleMapsUrl: string;
 }

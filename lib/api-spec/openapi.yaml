@@ -194,6 +194,79 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SiteSettings"
+  /admin/google-reviews/settings:
+    get:
+      operationId: getGoogleReviewSettings
+      tags: [admin]
+      summary: Get Google reviews settings
+      responses:
+        "200":
+          description: Google reviews settings
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleReviewSettings" }
+    put:
+      operationId: updateGoogleReviewSettings
+      tags: [admin]
+      summary: Update Google reviews settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GoogleReviewSettingsInput" }
+      responses:
+        "200":
+          description: Updated Google reviews settings
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleReviewSettings" }
+  /admin/google-reviews/lookup:
+    post:
+      operationId: lookupGoogleReviews
+      tags: [admin]
+      summary: Look up a Google place for reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GoogleReviewLookupInput" }
+      responses:
+        "200":
+          description: Matching Google place
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleReviewPlace" }
+        "404":
+          description: No matching place found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorEnvelope" }
+        "503":
+          description: Google Maps API key is not configured
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorEnvelope" }
+  /admin/google-reviews/sync:
+    post:
+      operationId: syncGoogleReviews
+      tags: [admin]
+      summary: Synchronize reviews from Google
+      responses:
+        "200":
+          description: Synchronization result
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleReviewSyncResponse" }
+        "400":
+          description: Google place is not configured
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorEnvelope" }
+        "503":
+          description: Google Maps API key is not configured
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorEnvelope" }
   /admin/services:
     get:
       operationId: listServices
@@ -746,9 +819,12 @@ components:
         comment: { type: string }
         rating: { type: integer, minimum: 1, maximum: 5 }
         photoUrl: { type: ["string", "null"] }
+        source: { type: string, enum: [manual, google] }
+        externalId: { type: ["string", "null"] }
+        reviewDate: { type: ["string", "null"], format: date-time }
         active: { type: boolean }
         createdAt: { type: string, format: date-time }
-      required: [id, name, comment, rating, photoUrl, active, createdAt]
+      required: [id, name, comment, rating, photoUrl, source, externalId, reviewDate, active, createdAt]
     TestimonialInput:
       type: object
       properties:
@@ -758,6 +834,45 @@ components:
         photoUrl: { type: ["string", "null"] }
         active: { type: boolean }
       required: [name, comment, rating, photoUrl, active]
+    GoogleReviewSettings:
+      type: object
+      properties:
+        id: { type: integer }
+        placeId: { type: ["string", "null"] }
+        placeName: { type: ["string", "null"] }
+        formattedAddress: { type: ["string", "null"] }
+        googleMapsUrl: { type: ["string", "null"], format: uri }
+        minRating: { type: integer, minimum: 1, maximum: 5 }
+        lastSyncedAt: { type: ["string", "null"], format: date-time }
+        updatedAt: { type: string, format: date-time }
+      required: [id, placeId, placeName, formattedAddress, googleMapsUrl, minRating, lastSyncedAt, updatedAt]
+    GoogleReviewSettingsInput:
+      type: object
+      properties:
+        placeId: { type: ["string", "null"] }
+        placeName: { type: ["string", "null"] }
+        formattedAddress: { type: ["string", "null"] }
+        googleMapsUrl: { type: ["string", "null"], format: uri }
+        minRating: { type: integer, minimum: 1, maximum: 5 }
+    GoogleReviewLookupInput:
+      type: object
+      properties:
+        query: { type: string, minLength: 1 }
+      required: [query]
+    GoogleReviewPlace:
+      type: object
+      properties:
+        placeId: { type: string }
+        placeName: { type: string }
+        formattedAddress: { type: string }
+        googleMapsUrl: { type: string, format: uri }
+      required: [placeId, placeName, formattedAddress, googleMapsUrl]
+    GoogleReviewSyncResponse:
+      type: object
+      properties:
+        syncedCount: { type: integer, minimum: 0 }
+        lastSyncedAt: { type: string, format: date-time }
+      required: [syncedCount, lastSyncedAt]
     ContactMessage:
       type: object
       properties:

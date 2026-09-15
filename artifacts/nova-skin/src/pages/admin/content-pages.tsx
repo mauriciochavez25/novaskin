@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   useListGalleryImages, useCreateGalleryImage, useUpdateGalleryImage, useDeleteGalleryImage, getListGalleryImagesQueryKey,
   useListVideos, useCreateVideo, useUpdateVideo, useDeleteVideo, getListVideosQueryKey,
   useListPromotions, useCreatePromotion, useUpdatePromotion, useDeletePromotion, getListPromotionsQueryKey,
   useListSpecialists, useCreateSpecialist, useUpdateSpecialist, useDeleteSpecialist, getListSpecialistsQueryKey,
-  useListTestimonials, useCreateTestimonial, useUpdateTestimonial, useDeleteTestimonial, getListTestimonialsQueryKey
+  useListTestimonials, useCreateTestimonial, useUpdateTestimonial, useDeleteTestimonial, getListTestimonialsQueryKey,
+  useGetGoogleReviewSettings, useUpdateGoogleReviewSettings, useLookupGoogleReviews, useSyncGoogleReviews,
+  getGetGoogleReviewSettingsQueryKey, getGetSiteQueryKey
 } from '@workspace/api-client-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader, AdminButton, Modal, AdminInput, AdminTextarea, AdminSwitch } from '../../components/admin/ui';
 import { MediaUpload } from '../../components/admin/media-upload';
-import { Edit2, Trash2, Plus } from 'lucide-react';
+import { Edit2, Trash2, Plus, Search, RefreshCw, MapPin, ExternalLink, Star } from 'lucide-react';
 
 function GenericList({ title, description, items, isLoading, columns, renderRow, onNew }: any) {
   if (isLoading) return <p className="text-[#68727b] font-medium">Cargando {title.toLowerCase()}...</p>;
@@ -265,41 +267,179 @@ export function Specialists() {
 
 export function Testimonials() {
   const { data: items, isLoading } = useListTestimonials();
+  const { data: googleSettings, isError: settingsError } = useGetGoogleReviewSettings();
   const create = useCreateTestimonial();
   const update = useUpdateTestimonial();
   const del = useDeleteTestimonial();
+  const saveGoogleSettings = useUpdateGoogleReviewSettings();
+  const lookup = useLookupGoogleReviews();
+  const sync = useSyncGoogleReviews();
   const qc = useQueryClient();
 
   const [editing, setEditing] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(true);
   const [photoUrl, setPhotoUrl] = useState("");
+  const [searchQuery, setSearchQuery] = useState("Av. Juárez 4955, Plaza Laguna Oriente, Local 43");
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const [minRating, setMinRating] = useState(4);
+  const [filterRating, setFilterRating] = useState("all");
+  const [googleError, setGoogleError] = useState("");
+
+  useEffect(() => {
+    if (!googleSettings) return;
+    setSelectedPlace(googleSettings.placeId ? {
+      placeId: googleSettings.placeId,
+      placeName: googleSettings.placeName,
+      formattedAddress: googleSettings.formattedAddress,
+      googleMapsUrl: googleSettings.googleMapsUrl,
+    } : null);
+    setMinRating(googleSettings.minRating);
+  }, [googleSettings]);
+
+  const invalidateReviews = () => {
+    qc.invalidateQueries({ queryKey: getListTestimonialsQueryKey() });
+    qc.invalidateQueries({ queryKey: getGetSiteQueryKey() });
+    qc.invalidateQueries({ queryKey: getGetGoogleReviewSettingsQueryKey() });
+  };
+  const errorMessage = (error: any, fallback: string) => {
+    const message = String(error?.data?.error || error?.message || "");
+    const normalized = message.toLowerCase();
+    if (normalized.includes("api key")) {
+      return "La integración de Google Maps no está configurada (falta GOOGLE_MAPS_API_KEY). Las reseñas manuales siguen disponibles.";
+    }
+    if (normalized.includes("no matching google place")) {
+      return "No encontramos ese negocio en Google. Revisa el nombre o la dirección e inténtalo de nuevo.";
+    }
+    if (normalized.includes("google places lookup")) {
+      return "Google no pudo completar la búsqueda del negocio. Revisa la configuración e inténtalo de nuevo.";
+    }
+    if (normalized.includes("google places sync")) {
+      return "Google no pudo sincronizar las reseñas. Inténtalo de nuevo más tarde.";
+    }
+    if (normalized.includes("must be configured")) {
+      return "Selecciona y guarda un negocio de Google antes de sincronizar las reseñas.";
+    }
+    return fallback;
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const d = { name: String(f.get('name')), comment: String(f.get('comment')), rating: Number(f.get('rating')), photoUrl: f.get('photoUrl') ? String(f.get('photoUrl')) : null, active };
-    const opt = { onSuccess: () => { qc.invalidateQueries({ queryKey: getListTestimonialsQueryKey() }); setOpen(false); } };
+    const opt = { onSuccess: () => { invalidateReviews(); setOpen(false); } };
     editing ? update.mutate({ id: editing.id, data: d }, opt) : create.mutate({ data: d }, opt);
   };
 
+  const handleLookup = () => {
+    setGoogleError("");
+    if (!searchQuery.trim()) {
+      setGoogleError("Escribe una dirección o nombre de negocio para buscar.");
+      return;
+    }
+    lookup.mutate({ data: { query: searchQuery.trim() } }, {
+      onSuccess: (place) => setSelectedPlace(place),
+      onError: (error) => setGoogleError(errorMessage(error, "No se encontró el negocio. Revisa la búsqueda e inténtalo de nuevo.")),
+    });
+  };
+
+  const handleSaveSettings = () => {
+    setGoogleError("");
+    saveGoogleSettings.mutate({
+      data: {
+        placeId: selectedPlace?.placeId || null,
+        placeName: selectedPlace?.placeName || null,
+        formattedAddress: selectedPlace?.formattedAddress || null,
+        googleMapsUrl: selectedPlace?.googleMapsUrl || null,
+        minRating,
+      },
+    }, {
+      onSuccess: () => {
+        qc.invalidateQueries({ queryKey: getGetGoogleReviewSettingsQueryKey() });
+        invalidateReviews();
+      },
+      onError: (error) => setGoogleError(errorMessage(error, "No pudimos guardar la configuración de Google.")),
+    });
+  };
+
+  const handleSync = () => {
+    setGoogleError("");
+    sync.mutate(undefined, {
+      onSuccess: () => {
+        qc.invalidateQueries({ queryKey: getGetGoogleReviewSettingsQueryKey() });
+        invalidateReviews();
+      },
+      onError: (error) => setGoogleError(errorMessage(error, "No pudimos sincronizar las reseñas de Google.")),
+    });
+  };
+
+  const toggleVisibility = (item: any) => {
+    update.mutate({
+      id: item.id,
+      data: {
+        name: item.name,
+        comment: item.comment,
+        rating: item.rating,
+        photoUrl: item.photoUrl || null,
+        active: !item.active,
+      },
+    }, { onSuccess: invalidateReviews });
+  };
+
+  const visibleItems = [...(items || [])]
+    .filter((item: any) => filterRating === "all" || item.rating >= Number(filterRating))
+    .sort((a: any, b: any) => b.rating - a.rating);
+
   return (
     <>
-      <GenericList title="Testimonios" description="Lo que dicen nuestros clientes." items={items} isLoading={isLoading} columns={['Cliente', 'Valoración', 'Estado', 'Acciones']} onNew={() => { setEditing(null); setPhotoUrl(""); setActive(true); setOpen(true); }} renderRow={(item: any) => (
-        <tr key={item.id} className="hover:bg-[#F2F2EF]/50 transition-colors">
-          <td className="p-4">
-            <p className="font-semibold text-[#2F4055]">{item.name}</p>
-            <p className="mt-1 text-sm text-[#68727b] line-clamp-1 max-w-sm italic">"{item.comment}"</p>
-          </td>
-          <td className="p-4 text-[#BB9445] text-sm tracking-widest">{"★".repeat(item.rating)}{"☆".repeat(5-item.rating)}</td>
-          <td className="p-4"><span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide ${item.active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>{item.active ? 'Activo' : 'Oculto'}</span></td>
-          <td className="p-4 text-right">
-            <button onClick={() => { setEditing(item); setPhotoUrl(item.photoUrl || ""); setActive(item.active); setOpen(true); }} className="p-2 text-[#BB9445] hover:bg-[#e6e1d9] rounded-md transition"><Edit2 size={18}/></button>
-            <button onClick={() => { if(confirm('¿Eliminar testimonio?')) del.mutate({ id: item.id }, { onSuccess: () => qc.invalidateQueries({ queryKey: getListTestimonialsQueryKey() }) }); }} className="p-2 text-[#A83525] hover:bg-[#A83525]/10 rounded-md transition ml-1"><Trash2 size={18}/></button>
-          </td>
-        </tr>
-      )} />
-      <Modal isOpen={open} onClose={() => setOpen(false)} title={editing ? 'Editar Testimonio' : 'Nuevo Testimonio'}>
+      <PageHeader title="Reseñas" description="Gestiona las reseñas de Google y los testimonios de tus clientes." action={<AdminButton onClick={() => { setEditing(null); setPhotoUrl(""); setActive(true); setOpen(true); }}><Plus size={16}/> Nueva reseña manual</AdminButton>} />
+      <section className="mb-8 rounded-xl border border-[#AF9275]/20 bg-white p-5 shadow-sm md:p-6">
+        <div className="mb-5">
+          <h2 className="font-serif text-2xl text-[#2F4055]">Configuración de Google</h2>
+          <p className="mt-1 text-sm text-[#68727b]">Busca tu negocio para importar y mantener actualizadas tus reseñas.</p>
+        </div>
+        {settingsError && <p className="mb-4 rounded-md bg-[#A83525]/10 p-3 text-sm text-[#A83525]">No pudimos cargar la configuración de Google. Puedes seguir gestionando reseñas manuales.</p>}
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <AdminInput label="Buscar negocio o dirección" data-testid="input-google-review-search" value={searchQuery} onChange={(e: any) => setSearchQuery(e.target.value)} className="flex-1" />
+          <AdminButton type="button" data-testid="button-search-google-business" variant="outline" className="mt-auto min-h-10" onClick={handleLookup} disabled={lookup.isPending}><Search size={16}/>{lookup.isPending ? "Buscando…" : "Buscar negocio"}</AdminButton>
+        </div>
+        {lookup.isError && <p className="mt-3 text-sm text-[#A83525]">{googleError}</p>}
+        {selectedPlace && <div className="mt-5 rounded-lg border border-[#BB9445]/30 bg-[#F2F2EF] p-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex gap-3"><MapPin className="mt-0.5 shrink-0 text-[#BB9445]" size={19}/><div><p className="font-semibold text-[#2F4055]">{selectedPlace.placeName}</p><p className="mt-1 text-sm text-[#68727b]">{selectedPlace.formattedAddress}</p>{selectedPlace.googleMapsUrl && <a href={selectedPlace.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[#BB9445] hover:underline">Ver en Google Maps <ExternalLink size={12}/></a>}</div></div>
+            <span className="rounded-full bg-[#BB9445]/15 px-2.5 py-1 text-xs font-semibold text-[#8d6d2d]">Negocio seleccionado</span>
+          </div>
+        </div>}
+        <div className="mt-5 grid gap-4 sm:grid-cols-[180px_1fr] sm:items-end">
+          <AdminInput label="Publicar desde" data-testid="input-google-min-rating" type="number" min="1" max="5" value={minRating} onChange={(e: any) => setMinRating(Math.min(5, Math.max(1, Number(e.target.value) || 1)))} />
+          <div className="flex flex-wrap gap-2">
+            <AdminButton type="button" data-testid="button-save-google-settings" variant="gold" onClick={handleSaveSettings} disabled={saveGoogleSettings.isPending}>{saveGoogleSettings.isPending ? "Guardando…" : "Guardar configuración"}</AdminButton>
+            <AdminButton type="button" data-testid="button-sync-google-reviews" variant="outline" onClick={handleSync} disabled={sync.isPending || !googleSettings?.placeId && !selectedPlace?.placeId}><RefreshCw size={15} className={sync.isPending ? "animate-spin" : ""}/>{sync.isPending ? "Sincronizando…" : "Sincronizar reseñas"}</AdminButton>
+          </div>
+        </div>
+        {googleError && !lookup.isError && <p className="mt-3 rounded-md bg-[#A83525]/10 p-3 text-sm text-[#A83525]">{googleError}</p>}
+        {googleSettings?.lastSyncedAt && <p className="mt-4 text-xs text-[#68727b]">Última sincronización: {new Date(googleSettings.lastSyncedAt).toLocaleString("es-MX", { dateStyle: "medium", timeStyle: "short" })}</p>}
+      </section>
+
+      <section className="rounded-xl border border-[#AF9275]/20 bg-white shadow-sm">
+        <div className="flex flex-col gap-3 border-b border-[#AF9275]/20 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div><h2 className="font-serif text-2xl text-[#2F4055]">Todas las reseñas</h2><p className="mt-1 text-sm text-[#68727b]">{items?.length || 0} reseña{items?.length === 1 ? "" : "s"} en total</p></div>
+          <div className="flex items-center gap-2"><label htmlFor="review-filter" className="text-xs font-semibold uppercase tracking-wider text-[#68727b]">Filtrar</label><select id="review-filter" data-testid="select-review-filter" value={filterRating} onChange={(e) => setFilterRating(e.target.value)} className="rounded-md border border-[#AF9275]/50 bg-white px-3 py-2 text-sm text-[#2F4055]"><option value="all">Todas</option><option value="5">5 estrellas</option><option value="4">4+ estrellas</option><option value="3">3+ estrellas</option></select></div>
+        </div>
+        {isLoading ? <p className="p-8 text-center text-sm text-[#68727b]">Cargando reseñas…</p> : visibleItems.length === 0 ? <p className="p-8 text-center text-sm text-[#68727b]">No hay reseñas para este filtro.</p> : <div className="divide-y divide-[#AF9275]/20">{visibleItems.map((item: any) => <article key={item.id} data-testid={`review-card-${item.id}`} className="flex flex-col gap-4 p-5 md:flex-row md:items-start md:justify-between">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2"><h3 className="font-semibold text-[#2F4055]">{item.name}</h3><span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${item.source === "google" ? "bg-[#e6e1d9] text-[#2F4055]" : "bg-[#BB9445]/15 text-[#8d6d2d]"}`}>{item.source === "google" ? "Google" : "Manual"}</span><span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${item.active ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-700"}`}>{item.active ? "Visible" : "Oculta"}</span></div>
+            <div className="mt-2 flex items-center gap-1 text-[#BB9445]" aria-label={`${item.rating} de 5 estrellas`}>{[1, 2, 3, 4, 5].map((star) => <Star key={star} size={14} fill={star <= item.rating ? "currentColor" : "none"} />)}</div>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-[#68727b]">“{item.comment}”</p>
+            {item.reviewDate && <time className="mt-2 block text-xs text-[#9a8c80]" dateTime={item.reviewDate}>{new Date(item.reviewDate).toLocaleDateString("es-MX", { dateStyle: "medium" })}</time>}
+          </div>
+          <div className="flex shrink-0 items-center gap-1 md:pt-1">
+            <button type="button" data-testid={`button-toggle-review-${item.id}`} onClick={() => toggleVisibility(item)} disabled={update.isPending} className="rounded-md px-3 py-2 text-xs font-semibold text-[#2F4055] transition hover:bg-[#e6e1d9]">{item.active ? "Ocultar" : "Publicar"}</button>
+            {item.source !== "google" && <><button type="button" data-testid={`button-edit-review-${item.id}`} onClick={() => { setEditing(item); setPhotoUrl(item.photoUrl || ""); setActive(item.active); setOpen(true); }} className="rounded-md p-2 text-[#BB9445] transition hover:bg-[#e6e1d9]" aria-label="Editar reseña"><Edit2 size={17}/></button><button type="button" data-testid={`button-delete-review-${item.id}`} onClick={() => { if (confirm("¿Eliminar reseña manual?")) del.mutate({ id: item.id }, { onSuccess: invalidateReviews }); }} className="rounded-md p-2 text-[#A83525] transition hover:bg-[#A83525]/10" aria-label="Eliminar reseña"><Trash2 size={17}/></button></>}
+          </div>
+        </article>)}</div>}
+      </section>
+      <Modal isOpen={open} onClose={() => setOpen(false)} title={editing ? 'Editar reseña manual' : 'Nueva reseña manual'}>
         <form onSubmit={handleSubmit} className="space-y-5">
           <AdminInput label="Nombre del Cliente" name="name" defaultValue={editing?.name} required />
           <AdminTextarea label="Comentario" name="comment" defaultValue={editing?.comment} required />

@@ -1,11 +1,12 @@
 import { Router, type IRouter, type RequestHandler } from "express";
-import { and, asc, count, desc, eq, gte, lte } from "drizzle-orm";
+import { and, asc, count, desc, eq, gte, lte, sql } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import { db } from "@workspace/db";
 import {
   adminUsers,
   contactMessages,
   galleryImages,
+  googleReviewSettings,
   promotions,
   services,
   siteSettings,
@@ -37,6 +38,7 @@ import {
   DeleteVideoParams,
   GetAdminSummaryResponse,
   GetCurrentUserResponse,
+  GetGoogleReviewSettingsResponse,
   GetSiteResponse,
   GetSiteSettingsResponse,
   ListContactMessagesResponse,
@@ -46,6 +48,8 @@ import {
   ListSpecialistsResponse,
   ListTestimonialsResponse,
   ListVideosResponse,
+  LookupGoogleReviewsBody,
+  LookupGoogleReviewsResponse,
   LoginBody,
   LoginResponse,
   UpdateContactMessageBody,
@@ -62,6 +66,8 @@ import {
   UpdateServiceResponse,
   UpdateSiteSettingsBody,
   UpdateSiteSettingsResponse,
+  UpdateGoogleReviewSettingsBody,
+  UpdateGoogleReviewSettingsResponse,
   UpdateSpecialistBody,
   UpdateSpecialistParams,
   UpdateSpecialistResponse,
@@ -71,6 +77,7 @@ import {
   UpdateVideoBody,
   UpdateVideoParams,
   UpdateVideoResponse,
+  SyncGoogleReviewsResponse,
 } from "@workspace/api-zod";
 import {
   clearAdminCookie,
@@ -109,6 +116,10 @@ async function ensureSeeded() {
         aboutText:
           "Nova Skin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural.",
       });
+    }
+    const [existingGoogleReviewSettings] = await db.select({ id: googleReviewSettings.id }).from(googleReviewSettings).limit(1);
+    if (!existingGoogleReviewSettings) {
+      await db.insert(googleReviewSettings).values({ minRating: 4 });
     }
     const [service] = await db.select({ id: services.id }).from(services).limit(1);
     if (!service) {
@@ -178,7 +189,10 @@ router.get("/site", async (_req, res, next) => {
       db.select().from(videos).where(eq(videos.active, true)).orderBy(asc(videos.sortOrder)),
       db.select().from(promotions).where(and(eq(promotions.active, true), lte(promotions.startDate, new Date().toISOString().slice(0, 10)), gte(promotions.endDate, new Date().toISOString().slice(0, 10)))).orderBy(desc(promotions.createdAt)),
       db.select().from(specialists).where(eq(specialists.active, true)).orderBy(asc(specialists.createdAt)),
-      db.select().from(testimonials).where(eq(testimonials.active, true)).orderBy(desc(testimonials.createdAt)),
+      db.select().from(testimonials).where(eq(testimonials.active, true)).orderBy(
+        desc(testimonials.rating),
+        desc(sql`coalesce(${testimonials.reviewDate}, ${testimonials.createdAt})`),
+      ),
     ]);
     res.json(GetSiteResponse.parse({ settings, services: serviceRows.map(normalizeService), gallery: galleryRows, videos: videoRows, promotions: promotionRows, specialists: specialistRows, testimonials: testimonialRows }));
   } catch (error) { next(error); }
@@ -246,6 +260,179 @@ crudRoutes("/testimonials", testimonials, CreateTestimonialBody, UpdateTestimoni
 
 admin.get("/settings", async (_req, res, next) => { try { const [row] = await db.select().from(siteSettings).limit(1); res.json(GetSiteSettingsResponse.parse(row)); } catch (error) { next(error); } });
 admin.put("/settings", async (req, res, next) => { try { const [row] = await db.update(siteSettings).set({ ...UpdateSiteSettingsBody.parse(req.body), updatedAt: new Date() }).where(eq(siteSettings.id, 1)).returning(); res.json(UpdateSiteSettingsResponse.parse(row)); } catch (error) { next(error); } });
+admin.get("/google-reviews/settings", async (_req, res, next) => {
+  try {
+    const [row] = await db.select().from(googleReviewSettings).limit(1);
+    res.json(GetGoogleReviewSettingsResponse.parse(row));
+  } catch (error) {
+    next(error);
+  }
+});
+admin.put("/google-reviews/settings", async (req, res, next) => {
+  try {
+    const input = UpdateGoogleReviewSettingsBody.parse(req.body);
+    const [existing] = await db.select().from(googleReviewSettings).limit(1);
+    const update = {
+      ...input,
+      updatedAt: new Date(),
+    };
+    const [row] = existing
+      ? await db.update(googleReviewSettings).set(update).where(eq(googleReviewSettings.id, existing.id)).returning()
+      : await db.insert(googleReviewSettings).values({ minRating: input.minRating ?? 4, ...input }).returning();
+    res.json(UpdateGoogleReviewSettingsResponse.parse(row));
+  } catch (error) {
+    next(error);
+  }
+});
+
+type GooglePlace = {
+  id?: string;
+  displayName?: { text?: string };
+  formattedAddress?: string;
+  googleMapsUri?: string;
+  reviews?: GoogleReview[];
+};
+
+type GoogleReview = {
+  name?: string;
+  rating?: number;
+  text?: { text?: string };
+  originalText?: { text?: string };
+  authorAttribution?: { displayName?: string; photoUri?: string };
+  publishTime?: string;
+};
+
+admin.post("/google-reviews/lookup", async (req, res, next) => {
+  try {
+    const input = LookupGoogleReviewsBody.parse(req.body);
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+      res.status(503).json({ error: "Google Maps API key is not configured" });
+      return;
+    }
+
+    const response = await fetch("https://places.googleapis.com/v1/places:searchText", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": apiKey,
+        "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.googleMapsUri",
+      },
+      body: JSON.stringify({ textQuery: input.query }),
+    });
+    if (!response.ok) {
+      res.status(502).json({ error: "Google Places lookup failed" });
+      return;
+    }
+    const payload = (await response.json()) as { places?: GooglePlace[] };
+    const place = payload.places?.[0];
+    if (!place?.id || !place.displayName?.text || !place.formattedAddress || !place.googleMapsUri) {
+      res.status(404).json({ error: "No matching Google place found" });
+      return;
+    }
+    res.json(LookupGoogleReviewsResponse.parse({
+      placeId: place.id,
+      placeName: place.displayName.text,
+      formattedAddress: place.formattedAddress,
+      googleMapsUrl: place.googleMapsUri,
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
+
+admin.post("/google-reviews/sync", async (_req, res, next) => {
+  try {
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+      res.status(503).json({ error: "Google Maps API key is not configured" });
+      return;
+    }
+    const [settings] = await db.select().from(googleReviewSettings).limit(1);
+    if (!settings?.placeId) {
+      res.status(400).json({ error: "A Google place must be configured before syncing reviews" });
+      return;
+    }
+
+    const response = await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(settings.placeId)}`, {
+      headers: {
+        "X-Goog-Api-Key": apiKey,
+        "X-Goog-FieldMask": "id,displayName,formattedAddress,googleMapsUri,reviews",
+      },
+    });
+    if (!response.ok) {
+      res.status(502).json({ error: "Google Places sync failed" });
+      return;
+    }
+    const place = (await response.json()) as GooglePlace;
+    const syncedAt = new Date();
+    let syncedCount = 0;
+    for (const review of place.reviews ?? []) {
+      const rating = typeof review.rating === "number" ? Math.round(review.rating) : 0;
+      const comment = review.text?.text?.trim() || review.originalText?.text?.trim() || "";
+      const externalId = review.name?.trim();
+      if (!externalId || !comment || !review.authorAttribution?.displayName || rating < 1 || rating > 5) {
+        continue;
+      }
+      const reviewDate = review.publishTime ? new Date(review.publishTime) : null;
+      const normalizedReviewDate = reviewDate && !Number.isNaN(reviewDate.getTime()) ? reviewDate : null;
+      const [existingReview] = await db
+        .select({ id: testimonials.id })
+        .from(testimonials)
+        .where(eq(testimonials.externalId, externalId))
+        .limit(1);
+      if (existingReview) {
+        await db.update(testimonials)
+          .set({
+            name: review.authorAttribution.displayName,
+            comment,
+            rating,
+            photoUrl: review.authorAttribution.photoUri ?? null,
+            source: "google",
+            reviewDate: normalizedReviewDate,
+            updatedAt: syncedAt,
+          })
+          .where(eq(testimonials.id, existingReview.id));
+      } else {
+        await db.insert(testimonials).values({
+          name: review.authorAttribution.displayName,
+          comment,
+          rating,
+          photoUrl: review.authorAttribution.photoUri ?? null,
+          source: "google",
+          externalId,
+          reviewDate: normalizedReviewDate,
+          active: rating >= settings.minRating,
+        });
+      }
+      syncedCount += 1;
+    }
+
+    const settingsUpdate: {
+      placeName?: string;
+      formattedAddress?: string;
+      googleMapsUrl?: string;
+      lastSyncedAt: Date;
+      updatedAt: Date;
+    } = {
+      lastSyncedAt: syncedAt,
+      updatedAt: syncedAt,
+    };
+    if (place.displayName?.text) settingsUpdate.placeName = place.displayName.text;
+    if (place.formattedAddress) settingsUpdate.formattedAddress = place.formattedAddress;
+    if (place.googleMapsUri) settingsUpdate.googleMapsUrl = place.googleMapsUri;
+    const [updatedSettings] = await db.update(googleReviewSettings)
+      .set(settingsUpdate)
+      .where(eq(googleReviewSettings.id, settings.id))
+      .returning();
+    res.json(SyncGoogleReviewsResponse.parse({
+      syncedCount,
+      lastSyncedAt: updatedSettings?.lastSyncedAt ?? syncedAt,
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
 admin.get("/messages", async (_req, res, next) => { try { const rows = await db.select().from(contactMessages).orderBy(desc(contactMessages.createdAt)); res.json(ListContactMessagesResponse.parse(rows)); } catch (error) { next(error); } });
 admin.patch("/messages/:id", async (req, res, next) => { try { const params = UpdateContactMessageParams.parse(req.params); const [row] = await db.update(contactMessages).set({ ...UpdateContactMessageBody.parse(req.body), updatedAt: new Date() }).where(eq(contactMessages.id, params.id)).returning(); res.json(UpdateContactMessageResponse.parse(row)); } catch (error) { next(error); } });
 admin.delete("/messages/:id", async (req, res, next) => { try { const params = DeleteContactMessageParams.parse(req.params); await db.delete(contactMessages).where(eq(contactMessages.id, params.id)); res.status(204).end(); } catch (error) { next(error); } });
