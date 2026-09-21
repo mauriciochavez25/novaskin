@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 
 type FaqSectionProps = {
-  imageUrl: string;
   onBook: () => void;
   whatsappHref: string;
   questionWhatsappHref: string;
@@ -68,7 +67,6 @@ const questions: FaqQuestion[] = [
 ];
 
 export default function FaqSection({
-  imageUrl,
   onBook,
   whatsappHref,
   questionWhatsappHref,
@@ -109,7 +107,7 @@ export default function FaqSection({
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
           <div
-            className={`transition duration-700 ease-out ${
+            className={`flex flex-col justify-center transition duration-700 ease-out ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
             }`}
           >
@@ -120,15 +118,6 @@ export default function FaqSection({
             <p className="mt-6 max-w-xl text-base leading-7 text-[#68727b] md:text-lg">
               Encuentra respuestas a algunas de las preguntas más comunes sobre tu experiencia en Nova Skin.
             </p>
-            <div className="mt-10 overflow-hidden rounded-[1.25rem] bg-[#AF9275] shadow-[0_18px_45px_rgba(47,64,85,.08)]">
-              <img
-                src={imageUrl}
-              alt="Consulta profesional en Nova Skin"
-                loading="lazy"
-                decoding="async"
-                className="aspect-[.92] w-full object-cover transition duration-700 hover:scale-[1.02]"
-              />
-            </div>
           </div>
 
           <div
