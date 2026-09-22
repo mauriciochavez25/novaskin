@@ -296,7 +296,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '01',
     name: 'Limpieza Facial',
-    imageUrl: `${media}what-to-improve-skin.jpg`,
+    imageUrl: `${media}treatment-upload-01-limpieza-facial.png`,
     description: 'Cuidado facial enfocado en limpiar, renovar y mejorar la apariencia general de la piel.',
     detail: 'La información detallada de este tratamiento estará disponible próximamente. El equipo de Nova Skin podrá orientarte durante una valoración.',
     faq: [],
@@ -304,7 +304,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '02',
     name: 'Toxina Botulínica',
-    imageUrl: `${media}treatment-01-toxina.jpg`,
+    imageUrl: `${media}treatment-upload-02-toxina-botulinica.png`,
     description: 'Ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión.',
     detail: 'Es un tratamiento que ayuda a disminuir temporalmente la actividad de determinados músculos para suavizar líneas de expresión. Una aplicación adecuada busca mantener una apariencia natural.',
     faq: [
@@ -316,7 +316,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '03',
     name: 'Bioestimuladores',
-    imageUrl: `${media}treatment-02-biostimuladores.jpg`,
+    imageUrl: `${media}treatment-upload-03-bioestimuladores.png`,
     description: 'Estimulan progresivamente la producción natural de colágeno y elastina para mejorar la firmeza y calidad de la piel.',
     detail: 'Los bioestimuladores buscan estimular progresivamente la producción natural de colágeno y elastina para mejorar la firmeza, elasticidad y calidad de la piel.',
     faq: [
@@ -328,7 +328,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '04',
     name: 'PDRN Salmón',
-    imageUrl: `${media}treatment-03-pdrn.jpg`,
+    imageUrl: `${media}treatment-upload-04-pdrn-salmon.png`,
     description: 'Tratamiento enfocado en la bioestimulación y regeneración cutánea para mejorar la calidad general de la piel.',
     detail: 'Es un tratamiento enfocado en la bioestimulación y regeneración cutánea para mejorar la calidad general de la piel.',
     faq: [
@@ -340,7 +340,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '05',
     name: 'Skin Boosters',
-    imageUrl: `${media}treatment-04-skin-boosters.jpg`,
+    imageUrl: `${media}treatment-upload-05-skin-booster.png`,
     description: 'Enfocados en mejorar la hidratación, luminosidad, elasticidad y calidad general de la piel.',
     detail: 'Los Skin Boosters están enfocados principalmente en mejorar la hidratación, luminosidad, elasticidad y calidad de la piel.',
     faq: [
@@ -352,7 +352,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '06',
     name: 'NCTF Revitalizante',
-    imageUrl: `${media}treatment-05-nctf.jpg`,
+    imageUrl: `${media}treatment-upload-06-nctf-revitalizante.png`,
     description: 'Mesoterapia enfocada en revitalizar la piel y mejorar hidratación, luminosidad y textura.',
     detail: 'Es un tratamiento de mesoterapia enfocado en revitalizar la piel y mejorar aspectos como hidratación, luminosidad, textura y calidad general.',
     faq: [
@@ -364,7 +364,7 @@ const treatmentCatalog: Treatment[] = [
   {
     number: '07',
     name: 'Mesoterapia Capilar',
-    imageUrl: `${media}treatment-06-mesoterapia-capilar.jpg`,
+    imageUrl: `${media}treatment-upload-07-mesoterapia-capilar.png`,
     description: 'Aplicación de activos directamente en el cuero cabelludo para favorecer las condiciones del folículo y la calidad del cabello.',
     detail: 'Consiste en aplicar activos directamente en el cuero cabelludo para favorecer las condiciones del folículo y mejorar la calidad del cabello.',
     faq: [
