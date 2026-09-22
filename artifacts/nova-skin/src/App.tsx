@@ -48,6 +48,8 @@ import ReviewsSection from '@/components/reviews-section';
 const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 20_000, retry: 1 } } });
 
 const media = '/media/';
+const publicBasePath = import.meta.env.BASE_URL;
+const privacyPolicyPath = `${publicBasePath}politica-de-privacidad`;
 const fallback = {
   clinicName: 'Nova Skin', tagline: 'Estética avanzada, bienestar real', phone: '871 143 7775',
   whatsapp: '8711437775', email: 'Correo próximamente', address: 'Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43',
@@ -106,6 +108,45 @@ function Button({ children, onClick, variant = 'dark', type = 'button', classNam
 
 function SectionHeading({ eyebrow, title, copy, light = false }: any) {
   return <div className={`max-w-2xl ${light ? 'text-[#F2F2F0]' : 'text-[#2F4055]'}`}><p className="mb-4 text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">{eyebrow}</p><h2 className="font-serif text-4xl leading-[1.08] md:text-6xl">{title}</h2>{copy && <p className={`mt-5 text-base leading-7 ${light ? 'text-[#d4d9d9]' : 'text-[#68727b]'}`}>{copy}</p>}</div>;
+}
+
+function PublicHeader({ hasScrolled, onBook }: { hasScrolled: boolean; onBook: () => void }) {
+  const [menu, setMenu] = useState(false);
+  const homeHref = (hash: string) => `${publicBasePath}${hash}`;
+
+  return (
+    <header className={`fixed left-0 right-0 top-0 z-40 border-b text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${hasScrolled ? 'border-[#AF9275]/35 bg-[#202C3B]/90 shadow-[0_10px_30px_rgba(32,44,59,.16)] backdrop-blur-md' : 'border-white/20 bg-transparent'}`}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
+        <a href={homeHref('#inicio')} data-testid="link-home" className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></a>
+        <nav className="hidden items-center gap-8 text-xs uppercase tracking-[.2em] md:flex"><a data-testid="link-services" href={homeHref('#servicios')}>Tratamientos</a><a data-testid="link-space" href={homeHref('#espacio')}>El espacio</a><a data-testid="link-team" href={homeHref('#equipo')}>Especialistas</a><a data-testid="link-contact" href={homeHref('#contacto')}>Contacto</a></nav>
+        <Button testId="button-book-header" variant="gold" onClick={onBook}>Agendar valoración <ArrowRight size={15}/></Button>
+        <button data-testid="button-mobile-menu" onClick={() => setMenu(!menu)} className="ml-2 md:hidden"><Menu size={23}/></button>
+      </div>
+      {menu && <nav className="flex flex-col gap-5 bg-[#2F4055] px-6 py-6 text-sm uppercase tracking-widest md:hidden"><a href={homeHref('#servicios')} onClick={() => setMenu(false)}>Tratamientos</a><a href={homeHref('#espacio')} onClick={() => setMenu(false)}>El espacio</a><a href={homeHref('#equipo')} onClick={() => setMenu(false)}>Especialistas</a><a href={homeHref('#contacto')} onClick={() => setMenu(false)}>Contacto</a></nav>}
+    </header>
+  );
+}
+
+function PublicFooter({ site }: { site: any }) {
+  return (
+    <footer className="bg-[#202c3a] px-5 py-12 text-[#F2F2F0] md:px-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:items-end md:justify-between">
+        <div>
+          <div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></div>
+          <p className="mt-5 max-w-xs text-sm leading-6 text-[#bdc5c8]">{site.tagline}</p>
+        </div>
+        <div className="text-sm text-[#bdc5c8] md:text-right">
+          <p>{site.address}</p>
+          <p className="mt-2">{site.hours}</p>
+          <div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div>
+        </div>
+      </div>
+      <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/15 pt-5 text-xs text-[#82909a] md:flex-row md:items-center md:justify-between">
+        <span>© {new Date().getFullYear()} Nova Skin · Estética avanzada, bienestar real.</span>
+        <a href={privacyPolicyPath} data-testid="link-footer-privacy" className="transition-colors hover:text-[#F2F2F0]">Política de Privacidad</a>
+      </div>
+    </footer>
+  );
 }
 
 function HoverVideo({ src, poster, title }: { src: string; poster?: string; title: string }) {
@@ -728,15 +769,7 @@ function PublicSite() {
   const faqQuestionWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una pregunta sobre los servicios de Nova Skin.')}`;
   const faqAskWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una duda y me gustaría recibir información sobre Nova Skin.')}`;
   return <div className="nova-grain overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
-    <header className={`fixed left-0 right-0 top-0 z-40 border-b text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${hasScrolled ? 'border-[#AF9275]/35 bg-[#202C3B]/90 shadow-[0_10px_30px_rgba(32,44,59,.16)] backdrop-blur-md' : 'border-white/20 bg-transparent'}`}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
-        <a href="#inicio" data-testid="link-home" className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></a>
-        <nav className="hidden items-center gap-8 text-xs uppercase tracking-[.2em] md:flex"><a data-testid="link-services" href="#servicios">Tratamientos</a><a data-testid="link-space" href="#espacio">El espacio</a><a data-testid="link-team" href="#equipo">Especialistas</a><a data-testid="link-contact" href="#contacto">Contacto</a></nav>
-        <Button testId="button-book-header" variant="gold" onClick={scrollToContact}>Agendar valoración <ArrowRight size={15}/></Button>
-        <button data-testid="button-mobile-menu" onClick={() => setMenu(!menu)} className="ml-2 md:hidden"><Menu size={23}/></button>
-      </div>
-      {menu && <nav className="flex flex-col gap-5 bg-[#2F4055] px-6 py-6 text-sm uppercase tracking-widest md:hidden"><a href="#servicios" onClick={() => setMenu(false)}>Tratamientos</a><a href="#espacio" onClick={() => setMenu(false)}>El espacio</a><a href="#equipo" onClick={() => setMenu(false)}>Especialistas</a><a href="#contacto" onClick={() => setMenu(false)}>Contacto</a></nav>}
-    </header>
+    <PublicHeader hasScrolled={hasScrolled} onBook={scrollToContact} />
     <main>
         <section id="inicio" className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#2F4055] px-5 pb-14 pt-32 md:px-10 md:pb-24">
          <video
@@ -782,9 +815,9 @@ function PublicSite() {
       {specialists.length > 0 && <section id="equipo" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="NUESTRO EQUIPO" title="Profesionales dedicadas al cuidado de tu piel."/><div className="mt-12 grid gap-10 md:grid-cols-2">{specialists.slice(0, 2).map((s, i) => <div key={s.id}><div className="arch aspect-[.92] overflow-hidden bg-[#AF9275]"><img src={s.photoUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"/></div><p className="mt-5 text-xs uppercase tracking-widest text-[#BB9445]">{s.specialty}</p><h3 className="mt-2 font-serif text-2xl md:text-3xl">{s.name}</h3>{s.bio && <p className="mt-2 text-sm leading-6 text-[#68727b]">{s.bio}</p>}</div>)}</div></div></section>}
        <ReviewsSection reviews={testimonials} />
        <FaqSection onBook={scrollToContact} whatsappHref={faqAskWhatsAppHref} questionWhatsappHref={faqQuestionWhatsAppHref} />
-       <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
+        <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div><p className="mt-5 text-xs leading-5 text-[#68727b]">Al enviar esta información, reconoces haber leído la <a href={privacyPolicyPath} className="font-semibold text-[#2F4055] underline decoration-[#BB9445] underline-offset-2 hover:text-[#BB9445]">Política de Privacidad</a>.</p>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
     </main>
-    <footer className="bg-[#202c3a] px-5 py-12 text-[#F2F2F0] md:px-10"><div className="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:items-end md:justify-between"><div><div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#BB9445] font-serif text-xl text-[#BB9445]">N</span><span className="text-sm font-bold tracking-[.24em]">NOVA SKIN</span></div><p className="mt-5 max-w-xs text-sm leading-6 text-[#bdc5c8]">{site.tagline}</p></div><div className="text-sm text-[#bdc5c8] md:text-right"><p>{site.address}</p><p className="mt-2">{site.hours}</p><div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div></div></div><div className="mx-auto mt-10 max-w-7xl border-t border-white/15 pt-5 text-xs text-[#82909a]">© {new Date().getFullYear()} Nova Skin · Estética avanzada, bienestar real.</div></footer>
+     <PublicFooter site={site} />
      {selectedTreatment && <TreatmentDetailsModal treatment={selectedTreatment} onClose={() => setSelectedTreatment(null)} />}
      {isFacialDetailsOpen && (
        <FacialCleansingDetailsModal
@@ -807,12 +840,128 @@ function AdminRoute({ component: Component, path }: any) {
   );
 }
 
+function PrivacyPolicyPage() {
+  const { data } = useGetSite();
+  const site: any = data?.settings ? normalizeVisibleBrandText(data.settings) : fallback;
+  const phone = site.phone || fallback.phone;
+  const whatsapp = String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '');
+  const email = site.email && site.email !== fallback.email ? site.email : 'Pendiente de proporcionar por Nova Skin';
+  const whatsappHref = `https://wa.me/${whatsapp}`;
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    const description = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    const createdDescription = !description;
+    const pageDescription = description || document.head.appendChild(document.createElement('meta'));
+    pageDescription.setAttribute('name', 'description');
+    pageDescription.setAttribute('content', 'Política de Privacidad de Nova Skin Med Spa.');
+    document.title = 'Política de Privacidad | Nova Skin';
+
+    return () => {
+      document.title = previousTitle;
+      if (createdDescription) pageDescription.remove();
+    };
+  }, []);
+
+  return (
+    <div className="nova-grain min-h-screen overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
+      <PublicHeader hasScrolled onBook={() => { window.location.href = `${publicBasePath}#contacto`; }} />
+      <main className="px-5 pb-20 pt-36 md:px-10 md:pb-28 md:pt-44">
+        <div className="mx-auto max-w-7xl">
+          <div className="border-b border-[#AF9275]/45 pb-12 md:pb-16">
+            <SectionHeading
+              eyebrow="INFORMACIÓN LEGAL"
+              title="Política de Privacidad"
+              copy="En Nova Skin cuidamos la información que compartes con nosotros. Este aviso describe, de forma clara, cómo se utiliza la información en este sitio."
+            />
+            <p className="mt-8 text-xs uppercase tracking-[.16em] text-[#AF9275]">Última actualización: pendiente de proporcionar por Nova Skin.</p>
+          </div>
+
+          <div className="mt-12 grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
+            <aside className="h-fit lg:sticky lg:top-32">
+              <p className="text-[11px] font-bold uppercase tracking-[.28em] text-[#BB9445]">Contenido</p>
+              <p className="mt-5 max-w-xs text-sm leading-7 text-[#68727b]">La información marcada como pendiente debe ser completada y validada por Nova Skin antes de publicar una versión definitiva del aviso.</p>
+            </aside>
+
+            <div className="space-y-12 md:space-y-14">
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">1. Responsable del tratamiento de datos</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">El responsable del tratamiento es <strong className="font-semibold text-[#2F4055]">pendiente de proporcionar</strong>. La razón social, el nombre del responsable y el domicilio específico para efectos de privacidad aún no están definidos en la información disponible del proyecto.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">2. Datos personales recopilados</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">Cuando utilizas el formulario de contacto, el sitio solicita tu nombre, teléfono y mensaje; el correo electrónico es opcional. Si eliges comunicarte por WhatsApp, la conversación puede incluir los datos que decidas compartir directamente en ese servicio.</p>
+                <p className="mt-4 text-base leading-8 text-[#68727b]">El inventario de datos técnicos de navegación, registros del servidor y proveedores que pudieran procesarlos queda <strong className="font-semibold text-[#2F4055]">pendiente de validación</strong>.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">3. Finalidad del uso de los datos</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">La información se utiliza para recibir y responder consultas, dar seguimiento a solicitudes de información, orientar sobre tratamientos y atender solicitudes de valoración o cita. También puede utilizarse para operar, mantener y proteger las funciones del sitio.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">4. Formularios y solicitudes de citas</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">El formulario disponible actualmente permite enviar una consulta a Nova Skin. En el sitio no se identifica un formulario independiente de agenda: las solicitudes de cita o valoración pueden iniciar mediante el formulario de contacto o mediante WhatsApp, y la disponibilidad se confirma posteriormente por el equipo.</p>
+                <p className="mt-4 text-base leading-8 text-[#68727b]">Al enviar el formulario, reconoces haber leído este aviso. No se agregó una casilla de aceptación porque el formulario actual no la utiliza para funcionar.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">5. Contacto mediante WhatsApp</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">El sitio ofrece enlaces para iniciar una conversación en WhatsApp. Al utilizarlos, compartes información con el proveedor de ese servicio conforme a sus propias políticas. Nova Skin recibirá los datos que decidas enviar en la conversación y los utilizará para atender tu solicitud.</p>
+                <a href={whatsappHref} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[.16em] text-[#2F4055] underline decoration-[#BB9445] underline-offset-4 hover:text-[#BB9445]">Contactar por WhatsApp <ArrowRight size={15}/></a>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">6. Cookies y tecnologías similares</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">En la versión actual del sitio no se identifica código propio de cookies publicitarias o analíticas ni un banner de consentimiento. El uso de cookies o tecnologías similares que pudiera realizar el alojamiento, el navegador o servicios de terceros queda <strong className="font-semibold text-[#2F4055]">pendiente de revisión</strong> y deberá incorporarse a este aviso si aplica.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">7. Protección de la información</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">Nova Skin debe aplicar medidas razonables de seguridad administrativas, técnicas y físicas para proteger la información contra daño, pérdida, alteración, destrucción o acceso no autorizado. Los responsables, plazos de conservación y medidas específicas quedan pendientes de documentar por Nova Skin.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">8. Derechos ARCO</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">Puedes solicitar el acceso a tus datos personales, su rectificación cuando sean incorrectos o estén incompletos, su cancelación cuando consideres que no deben continuar en tratamiento y oponerte a su uso para finalidades específicas, conforme a la legislación aplicable.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">9. Medios para ejercer esos derechos</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">El medio de contacto actualmente disponible es el teléfono y WhatsApp de Nova Skin: <a href={`tel:${phone}`} className="font-semibold text-[#2F4055] underline decoration-[#BB9445] underline-offset-4">{phone}</a>. El correo electrónico y el procedimiento formal para recibir, validar y responder solicitudes ARCO quedan <strong className="font-semibold text-[#2F4055]">pendientes de proporcionar</strong>.</p>
+              </article>
+
+              <article>
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">10. Cambios al aviso de privacidad</h2>
+                <p className="mt-5 text-base leading-8 text-[#68727b]">Nova Skin podrá actualizar este aviso cuando cambien sus procesos, servicios o las disposiciones aplicables. Las modificaciones se publicarán en esta misma página. La fecha de entrada en vigor y el historial de cambios quedan pendientes de definir.</p>
+              </article>
+
+              <article className="border-t border-[#AF9275]/45 pt-10">
+                <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">11. Datos de contacto</h2>
+                <div className="mt-5 space-y-2 text-base leading-8 text-[#68727b]">
+                  <p><strong className="font-semibold text-[#2F4055]">Teléfono:</strong> <a href={`tel:${phone}`} className="underline decoration-[#BB9445] underline-offset-4">{phone}</a></p>
+                  <p><strong className="font-semibold text-[#2F4055]">WhatsApp:</strong> <a href={whatsappHref} target="_blank" rel="noreferrer" className="underline decoration-[#BB9445] underline-offset-4">{phone}</a></p>
+                  <p><strong className="font-semibold text-[#2F4055]">Domicilio:</strong> <span className="whitespace-pre-line">{site.address}</span></p>
+                  <p><strong className="font-semibold text-[#2F4055]">Correo electrónico:</strong> {email}</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+      <PublicFooter site={site} />
+    </div>
+  );
+}
+
 function Router() {
   return (
     // Keep a shared shell (sidebar, navbar) outside the boundary so it
     // survives a page crash.
     <RoutedErrorBoundary>
       <Switch>
+        <Route path="/politica-de-privacidad" component={PrivacyPolicyPage} />
         <Route path="/" component={PublicSite} />
         <Route path="/admin/login" component={Login} />
         <AdminRoute path="/admin" component={Dashboard} />
