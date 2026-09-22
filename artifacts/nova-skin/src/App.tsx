@@ -687,7 +687,6 @@ function PublicSite() {
       ? site.heroDescription
       : fallback.heroDescription,
   };
-  const [menu, setMenu] = useState(false);
   const [lightbox, setLightbox] = useState<any>(null);
   const [sent, setSent] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
