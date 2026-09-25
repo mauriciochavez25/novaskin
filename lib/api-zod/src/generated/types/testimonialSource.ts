@@ -12,4 +12,5 @@ export type TestimonialSource = typeof TestimonialSource[keyof typeof Testimonia
 export const TestimonialSource = {
   manual: 'manual',
   google: 'google',
+  draft: 'draft',
 } as const;

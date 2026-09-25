@@ -1,5 +1,6 @@
 import app from "./app";
 import { logger } from "./lib/logger";
+import { startGoogleBusinessReviewAutoSync } from "./lib/googleBusinessReviews";
 
 const rawPort = process.env["PORT"];
 
@@ -14,6 +15,8 @@ const port = Number(rawPort);
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
+
+startGoogleBusinessReviewAutoSync();
 
 app.listen(port, (err) => {
   if (err) {

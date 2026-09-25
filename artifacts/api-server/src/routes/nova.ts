@@ -1,5 +1,5 @@
 import { Router, type IRouter, type RequestHandler } from "express";
-import { and, asc, count, desc, eq, gte, lte, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, gte, isNull, lte, sql } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import { db } from "@workspace/db";
 import {
@@ -50,6 +50,7 @@ import {
   ListVideosResponse,
   LookupGoogleReviewsBody,
   LookupGoogleReviewsResponse,
+  ListGoogleBusinessLocationsResponse,
   LoginBody,
   LoginResponse,
   UpdateContactMessageBody,
@@ -78,6 +79,8 @@ import {
   UpdateVideoParams,
   UpdateVideoResponse,
   SyncGoogleReviewsResponse,
+  StartGoogleBusinessProfileConnectionResponse,
+  DisconnectGoogleBusinessProfileResponse,
 } from "@workspace/api-zod";
 import {
   clearAdminCookie,
@@ -86,6 +89,14 @@ import {
   setAdminCookie,
   validateAdminPassword,
 } from "../lib/adminAuth";
+import {
+  completeGoogleAuthorization,
+  createGoogleAuthorizationUrl,
+  disconnectGoogleBusinessProfile,
+  GoogleBusinessProfileError,
+  listGoogleBusinessLocations,
+  syncGoogleBusinessReviews,
+} from "../lib/googleBusinessReviews";
 
 const router: IRouter = Router();
 
@@ -152,13 +163,100 @@ async function ensureSeeded() {
          { name: "María Muñiz Montemayor", specialty: "Lic. en Cosmetología", bio: "", photoUrl: media("treatment-room.png"), instagram: null, active: true },
       ]);
     }
-    const [testimonial] = await db.select({ id: testimonials.id }).from(testimonials).limit(1);
-    if (!testimonial) {
-      await db.insert(testimonials).values([
-        { name: "Mariana R.", comment: "Desde la primera valoración sentí que por fin estaban escuchando mi piel. El resultado fue natural y la experiencia, preciosa.", rating: 5, photoUrl: null, active: true },
-        { name: "Alejandra G.", comment: "Nova Skin se siente diferente: profesional, cálida y muy cuidadosa con cada detalle.", rating: 5, photoUrl: null, active: true },
-      ]);
-    }
+    await db.transaction(async (tx) => {
+      const [reviewSettings] = await tx.select().from(googleReviewSettings).limit(1).for("update");
+      if (!reviewSettings || reviewSettings.exampleDraftsSeededAt) return;
+      const retiredSeedReviews = [
+      {
+        name: "Mariana R.",
+        comment: "Desde la primera valoración sentí que por fin estaban escuchando mi piel. El resultado fue natural y la experiencia, preciosa.",
+      },
+      {
+        name: "Alejandra G.",
+        comment: "Nova Skin se siente diferente: profesional, cálida y muy cuidadosa con cada detalle.",
+      },
+    ];
+      for (const oldReview of retiredSeedReviews) {
+        await tx.update(testimonials)
+        .set({
+          source: "draft",
+          active: false,
+          updatedAt: new Date(),
+        })
+        .where(and(
+          eq(testimonials.name, oldReview.name),
+          eq(testimonials.comment, oldReview.comment),
+          eq(testimonials.source, "manual"),
+          eq(testimonials.active, true),
+          isNull(testimonials.externalId),
+          eq(testimonials.updatedAt, testimonials.createdAt),
+        ));
+      }
+      const draftReviews = [
+      {
+        key: "limpieza-facial",
+        treatment: "Limpieza facial profunda",
+        comment: "BORRADOR NO REAL. Plantilla: «Después de mi limpieza facial, sentí la piel más fresca y luminosa». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "valoracion-facial",
+        treatment: "Valoración facial",
+        comment: "BORRADOR NO REAL. Plantilla: «La valoración me ayudó a entender qué necesitaba mi piel y qué opciones tenía». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "toxina-botulinica",
+        treatment: "Toxina botulínica",
+        comment: "BORRADOR NO REAL. Plantilla: «Me explicaron el procedimiento con claridad y el resultado quedó natural». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "bioestimuladores",
+        treatment: "Bioestimuladores",
+        comment: "BORRADOR NO REAL. Plantilla: «Me sentí acompañada durante mi tratamiento y el plan fue claro desde el inicio». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "pdrn-salmon",
+        treatment: "PDRN de salmón",
+        comment: "BORRADOR NO REAL. Plantilla: «Me explicaron para qué servía el tratamiento y cómo sería el cuidado posterior». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "skin-booster",
+        treatment: "Skin booster",
+        comment: "BORRADOR NO REAL. Plantilla: «La atención fue cuidadosa y recibí indicaciones claras para después de mi sesión». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "nctf-revitalizante",
+        treatment: "NCTF revitalizante",
+        comment: "BORRADOR NO REAL. Plantilla: «Me gustó que adaptaran la sesión a las necesidades de mi piel». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+      {
+        key: "mesoterapia-capilar",
+        treatment: "Mesoterapia capilar",
+        comment: "BORRADOR NO REAL. Plantilla: «Me explicaron el plan de sesiones y resolvieron mis dudas antes de comenzar». Sustituir por la experiencia literal de una clienta y obtener su autorización antes de publicar.",
+      },
+    ];
+      for (const draft of draftReviews) {
+        const externalId = `draft-example:${draft.key}`;
+        const [existingDraft] = await tx.select({ id: testimonials.id })
+          .from(testimonials)
+          .where(eq(testimonials.externalId, externalId))
+          .limit(1);
+        if (!existingDraft) {
+          await tx.insert(testimonials).values({
+            name: `BORRADOR INTERNO · ${draft.treatment}`,
+            comment: draft.comment,
+            rating: 5,
+            photoUrl: null,
+            source: "draft",
+            externalId,
+            reviewDate: null,
+            active: false,
+          });
+        }
+      }
+      await tx.update(googleReviewSettings)
+        .set({ exampleDraftsSeededAt: new Date() })
+        .where(eq(googleReviewSettings.id, reviewSettings.id));
+    });
     const [promotion] = await db.select({ id: promotions.id }).from(promotions).limit(1);
     if (!promotion) {
       await db.insert(promotions).values([
@@ -244,10 +342,69 @@ function normalizeService(row: typeof services.$inferSelect) {
   return { ...row, price: row.price === null ? null : Number(row.price) };
 }
 
+function publicGoogleReviewSettings(row: typeof googleReviewSettings.$inferSelect) {
+  const { businessProfileRefreshToken, ...safeSettings } = row;
+  return {
+    ...safeSettings,
+    businessProfileConnected: Boolean(businessProfileRefreshToken),
+  };
+}
+
 function crudRoutes<T extends Record<string, unknown>>(path: string, table: any, createSchema: { parse: (x: unknown) => T }, updateSchema: { parse: (x: unknown) => T }, responseSchema: { parse: (x: unknown) => unknown }, listSchema: { parse: (x: unknown) => unknown }) {
   admin.get(path, async (_req, res, next) => { try { const rows = await db.select().from(table).orderBy(desc(table.createdAt)); res.json(listSchema.parse(rows.map((row: any) => table === services ? normalizeService(row) : row))); } catch (error) { next(error); } });
   admin.post(path, async (req, res, next) => { try { const rows = await db.insert(table).values(createSchema.parse(req.body)).returning() as unknown as any[]; const row = rows[0]; res.status(201).json(responseSchema.parse(table === services ? normalizeService(row) : row)); } catch (error) { next(error); } });
-  admin.patch(`${path}/:id`, async (req, res, next) => { try { const id = Number(req.params.id); const rows = await db.update(table).set({ ...updateSchema.parse(req.body), updatedAt: new Date() }).where(eq(table.id, id)).returning() as unknown as any[]; const row = rows[0]; if (!row) { res.status(404).json({ error: "No encontrado" }); return; } res.json(responseSchema.parse(table === services ? normalizeService(row as typeof services.$inferSelect) : row)); } catch (error) { next(error); } });
+  admin.patch(`${path}/:id`, async (req, res, next) => { try {
+    const id = Number(req.params.id);
+    const input = updateSchema.parse(req.body);
+    if (table === testimonials) {
+      const testimonialInput = UpdateTestimonialBody.parse(req.body);
+      const result = await db.transaction(async (tx) => {
+        const [settings] = await tx.select().from(googleReviewSettings).limit(1).for("update");
+        const [existing] = await tx.select().from(testimonials)
+          .where(eq(testimonials.id, id)).limit(1).for("update");
+        if (!existing) return { status: 404, error: "No encontrado" };
+        if (existing.source === "draft" && testimonialInput.active) {
+          return { status: 400, error: "Los borradores de ejemplo no se pueden publicar. Sustitúyelos por opiniones reales autorizadas." };
+        }
+        if (existing.source === "google") {
+          const currentLocationPrefix = settings?.businessAccountName && settings.businessLocationName
+            ? `${settings.businessAccountName}/${settings.businessLocationName}/reviews/`
+            : null;
+          if (
+            testimonialInput.active &&
+            (!settings?.businessProfileRefreshToken || !currentLocationPrefix ||
+              !existing.externalId?.startsWith(currentLocationPrefix))
+          ) {
+            return { status: 400, error: "Esta reseña pertenece a otra ficha o la cuenta está desconectada." };
+          }
+          const [row] = await tx.update(testimonials)
+            .set({
+              active: testimonialInput.active,
+              visibilityOverride: testimonialInput.active,
+              updatedAt: new Date(),
+            })
+            .where(eq(testimonials.id, id))
+            .returning();
+          return { row };
+        }
+        const [row] = await tx.update(testimonials)
+          .set({ ...testimonialInput, updatedAt: new Date() })
+          .where(eq(testimonials.id, id))
+          .returning();
+        return { row };
+      });
+      if ("error" in result) {
+        res.status(result.status ?? 400).json({ error: result.error });
+        return;
+      }
+      res.json(responseSchema.parse(result.row));
+      return;
+    }
+    const rows = await db.update(table).set({ ...input, updatedAt: new Date() }).where(eq(table.id, id)).returning() as unknown as any[];
+    const row = rows[0];
+    if (!row) { res.status(404).json({ error: "No encontrado" }); return; }
+    res.json(responseSchema.parse(table === services ? normalizeService(row as typeof services.$inferSelect) : row));
+  } catch (error) { next(error); } });
   admin.delete(`${path}/:id`, async (req, res, next) => { try { await db.delete(table).where(eq(table.id, Number(req.params.id))); res.status(204).end(); } catch (error) { next(error); } });
 }
 
@@ -263,7 +420,11 @@ admin.put("/settings", async (req, res, next) => { try { const [row] = await db.
 admin.get("/google-reviews/settings", async (_req, res, next) => {
   try {
     const [row] = await db.select().from(googleReviewSettings).limit(1);
-    res.json(GetGoogleReviewSettingsResponse.parse(row));
+    if (!row) {
+      res.status(404).json({ error: "Configuración de reseñas no encontrada" });
+      return;
+    }
+    res.json(GetGoogleReviewSettingsResponse.parse(publicGoogleReviewSettings(row)));
   } catch (error) {
     next(error);
   }
@@ -271,15 +432,36 @@ admin.get("/google-reviews/settings", async (_req, res, next) => {
 admin.put("/google-reviews/settings", async (req, res, next) => {
   try {
     const input = UpdateGoogleReviewSettingsBody.parse(req.body);
-    const [existing] = await db.select().from(googleReviewSettings).limit(1);
-    const update = {
-      ...input,
-      updatedAt: new Date(),
-    };
-    const [row] = existing
-      ? await db.update(googleReviewSettings).set(update).where(eq(googleReviewSettings.id, existing.id)).returning()
-      : await db.insert(googleReviewSettings).values({ minRating: input.minRating ?? 4, ...input }).returning();
-    res.json(UpdateGoogleReviewSettingsResponse.parse(row));
+    const row = await db.transaction(async (tx) => {
+      const [existing] = await tx.select().from(googleReviewSettings).limit(1).for("update");
+      const locationChanged = Boolean(
+        existing &&
+        input.businessLocationName !== undefined &&
+        (
+          input.businessAccountName !== existing.businessAccountName ||
+          input.businessLocationName !== existing.businessLocationName
+        ),
+      );
+      if (locationChanged) {
+        await tx.update(testimonials)
+          .set({ active: false, updatedAt: new Date() })
+          .where(eq(testimonials.source, "google"));
+      }
+      const update = {
+        ...input,
+        ...(locationChanged ? { lastSyncedAt: null, totalReviewCount: 0 } : {}),
+        updatedAt: new Date(),
+      };
+      const [updated] = existing
+        ? await tx.update(googleReviewSettings).set(update).where(eq(googleReviewSettings.id, existing.id)).returning()
+        : await tx.insert(googleReviewSettings).values({ minRating: input.minRating ?? 4, ...input }).returning();
+      return updated;
+    });
+    if (!row) {
+      res.status(500).json({ error: "No se pudo guardar la configuración" });
+      return;
+    }
+    res.json(UpdateGoogleReviewSettingsResponse.parse(publicGoogleReviewSettings(row)));
   } catch (error) {
     next(error);
   }
@@ -341,101 +523,75 @@ admin.post("/google-reviews/lookup", async (req, res, next) => {
   }
 });
 
-admin.post("/google-reviews/sync", async (_req, res, next) => {
+admin.post("/google-reviews/connect", async (req, res, next) => {
   try {
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-    if (!apiKey) {
-      res.status(503).json({ error: "Google Maps API key is not configured" });
+    res.json(StartGoogleBusinessProfileConnectionResponse.parse(await createGoogleAuthorizationUrl(req)));
+  } catch (error) {
+    if (error instanceof GoogleBusinessProfileError) {
+      res.status(error.status).json({ error: error.message });
       return;
     }
-    const [settings] = await db.select().from(googleReviewSettings).limit(1);
-    if (!settings?.placeId) {
-      res.status(400).json({ error: "A Google place must be configured before syncing reviews" });
-      return;
-    }
-
-    const response = await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(settings.placeId)}`, {
-      headers: {
-        "X-Goog-Api-Key": apiKey,
-        "X-Goog-FieldMask": "id,displayName,formattedAddress,googleMapsUri,reviews",
-      },
-    });
-    if (!response.ok) {
-      res.status(502).json({ error: "Google Places sync failed" });
-      return;
-    }
-    const place = (await response.json()) as GooglePlace;
-    const syncedAt = new Date();
-    let syncedCount = 0;
-    for (const review of place.reviews ?? []) {
-      const rating = typeof review.rating === "number" ? Math.round(review.rating) : 0;
-      const comment = review.text?.text?.trim() || review.originalText?.text?.trim() || "";
-      const externalId = review.name?.trim();
-      if (!externalId || !comment || !review.authorAttribution?.displayName || rating < 1 || rating > 5) {
-        continue;
-      }
-      const reviewDate = review.publishTime ? new Date(review.publishTime) : null;
-      const normalizedReviewDate = reviewDate && !Number.isNaN(reviewDate.getTime()) ? reviewDate : null;
-      const [existingReview] = await db
-        .select({ id: testimonials.id })
-        .from(testimonials)
-        .where(eq(testimonials.externalId, externalId))
-        .limit(1);
-      if (existingReview) {
-        await db.update(testimonials)
-          .set({
-            name: review.authorAttribution.displayName,
-            comment,
-            rating,
-            photoUrl: review.authorAttribution.photoUri ?? null,
-            source: "google",
-            reviewDate: normalizedReviewDate,
-            updatedAt: syncedAt,
-          })
-          .where(eq(testimonials.id, existingReview.id));
-      } else {
-        await db.insert(testimonials).values({
-          name: review.authorAttribution.displayName,
-          comment,
-          rating,
-          photoUrl: review.authorAttribution.photoUri ?? null,
-          source: "google",
-          externalId,
-          reviewDate: normalizedReviewDate,
-          active: rating >= settings.minRating,
-        });
-      }
-      syncedCount += 1;
-    }
-
-    const settingsUpdate: {
-      placeName?: string;
-      formattedAddress?: string;
-      googleMapsUrl?: string;
-      lastSyncedAt: Date;
-      updatedAt: Date;
-    } = {
-      lastSyncedAt: syncedAt,
-      updatedAt: syncedAt,
-    };
-    if (place.displayName?.text) settingsUpdate.placeName = place.displayName.text;
-    if (place.formattedAddress) settingsUpdate.formattedAddress = place.formattedAddress;
-    if (place.googleMapsUri) settingsUpdate.googleMapsUrl = place.googleMapsUri;
-    const [updatedSettings] = await db.update(googleReviewSettings)
-      .set(settingsUpdate)
-      .where(eq(googleReviewSettings.id, settings.id))
-      .returning();
-    res.json(SyncGoogleReviewsResponse.parse({
-      syncedCount,
-      lastSyncedAt: updatedSettings?.lastSyncedAt ?? syncedAt,
+    next(error);
+  }
+});
+admin.get("/google-reviews/locations", async (_req, res, next) => {
+  try {
+    res.json(ListGoogleBusinessLocationsResponse.parse({
+      locations: await listGoogleBusinessLocations(),
     }));
   } catch (error) {
+    if (error instanceof GoogleBusinessProfileError) {
+      res.status(error.status).json({ error: error.message });
+      return;
+    }
+    next(error);
+  }
+});
+admin.post("/google-reviews/disconnect", async (_req, res, next) => {
+  try {
+    const row = await disconnectGoogleBusinessProfile();
+    res.json(DisconnectGoogleBusinessProfileResponse.parse(publicGoogleReviewSettings(row)));
+  } catch (error) {
+    if (error instanceof GoogleBusinessProfileError) {
+      res.status(error.status).json({ error: error.message });
+      return;
+    }
+    next(error);
+  }
+});
+admin.post("/google-reviews/sync", async (_req, res, next) => {
+  try {
+    res.json(SyncGoogleReviewsResponse.parse(await syncGoogleBusinessReviews()));
+  } catch (error) {
+    if (error instanceof GoogleBusinessProfileError) {
+      res.status(error.status).json({ error: error.message });
+      return;
+    }
     next(error);
   }
 });
 admin.get("/messages", async (_req, res, next) => { try { const rows = await db.select().from(contactMessages).orderBy(desc(contactMessages.createdAt)); res.json(ListContactMessagesResponse.parse(rows)); } catch (error) { next(error); } });
 admin.patch("/messages/:id", async (req, res, next) => { try { const params = UpdateContactMessageParams.parse(req.params); const [row] = await db.update(contactMessages).set({ ...UpdateContactMessageBody.parse(req.body), updatedAt: new Date() }).where(eq(contactMessages.id, params.id)).returning(); res.json(UpdateContactMessageResponse.parse(row)); } catch (error) { next(error); } });
 admin.delete("/messages/:id", async (req, res, next) => { try { const params = DeleteContactMessageParams.parse(req.params); await db.delete(contactMessages).where(eq(contactMessages.id, params.id)); res.status(204).end(); } catch (error) { next(error); } });
+
+router.get("/admin/google-reviews/oauth/callback", async (req, res) => {
+  const state = typeof req.query.state === "string" ? req.query.state : "";
+  const code = typeof req.query.code === "string" ? req.query.code : "";
+  if (!state || !code || req.query.error) {
+    res.redirect(303, "/admin/testimonials?google=authorization-error");
+    return;
+  }
+  try {
+    await completeGoogleAuthorization(req, state, code);
+    res.redirect(303, "/admin/testimonials?google=connected");
+  } catch (error) {
+    req.log.error(
+      { err: error instanceof Error ? error.message : "Unknown OAuth error" },
+      "Google Business Profile authorization failed",
+    );
+    res.redirect(303, "/admin/testimonials?google=authorization-error");
+  }
+});
 
 void DeleteGalleryImageParams; void DeletePromotionParams; void DeleteServiceParams; void DeleteSpecialistParams; void DeleteTestimonialParams; void DeleteVideoParams; void UpdateGalleryImageParams; void UpdatePromotionParams; void UpdateServiceParams; void UpdateSpecialistParams; void UpdateTestimonialParams; void UpdateVideoParams; void UpdateContactMessageBody; void CreateContactMessageResponse; void UpdateContactMessageBody; void now;
 

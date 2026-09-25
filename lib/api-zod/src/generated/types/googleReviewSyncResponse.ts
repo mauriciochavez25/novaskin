@@ -9,5 +9,8 @@
 export interface GoogleReviewSyncResponse {
   /** @minimum 0 */
   syncedCount: number;
+  /** @minimum 0 */
+  totalReviewCount: number;
+  skippedUntilThreshold: boolean;
   lastSyncedAt: Date;
 }

@@ -1,3 +1,3 @@
 - [Revisión de placeholders visuales](placeholder-review.md) — inspeccionar imágenes temporales localmente y retirar marcas visibles antes de presentar una sección.
 - [Alcance de secciones aisladas](section-scope.md) — no mezclar funcionalidades pendientes de secciones vecinas en una implementación acotada.
-- [Sincronización segura de reseñas](review-sync-migration.md) — evitar restricciones que obliguen a truncar testimonios existentes al deduplicar reseñas externas.
+- [Sincronización segura de reseñas](review-sync-migration.md) — conservar datos al deduplicar y usar Business Profile OAuth paginado cuando se requieran más de cinco reseñas.

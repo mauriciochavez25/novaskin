@@ -220,6 +220,44 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/GoogleReviewSettings" }
+  /admin/google-reviews/connect:
+    post:
+      operationId: startGoogleBusinessProfileConnection
+      tags: [admin]
+      summary: Start Google Business Profile OAuth
+      responses:
+        "200":
+          description: Authorization URL and redirect URI
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleBusinessConnectResponse" }
+        "503":
+          description: OAuth client credentials are not configured
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorEnvelope" }
+  /admin/google-reviews/locations:
+    get:
+      operationId: listGoogleBusinessLocations
+      tags: [admin]
+      summary: List locations available to the connected Google account
+      responses:
+        "200":
+          description: Verified Business Profile locations
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleBusinessLocationsResponse" }
+  /admin/google-reviews/disconnect:
+    post:
+      operationId: disconnectGoogleBusinessProfile
+      tags: [admin]
+      summary: Disconnect Google Business Profile
+      responses:
+        "200":
+          description: Connection removed
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoogleReviewSettings" }
   /admin/google-reviews/lookup:
     post:
       operationId: lookupGoogleReviews
@@ -819,12 +857,13 @@ components:
         comment: { type: string }
         rating: { type: integer, minimum: 1, maximum: 5 }
         photoUrl: { type: ["string", "null"] }
-        source: { type: string, enum: [manual, google] }
+        source: { type: string, enum: [manual, google, draft] }
         externalId: { type: ["string", "null"] }
         reviewDate: { type: ["string", "null"], format: date-time }
         active: { type: boolean }
+        visibilityOverride: { type: ["boolean", "null"] }
         createdAt: { type: string, format: date-time }
-      required: [id, name, comment, rating, photoUrl, source, externalId, reviewDate, active, createdAt]
+      required: [id, name, comment, rating, photoUrl, source, externalId, reviewDate, active, visibilityOverride, createdAt]
     TestimonialInput:
       type: object
       properties:
@@ -842,10 +881,19 @@ components:
         placeName: { type: ["string", "null"] }
         formattedAddress: { type: ["string", "null"] }
         googleMapsUrl: { type: ["string", "null"], format: uri }
+        businessProfileConnected: { type: boolean }
+        businessAccountName: { type: ["string", "null"] }
+        businessLocationName: { type: ["string", "null"] }
+        businessLocationTitle: { type: ["string", "null"] }
         minRating: { type: integer, minimum: 1, maximum: 5 }
+        autoSyncEnabled: { type: boolean }
+        autoSyncEveryMinutes: { type: integer, minimum: 5, maximum: 1440 }
+        autoSyncThreshold: { type: integer, minimum: 0, maximum: 1000000 }
+        totalReviewCount: { type: integer, minimum: 0 }
+        lastSyncError: { type: ["string", "null"] }
         lastSyncedAt: { type: ["string", "null"], format: date-time }
         updatedAt: { type: string, format: date-time }
-      required: [id, placeId, placeName, formattedAddress, googleMapsUrl, minRating, lastSyncedAt, updatedAt]
+      required: [id, placeId, placeName, formattedAddress, googleMapsUrl, businessProfileConnected, businessAccountName, businessLocationName, businessLocationTitle, minRating, autoSyncEnabled, autoSyncEveryMinutes, autoSyncThreshold, totalReviewCount, lastSyncError, lastSyncedAt, updatedAt]
     GoogleReviewSettingsInput:
       type: object
       properties:
@@ -854,6 +902,33 @@ components:
         formattedAddress: { type: ["string", "null"] }
         googleMapsUrl: { type: ["string", "null"], format: uri }
         minRating: { type: integer, minimum: 1, maximum: 5 }
+        businessAccountName: { type: ["string", "null"] }
+        businessLocationName: { type: ["string", "null"] }
+        businessLocationTitle: { type: ["string", "null"] }
+        autoSyncEnabled: { type: boolean }
+        autoSyncEveryMinutes: { type: integer, minimum: 5, maximum: 1440 }
+        autoSyncThreshold: { type: integer, minimum: 0, maximum: 1000000 }
+    GoogleBusinessConnectResponse:
+      type: object
+      properties:
+        authorizationUrl: { type: string, format: uri }
+        redirectUri: { type: string, format: uri }
+      required: [authorizationUrl, redirectUri]
+    GoogleBusinessLocation:
+      type: object
+      properties:
+        accountName: { type: string }
+        locationName: { type: string }
+        title: { type: string }
+        address: { type: ["string", "null"] }
+      required: [accountName, locationName, title, address]
+    GoogleBusinessLocationsResponse:
+      type: object
+      properties:
+        locations:
+          type: array
+          items: { $ref: "#/components/schemas/GoogleBusinessLocation" }
+      required: [locations]
     GoogleReviewLookupInput:
       type: object
       properties:
@@ -871,8 +946,10 @@ components:
       type: object
       properties:
         syncedCount: { type: integer, minimum: 0 }
+        totalReviewCount: { type: integer, minimum: 0 }
+        skippedUntilThreshold: { type: boolean }
         lastSyncedAt: { type: string, format: date-time }
-      required: [syncedCount, lastSyncedAt]
+      required: [syncedCount, totalReviewCount, skippedUntilThreshold, lastSyncedAt]
     ContactMessage:
       type: object
       properties:

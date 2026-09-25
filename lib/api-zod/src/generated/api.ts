@@ -99,10 +99,11 @@ export const GetSiteResponse = zod.object({
   "comment": zod.string(),
   "rating": zod.int().min(1).max(getSiteResponseTestimonialsItemRatingMax),
   "photoUrl": zod.string().nullable(),
-  "source": zod.enum(['manual', 'google']),
+  "source": zod.enum(['manual', 'google', 'draft']),
   "externalId": zod.string().nullable(),
   "reviewDate": zod.coerce.date().nullable(),
   "active": zod.boolean(),
+  "visibilityOverride": zod.boolean().nullable(),
   "createdAt": zod.coerce.date()
 }))
 })
@@ -296,6 +297,14 @@ export const UpdateSiteSettingsResponse = zod.object({
  */
 export const getGoogleReviewSettingsResponseMinRatingMax = 5;
 
+export const getGoogleReviewSettingsResponseAutoSyncEveryMinutesMin = 5;
+export const getGoogleReviewSettingsResponseAutoSyncEveryMinutesMax = 1440;
+
+export const getGoogleReviewSettingsResponseAutoSyncThresholdMin = 0;
+export const getGoogleReviewSettingsResponseAutoSyncThresholdMax = 1000000;
+
+export const getGoogleReviewSettingsResponseTotalReviewCountMin = 0;
+
 
 
 export const GetGoogleReviewSettingsResponse = zod.object({
@@ -304,7 +313,16 @@ export const GetGoogleReviewSettingsResponse = zod.object({
   "placeName": zod.string().nullable(),
   "formattedAddress": zod.string().nullable(),
   "googleMapsUrl": zod.url().nullable(),
+  "businessProfileConnected": zod.boolean(),
+  "businessAccountName": zod.string().nullable(),
+  "businessLocationName": zod.string().nullable(),
+  "businessLocationTitle": zod.string().nullable(),
   "minRating": zod.int().min(1).max(getGoogleReviewSettingsResponseMinRatingMax),
+  "autoSyncEnabled": zod.boolean(),
+  "autoSyncEveryMinutes": zod.int().min(getGoogleReviewSettingsResponseAutoSyncEveryMinutesMin).max(getGoogleReviewSettingsResponseAutoSyncEveryMinutesMax),
+  "autoSyncThreshold": zod.int().min(getGoogleReviewSettingsResponseAutoSyncThresholdMin).max(getGoogleReviewSettingsResponseAutoSyncThresholdMax),
+  "totalReviewCount": zod.int().min(getGoogleReviewSettingsResponseTotalReviewCountMin),
+  "lastSyncError": zod.string().nullable(),
   "lastSyncedAt": zod.coerce.date().nullable(),
   "updatedAt": zod.coerce.date()
 })
@@ -315,6 +333,12 @@ export const GetGoogleReviewSettingsResponse = zod.object({
  */
 export const updateGoogleReviewSettingsBodyMinRatingMax = 5;
 
+export const updateGoogleReviewSettingsBodyAutoSyncEveryMinutesMin = 5;
+export const updateGoogleReviewSettingsBodyAutoSyncEveryMinutesMax = 1440;
+
+export const updateGoogleReviewSettingsBodyAutoSyncThresholdMin = 0;
+export const updateGoogleReviewSettingsBodyAutoSyncThresholdMax = 1000000;
+
 
 
 export const UpdateGoogleReviewSettingsBody = zod.object({
@@ -322,10 +346,24 @@ export const UpdateGoogleReviewSettingsBody = zod.object({
   "placeName": zod.string().nullish(),
   "formattedAddress": zod.string().nullish(),
   "googleMapsUrl": zod.url().nullish(),
-  "minRating": zod.int().min(1).max(updateGoogleReviewSettingsBodyMinRatingMax).optional()
+  "minRating": zod.int().min(1).max(updateGoogleReviewSettingsBodyMinRatingMax).optional(),
+  "businessAccountName": zod.string().nullish(),
+  "businessLocationName": zod.string().nullish(),
+  "businessLocationTitle": zod.string().nullish(),
+  "autoSyncEnabled": zod.boolean().optional(),
+  "autoSyncEveryMinutes": zod.int().min(updateGoogleReviewSettingsBodyAutoSyncEveryMinutesMin).max(updateGoogleReviewSettingsBodyAutoSyncEveryMinutesMax).optional(),
+  "autoSyncThreshold": zod.int().min(updateGoogleReviewSettingsBodyAutoSyncThresholdMin).max(updateGoogleReviewSettingsBodyAutoSyncThresholdMax).optional()
 })
 
 export const updateGoogleReviewSettingsResponseMinRatingMax = 5;
+
+export const updateGoogleReviewSettingsResponseAutoSyncEveryMinutesMin = 5;
+export const updateGoogleReviewSettingsResponseAutoSyncEveryMinutesMax = 1440;
+
+export const updateGoogleReviewSettingsResponseAutoSyncThresholdMin = 0;
+export const updateGoogleReviewSettingsResponseAutoSyncThresholdMax = 1000000;
+
+export const updateGoogleReviewSettingsResponseTotalReviewCountMin = 0;
 
 
 
@@ -335,7 +373,74 @@ export const UpdateGoogleReviewSettingsResponse = zod.object({
   "placeName": zod.string().nullable(),
   "formattedAddress": zod.string().nullable(),
   "googleMapsUrl": zod.url().nullable(),
+  "businessProfileConnected": zod.boolean(),
+  "businessAccountName": zod.string().nullable(),
+  "businessLocationName": zod.string().nullable(),
+  "businessLocationTitle": zod.string().nullable(),
   "minRating": zod.int().min(1).max(updateGoogleReviewSettingsResponseMinRatingMax),
+  "autoSyncEnabled": zod.boolean(),
+  "autoSyncEveryMinutes": zod.int().min(updateGoogleReviewSettingsResponseAutoSyncEveryMinutesMin).max(updateGoogleReviewSettingsResponseAutoSyncEveryMinutesMax),
+  "autoSyncThreshold": zod.int().min(updateGoogleReviewSettingsResponseAutoSyncThresholdMin).max(updateGoogleReviewSettingsResponseAutoSyncThresholdMax),
+  "totalReviewCount": zod.int().min(updateGoogleReviewSettingsResponseTotalReviewCountMin),
+  "lastSyncError": zod.string().nullable(),
+  "lastSyncedAt": zod.coerce.date().nullable(),
+  "updatedAt": zod.coerce.date()
+})
+
+
+/**
+ * @summary Start Google Business Profile OAuth
+ */
+export const StartGoogleBusinessProfileConnectionResponse = zod.object({
+  "authorizationUrl": zod.url(),
+  "redirectUri": zod.url()
+})
+
+
+/**
+ * @summary List locations available to the connected Google account
+ */
+export const ListGoogleBusinessLocationsResponse = zod.object({
+  "locations": zod.array(zod.object({
+  "accountName": zod.string(),
+  "locationName": zod.string(),
+  "title": zod.string(),
+  "address": zod.string().nullable()
+}))
+})
+
+
+/**
+ * @summary Disconnect Google Business Profile
+ */
+export const disconnectGoogleBusinessProfileResponseMinRatingMax = 5;
+
+export const disconnectGoogleBusinessProfileResponseAutoSyncEveryMinutesMin = 5;
+export const disconnectGoogleBusinessProfileResponseAutoSyncEveryMinutesMax = 1440;
+
+export const disconnectGoogleBusinessProfileResponseAutoSyncThresholdMin = 0;
+export const disconnectGoogleBusinessProfileResponseAutoSyncThresholdMax = 1000000;
+
+export const disconnectGoogleBusinessProfileResponseTotalReviewCountMin = 0;
+
+
+
+export const DisconnectGoogleBusinessProfileResponse = zod.object({
+  "id": zod.int(),
+  "placeId": zod.string().nullable(),
+  "placeName": zod.string().nullable(),
+  "formattedAddress": zod.string().nullable(),
+  "googleMapsUrl": zod.url().nullable(),
+  "businessProfileConnected": zod.boolean(),
+  "businessAccountName": zod.string().nullable(),
+  "businessLocationName": zod.string().nullable(),
+  "businessLocationTitle": zod.string().nullable(),
+  "minRating": zod.int().min(1).max(disconnectGoogleBusinessProfileResponseMinRatingMax),
+  "autoSyncEnabled": zod.boolean(),
+  "autoSyncEveryMinutes": zod.int().min(disconnectGoogleBusinessProfileResponseAutoSyncEveryMinutesMin).max(disconnectGoogleBusinessProfileResponseAutoSyncEveryMinutesMax),
+  "autoSyncThreshold": zod.int().min(disconnectGoogleBusinessProfileResponseAutoSyncThresholdMin).max(disconnectGoogleBusinessProfileResponseAutoSyncThresholdMax),
+  "totalReviewCount": zod.int().min(disconnectGoogleBusinessProfileResponseTotalReviewCountMin),
+  "lastSyncError": zod.string().nullable(),
   "lastSyncedAt": zod.coerce.date().nullable(),
   "updatedAt": zod.coerce.date()
 })
@@ -364,10 +469,14 @@ export const LookupGoogleReviewsResponse = zod.object({
  */
 export const syncGoogleReviewsResponseSyncedCountMin = 0;
 
+export const syncGoogleReviewsResponseTotalReviewCountMin = 0;
+
 
 
 export const SyncGoogleReviewsResponse = zod.object({
   "syncedCount": zod.int().min(syncGoogleReviewsResponseSyncedCountMin),
+  "totalReviewCount": zod.int().min(syncGoogleReviewsResponseTotalReviewCountMin),
+  "skippedUntilThreshold": zod.boolean(),
   "lastSyncedAt": zod.coerce.date()
 })
 
@@ -805,10 +914,11 @@ export const ListTestimonialsResponseItem = zod.object({
   "comment": zod.string(),
   "rating": zod.int().min(1).max(listTestimonialsResponseRatingMax),
   "photoUrl": zod.string().nullable(),
-  "source": zod.enum(['manual', 'google']),
+  "source": zod.enum(['manual', 'google', 'draft']),
   "externalId": zod.string().nullable(),
   "reviewDate": zod.coerce.date().nullable(),
   "active": zod.boolean(),
+  "visibilityOverride": zod.boolean().nullable(),
   "createdAt": zod.coerce.date()
 })
 export const ListTestimonialsResponse = zod.array(ListTestimonialsResponseItem)
@@ -840,10 +950,11 @@ export const CreateTestimonialResponse = zod.object({
   "comment": zod.string(),
   "rating": zod.int().min(1).max(createTestimonialResponseRatingMax),
   "photoUrl": zod.string().nullable(),
-  "source": zod.enum(['manual', 'google']),
+  "source": zod.enum(['manual', 'google', 'draft']),
   "externalId": zod.string().nullable(),
   "reviewDate": zod.coerce.date().nullable(),
   "active": zod.boolean(),
+  "visibilityOverride": zod.boolean().nullable(),
   "createdAt": zod.coerce.date()
 })
 
@@ -878,10 +989,11 @@ export const UpdateTestimonialResponse = zod.object({
   "comment": zod.string(),
   "rating": zod.int().min(1).max(updateTestimonialResponseRatingMax),
   "photoUrl": zod.string().nullable(),
-  "source": zod.enum(['manual', 'google']),
+  "source": zod.enum(['manual', 'google', 'draft']),
   "externalId": zod.string().nullable(),
   "reviewDate": zod.coerce.date().nullable(),
   "active": zod.boolean(),
+  "visibilityOverride": zod.boolean().nullable(),
   "createdAt": zod.coerce.date()
 })
 

@@ -107,7 +107,16 @@ export const testimonials = pgTable("testimonials", {
   externalId: text("external_id"),
   reviewDate: timestamp("review_date", { withTimezone: true }),
   active: boolean("active").default(true).notNull(),
+  visibilityOverride: boolean("visibility_override"),
   ...timestamps,
+});
+
+export const googleBusinessOauthStates = pgTable("google_business_oauth_states", {
+  stateHash: text("state_hash").primaryKey(),
+  adminId: integer("admin_id").notNull(),
+  redirectUri: text("redirect_uri").notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 export const googleReviewSettings = pgTable("google_review_settings", {
@@ -116,8 +125,18 @@ export const googleReviewSettings = pgTable("google_review_settings", {
   placeName: text("place_name"),
   formattedAddress: text("formatted_address"),
   googleMapsUrl: text("google_maps_url"),
+  businessProfileRefreshToken: text("business_profile_refresh_token"),
+  businessAccountName: text("business_account_name"),
+  businessLocationName: text("business_location_name"),
+  businessLocationTitle: text("business_location_title"),
   minRating: integer("min_rating").default(4).notNull(),
+  autoSyncEnabled: boolean("auto_sync_enabled").default(true).notNull(),
+  autoSyncEveryMinutes: integer("auto_sync_every_minutes").default(60).notNull(),
+  autoSyncThreshold: integer("auto_sync_threshold").default(5).notNull(),
+  totalReviewCount: integer("total_review_count").default(0).notNull(),
+  lastSyncError: text("last_sync_error"),
   lastSyncedAt: timestamp("last_synced_at", { withTimezone: true }),
+  exampleDraftsSeededAt: timestamp("example_drafts_seeded_at", { withTimezone: true }),
   ...timestamps,
 });
 

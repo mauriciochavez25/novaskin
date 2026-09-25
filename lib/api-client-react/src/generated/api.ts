@@ -27,6 +27,8 @@ import type {
   ErrorEnvelope,
   GalleryImage,
   GalleryImageInput,
+  GoogleBusinessConnectResponse,
+  GoogleBusinessLocationsResponse,
   GoogleReviewLookupInput,
   GoogleReviewPlace,
   GoogleReviewSettings,
@@ -1043,6 +1045,225 @@ export const useUpdateGoogleReviewSettings = <TError = ErrorType<unknown>,
         TContext
       > => {
       return useMutation(getUpdateGoogleReviewSettingsMutationOptions(options));
+    }
+
+export const getStartGoogleBusinessProfileConnectionUrl = () => {
+
+
+
+
+  return `/api/admin/google-reviews/connect`
+}
+
+/**
+ * @summary Start Google Business Profile OAuth
+ */
+export const startGoogleBusinessProfileConnection = async ( options?: Parameters<typeof customFetch>[1]): Promise<GoogleBusinessConnectResponse> => {
+
+  return customFetch<GoogleBusinessConnectResponse>(getStartGoogleBusinessProfileConnectionUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getStartGoogleBusinessProfileConnectionMutationOptions = <TError = ErrorType<ErrorEnvelope>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof startGoogleBusinessProfileConnection>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof startGoogleBusinessProfileConnection>>, TError,void, TContext> => {
+
+const mutationKey = ['startGoogleBusinessProfileConnection'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof startGoogleBusinessProfileConnection>>, void> = () => {
+
+
+          return  startGoogleBusinessProfileConnection(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type StartGoogleBusinessProfileConnectionMutationResult = NonNullable<Awaited<ReturnType<typeof startGoogleBusinessProfileConnection>>>
+
+    export type StartGoogleBusinessProfileConnectionMutationError = ErrorType<ErrorEnvelope>
+
+    /**
+ * @summary Start Google Business Profile OAuth
+ */
+export const useStartGoogleBusinessProfileConnection = <TError = ErrorType<ErrorEnvelope>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof startGoogleBusinessProfileConnection>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof startGoogleBusinessProfileConnection>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getStartGoogleBusinessProfileConnectionMutationOptions(options));
+    }
+
+export const getListGoogleBusinessLocationsUrl = () => {
+
+
+
+
+  return `/api/admin/google-reviews/locations`
+}
+
+/**
+ * @summary List locations available to the connected Google account
+ */
+export const listGoogleBusinessLocations = async ( options?: Parameters<typeof customFetch>[1]): Promise<GoogleBusinessLocationsResponse> => {
+
+  return customFetch<GoogleBusinessLocationsResponse>(getListGoogleBusinessLocationsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListGoogleBusinessLocationsQueryKey = () => {
+    return [
+    `/api/admin/google-reviews/locations`
+    ] as const;
+    }
+
+
+export const getListGoogleBusinessLocationsQueryOptions = <TData = Awaited<ReturnType<typeof listGoogleBusinessLocations>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listGoogleBusinessLocations>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListGoogleBusinessLocationsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listGoogleBusinessLocations>>> = ({ signal }) => listGoogleBusinessLocations({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listGoogleBusinessLocations>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListGoogleBusinessLocationsQueryResult = NonNullable<Awaited<ReturnType<typeof listGoogleBusinessLocations>>>
+export type ListGoogleBusinessLocationsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List locations available to the connected Google account
+ */
+
+export function useListGoogleBusinessLocations<TData = Awaited<ReturnType<typeof listGoogleBusinessLocations>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listGoogleBusinessLocations>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListGoogleBusinessLocationsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getDisconnectGoogleBusinessProfileUrl = () => {
+
+
+
+
+  return `/api/admin/google-reviews/disconnect`
+}
+
+/**
+ * @summary Disconnect Google Business Profile
+ */
+export const disconnectGoogleBusinessProfile = async ( options?: Parameters<typeof customFetch>[1]): Promise<GoogleReviewSettings> => {
+
+  return customFetch<GoogleReviewSettings>(getDisconnectGoogleBusinessProfileUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getDisconnectGoogleBusinessProfileMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof disconnectGoogleBusinessProfile>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof disconnectGoogleBusinessProfile>>, TError,void, TContext> => {
+
+const mutationKey = ['disconnectGoogleBusinessProfile'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof disconnectGoogleBusinessProfile>>, void> = () => {
+
+
+          return  disconnectGoogleBusinessProfile(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DisconnectGoogleBusinessProfileMutationResult = NonNullable<Awaited<ReturnType<typeof disconnectGoogleBusinessProfile>>>
+
+    export type DisconnectGoogleBusinessProfileMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Disconnect Google Business Profile
+ */
+export const useDisconnectGoogleBusinessProfile = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof disconnectGoogleBusinessProfile>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof disconnectGoogleBusinessProfile>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getDisconnectGoogleBusinessProfileMutationOptions(options));
     }
 
 export const getLookupGoogleReviewsUrl = () => {

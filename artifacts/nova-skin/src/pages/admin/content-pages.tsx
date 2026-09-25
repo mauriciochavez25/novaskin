@@ -12,6 +12,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader, AdminButton, Modal, AdminInput, AdminTextarea, AdminSwitch } from '../../components/admin/ui';
 import { MediaUpload } from '../../components/admin/media-upload';
 import { Edit2, Trash2, Plus, Search, RefreshCw, MapPin, ExternalLink, Star } from 'lucide-react';
+export { Testimonials } from './reviews-admin';
 
 function GenericList({ title, description, items, isLoading, columns, renderRow, onNew }: any) {
   if (isLoading) return <p className="text-[#68727b] font-medium">Cargando {title.toLowerCase()}...</p>;
@@ -265,7 +266,7 @@ export function Specialists() {
   );
 }
 
-export function Testimonials() {
+export function LegacyTestimonials() {
   const { data: items, isLoading } = useListTestimonials();
   const { data: googleSettings, isError: settingsError } = useGetGoogleReviewSettings();
   const create = useCreateTestimonial();

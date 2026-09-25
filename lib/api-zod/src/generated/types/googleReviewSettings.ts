@@ -16,11 +16,33 @@ export interface GoogleReviewSettings {
   formattedAddress: string | null;
   /** @nullable */
   googleMapsUrl: string | null;
+  businessProfileConnected: boolean;
+  /** @nullable */
+  businessAccountName: string | null;
+  /** @nullable */
+  businessLocationName: string | null;
+  /** @nullable */
+  businessLocationTitle: string | null;
   /**
      * @minimum 1
      * @maximum 5
      */
   minRating: number;
+  autoSyncEnabled: boolean;
+  /**
+     * @minimum 5
+     * @maximum 1440
+     */
+  autoSyncEveryMinutes: number;
+  /**
+     * @minimum 0
+     * @maximum 1000000
+     */
+  autoSyncThreshold: number;
+  /** @minimum 0 */
+  totalReviewCount: number;
+  /** @nullable */
+  lastSyncError: string | null;
   /** @nullable */
   lastSyncedAt: Date | null;
   updatedAt: Date;

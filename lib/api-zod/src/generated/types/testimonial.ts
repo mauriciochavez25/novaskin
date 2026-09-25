@@ -24,5 +24,7 @@ export interface Testimonial {
   /** @nullable */
   reviewDate: Date | null;
   active: boolean;
+  /** @nullable */
+  visibilityOverride: boolean | null;
   createdAt: Date;
 }
