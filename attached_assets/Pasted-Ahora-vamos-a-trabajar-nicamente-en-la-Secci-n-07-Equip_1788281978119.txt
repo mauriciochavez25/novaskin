@@ -22,7 +22,7 @@ No quiero que los nombres o fotografías sean enlaces a páginas nuevas por ahor
 
 Sin embargo, al final de la sección sí quiero una llamada a la acción breve que conecte con el proceso de agendamiento. Coloca un texto como “¿Lista para comenzar?” y debajo un botón principal que diga “AGENDAR VALORACIÓN →”. Este botón debe hacer scroll suave hasta la Sección 10 — Contacto, directamente al formulario que ya existe. No debe abrir otro formulario y no debe crear una nueva página.
 
-Junto al botón principal agrega una opción secundaria de WhatsApp. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775 y debe cargar un mensaje preescrito que diga: “Hola, me gustaría agendar una valoración en NovaSkin.”
+Junto al botón principal agrega una opción secundaria de WhatsApp. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8715044852 y debe cargar un mensaje preescrito que diga: “Hola, me gustaría agendar una valoración en NovaSkin.”
 
 Mantén el botón de Agendar valoración con mayor importancia visual que WhatsApp y utiliza únicamente los colores y estilos del branding actual.
 
@@ -36,6 +36,6 @@ No agregues íconos médicos genéricos como cruces, estetoscopios o jeringas si
 
 No inventes testimonios sobre las especialistas ni frases como “10 años de experiencia”, “especialista certificada”, “experta internacional” o similares si no han sido proporcionadas.
 
-Cuando termines, revisa que los nombres estén escritos correctamente, que las fotografías mantengan buena proporción, que el botón de Agendar valoración lleve al formulario existente, que WhatsApp abra correctamente el número 8711437775, y que la sección funcione correctamente en desktop, tablet y móvil.
+Cuando termines, revisa que los nombres estén escritos correctamente, que las fotografías mantengan buena proporción, que el botón de Agendar valoración lleve al formulario existente, que WhatsApp abra correctamente el número 8715044852, y que la sección funcione correctamente en desktop, tablet y móvil.
 
 Trabaja únicamente sobre la Sección 07 — Equipo NovaSkin. No modifiques ninguna otra parte del sitio. Cuando termines, detente y espera mis siguientes instrucciones antes de continuar con la Sección 08 — Referencias / Reseñas.

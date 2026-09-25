@@ -69,7 +69,7 @@ Mantener el botón de envío existente.
 Actualizar los datos de contacto mostrados en esta sección con la siguiente información REAL:
 
 TELÉFONO / WHATSAPP:
-871 143 7775
+8715044852
 
 HORARIO:
 10:00 a.m. – 2:00 p.m.
@@ -90,6 +90,6 @@ Si actualmente el diseño obliga a mostrar un correo, utilizar temporalmente el 
 
 WHATSAPP:
 Los botones de WhatsApp del sitio deben utilizar el número:
-8711437775
+8715044852
 
 Mantener el diseño de contacto aprobado y la identidad visual existente.

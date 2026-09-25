@@ -28,6 +28,7 @@ export const siteSettings = pgTable("site_settings", {
   tagline: text("tagline").notNull(),
   phone: text("phone").notNull(),
   whatsapp: text("whatsapp").notNull(),
+  contactNumbersUpdatedAt: timestamp("contact_numbers_updated_at", { withTimezone: true }),
   email: text("email").notNull(),
   address: text("address").notNull(),
   hours: text("hours").notNull(),

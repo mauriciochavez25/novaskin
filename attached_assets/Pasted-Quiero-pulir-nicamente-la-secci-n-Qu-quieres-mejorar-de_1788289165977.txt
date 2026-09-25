@@ -16,7 +16,7 @@ Mantén la fotografía en el lado izquierdo debajo del texto, pero procura que n
 
 Mantén al final el botón “QUIERO UNA VALORACIÓN →”. Al hacer clic debe hacer scroll suave hasta el formulario de contacto existente al final de la página. No crees un formulario nuevo.
 
-Mantén “Escríbenos por WhatsApp”. Al hacer clic debe abrir WhatsApp al número 8711437775 con el mensaje preescrito: “Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.”
+Mantén “Escríbenos por WhatsApp”. Al hacer clic debe abrir WhatsApp al número 8715044852 con el mensaje preescrito: “Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.”
 
 Agrega interacciones muy sutiles. Al pasar el cursor por uno de los cinco objetivos, puede cambiar ligeramente el color de la flecha o del número dorado. No utilices fondos fuertes, sombras grandes ni animaciones exageradas.
 

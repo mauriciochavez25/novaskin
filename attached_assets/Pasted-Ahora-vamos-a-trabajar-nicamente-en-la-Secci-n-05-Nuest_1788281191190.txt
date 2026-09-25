@@ -30,7 +30,7 @@ No quiero que al hacer clic sobre el video se pause ni que se abra otro reproduc
 
 Si consideras útil añadir una acción secundaria, puedes colocar debajo de ambos módulos un botón único con el texto “QUIERO AGENDAR UNA VALORACIÓN →”. Este botón debe realizar un scroll suave hasta la Sección 10 — Contacto, exactamente donde comienza el formulario existente. No debe abrir otro formulario, no debe crear una nueva página y no debe modificar la lógica actual del formulario.
 
-También puede colocarse un enlace secundario discreto de WhatsApp junto al botón principal. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775 y un mensaje preescrito que diga: “Hola, me gustaría agendar una valoración en NovaSkin.”
+También puede colocarse un enlace secundario discreto de WhatsApp junto al botón principal. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8715044852 y un mensaje preescrito que diga: “Hola, me gustaría agendar una valoración en NovaSkin.”
 
 No agregues fotografías provisionales en esta sección. Los dos videos proporcionados son el material real y definitivo que debe utilizarse para representar los salones.
 

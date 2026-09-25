@@ -158,7 +158,7 @@ El botón secundario debe decir:
 
 “PREGUNTAR POR WHATSAPP”
 
-Debe abrir WhatsApp con el número 8711437775 y el mensaje preescrito:
+Debe abrir WhatsApp con el número 8715044852 y el mensaje preescrito:
 
 “Hola, me gustaría recibir información sobre los faciales Nova Essential y Nova Éclat y saber cuál puede ser adecuado para mí.”
 

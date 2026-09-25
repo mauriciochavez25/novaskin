@@ -132,7 +132,7 @@ Debajo coloca dos botones.
 
 El botón principal debe decir “AGENDAR VALORACIÓN →”. Al hacer clic, debe regresar mediante scroll suave a la Sección 10 — Contacto, posicionando al usuario directamente donde comienza el formulario que ya existe en el sitio. No debe crear un formulario nuevo y no debe abrir otra página.
 
-El segundo botón debe decir “WHATSAPP”. Al hacer clic debe abrir una conversación de WhatsApp con NovaSkin utilizando el número real 8711437775. Quiero que el mensaje aparezca previamente escrito y cambie según el tratamiento. Por ejemplo, si el usuario está viendo Toxina Botulínica, el mensaje puede decir: “Hola, me gustaría recibir más información sobre Toxina Botulínica y agendar una valoración.” Si está viendo PDRN, debe sustituir automáticamente el nombre por PDRN Salmón, y así sucesivamente con los seis tratamientos.
+El segundo botón debe decir “WHATSAPP”. Al hacer clic debe abrir una conversación de WhatsApp con NovaSkin utilizando el número real 8715044852. Quiero que el mensaje aparezca previamente escrito y cambie según el tratamiento. Por ejemplo, si el usuario está viendo Toxina Botulínica, el mensaje puede decir: “Hola, me gustaría recibir más información sobre Toxina Botulínica y agendar una valoración.” Si está viendo PDRN, debe sustituir automáticamente el nombre por PDRN Salmón, y así sucesivamente con los seis tratamientos.
 
 Si la vista ampliada se implementa como modal o panel, agrega un botón claro para cerrar y regresar a los tratamientos. Si se implementa como página individual, agrega una opción “← VOLVER A TRATAMIENTOS” que regrese al carrusel manteniendo una experiencia fluida.
 

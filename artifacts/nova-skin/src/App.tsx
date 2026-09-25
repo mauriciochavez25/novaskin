@@ -51,7 +51,7 @@ const media = '/media/';
 const publicBasePath = import.meta.env.BASE_URL;
 const privacyPolicyPath = `${publicBasePath}politica-de-privacidad`;
 const fallback = {
-  clinicName: 'Nova Skin', tagline: 'Estética avanzada, bienestar real', phone: '871 143 7775',
+  clinicName: 'Nova Skin', tagline: 'Estética avanzada, bienestar real', phone: '8715044852',
   whatsapp: '8715044852', email: 'Correo próximamente', address: 'Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43',
   hours: '10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.', instagram: '@novaskinmedspa', facebook: 'Nova Skin', tiktok: '@novaskinmedspa',
   heroImage: `${media}clinic-lobby.png`, heroEyebrow: 'ESTÉTICA AVANZADA, BIENESTAR REAL', heroTitle: 'Tu piel merece el respaldo de la ciencia y el confort de un spa.',

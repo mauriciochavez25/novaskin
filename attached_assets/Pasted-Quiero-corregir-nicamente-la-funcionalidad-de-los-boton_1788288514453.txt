@@ -26,7 +26,7 @@ Al final de cada vista ampliada coloca el texto “¿Quieres saber si este trata
 
 El botón principal “AGENDAR VALORACIÓN →” debe hacer scroll suave hasta el formulario de contacto existente al final de la página. No crees un formulario nuevo.
 
-El botón “WHATSAPP” debe abrir una conversación con NovaSkin utilizando el número 8711437775 y un mensaje preescrito que incluya automáticamente el nombre del tratamiento seleccionado. Por ejemplo: “Hola, me gustaría recibir más información sobre Bioestimuladores y agendar una valoración.”
+El botón “WHATSAPP” debe abrir una conversación con NovaSkin utilizando el número 8715044852 y un mensaje preescrito que incluya automáticamente el nombre del tratamiento seleccionado. Por ejemplo: “Hola, me gustaría recibir más información sobre Bioestimuladores y agendar una valoración.”
 
 Si la vista ampliada funciona como modal o panel, debe incluir un botón claro para cerrar y volver al carrusel. Si actualmente el proyecto utiliza una página interna o drawer, conserva esa misma solución en lugar de crear otra arquitectura diferente.
 

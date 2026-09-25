@@ -26,7 +26,7 @@ Los números 01, 02, 03 y 04 no son botones. Son únicamente indicadores del rec
 
 Al final del recorrido, después de la etapa 04, agrega una llamada a la acción breve. Coloca un texto como “¿Lista para comenzar tu experiencia NovaSkin?” y debajo un botón principal que diga “AGENDAR VALORACIÓN →”. Este botón debe realizar un scroll suave hasta la Sección 10 — Contacto, exactamente donde comienza el formulario existente. No debe abrir otro formulario, crear una página nueva ni modificar el formulario actual.
 
-Junto al botón principal puedes colocar una opción secundaria de “WHATSAPP”. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775. El mensaje preescrito debe decir: “Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.”
+Junto al botón principal puedes colocar una opción secundaria de “WHATSAPP”. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8715044852. El mensaje preescrito debe decir: “Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.”
 
 Mantén el botón de Agendar valoración con mayor importancia visual que WhatsApp. Ambos deben utilizar únicamente los colores, bordes y estilos que ya corresponden al branding de NovaSkin.
 
@@ -46,6 +46,6 @@ Todas las imágenes provisionales que utilices deben quedar claramente estructur
 
 También cuida la transición entre la Sección 05 y esta Sección 06. En la Sección 05 acabamos de enseñar físicamente los dos salones de NovaSkin; ahora el usuario debe pasar de conocer dónde será atendido a entender cómo será atendido. La transición debe sentirse natural.
 
-Al terminar, revisa que el timeline funcione correctamente, que la línea se active conforme se hace scroll, que las cuatro etapas aparezcan en el orden correcto, que el video o imágenes no se deformen, que el botón de Agendar valoración lleve al formulario existente, que WhatsApp abra correctamente el número 8711437775 y que todo funcione correctamente en desktop, tablet y móvil.
+Al terminar, revisa que el timeline funcione correctamente, que la línea se active conforme se hace scroll, que las cuatro etapas aparezcan en el orden correcto, que el video o imágenes no se deformen, que el botón de Agendar valoración lleve al formulario existente, que WhatsApp abra correctamente el número 8715044852 y que todo funcione correctamente en desktop, tablet y móvil.
 
 Trabaja únicamente sobre la Sección 06 — Así se vive NovaSkin. No modifiques ninguna otra sección. Cuando termines, detente y espera mis siguientes instrucciones antes de continuar con la Sección 07 — Equipo NovaSkin.

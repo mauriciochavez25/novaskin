@@ -107,13 +107,17 @@ let seedPromise: Promise<void> | undefined;
 async function ensureSeeded() {
   if (seedPromise) return seedPromise;
   seedPromise = (async () => {
-    const [existingSettings] = await db.select({ id: siteSettings.id }).from(siteSettings).limit(1);
+    const [existingSettings] = await db.select({
+      id: siteSettings.id,
+      contactNumbersUpdatedAt: siteSettings.contactNumbersUpdatedAt,
+    }).from(siteSettings).limit(1);
     if (!existingSettings) {
       await db.insert(siteSettings).values({
         clinicName: "Nova Skin",
         tagline: "Estética avanzada, bienestar real",
-         phone: "871 143 7775",
+         phone: "8715044852",
          whatsapp: "8715044852",
+         contactNumbersUpdatedAt: new Date(),
          email: "Correo próximamente",
          address: "Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43",
          hours: "10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.",
@@ -127,13 +131,18 @@ async function ensureSeeded() {
         aboutText:
           "Nova Skin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural.",
       });
-    } else {
-      // Change only the old default; keep any independently customized number.
+    } else if (!existingSettings.contactNumbersUpdatedAt) {
+      // Apply the contact-number change once; preserve later admin edits.
       await db.update(siteSettings)
-        .set({ whatsapp: "8715044852", updatedAt: new Date() })
+        .set({
+          phone: "8715044852",
+          whatsapp: "8715044852",
+          contactNumbersUpdatedAt: new Date(),
+          updatedAt: new Date(),
+        })
         .where(and(
           eq(siteSettings.id, existingSettings.id),
-          eq(siteSettings.whatsapp, "8711437775"),
+          isNull(siteSettings.contactNumbersUpdatedAt),
         ));
     }
     const [existingGoogleReviewSettings] = await db.select({ id: googleReviewSettings.id }).from(googleReviewSettings).limit(1);

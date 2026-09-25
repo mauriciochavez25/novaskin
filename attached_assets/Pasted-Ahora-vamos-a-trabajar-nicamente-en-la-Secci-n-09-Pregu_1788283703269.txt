@@ -48,13 +48,13 @@ No inventes los días de atención si todavía no contamos con esa información 
 
 08. ¿Cómo puedo comunicarme directamente con NovaSkin?
 
-Respuesta: “Puedes comunicarte directamente por WhatsApp al 871 143 7775.”
+Respuesta: “Puedes comunicarte directamente por WhatsApp al 8715044852.”
 
-Dentro de esta respuesta coloca un pequeño enlace que diga “ENVIAR WHATSAPP →”. Al presionarlo debe abrir una conversación con el número real 8711437775 y cargar el mensaje: “Hola, tengo una pregunta sobre los servicios de NovaSkin.”
+Dentro de esta respuesta coloca un pequeño enlace que diga “ENVIAR WHATSAPP →”. Al presionarlo debe abrir una conversación con el número real 8715044852 y cargar el mensaje: “Hola, tengo una pregunta sobre los servicios de NovaSkin.”
 
 Después del acordeón quiero una pequeña llamada a la acción para las personas cuya duda no aparece en las preguntas frecuentes. Coloca el texto “¿No encontraste lo que buscabas?” y debajo “Escríbenos y con gusto podemos orientarte.”
 
-Agrega un botón que diga “PREGUNTAR POR WHATSAPP →”. Este botón debe abrir directamente WhatsApp con el número 8711437775 y el mensaje preescrito “Hola, tengo una duda y me gustaría recibir información sobre NovaSkin.”
+Agrega un botón que diga “PREGUNTAR POR WHATSAPP →”. Este botón debe abrir directamente WhatsApp con el número 8715044852 y el mensaje preescrito “Hola, tengo una duda y me gustaría recibir información sobre NovaSkin.”
 
 También coloca un botón secundario que diga “SOLICITAR CITA →”. Este botón debe hacer scroll suave hacia la Sección 10 — Contacto, exactamente donde comienza el formulario existente. No debe abrir otro formulario ni crear una página nueva.
 
@@ -74,6 +74,6 @@ No agregues precios, promociones, resultados garantizados, contraindicaciones, i
 
 La transición final de esta sección hacia Contacto debe sentirse natural. El usuario acaba de resolver sus principales dudas y la siguiente acción lógica debe ser contactar o solicitar una cita.
 
-Cuando termines, revisa que las ocho preguntas estén correctamente escritas, que el acordeón funcione, que solo exista una respuesta abierta a la vez, que WhatsApp utilice el número 8711437775, que el botón “Solicitar cita” lleve al formulario y que todo sea responsive.
+Cuando termines, revisa que las ocho preguntas estén correctamente escritas, que el acordeón funcione, que solo exista una respuesta abierta a la vez, que WhatsApp utilice el número 8715044852, que el botón “Solicitar cita” lleve al formulario y que todo sea responsive.
 
 Realiza únicamente estos cambios en la Sección 09 — Preguntas Frecuentes. No modifiques ninguna otra sección. Cuando termines, detente y espera mis instrucciones antes de continuar con la Sección 10 — Contacto / Solicitud de cita.

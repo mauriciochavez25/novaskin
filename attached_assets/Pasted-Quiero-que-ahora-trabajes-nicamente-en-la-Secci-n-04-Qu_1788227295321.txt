@@ -24,7 +24,7 @@ Quiero que cuando aparezca la recomendación de un objetivo exista un botón peq
 
 Además, al final de esta Sección 04 quiero un botón principal con el texto “QUIERO UNA VALORACIÓN →”. Este botón debe realizar un scroll suave hasta la Sección 10 — Contacto, directamente al formulario existente. No debe abrir un formulario nuevo, no debe crear una página nueva y no debe modificar el formulario actual.
 
-También agrega un botón o enlace secundario de WhatsApp. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8711437775. El mensaje preescrito puede decir: “Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.”
+También agrega un botón o enlace secundario de WhatsApp. Al hacer clic debe abrir una conversación con NovaSkin utilizando el número real 8715044852. El mensaje preescrito puede decir: “Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.”
 
 Quiero animaciones suaves al entrar a la sección. Primero debe aparecer el título, luego el texto introductorio, después la imagen principal y finalmente los cinco objetivos de forma progresiva. Puedes hacer que los objetivos aparezcan uno por uno alrededor de la imagen. No utilices rebotes, zooms fuertes ni movimientos rápidos.
 

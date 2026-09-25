@@ -56,7 +56,7 @@ El segundo botón debe decir:
 
 Al hacer clic debe realizar un scroll suave hasta el formulario de contacto que ya existe al final del sitio. No debe abrir otro formulario, no debe llevar a otra página y no debe crear una nueva lógica de reservación.
 
-Debajo o cerca de estos botones puedes agregar un enlace secundario discreto de WhatsApp, si visualmente funciona con la composición. Al hacer clic debe abrir WhatsApp con el número real de NovaSkin 8711437775 y cargar el siguiente mensaje:
+Debajo o cerca de estos botones puedes agregar un enlace secundario discreto de WhatsApp, si visualmente funciona con la composición. Al hacer clic debe abrir WhatsApp con el número real de NovaSkin 8715044852 y cargar el siguiente mensaje:
 
 “Hola, me gustaría recibir información sobre la limpieza facial de NovaSkin.”
 
