@@ -5,6 +5,7 @@ type FaqSectionProps = {
   onBook: () => void;
   whatsappHref: string;
   questionWhatsappHref: string;
+  whatsappNumber: string;
   googleMapsUrl?: string;
 };
 
@@ -61,7 +62,7 @@ const questions: FaqQuestion[] = [
   {
     number: '08',
     question: '¿Cómo puedo comunicarme directamente con Nova Skin?',
-    answer: 'Puedes comunicarte directamente por WhatsApp al 871 143 7775.',
+    answer: 'Puedes comunicarte directamente por WhatsApp.',
     whatsapp: true,
   },
 ];
@@ -70,6 +71,7 @@ export default function FaqSection({
   onBook,
   whatsappHref,
   questionWhatsappHref,
+  whatsappNumber,
   googleMapsUrl = '',
 }: FaqSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -158,7 +160,7 @@ export default function FaqSection({
                     >
                       <div className="min-h-0 overflow-hidden">
                         <div className="pb-7 pr-8 text-sm leading-7 text-[#68727b] md:pr-12 md:text-base">
-                          <p>{item.answer}</p>
+                          <p>{item.whatsapp ? `Puedes comunicarte directamente por WhatsApp al ${whatsappNumber}.` : item.answer}</p>
                           {item.location && (
                             googleMapsUrl ? (
                               <a

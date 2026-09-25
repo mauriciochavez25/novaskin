@@ -19,6 +19,7 @@ type FacialOption = {
 type FacialCleansingDetailsModalProps = {
   onClose: () => void;
   posterUrl: string;
+  whatsappHref: string;
 };
 
 const facialOptions: FacialOption[] = [
@@ -129,13 +130,10 @@ const facialOptions: FacialOption[] = [
   },
 ];
 
-const whatsappUrl = `https://wa.me/8711437775?text=${encodeURIComponent(
-  'Hola, me gustaría recibir información sobre los faciales Nova Essential y Nova Éclat y saber cuál puede ser adecuado para mí.',
-)}`;
-
 export default function FacialCleansingDetailsModal({
   onClose,
   posterUrl,
+  whatsappHref,
 }: FacialCleansingDetailsModalProps) {
   const [openFacial, setOpenFacial] = useState<number | null>(null);
 
@@ -309,7 +307,7 @@ export default function FacialCleansingDetailsModal({
                 </button>
                 <a
                   data-testid="link-facial-details-whatsapp"
-                  href={whatsappUrl}
+                  href={whatsappHref}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/35 px-5 py-3 text-center text-sm font-semibold uppercase tracking-[.08em] text-white transition hover:-translate-y-0.5 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BB9445]"

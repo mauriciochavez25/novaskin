@@ -52,12 +52,27 @@ const publicBasePath = import.meta.env.BASE_URL;
 const privacyPolicyPath = `${publicBasePath}politica-de-privacidad`;
 const fallback = {
   clinicName: 'Nova Skin', tagline: 'Estética avanzada, bienestar real', phone: '871 143 7775',
-  whatsapp: '8711437775', email: 'Correo próximamente', address: 'Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43',
+  whatsapp: '8715044852', email: 'Correo próximamente', address: 'Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43',
   hours: '10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.', instagram: '@novaskinmedspa', facebook: 'Nova Skin', tiktok: '@novaskinmedspa',
   heroImage: `${media}clinic-lobby.png`, heroEyebrow: 'ESTÉTICA AVANZADA, BIENESTAR REAL', heroTitle: 'Tu piel merece el respaldo de la ciencia y el confort de un spa.',
   heroDescription: 'Tratamientos clínico-estéticos personalizados en un entorno cálido, sofisticado y seguro.',
   aboutText: 'Creemos que el cuidado personal no debe sentirse como una obligación, sino como un momento de reconexión. Combinamos ciencia, tecnología y bienestar para que cada visita se sienta tan bien como se ve.'
 };
+
+function buildWhatsAppUrl(number: string, message?: string) {
+  const digits = number.replace(/\D/g, '');
+  const internationalNumber = digits.length === 10 ? `52${digits}` : digits;
+  const url = `https://wa.me/${internationalNumber}`;
+  return message ? `${url}?text=${encodeURIComponent(message)}` : url;
+}
+
+function formatWhatsAppNumber(number: string) {
+  const digits = number.replace(/\D/g, '');
+  const nationalNumber = digits.length === 12 && digits.startsWith('52') ? digits.slice(2) : digits;
+  return nationalNumber.length === 10
+    ? `${nationalNumber.slice(0, 3)} ${nationalNumber.slice(3, 6)} ${nationalNumber.slice(6)}`
+    : number;
+}
 
 const visibleBrandTextFields = new Set([
   'clinicName',
@@ -138,7 +153,7 @@ function PublicFooter({ site }: { site: any }) {
         <div className="text-sm text-[#bdc5c8] md:text-right">
           <p>{site.address}</p>
           <p className="mt-2">{site.hours}</p>
-          <div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={`https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}`} aria-label="WhatsApp"><MessageCircle size={18}/></a></div>
+          <div className="mt-5 flex gap-4 md:justify-end"><a data-testid="link-footer-instagram" href="#" aria-label="Instagram"><Instagram size={18}/></a><a data-testid="link-footer-whatsapp" href={buildWhatsAppUrl(String(site.whatsapp || fallback.whatsapp))} aria-label="WhatsApp"><MessageCircle size={18}/></a></div>
         </div>
       </div>
       <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/15 pt-5 text-xs text-[#82909a] md:flex-row md:items-center md:justify-between">
@@ -416,9 +431,9 @@ const treatmentCatalog: Treatment[] = [
   },
 ];
 
-function TreatmentDetailsModal({ treatment, onClose }: { treatment: Treatment; onClose: () => void }) {
+function TreatmentDetailsModal({ treatment, onClose, whatsappNumber }: { treatment: Treatment; onClose: () => void; whatsappNumber: string }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappUrl = `https://wa.me/8711437775?text=${encodeURIComponent(`Hola, me gustaría recibir más información sobre ${treatment.name} y agendar una valoración.`)}`;
+  const whatsappUrl = buildWhatsAppUrl(whatsappNumber, `Hola, me gustaría recibir más información sobre ${treatment.name} y agendar una valoración.`);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -759,14 +774,16 @@ function PublicSite() {
   };
   const scrollToContact = () => document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToTreatments = (_treatments: string[]) => document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' });
-  const improvementWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.')}`;
-  const salonWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración en Nova Skin.')}`;
-  const salonSpacesWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información y agendar una valoración en Nova Skin.')}`;
-  const experienceWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.')}`;
-  const facialCleansingWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre la limpieza facial de Nova Skin.')}`;
-  const heroWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre los tratamientos de Nova Skin.')}`;
-  const faqQuestionWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una pregunta sobre los servicios de Nova Skin.')}`;
-  const faqAskWhatsAppHref = `https://wa.me/${String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tengo una duda y me gustaría recibir información sobre Nova Skin.')}`;
+  const whatsappNumber = String(site.whatsapp || fallback.whatsapp);
+  const improvementWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría recibir orientación sobre qué tratamiento puede ser adecuado para lo que quiero mejorar.');
+  const salonWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría agendar una valoración en Nova Skin.');
+  const salonSpacesWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría recibir información y agendar una valoración en Nova Skin.');
+  const experienceWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría agendar una valoración y conocer qué tratamiento puede ser adecuado para mí.');
+  const facialCleansingWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría recibir información sobre la limpieza facial de Nova Skin.');
+  const facialDetailsWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría recibir información sobre los faciales Nova Essential y Nova Éclat y saber cuál puede ser adecuado para mí.');
+  const heroWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, me gustaría recibir información sobre los tratamientos de Nova Skin.');
+  const faqQuestionWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, tengo una pregunta sobre los servicios de Nova Skin.');
+  const faqAskWhatsAppHref = buildWhatsAppUrl(whatsappNumber, 'Hola, tengo una duda y me gustaría recibir información sobre Nova Skin.');
   return <div className="nova-grain overflow-hidden bg-[#F2F2EF] text-[#2F4055]">
     <PublicHeader hasScrolled={hasScrolled} onBook={scrollToContact} />
     <main>
@@ -813,14 +830,15 @@ function PublicSite() {
        <TeamSection specialists={specialistsFromApi} fallbackImages={[localImages[2], localImages[1]]} imageOverrides={[`${media}specialist-maria.png`, `${media}specialist-indira.png`]} onBook={scrollToContact} whatsappHref={salonWhatsAppHref} />
       {specialists.length > 0 && <section id="equipo" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto max-w-7xl"><SectionHeading eyebrow="NUESTRO EQUIPO" title="Profesionales dedicadas al cuidado de tu piel."/><div className="mt-12 grid gap-10 md:grid-cols-2">{specialists.slice(0, 2).map((s, i) => <div key={s.id}><div className="arch aspect-[.92] overflow-hidden bg-[#AF9275]"><img src={s.photoUrl || localImages[i % 3]} alt={s.name} className="h-full w-full object-cover transition duration-700 hover:scale-[1.02]"/></div><p className="mt-5 text-xs uppercase tracking-widest text-[#BB9445]">{s.specialty}</p><h3 className="mt-2 font-serif text-2xl md:text-3xl">{s.name}</h3>{s.bio && <p className="mt-2 text-sm leading-6 text-[#68727b]">{s.bio}</p>}</div>)}</div></div></section>}
        <ReviewsSection reviews={testimonials} />
-       <FaqSection onBook={scrollToContact} whatsappHref={faqAskWhatsAppHref} questionWhatsappHref={faqQuestionWhatsAppHref} />
+       <FaqSection onBook={scrollToContact} whatsappHref={faqAskWhatsAppHref} questionWhatsappHref={faqQuestionWhatsAppHref} whatsappNumber={formatWhatsAppNumber(whatsappNumber)} />
         <section id="contacto" className="bg-[#F2F2EF] px-5 py-20 md:px-10 md:py-28"><div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.8fr_1.2fr]"><div><SectionHeading eyebrow="Empieza por aquí" title="Hablemos de lo que quieres sentir." copy="Cuéntanos qué te gustaría trabajar. Te responderemos con calma para encontrar el mejor siguiente paso."/><div className="mt-9 space-y-4 text-sm"><a data-testid="link-contact-phone" href={`tel:${site.phone}`} className="flex items-center gap-3"><Phone size={17} className="text-[#BB9445]"/>{site.phone}</a><div className="flex items-center gap-3"><Mail size={17} className="text-[#BB9445]"/>{site.email || 'Correo próximamente'}</div><div className="flex items-start gap-3"><Clock3 size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.hours}</span></div><div className="flex items-start gap-3"><CalendarDays size={17} className="mt-0.5 text-[#BB9445]"/><span className="whitespace-pre-line">{site.address}</span></div></div></div><form onSubmit={submitContact} className="soft-card bg-[#e6e1d9] p-7 md:p-10"><p className="mb-7 font-serif text-2xl">Tu próximo ritual empieza con una pregunta.</p><div className="grid gap-4 md:grid-cols-2"><input required name="name" data-testid="input-contact-name" className="admin-input" placeholder="Nombre"/><input required name="phone" data-testid="input-contact-phone" className="admin-input" placeholder="Teléfono"/><input name="email" type="email" data-testid="input-contact-email" className="admin-input md:col-span-2" placeholder="Email"/><textarea required name="message" data-testid="input-contact-message" className="admin-input min-h-32 resize-y md:col-span-2" placeholder="¿Qué te gustaría consultar?"/><Button type="submit" testId="button-contact-submit" variant="gold" className="md:col-span-2">{contact.isPending ? 'Enviando…' : sent ? <><Check size={16}/> Recibido, gracias</> : <>Enviar mensaje <Send size={16}/></>}</Button></div><p className="mt-5 text-xs leading-5 text-[#68727b]">Al enviar esta información, reconoces haber leído la <a href={privacyPolicyPath} className="font-semibold text-[#2F4055] underline decoration-[#BB9445] underline-offset-2 hover:text-[#BB9445]">Política de Privacidad</a>.</p>{contact.isError && <p data-testid="status-contact-error" className="mt-4 text-sm text-[#A83525]">No pudimos enviar tu mensaje. Intenta de nuevo.</p>}</form></div></section>
     </main>
      <PublicFooter site={site} />
-     {selectedTreatment && <TreatmentDetailsModal treatment={selectedTreatment} onClose={() => setSelectedTreatment(null)} />}
+      {selectedTreatment && <TreatmentDetailsModal treatment={selectedTreatment} onClose={() => setSelectedTreatment(null)} whatsappNumber={whatsappNumber} />}
      {isFacialDetailsOpen && (
        <FacialCleansingDetailsModal
          posterUrl={facialCleansingPoster}
+          whatsappHref={facialDetailsWhatsAppHref}
          onClose={() => setIsFacialDetailsOpen(false)}
        />
      )}
@@ -843,9 +861,10 @@ function PrivacyPolicyPage() {
   const { data } = useGetSite();
   const site: any = data?.settings ? normalizeVisibleBrandText(data.settings) : fallback;
   const phone = site.phone || fallback.phone;
-  const whatsapp = String(site.whatsapp || fallback.whatsapp).replace(/\D/g, '');
+  const whatsapp = String(site.whatsapp || fallback.whatsapp);
   const email = site.email && site.email !== fallback.email ? site.email : 'Pendiente de proporcionar por Nova Skin';
-  const whatsappHref = `https://wa.me/${whatsapp}`;
+  const whatsappHref = buildWhatsAppUrl(whatsapp);
+  const whatsappDisplay = formatWhatsAppNumber(whatsapp);
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -928,7 +947,7 @@ function PrivacyPolicyPage() {
 
               <article>
                 <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">9. Medios para ejercer esos derechos</h2>
-                <p className="mt-5 text-base leading-8 text-[#68727b]">El medio de contacto actualmente disponible es el teléfono y WhatsApp de Nova Skin: <a href={`tel:${phone}`} className="font-semibold text-[#2F4055] underline decoration-[#BB9445] underline-offset-4">{phone}</a>. El correo electrónico y el procedimiento formal para recibir, validar y responder solicitudes ARCO quedan <strong className="font-semibold text-[#2F4055]">pendientes de proporcionar</strong>.</p>
+                 <p className="mt-5 text-base leading-8 text-[#68727b]">Los medios de contacto actualmente disponibles son el teléfono de Nova Skin: <a href={`tel:${phone}`} className="font-semibold text-[#2F4055] underline decoration-[#BB9445] underline-offset-4">{phone}</a> y WhatsApp: <a href={whatsappHref} target="_blank" rel="noreferrer" className="font-semibold text-[#2F4055] underline decoration-[#BB9445] underline-offset-4">{whatsappDisplay}</a>. El correo electrónico y el procedimiento formal para recibir, validar y responder solicitudes ARCO quedan <strong className="font-semibold text-[#2F4055]">pendientes de proporcionar</strong>.</p>
               </article>
 
               <article>
@@ -940,7 +959,7 @@ function PrivacyPolicyPage() {
                 <h2 className="font-serif text-3xl text-[#2F4055] md:text-4xl">11. Datos de contacto</h2>
                 <div className="mt-5 space-y-2 text-base leading-8 text-[#68727b]">
                   <p><strong className="font-semibold text-[#2F4055]">Teléfono:</strong> <a href={`tel:${phone}`} className="underline decoration-[#BB9445] underline-offset-4">{phone}</a></p>
-                  <p><strong className="font-semibold text-[#2F4055]">WhatsApp:</strong> <a href={whatsappHref} target="_blank" rel="noreferrer" className="underline decoration-[#BB9445] underline-offset-4">{phone}</a></p>
+                   <p><strong className="font-semibold text-[#2F4055]">WhatsApp:</strong> <a href={whatsappHref} target="_blank" rel="noreferrer" className="underline decoration-[#BB9445] underline-offset-4">{whatsappDisplay}</a></p>
                   <p><strong className="font-semibold text-[#2F4055]">Domicilio:</strong> <span className="whitespace-pre-line">{site.address}</span></p>
                   <p><strong className="font-semibold text-[#2F4055]">Correo electrónico:</strong> {email}</p>
                 </div>

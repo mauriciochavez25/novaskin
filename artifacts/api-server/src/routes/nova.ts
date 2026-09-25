@@ -113,7 +113,7 @@ async function ensureSeeded() {
         clinicName: "Nova Skin",
         tagline: "Estética avanzada, bienestar real",
          phone: "871 143 7775",
-         whatsapp: "8711437775",
+         whatsapp: "8715044852",
          email: "Correo próximamente",
          address: "Av. Juárez 4955\nPlaza Laguna Oriente\nLocal 43",
          hours: "10:00 a.m. – 2:00 p.m. / 3:00 p.m. – 7:00 p.m.",
@@ -127,6 +127,14 @@ async function ensureSeeded() {
         aboutText:
           "Nova Skin fusiona la precisión de la medicina estética con la serenidad de una experiencia de spa. Diseñamos cada tratamiento desde la escucha, la ciencia y el respeto por tu belleza natural.",
       });
+    } else {
+      // Change only the old default; keep any independently customized number.
+      await db.update(siteSettings)
+        .set({ whatsapp: "8715044852", updatedAt: new Date() })
+        .where(and(
+          eq(siteSettings.id, existingSettings.id),
+          eq(siteSettings.whatsapp, "8711437775"),
+        ));
     }
     const [existingGoogleReviewSettings] = await db.select({ id: googleReviewSettings.id }).from(googleReviewSettings).limit(1);
     if (!existingGoogleReviewSettings) {
